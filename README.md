@@ -30,12 +30,12 @@ access logs, databases, user roles, etc.
 to their desired choice of universities, track their applications and view related documents.
 
  - Instructors will be checking if the course load matches the syllabus, and will be approving student applications.
- - 
+
  - The coordinators will be screening the application processes and instructors will be confirming complementary courses 
 with respect to their matching syllabuses.
 
  - Department chairs will manage and make the final confirmation of the applications.
- - 
+
  - International Student Office will manage incoming student applications.
 
 ## Tech Stack
