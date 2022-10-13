@@ -22,15 +22,15 @@ A web application aiming to provide ease of use to multiple user parties for the
 
 ## What we will implement:
 We will design a web application the users will have access to different interfaces based on their roles.
-> Admin user will have access to entire functionality of the application, therefore their interface will show
+-Admin user will have access to entire functionality of the application, therefore their interface will show
 access logs, databases, user roles, etc.
-> Student role will be the primary role of the website, where they will be able to make new Erasmus applications 
+-Student role will be the primary role of the website, where they will be able to make new Erasmus applications 
 to their desired choice of universities, track their applications and view related documents.
-> Instructors will be checking if the course load matches the syllabus, and will be approving student applications.
-> The coordinators will be screening the application processes and instructors will be confirming complementary courses 
+-Instructors will be checking if the course load matches the syllabus, and will be approving student applications.
+-The coordinators will be screening the application processes and instructors will be confirming complementary courses 
 with respect to their matching syllabuses.
-> Department chairs will manage and make the final confirmation of the applications.
-> International Student Office will manage incoming student applications.
+-Department chairs will manage and make the final confirmation of the applications.
+-International Student Office will manage incoming student applications.
 
 ## Tech Stack
 - Java Spring Framework
