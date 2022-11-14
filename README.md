@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # Group Name: CrackWare
 
 ## CrackWare Members:
@@ -48,4 +46,3 @@ with respect to their matching syllabuses.
 - Microsoft Azure for hosting
 - Jenkins CI/CD
 - MariaDB Database
->>>>>>> f8d52478294c1407c7aea3ca29b476d796865a3d
