@@ -1,23 +1,36 @@
 import { Link } from "react-router-dom";
+import classes from './NavigationBar.module.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function NavigationBar() {
   return (
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Erasmus Bilkent</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Features</a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
-            <a class="nav-item nav-link disabled" href="#">Disabled</a>
-          </div>
-        </div>
-      </nav>
+
+      <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">Erasmus Bilkent</Navbar.Brand>
+        <Navbar.Text>
+            Student
+          </Navbar.Text>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="#link">Profile</Nav.Link>
+          </Nav>
+          <Form inline >
+              <Button variant="danger" href="/logout">Logout</Button>
+            </Form>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
     </header>
+    
   );
 }
 export default NavigationBar;
