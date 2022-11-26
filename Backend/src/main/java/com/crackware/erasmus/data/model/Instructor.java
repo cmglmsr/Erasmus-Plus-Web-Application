@@ -1,4 +1,4 @@
-package com.example.demo.instructor;
+package com.crackware.erasmus.data.model;
 public class Instructor {
     private String department;
     private String signature;

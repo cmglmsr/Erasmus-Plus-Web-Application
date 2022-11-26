@@ -1,4 +1,4 @@
-package com.example.demo.Coordinator;
+package com.crackware.erasmus.data.services;
 
 import org.springframework.stereotype.Service;
 
