@@ -15,7 +15,7 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     private Student student;
 
     @Enumerated(EnumType.STRING)

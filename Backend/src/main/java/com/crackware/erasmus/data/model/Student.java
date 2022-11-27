@@ -25,7 +25,7 @@ public class Student extends BaseEntity{
     @Column(name="languages")
     private Set<Language> languages;
 
-    @OneToMany
-    private Set<Application> application;
+    @OneToOne
+    private Application application;
 
 }
