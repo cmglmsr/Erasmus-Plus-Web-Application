@@ -1,13 +1,12 @@
 package com.crackware.erasmus.data.model;
 
-import com.crackware.erasmus.data.model.BaseEntity;
-import com.crackware.erasmus.data.model.Department;
+import com.crackware.erasmus.data.model.enums.Department;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.swing.text.Document;
+
 @Setter
 @Getter
 @Entity

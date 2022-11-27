@@ -1,6 +1,8 @@
 package com.crackware.erasmus.data.model;
 
 
+import com.crackware.erasmus.data.model.enums.Department;
+import com.crackware.erasmus.data.model.enums.Language;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +21,7 @@ public class Student extends BaseEntity{
 
     private int term;
 
-    @ElementCollection(targetClass=Language.class)
+    @ElementCollection(targetClass= Language.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="student_languages")
     @Column(name="languages")

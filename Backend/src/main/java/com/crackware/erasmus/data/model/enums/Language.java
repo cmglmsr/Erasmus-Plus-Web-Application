@@ -1,4 +1,4 @@
-package com.crackware.erasmus.data.model;
+package com.crackware.erasmus.data.model.enums;
 
 
 import javax.persistence.Entity;

@@ -1,5 +1,7 @@
 package com.crackware.erasmus.data.model;
 
+import com.crackware.erasmus.data.model.enums.Department;
+import com.crackware.erasmus.data.model.enums.School;
 import lombok.Getter;
 import lombok.Setter;
 
