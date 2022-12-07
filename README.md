@@ -36,7 +36,7 @@ with respect to their matching syllabuses.
 
  - Department chairs will manage and make the final confirmation of the applications.
 
- - International Student Office will manage incoming student applications..
+ - International Student Office will manage incoming student applications.
 
 ## Tech Stack
 - Java Spring Framework
