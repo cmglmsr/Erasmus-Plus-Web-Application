@@ -1,11 +1,11 @@
 import NavigationBar from './NavigationBar';
-import Table from './Table';
-function Layout() {
+import classes from "./Layout.module.css";
+
+function Layout(props) {
   return (
     <div>
       <NavigationBar></NavigationBar>
-      <Table></Table>
-      <main className=""></main>
+      <main className={classes.main}>{props.children}</main>
     </div>
   );
 }
