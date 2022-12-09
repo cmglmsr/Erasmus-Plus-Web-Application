@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 
 function Table() {
   return (
     <Card>
       <div class="container">
-        <h2>To Do List</h2>
+        <h3>To Do List</h3>
         <table class="table table-striped">
           <thead>
             <tr>

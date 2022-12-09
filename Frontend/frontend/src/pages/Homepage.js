@@ -1,6 +1,5 @@
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import Table from "../components/layout/Table";
+import ProfileAction from "../components/common/ProfileAction";
+import Table from "../components/HomePage/Table";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -18,15 +17,10 @@ const DUMMY_PROFILE =
     return (
       <section>
         <Row>
-          <Col xs={3}>
-            <Row  className="mb-3">
-            <ProfileSummary profile={DUMMY_PROFILE} />
-            </Row>
-            <Row>
-              <ActionButtons role={DUMMY_PROFILE.role} />
-            </Row>
+          <Col xs={3} className="mx-3">
+            <ProfileAction profile={DUMMY_PROFILE} />
           </Col>
-          <Col>
+          <Col className="mx-3">
             <Table />
           </Col>
         </Row>
