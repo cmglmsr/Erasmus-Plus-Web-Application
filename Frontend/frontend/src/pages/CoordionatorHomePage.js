@@ -1,5 +1,4 @@
 import ProfileAction from "../components/common/ProfileAction";
-import Table from "../components/HomePage/ToDoList";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ToDoList from "../components/HomePage/ToDoList";
@@ -7,7 +6,7 @@ import Schedule from "../components/HomePage/Schedule";
 
 const DUMMY_PROFILE = {
   role: "coordinator",
-  image: "",
+  image: "https://www.flaticon.com/free-icon/profile_3135715",
   name: "",
   surname: "",
   department: "",

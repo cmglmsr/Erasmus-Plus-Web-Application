@@ -1,11 +1,14 @@
-.center {
+.center{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.scrollable{
-    height: 400px;
-    overflow: scroll;
+.heading {
+  text-align: center;
 }
+
+
+
+

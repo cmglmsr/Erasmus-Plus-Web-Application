@@ -1,39 +1,72 @@
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
-import classes from "./Schedule.css";
+import classes from "./Schedule.module.css";
+import React, { useState, useEffect } from 'react';
 
 function Schedule() {
+  const [dateState, setDateState] = useState(new Date());
+    useEffect(() => {
+           setInterval(() => setDateState(new Date()), 30000);
+    }, []);
   return (
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+    <Card>
+      <h3 className={classes.heading}>Schedule</h3>
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Due date</th>
+          <th>Due time</th>
+          <th>Task</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>{dateState.toLocaleDateString('en-GB', {
+                 day: 'numeric',
+                 month: 'short',
+                 year: 'numeric',
+              })}</td>
+          <td>16.00</td>
+          <td>Eren Duran's preapproval form's confirmation</td>
+        
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>{dateState.toLocaleDateString('en-GB', {
+                 day: 'numeric',
+                 month: 'short',
+                 year: 'numeric',
+              })}</td>
+          <td>17.00</td>
+          <td>Elifsena Oz's Final Course Transfer Form's submittion</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>{dateState.toLocaleDateString('en-GB', {
+                 day: 'numeric',
+                 month: 'short',
+                 year: 'numeric',
+              })}</td>
+          <td>19.00</td>
+          <td>Aslı Karaman's documents' signature</td>
+      
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>{dateState.toLocaleDateString('en-GB', {
+                 day: 'numeric',
+                 month: 'short',
+                 year: 'numeric',
+              })}</td>
+          <td>20.00</td>
+          <td>Cem Gülümser's elective courses' approvement </td>
+        </tr>
+      </tbody>
+    </Table>
+    </Card>
+    
   );
 }
 export default Schedule;

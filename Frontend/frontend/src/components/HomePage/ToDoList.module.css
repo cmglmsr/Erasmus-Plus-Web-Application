@@ -4,3 +4,11 @@
     align-items: center;
     height: 100vh;
 }
+
+.heading {
+    text-align: center;
+}
+
+.p {
+    display: inline;
+}
