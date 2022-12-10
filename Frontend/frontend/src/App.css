@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.button-default,
+.button-default:active:focus {
+  background-color: cadetblue;
+  border-color: #5f9ea0;
+}
+.button-default:hover {
+  background-color: rgb(70, 116, 117);
+  border-color: rgb(58, 94, 95);
+}
+
+.form {
+  display: block;
+  padding: 10px;
+}
+
+.heading {
+  text-align: center;
+}

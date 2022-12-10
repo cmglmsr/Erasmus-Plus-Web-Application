@@ -2,6 +2,7 @@ import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./Schedule.module.css";
 import React, { useState, useEffect } from 'react';
+import { Container } from "react-bootstrap";
 
 function Schedule() {
   const [dateState, setDateState] = useState(new Date());

@@ -1,9 +1,9 @@
-import ProfileDetails from "../components/ProfilePage/ProfileDetails";
+import ApplicationList from "../components/ApplicationListPage/ApplicationList";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProfileAction from "../components/common/ProfileAction";
 
-function ProfilePage(props) {
+function ApplicationListPage(props) {
   return (
     <section>
       <Row>
@@ -11,11 +11,11 @@ function ProfilePage(props) {
           <ProfileAction profile={props.profile} />
         </Col>
         <Col className="mx-3">
-          <ProfileDetails profile={props.profile} />
+          <ApplicationList/>
         </Col>
       </Row>
     </section>
   );
 }
 
-export default ProfilePage;
+export default ApplicationListPage;

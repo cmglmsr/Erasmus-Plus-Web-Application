@@ -9,19 +9,19 @@ function ActionButtons(props) {
     var role = props.role;
     let buttons = [];
     if (role === "student") {
-        buttons[0] = <Button className={classes.button} as={Link} to="application">My Application</Button>;
+        buttons[0] = <Button className="button-default" as={Link} to="/application">My Application</Button>;
     }
     else if (role === "international student office") {
-        buttons[0] = <Button className={classes.button} as={Link} to="transcripts">Transcripts</Button>;
+        buttons[0] = <Button className="button-default" as={Link} to="/transcripts">Transcripts</Button>;
     }
     else {
-        buttons[0] = <Button className={classes.button} as={Link} to="applications">Applications</Button>;
-        buttons[1] = <Button className={classes.button} as={Link} to="placements">Placements</Button>;
-        buttons[2] = <Button className={classes.button} as={Link} to="pre-approvals">Pre-Approvals</Button>;
-        buttons[3] = <Button className={classes.button} as={Link} to="course-transfer-list">Course Transfer</Button>;
+        buttons[0] = <Button className="button-default" as={Link} to="/application-list">Applications</Button>;
+        buttons[1] = <Button className="button-default" as={Link} to="/placements">Placements</Button>;
+        buttons[2] = <Button className="button-default" as={Link} to="/pre-approvals">Pre-Approvals</Button>;
+        buttons[3] = <Button className="button-default" as={Link} to="/course-transfer-list">Course Transfer</Button>;
     }
     if (role === "coordinator") {
-        buttons[4] = <Button className={classes.button} as={Link} to="final-course-transfer">Final Course Transfer</Button>;
+        buttons[4] = <Button className="button-default" as={Link} to="/final-course-transfer">Final Course Transfer</Button>;
     }
 
     const results= []
@@ -35,9 +35,7 @@ function ActionButtons(props) {
 
     return(
         <Card>
-            <Container>
                 {results}
-            </Container>
         </Card>
     )
 }

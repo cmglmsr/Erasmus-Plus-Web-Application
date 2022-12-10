@@ -7,7 +7,6 @@ function ProfileSummary(props) {
   var profile = props.profile;
   return (
     <Card>
-      <Container>
         <Table className={classes.table}>
           <thead className={classes.head}>
             <tr>
@@ -33,12 +32,15 @@ function ProfileSummary(props) {
               <td>{profile.surname}</td>
             </tr>
             <tr>
+              <th>Bilkent ID</th>
+              <td>{profile.id}</td>
+            </tr>
+            <tr>
               <th>Department</th>
               <td>{profile.department}</td>
             </tr>
           </tbody>
         </Table>
-      </Container>
     </Card>
   );
 }

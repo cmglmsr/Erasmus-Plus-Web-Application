@@ -6,7 +6,7 @@ import Schedule from "../components/HomePage/Schedule";
 
 const DUMMY_PROFILE = {
   role: "coordinator",
-  image: "https://www.flaticon.com/free-icon/profile_3135715",
+  image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
   name: "",
   surname: "",
   department: "",

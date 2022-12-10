@@ -14,7 +14,6 @@ function NavigationBar() {
           <Navbar.Brand as={Link} to="/">
             Erasmus Bilkent
           </Navbar.Brand>
-          <Navbar.Text>Coordinator</Navbar.Text>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
