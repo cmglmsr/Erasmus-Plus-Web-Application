@@ -12,7 +12,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" exact={true} element={<ProfilePage/>}></Route>
+        <Route path="/" exact={true} element={<CoordinatorHomePage/>}></Route>
       </Routes>
     </Layout>
   );
