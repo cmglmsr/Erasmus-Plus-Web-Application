@@ -43,7 +43,7 @@ function ToDoList() {
                 />
               </div>
             </th>
-            <td>Eren Duran's preapproval form should be confirmed</td>
+            <td>Submit Eren Duran's transcript</td>
             <td>14.00</td>
           </tr>
           <tr>
@@ -57,7 +57,7 @@ function ToDoList() {
                 />
               </div>
             </th>
-            <td>Elifsena Oz's Final Course Transfer Form should be submited</td>
+            <td>Submit Asli Karaman's transcript</td>
             <td>16.00</td>
           </tr>
           <tr>
@@ -71,7 +71,7 @@ function ToDoList() {
                 />
               </div>
             </th>
-            <td>Aslı Karaman's documents should be signed</td>
+            <td>Submit Elifsena Oz's transcript</td>
             <td>18.00</td>
           </tr>
         </tbody>

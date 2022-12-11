@@ -30,7 +30,7 @@ function Schedule() {
                  year: 'numeric',
               })}</td>
           <td>16.00</td>
-          <td>Eren Duran's preapproval form's confirmation</td>
+          <td>Submit Eren Duran's transcript</td>
         
         </tr>
         <tr>
@@ -41,7 +41,7 @@ function Schedule() {
                  year: 'numeric',
               })}</td>
           <td>17.00</td>
-          <td>Elifsena Oz's Final Course Transfer Form's submittion</td>
+          <td>Submit Cem Gülümser's transcript</td>
         </tr>
         <tr>
           <td>3</td>
@@ -51,7 +51,7 @@ function Schedule() {
                  year: 'numeric',
               })}</td>
           <td>19.00</td>
-          <td>Aslı Karaman's documents' signature</td>
+          <td>Submit Elifsena Oz's transcript</td>
       
         </tr>
         <tr>
@@ -62,7 +62,7 @@ function Schedule() {
                  year: 'numeric',
               })}</td>
           <td>20.00</td>
-          <td>Cem Gülümser's elective courses' approvement </td>
+          <td>Submit Arda Yıldız's transcript</td>
         </tr>
       </tbody>
     </Table>

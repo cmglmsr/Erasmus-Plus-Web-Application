@@ -5,14 +5,16 @@ import ToDoList from "../components/HomePage/ToDoList";
 import Schedule from "../components/HomePage/Schedule";
 
 const DUMMY_PROFILE = {
-  role: "coordinator",
-  image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-  name: "",
-  surname: "",
-  department: "",
+  role: "student",
+  image: "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
+  id: "21901576",
+  name: "Aslı",
+  surname: "Karaman",
+  department: "Computer Engineering",
+  semester: 3
 };
 
-function CoordinatorHomePage() {
+function Student() {
   return (
     <section>
       <Row>
@@ -20,17 +22,14 @@ function CoordinatorHomePage() {
           <ProfileAction profile={DUMMY_PROFILE} />
         </Col>
         <Col className="mx-4">
-        <div>
-          <Row>
-            <ToDoList />
-          </Row>
-          <Row className="my-4">
-            <Schedule />
-          </Row>
-        </div>
-      </Col>
-    </Row>
+          <div>
+            <Row className="my-3">
+              <Schedule />
+            </Row>
+          </div>
+        </Col>
+      </Row>
     </section>
   );
 }
-export default CoordinatorHomePage;
+export default Student;

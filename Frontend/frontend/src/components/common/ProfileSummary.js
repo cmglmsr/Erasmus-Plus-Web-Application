@@ -7,6 +7,7 @@ function ProfileSummary(props) {
   var profile = props.profile;
   var role = profile.role;
   var semester;
+  var table;
 
   if (role === "student") {
     semester = (
@@ -16,7 +17,41 @@ function ProfileSummary(props) {
       </tr>
     );
   }
-  return (
+
+  if(role === "International Student Office"){
+    table = <Card>
+    <Table>
+      <thead className={classes.head}>
+        <tr>
+          <th colSpan={2}>
+            <img
+              className={classes.image}
+              alt="profileImage"
+              src={profile.image}
+            ></img>
+          </th>
+        </tr>
+        <tr>
+          <th colSpan={2}>{profile.role}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td>{profile.name}</td>
+        </tr>
+        <tr>
+          <th>Surname</th>
+          <td>{profile.surname}</td>
+        </tr>
+        <tr>
+          <th>Bilkent ID</th>
+          <td>{profile.id}</td>
+        </tr>
+      </tbody>
+    </Table>
+  </Card>
+  }else{
     <Card>
       <Table>
         <thead className={classes.head}>
@@ -54,6 +89,8 @@ function ProfileSummary(props) {
         </tbody>
       </Table>
     </Card>
-  );
+  }
+
+  return table;
 }
 export default ProfileSummary;

@@ -7,12 +7,13 @@ import ApplicationPage from './pages/ApplicationPage';
 import ApplicationListPage from './pages/ApplicationListPage';
 import CoordinatorHomePage from './pages/CoordionatorHomePage';
 import InformationPage from './pages/InformationPage';
+import InternationalStudentOffice from './pages/InternationalStudentOffice';
 
 
 const DUMMY_PROFILE = {
   role: "student",
   image:
-    "https://media-exp1.licdn.com/dms/image/D4D03AQEdRKW_KFlPHQ/profile-displayphoto-shrink_800_800/0/1665401571688?e=1675900800&v=beta&t=gv1Z-1e1Qwaglyupyd0o10c5YeCiO95fqjnqUtoc6fI",
+    "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
   name: "Elifsena",
   surname: "Oz",
   id: "22002245",
@@ -34,6 +35,8 @@ function App() {
         <Route path="/application" exact={true} element={<ApplicationPage profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/application-list" exact={true} element={<ApplicationListPage profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/info" exact={true} element={<InformationPage/>}></Route>
+        <Route path="/international" exact={true} element={<InternationalStudentOffice/>}></Route>
+        <Route path="/coordinator" exact={true} element={<CoordinatorHomePage/>}></Route>
       </Routes>
     </Layout>
   );
