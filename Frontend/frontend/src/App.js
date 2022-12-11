@@ -10,13 +10,14 @@ import InformationPage from './pages/InformationPage';
 
 
 const DUMMY_PROFILE = {
-  role: "coordinator",
+  role: "student",
   image:
     "https://media-exp1.licdn.com/dms/image/D4D03AQEdRKW_KFlPHQ/profile-displayphoto-shrink_800_800/0/1665401571688?e=1675900800&v=beta&t=gv1Z-1e1Qwaglyupyd0o10c5YeCiO95fqjnqUtoc6fI",
   name: "Elifsena",
   surname: "Oz",
   id: "22002245",
   department: "CS",
+  semester: "3",
   email: "elifsena.oz@ug.bilkent.edu.tr",
   dateOfBirth: "25.06.2002",
   nationalID: "11223344556",
@@ -28,7 +29,11 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" exact={true} element={<InformationPage/>}></Route>
+      <Route path="/" exact={true} element={<HomePage profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/profile" exact={true} element={<ProfilePage profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/application" exact={true} element={<ApplicationPage profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/application-list" exact={true} element={<ApplicationListPage profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/info" exact={true} element={<InformationPage/>}></Route>
       </Routes>
     </Layout>
   );
