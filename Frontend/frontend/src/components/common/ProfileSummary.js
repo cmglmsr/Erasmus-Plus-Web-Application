@@ -7,7 +7,7 @@ function ProfileSummary(props) {
   var profile = props.profile;
   return (
     <Card>
-        <Table className={classes.table}>
+        <Table >
           <thead className={classes.head}>
             <tr>
               <th colSpan={2}>
