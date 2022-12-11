@@ -1,10 +1,12 @@
 package com.crackware.erasmus.data.services.impl;
 
+import com.crackware.erasmus.data.model.Coordinator;
 import com.crackware.erasmus.data.model.FacultyBoardMember;
 import com.crackware.erasmus.data.repositories.FacultyBoardMemberRepository;
 import com.crackware.erasmus.data.services.FacultyBoardMemberService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -18,26 +20,28 @@ public class FacultyBoardMemberImpl implements FacultyBoardMemberService {
 
     @Override
     public Set<FacultyBoardMember> findAll() {
-        return null;
+        HashSet<FacultyBoardMember> facultyBoardMembers = new HashSet<>();
+        facultyBoardMemberRepository.findAll().forEach(facultyBoardMembers::add);
+        return facultyBoardMembers;
     }
 
     @Override
     public FacultyBoardMember findById(Long aLong) {
-        return null;
+        return facultyBoardMemberRepository.findById(aLong).orElse(null);
     }
 
     @Override
     public FacultyBoardMember save(FacultyBoardMember object) {
-        return null;
+        return facultyBoardMemberRepository.save(object);
     }
 
     @Override
     public void delete(FacultyBoardMember object) {
-
+        facultyBoardMemberRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        facultyBoardMemberRepository.deleteById(aLong);
     }
 }

@@ -1,10 +1,12 @@
 package com.crackware.erasmus.data.services.impl;
 
+import com.crackware.erasmus.data.model.Coordinator;
 import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.repositories.StudentRepository;
 import com.crackware.erasmus.data.services.StudentService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -19,26 +21,28 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Set<Student> findAll() {
-        return null;
+        HashSet<Student> students = new HashSet<>();
+        studentRepository.findAll().forEach(students::add);
+        return students;
     }
 
     @Override
     public Student findById(Long aLong) {
-        return null;
+        return studentRepository.findById(aLong).orElse(null);
     }
 
     @Override
     public Student save(Student object) {
-        return null;
+        return studentRepository.save(object);
     }
 
     @Override
     public void delete(Student object) {
-
+        studentRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        studentRepository.deleteById(aLong);
     }
 }
