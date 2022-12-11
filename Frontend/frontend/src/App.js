@@ -5,6 +5,9 @@ import ProfilePage from './pages/ProfilePage';
 import HomePage from './pages/Homepage';
 import ApplicationPage from './pages/ApplicationPage';
 import ApplicationListPage from './pages/ApplicationListPage';
+import CoordinatorHomePage from './pages/CoordionatorHomePage';
+import InformationPage from './pages/InformationPage';
+
 
 const DUMMY_PROFILE = {
   role: "coordinator",
@@ -25,10 +28,7 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" exact={true} element={<HomePage profile={DUMMY_PROFILE}/>}></Route>
-        <Route path="/profile" exact={true} element={<ProfilePage profile={DUMMY_PROFILE}/>}></Route>
-        <Route path="/application" exact={true} element={<ApplicationPage profile={DUMMY_PROFILE}/>}></Route>
-        <Route path="/application-list" exact={true} element={<ApplicationListPage profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/" exact={true} element={<InformationPage/>}></Route>
       </Routes>
     </Layout>
   );
