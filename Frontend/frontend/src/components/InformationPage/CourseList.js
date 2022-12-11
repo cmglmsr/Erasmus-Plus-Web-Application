@@ -31,7 +31,7 @@ function CourseList() {
             <td>Elective</td>
           </tr>
           <tr>
-            <td>CS202</td>
+            <td>CS202-Fundamental Structures of Computer Science II</td>
             <td>Computer Engineering</td>
             <td>Mandatory</td>
           </tr>
