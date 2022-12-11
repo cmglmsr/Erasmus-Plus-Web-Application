@@ -1,4 +1,5 @@
-package com.example.demo.instructor;
+package com.crackware.erasmus.data.services;
+import com.crackware.erasmus.data.model.Instructor;
 import org.springframework.stereotype.Service;
 
 

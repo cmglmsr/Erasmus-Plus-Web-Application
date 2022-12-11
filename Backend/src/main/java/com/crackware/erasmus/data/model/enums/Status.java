@@ -1,0 +1,14 @@
+package com.crackware.erasmus.data.model.enums;
+
+public enum Status {
+    APPROVED,
+    DENIED,
+    WAITING_COORDINATOR,
+    WAITING_INSTRUCTOR,
+    WAITING_FACULTY_BOARD_MEMBER,
+    WAITING_ISO,
+    APPROVED_COORDINATOR,
+    APPROVED_INSTRUCTOR,
+    APPROVED_FACULTY_BOARD_MEMBER,
+    APPROVED_ISO
+}
