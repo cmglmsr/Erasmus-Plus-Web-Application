@@ -9,7 +9,7 @@ function ProfileSummary(props) {
   var semester;
   var table;
 
-  if (role === "student") {
+  if (role === "Student") {
     semester = (
       <tr>
         <th>Semester</th>
@@ -18,7 +18,7 @@ function ProfileSummary(props) {
     );
   }
 
-  if(role === "International Student Office"){
+  if(role == "International Student Office"){
     table = <Card>
     <Table>
       <thead className={classes.head}>
@@ -52,45 +52,45 @@ function ProfileSummary(props) {
     </Table>
   </Card>
   }else{
-    <Card>
-      <Table>
-        <thead className={classes.head}>
-          <tr>
-            <th colSpan={2}>
-              <img
-                className={classes.image}
-                alt="profileImage"
-                src={profile.image}
-              ></img>
-            </th>
-          </tr>
-          <tr>
-            <th colSpan={2}>{profile.role}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Name</th>
-            <td>{profile.name}</td>
-          </tr>
-          <tr>
-            <th>Surname</th>
-            <td>{profile.surname}</td>
-          </tr>
-          <tr>
-            <th>Bilkent ID</th>
-            <td>{profile.id}</td>
-          </tr>
-          <tr>
-            <th>Department</th>
-            <td>{profile.department}</td>
-          </tr>
-          {semester}
-        </tbody>
-      </Table>
-    </Card>
+    table = <Card>
+    <Table>
+      <thead className={classes.head}>
+        <tr>
+          <th colSpan={2}>
+            <img
+              className={classes.image}
+              alt="profileImage"
+              src={profile.image}
+            ></img>
+          </th>
+        </tr>
+        <tr>
+          <th colSpan={2}>{profile.role}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td>{profile.name}</td>
+        </tr>
+        <tr>
+          <th>Surname</th>
+          <td>{profile.surname}</td>
+        </tr>
+        <tr>
+          <th>Bilkent ID</th>
+          <td>{profile.id}</td>
+        </tr>
+        <tr>
+          <th>Department</th>
+          <td>{profile.department}</td>
+        </tr>
+        {semester}
+      </tbody>
+    </Table>
+  </Card>
   }
-
   return table;
+  
 }
 export default ProfileSummary;

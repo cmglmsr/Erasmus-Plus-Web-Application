@@ -8,10 +8,11 @@ import ApplicationListPage from './pages/ApplicationListPage';
 import CoordinatorHomePage from './pages/CoordionatorHomePage';
 import InformationPage from './pages/InformationPage';
 import InternationalStudentOffice from './pages/InternationalStudentOffice';
+import Student from './pages/Student';
 
 
 const DUMMY_PROFILE = {
-  role: "student",
+  role: "Student",
   image:
     "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
   name: "Elifsena",
@@ -37,6 +38,7 @@ function App() {
         <Route path="/info" exact={true} element={<InformationPage/>}></Route>
         <Route path="/international" exact={true} element={<InternationalStudentOffice/>}></Route>
         <Route path="/coordinator" exact={true} element={<CoordinatorHomePage/>}></Route>
+        <Route path="/student" exact={true} element={<Student/>}></Route>
       </Routes>
     </Layout>
   );

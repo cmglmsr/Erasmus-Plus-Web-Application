@@ -5,7 +5,7 @@ import ToDoList from "../components/HomePage/ToDoList";
 import Schedule from "../components/HomePage/Schedule";
 
 const DUMMY_PROFILE = {
-  role: "coordinator",
+  role: "Coordinator",
   image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
   name: "",
   surname: "",
