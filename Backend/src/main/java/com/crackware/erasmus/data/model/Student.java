@@ -18,7 +18,9 @@ public class Student extends BaseEntity{
     @Enumerated
     private Department department;
 
-    private double cgpa;
+    private String cgpa;
+
+    private String bilkentId;
 
     private int term;
 
