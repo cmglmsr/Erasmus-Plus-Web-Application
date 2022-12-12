@@ -4,11 +4,14 @@ import Row from "react-bootstrap/Row";
 
 function LoginPage() {
   function onLoginHandler(loginData) {
+      console.log(loginData);
     fetch(
-      "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
+      "http://localhost:8080/api/auth/signin", //enter api address
       {
         method: "POST",
-        body: JSON.stringify(loginData),
+        body: JSON.stringify(loginData), headers: {
+              "Content-Type": "application/json",
+          },
       }
     );
   }

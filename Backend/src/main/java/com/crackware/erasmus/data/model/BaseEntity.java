@@ -39,5 +39,4 @@ public class BaseEntity{
 
     private String dateOfBirth;
 
-
 }

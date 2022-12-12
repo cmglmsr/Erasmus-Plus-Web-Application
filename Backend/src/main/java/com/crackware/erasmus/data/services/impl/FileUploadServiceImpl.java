@@ -35,7 +35,4 @@ public class FileUploadServiceImpl implements FileUploadService {
         return (Stream<Document>) documentRepository.findAll();
     }
 
-    public void uploadFile(MultipartFile file) throws IOException {
-        file.transferTo(new File("C:\\Users\\cemg\\Desktop\\testuploads\\"+file.getOriginalFilename()));
-    }
 }

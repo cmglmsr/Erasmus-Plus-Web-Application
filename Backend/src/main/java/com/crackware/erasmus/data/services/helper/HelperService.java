@@ -51,7 +51,7 @@ public class HelperService {
         currentRole.setName(EnumRole.valueOf(authorities.get(0).getAuthority()));
         if (authorities.get(0) == null)
             return null;
-        String mail = authentication.getPrincipal().toString();
+        String mail = authentication.getName();
         switch (currentRole.getName()){
             case ROLE_ADMIN: return adminService.findByEmail(mail);
             case ROLE_ISO: return isoService.findByEmail(mail);
