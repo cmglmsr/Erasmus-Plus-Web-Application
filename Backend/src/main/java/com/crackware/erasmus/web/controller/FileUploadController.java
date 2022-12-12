@@ -43,8 +43,8 @@ public class FileUploadController {
 
             return new ResponseFile(
                     dbFile.getName(),
-                    fileDownloadUri,
                     dbFile.getType(),
+                    fileDownloadUri,
                     dbFile.getData().length);
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(files);
