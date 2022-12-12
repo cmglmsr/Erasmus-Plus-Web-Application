@@ -1,7 +1,9 @@
 package com.crackware.erasmus.data.services.impl;
 
 import com.crackware.erasmus.data.model.Application;
+import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.repositories.ApplicationRepository;
+import com.crackware.erasmus.data.repositories.StudentRepository;
 import com.crackware.erasmus.data.services.ApplicationService;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,15 @@ import java.util.Set;
 public class ApplicationServiceImpl implements ApplicationService {
 
     private final ApplicationRepository applicationRepository;
+    private final StudentRepository studentRepository;
 
-    public ApplicationServiceImpl(ApplicationRepository applicationRepository) {
+    public ApplicationServiceImpl(ApplicationRepository applicationRepository, StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+        Student s = new Student();
+        s.setName("cem");
+        s.setMail("cemg@hotmail.com");
+        s.setBilkentId("22003430");
+        studentRepository.save(s);
         this.applicationRepository = applicationRepository;
     }
 

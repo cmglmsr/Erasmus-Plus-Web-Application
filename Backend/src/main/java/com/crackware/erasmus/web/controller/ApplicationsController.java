@@ -6,6 +6,7 @@ import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.model.enums.School;
 import com.crackware.erasmus.data.model.enums.Status;
+import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.impl.ApplicationListServiceImpl;
 import com.crackware.erasmus.data.services.impl.ApplicationServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -24,10 +24,12 @@ public class ApplicationsController {
 
     private final ApplicationListServiceImpl applicationListService;
     private final ApplicationServiceImpl applicationService;
+    private final HelperService helperService;
 
-    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService) {
+    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService) {
         this.applicationListService = applicationListService;
         this.applicationService = applicationService;
+        this.helperService = helperService;
     }
 
     @PostMapping("/createApplication")
@@ -40,17 +42,14 @@ public class ApplicationsController {
                                     @RequestParam("pref4") String pref4,
                                     @RequestParam("pref5") String pref5) {
         final HashSet<School> schools = new HashSet<>();
-        final Student student = new Student();
+        final Student student = (Student) helperService.getUser();
+        System.out.println(helperService.getUser());
         final Application application = new Application();
-        student.setEmail(email);
         student.setAddress(address);
         student.setPhoneNumber(phoneNumber);
-        student.setName("Eren Duran");
-        student.setBilkentId("31313131");
-        student.setCgpa("1.31");
         application.setAdmittedSchool(School.YOZGAT_BOZOK_UNI);
         application.setDate(new Date());
-        application.setDepartment(Department.CS);
+        application.setDepartment(student.getDepartment());
         application.setStatus(Status.APPROVED);
         application.setStudent(student);
         application.setSchools(schools);

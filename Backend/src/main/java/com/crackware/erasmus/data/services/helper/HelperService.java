@@ -1,6 +1,7 @@
 package com.crackware.erasmus.data.services.helper;
 
 import com.crackware.erasmus.data.model.BaseEntity;
+import com.crackware.erasmus.data.model.security.EnumRole;
 import com.crackware.erasmus.data.model.security.Role;
 import com.crackware.erasmus.data.services.*;
 import org.springframework.context.annotation.Bean;
@@ -39,13 +40,16 @@ public class HelperService {
         this.facultyBoardMemberService = facultyBoardMemberService;
     }
 
-    public BaseEntity getUser(){
+    public BaseEntity getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        ArrayList<GrantedAuthority> authorities = (ArrayList<GrantedAuthority>) authentication.getAuthorities();
+        System.out.println(authentication.getAuthorities());
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>(authentication.getAuthorities());
         if (authorities.size() == 0)
             return null;
-        Role currentRole = (Role) authorities.get(0);
-        if (currentRole == null)
+
+        Role currentRole = new Role();
+        currentRole.setName(EnumRole.valueOf(authorities.get(0).getAuthority()));
+        if (authorities.get(0) == null)
             return null;
         String mail = authentication.getPrincipal().toString();
         switch (currentRole.getName()){

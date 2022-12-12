@@ -37,7 +37,7 @@ public class BaseEntity{
     @JsonIgnore
     private String password;
 
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
 
 }
