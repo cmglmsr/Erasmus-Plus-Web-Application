@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Setter
 @Getter
 @Entity
 public class Coordinator extends BaseEntity {
-    @Enumerated
+
     private Department department;
+
     private String signature; // String is used instead of string type
 
 

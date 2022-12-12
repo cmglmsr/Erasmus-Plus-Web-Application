@@ -1,6 +1,8 @@
 package com.crackware.erasmus.data.services.impl;
 
 import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.model.Student;
+import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.repositories.CoordinatorRepository;
 import com.crackware.erasmus.data.services.CoordinatorService;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,10 @@ public class CoordinatorServiceImpl implements CoordinatorService {
 
     public CoordinatorServiceImpl(CoordinatorRepository coordinatorRepository) {
         this.coordinatorRepository = coordinatorRepository;
+        Coordinator student = new Coordinator();
+        student.setName("ASLI FUCKING KARAMAN");
+        student.setDepartment(Department.CS);
+        coordinatorRepository.save(student);
     }
 
     @Override
