@@ -3,8 +3,6 @@ package com.crackware.erasmus.web.controller;
 import com.crackware.erasmus.data.message.ResponseFile;
 import com.crackware.erasmus.data.model.Document;
 import com.crackware.erasmus.data.services.impl.FileUploadServiceImpl;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +15,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:8080") // Change cross-origin when hosted
 public class FileUploadController {
-    @Autowired
-    FileUploadServiceImpl fileUploadService;
+    private final FileUploadServiceImpl fileUploadService;
+
+    public FileUploadController(FileUploadServiceImpl fileUploadService) {
+        this.fileUploadService = fileUploadService;
+    }
 
     @PostMapping("fileupload")
     public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
@@ -38,7 +39,7 @@ public class FileUploadController {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/files/")
-                    .path(dbFile.getId().toString())
+                    .path(dbFile.getId())
                     .toUriString();
 
             return new ResponseFile(

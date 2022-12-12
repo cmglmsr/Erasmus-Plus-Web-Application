@@ -18,9 +18,15 @@ public class Student extends BaseEntity{
     @Enumerated
     private Department department;
 
-    private double cgpa;
+    private String cgpa;
+
+    private String bilkentId;
 
     private int term;
+
+    private String email;
+    private String address;
+    private String phoneNumber;
 
     @ElementCollection(targetClass= Language.class)
     @Enumerated(EnumType.STRING)
