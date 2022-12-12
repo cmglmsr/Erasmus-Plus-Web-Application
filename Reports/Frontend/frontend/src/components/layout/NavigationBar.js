@@ -25,7 +25,7 @@ function NavigationBar() {
                 Profile
               </Nav.Link>
             </Nav>
-            <Form inline>
+            <Form>
               <Button variant="danger" as={Link} to="/logout">
                 Logout
               </Button>
