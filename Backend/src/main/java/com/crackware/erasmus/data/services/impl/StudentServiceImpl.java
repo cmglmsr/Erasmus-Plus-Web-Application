@@ -1,6 +1,6 @@
 package com.crackware.erasmus.data.services.impl;
 
-import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.model.BaseEntity;
 import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.repositories.StudentRepository;
 import com.crackware.erasmus.data.services.StudentService;
@@ -44,5 +44,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteById(Long aLong) {
         studentRepository.deleteById(aLong);
+    }
+
+    @Override
+    public BaseEntity findByEmail(String email) {
+        return studentRepository.findByMail(email);
     }
 }

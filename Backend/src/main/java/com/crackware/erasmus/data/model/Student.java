@@ -12,7 +12,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table
 public class Student extends BaseEntity{
 
     @Enumerated
@@ -25,7 +24,9 @@ public class Student extends BaseEntity{
     private int term;
 
     private String email;
+
     private String address;
+
     private String phoneNumber;
 
     @ElementCollection(targetClass= Language.class)

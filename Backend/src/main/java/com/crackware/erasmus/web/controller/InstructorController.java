@@ -16,8 +16,4 @@ public class InstructorController {
         this.instructorService = instructorService;
     }
 
-    @GetMapping
-    public String printInfo() {
-        return instructorService.printInfo();
-    }
 }

@@ -1,6 +1,6 @@
 package com.crackware.erasmus.data.services.impl;
 
-import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.model.BaseEntity;
 import com.crackware.erasmus.data.model.InternationalStudentOffice;
 import com.crackware.erasmus.data.repositories.InternationalStudentOfficeRepository;
 import com.crackware.erasmus.data.services.InternationalStudentOfficeService;
@@ -44,5 +44,10 @@ public class InternationalStudentOfficeServiceImpl implements InternationalStude
     @Override
     public void deleteById(Long aLong) {
         internationalStudentOfficeRepository.deleteById(aLong);
+    }
+
+    @Override
+    public BaseEntity findByEmail(String email) {
+        return internationalStudentOfficeRepository.findByMail(email);
     }
 }

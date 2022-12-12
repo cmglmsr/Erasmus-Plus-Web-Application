@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import com.crackware.erasmus.data.model.Document;
 import com.crackware.erasmus.data.repositories.DocumentRepository;
 import com.crackware.erasmus.data.services.FileUploadService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
 
-    @Autowired
-    private DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository;
+
+    public FileUploadServiceImpl(DocumentRepository documentRepository) {
+        this.documentRepository = documentRepository;
+    }
 
     public Document store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -25,12 +27,12 @@ public class FileUploadServiceImpl implements FileUploadService {
         return documentRepository.save(FileDB);
     }
 
-    public Document getFile(String id) {
+    public Document getFile(Long id) {
         return documentRepository.findById(id).get();
     }
 
     public Stream<Document> getAllFiles() {
-        return documentRepository.findAll().stream();
+        return (Stream<Document>) documentRepository.findAll();
     }
 
     public void uploadFile(MultipartFile file) throws IOException {

@@ -1,6 +1,6 @@
 package com.crackware.erasmus.data.services.impl;
 
-import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.model.BaseEntity;
 import com.crackware.erasmus.data.model.FacultyBoardMember;
 import com.crackware.erasmus.data.repositories.FacultyBoardMemberRepository;
 import com.crackware.erasmus.data.services.FacultyBoardMemberService;
@@ -43,5 +43,10 @@ public class FacultyBoardMemberImpl implements FacultyBoardMemberService {
     @Override
     public void deleteById(Long aLong) {
         facultyBoardMemberRepository.deleteById(aLong);
+    }
+
+    @Override
+    public BaseEntity findByEmail(String email) {
+        return facultyBoardMemberRepository.findByMail(email);
     }
 }

@@ -52,7 +52,7 @@ public class FileUploadController {
     }
 
     @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
         Document doc = fileUploadService.getFile(id);
 
         return ResponseEntity.ok()

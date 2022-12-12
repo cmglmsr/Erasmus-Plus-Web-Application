@@ -1,6 +1,7 @@
 package com.crackware.erasmus.data.services.impl;
 
 import com.crackware.erasmus.data.model.Admin;
+import com.crackware.erasmus.data.model.BaseEntity;
 import com.crackware.erasmus.data.repositories.AdminRepository;
 import com.crackware.erasmus.data.services.AdminService;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteById(Long aLong) {
         adminRepository.deleteById(aLong);
+    }
+
+    @Override
+    public BaseEntity findByEmail(String email) {
+        return adminRepository.findByMail(email);
     }
 }

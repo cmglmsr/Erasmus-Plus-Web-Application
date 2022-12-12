@@ -4,4 +4,6 @@ import com.crackware.erasmus.data.model.Coordinator;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CoordinatorRepository extends CrudRepository<Coordinator, Long> {
+    public Coordinator findByMail(String mail);
+
 }
