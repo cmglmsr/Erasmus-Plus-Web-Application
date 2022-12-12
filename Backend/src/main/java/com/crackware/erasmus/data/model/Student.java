@@ -24,6 +24,10 @@ public class Student extends BaseEntity{
 
     private int term;
 
+    private String email;
+    private String address;
+    private String phoneNumber;
+
     @ElementCollection(targetClass= Language.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="student_languages")
