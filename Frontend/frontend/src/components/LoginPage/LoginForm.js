@@ -9,11 +9,11 @@ import Button from "react-bootstrap/Button";
 const ValidationForm = (props) => {
   const [fields, errors, form] = useFormInputValidation(
     {
-      email: "",
+      mail: "",
       password: "",
     },
     {
-      email: "required|email",
+      mail: "required|email",
       password: "required",
     }
   );
@@ -34,13 +34,13 @@ const ValidationForm = (props) => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
-            name="email"
+            name="mail"
             onBlur={form.handleBlurEvent}
             onChange={form.handleChangeEvent}
-            value={fields.email}
+            value={fields.mail}
             placeholder="Enter Email"
           />
-          <label className="error">{errors.email ? errors.email : ""}</label>
+          <label className="error">{errors.mail ? errors.mail : ""}</label>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="loginPasswordInput">
