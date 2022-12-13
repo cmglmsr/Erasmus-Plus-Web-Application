@@ -21,11 +21,11 @@ public class FacultyBoardMemberController {
     }
 
     @GetMapping("/home")
-    public FacultyBoardMember coordinatorHome() {
+    public FacultyBoardMember facultyBoardMemberHome() {
         return (FacultyBoardMember) helperService.getUser();
     }
     @GetMapping("/profile")
-    public FacultyBoardMember coordinatorProfile() {
+    public FacultyBoardMember facultyBoardMemberProfile() {
         return (FacultyBoardMember) helperService.getUser();
     }
 }

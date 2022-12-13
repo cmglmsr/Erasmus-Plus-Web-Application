@@ -22,11 +22,11 @@ public class InstructorController {
     }
 
     @GetMapping("/home")
-    public Instructor coordinatorHome() {
+    public Instructor instructorHome() {
         return (Instructor) helperService.getUser();
     }
     @GetMapping("/profile")
-    public Instructor coordinatorProfile() {
+    public Instructor instructorProfile() {
         return (Instructor) helperService.getUser();
     }
 }
