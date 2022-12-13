@@ -22,7 +22,7 @@ class SemesterCheckbox extends React.Component {
   };
 
   toggle2 = () => {
-    this.setState({
+    this.state({
         group2: !this.state.group2,
       group1: false,
       group3: false,
@@ -30,7 +30,7 @@ class SemesterCheckbox extends React.Component {
   };
 
   toggle3 = () => {
-    this.setState({
+    this.state({
         group3: !this.state.group3,
       group2: false,
       group1: false,
