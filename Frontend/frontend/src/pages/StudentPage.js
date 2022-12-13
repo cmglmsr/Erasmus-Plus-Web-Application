@@ -21,6 +21,7 @@ function Student() {
       method: "GET",
       headers: {
         "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
       },
     }).then((response) => {
       response.json().then((parsedJson) => {
