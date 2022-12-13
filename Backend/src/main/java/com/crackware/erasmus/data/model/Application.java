@@ -45,6 +45,7 @@ public class Application {
     @OneToOne(cascade=CascadeType.ALL)
     private School finalSchool;
 
+    @OrderColumn
     private double points;
 
     @Enumerated(EnumType.STRING)
