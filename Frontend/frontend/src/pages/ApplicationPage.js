@@ -19,7 +19,7 @@ import ApplicationDetails from "../components/ApplicationPage/ApplicationDetails
             <ProfileAction profile={props.profile} />
           </Col>
           <Col className="mx-4">
-            <ApplicationDetails application={props.profile} onSubmit={applicationHandler}/>
+            <ApplicationDetails application={applicationHandler} />
           </Col>
         </Row>
       </section>
