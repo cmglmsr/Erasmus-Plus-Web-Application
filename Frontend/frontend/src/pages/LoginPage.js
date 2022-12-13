@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 
 function LoginPage() {
   var error;
-  function onLoginHandler(loginData) {
+  function onLoginHandler(loinData) {
     console.log(loginData);
     fetch(
       "http://localhost:8080/signin", //enter api address
@@ -23,12 +23,6 @@ function LoginPage() {
           }
           else if (parsedJson.roles[0] === "ROLE_COORDINATOR") {
             window.location.href = "http://localhost:3000/coordinator";
-          }
-          if (parsedJson.roles[0] === "ROLE_STUDENT") {
-            window.location.href = "http://localhost:3000/";
-          }
-          if (parsedJson.roles[0] === "ROLE_STUDENT") {
-            window.location.href = "http://localhost:3000/";
           }
         }
         else if (response.status === 401) {

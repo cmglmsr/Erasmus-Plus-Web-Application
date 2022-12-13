@@ -22,7 +22,6 @@ function Student() {
       headers: {
         "Content-Type": "application/json",
       },
-      mode: "cors",
     }).then((response) => {
       response.json().then((parsedJson) => {
         console.log(parsedJson);
