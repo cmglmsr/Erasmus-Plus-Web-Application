@@ -32,11 +32,11 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public Admin coordinatorHome() {
+    public Admin adminHome() {
         return (Admin) helperService.getUser();
     }
     @GetMapping("/profile")
-    public Admin coordinatorProfile() {
+    public Admin adminProfile() {
         return (Admin) helperService.getUser();
     }
 

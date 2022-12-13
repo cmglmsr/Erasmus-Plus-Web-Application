@@ -44,8 +44,4 @@ public class Coordinator extends BaseEntity {
     public void finalCourseTransferForm() {
         // Sign the string
     }
-
-    public void sign(String document) {
-        // Sign the document
-    }
 }

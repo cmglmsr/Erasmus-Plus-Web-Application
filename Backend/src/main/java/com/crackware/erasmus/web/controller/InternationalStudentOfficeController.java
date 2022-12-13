@@ -22,11 +22,11 @@ public class InternationalStudentOfficeController {
     }
 
     @GetMapping("/home")
-    public InternationalStudentOffice coordinatorHome() {
+    public InternationalStudentOffice internationalStudentOfficeHome() {
         return (InternationalStudentOffice) helperService.getUser();
     }
     @GetMapping("/profile")
-    public InternationalStudentOffice coordinatorProfile() {
+    public InternationalStudentOffice internationalStudentOfficeProfile() {
         return (InternationalStudentOffice) helperService.getUser();
     }
 }

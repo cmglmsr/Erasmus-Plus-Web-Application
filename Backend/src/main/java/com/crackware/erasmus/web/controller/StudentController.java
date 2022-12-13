@@ -20,11 +20,11 @@ public class StudentController {
     }
 
     @GetMapping("/home")
-    public Student coordinatorHome() {
+    public Student studentHome() {
         return (Student) helperService.getUser();
     }
     @GetMapping("/profile")
-    public Student coordinatorProfile() {
+    public Student studentProfile() {
         return (Student) helperService.getUser();
     }
 }
