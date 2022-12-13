@@ -29,4 +29,18 @@ public class InternationalStudentOfficeController {
     public InternationalStudentOffice internationalStudentOfficeProfile() {
         return (InternationalStudentOffice) helperService.getUser();
     }
+
+    @RestController
+    @CrossOrigin("http://localhost:8080") // Change cross-origin when hosted
+    public class FileUploadController {
+        private final FileUploadServiceImpl fileUploadService;
+    @PostMapping("/home")
+    public void uploadFile(@RequestParam("transcript") MultipartFile file) throws IOException {
+        try {
+            fileUploadService.store(file);
+            System.out.println("[+] Transcript upload successful.");
+        } catch (IOException e) {
+            System.out.println("[-] Transcript upload failed.");
+        }
+    }
 }
