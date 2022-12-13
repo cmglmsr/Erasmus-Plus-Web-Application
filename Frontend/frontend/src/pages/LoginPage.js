@@ -15,9 +15,12 @@ function LoginPage() {
         },
       }
     ).then((response) => {
-      if (response.roles === "ROLE_STUDENT") {
-        window.location.href = "http://localhost:8080/"
-      }
+        response.json().then(parsedJson => {
+            if (parsedJson.roles[0] === "ROLE_STUDENT") {
+                window.location.href = "http://localhost:3000/"
+            }
+        })
+
       // HTTP 301 response
       // HOW CAN I FOLLOW THE HTTP REDIRECT RESPONSE?
     });
