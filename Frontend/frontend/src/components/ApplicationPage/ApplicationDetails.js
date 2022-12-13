@@ -1,5 +1,4 @@
 import { formatPhoneNumberIntl } from "react-phone-number-input";
-
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -18,12 +17,11 @@ function ApplicationDetails(props) {
     if (event.target.checked) {
       console.log("Checkbox is checked");
       semester = isSubscribed;
-      console.log(event.target);
+      console.log(semester);
     } else {
       console.log("Checkbox is NOT checked");
       semester = isSubscribed;
-      console.log(event.target);
-
+      console.log(semester);
     }
     setIsSubscribed((current) => !current);
   };
@@ -56,42 +54,39 @@ function ApplicationDetails(props) {
         <Form.Group as={Row} className="my-3" controlId="preferredPeriod">
           <Col sm="3">Time Period</Col>
           <Col>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                inline
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 id="flexCheckDefault"
                 value={isSubscribed}
                 onChange={handleChange}
               />
-              <label class="form-check-label" for="flexCheckDefault">
+              <label className="form-check-label">
               Fal Semester Only
               </label>
             </div>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                inline
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 id="flexCheckChecked"
                 value={isSubscribed}
                 onChange={handleChange}
               />
-              <label class="form-check-label" for="flexCheckChecked">
+              <label className="form-check-label">
               Spring Semester Only
               </label>
             </div>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                inline
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 id="flexCheckChecked"
                 value={isSubscribed}
                 onChange={handleChange}
               />
-              <label class="form-check-label" for="flexCheckChecked">
+              <label className="form-check-label">
               Fal & Spring Semesters
               </label>
             </div>
@@ -102,7 +97,7 @@ function ApplicationDetails(props) {
             1st Preference
           </Form.Label>
           <Col>
-            <Form.Select value={this.satate.pref1}>
+            <Form.Select >
               <option disabled>
               </option>
               <option value="1">Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland</option>
@@ -115,7 +110,7 @@ function ApplicationDetails(props) {
             2nd Preference
           </Form.Label>
           <Col>
-            <Form.Select value={this.satate.pref2}>
+            <Form.Select >
               <option disabled></option>
               <option value="1">Vrije Universiteit Amsterdam-The Netherlands</option>
               <option value="2">Female</option>
@@ -127,7 +122,7 @@ function ApplicationDetails(props) {
             3rd Preference
           </Form.Label>
           <Col>
-            <Form.Select value={this.satate.pref3}>
+            <Form.Select>
               <option>
               </option>
               <option value="1">Ecole Pour Linformatique Et Les Techniques Avancees
@@ -141,7 +136,7 @@ function ApplicationDetails(props) {
             4th Preference
           </Form.Label>
           <Col>
-            <Form.Select value={this.satate.pref4}>
+            <Form.Select>
               <option disabled></option>
               <option value="1">Kingston University-U.K.</option>
               <option value="2">Female</option>
@@ -153,7 +148,7 @@ function ApplicationDetails(props) {
             5th Preference
           </Form.Label>
           <Col>
-            <Form.Select value={this.satate.pref5}>
+            <Form.Select>
               <option></option>
               <option value="1">Male</option>
               <option value="2">Female</option>
