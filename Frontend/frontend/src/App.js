@@ -8,7 +8,7 @@ import ApplicationListPage from './pages/ApplicationListPage';
 import CoordinatorHomePage from './pages/CoordionatorHomePage';
 import InformationPage from './pages/InformationPage';
 import InternationalStudentOffice from './pages/InternationalStudentOffice';
-import Student from './pages/Student';
+import StudentPage from './pages/StudentPage';
 import LoginPage from "./pages/LoginPage";
 
 
@@ -40,7 +40,7 @@ function App() {
         <Route path="/info" exact={true} element={<InformationPage/>}></Route>
         <Route path="/international" exact={true} element={<InternationalStudentOffice/>}></Route>
         <Route path="/coordinator" exact={true} element={<CoordinatorHomePage/>}></Route>
-        <Route path="/student" exact={true} element={<Student/>}></Route>
+        <Route path="/student/home" exact={true} element={<StudentPage />}></Route>
       </Routes>
     </Layout>
   );

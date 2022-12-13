@@ -102,11 +102,10 @@ function ApplicationDetails(props) {
             1st Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender">
-              <option>
-                Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland
+            <Form.Select value={this.satate.pref1}>
+              <option disabled>
               </option>
-              <option value="1">Male</option>
+              <option value="1">Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland</option>
               <option value="2">Female</option>
             </Form.Select>
           </Col>
@@ -116,9 +115,9 @@ function ApplicationDetails(props) {
             2nd Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender">
-              <option>Vrije Universiteit Amsterdam-The Netherlands</option>
-              <option value="1">Male</option>
+            <Form.Select value={this.satate.pref2}>
+              <option disabled></option>
+              <option value="1">Vrije Universiteit Amsterdam-The Netherlands</option>
               <option value="2">Female</option>
             </Form.Select>
           </Col>
@@ -128,12 +127,11 @@ function ApplicationDetails(props) {
             3rd Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender">
+            <Form.Select value={this.satate.pref3}>
               <option>
-                Ecole Pour Linformatique Et Les Techniques Avancees
-                (EPITA)-France
               </option>
-              <option value="1">Male</option>
+              <option value="1">Ecole Pour Linformatique Et Les Techniques Avancees
+                (EPITA)-France</option>
               <option value="2">Female</option>
             </Form.Select>
           </Col>
@@ -143,9 +141,9 @@ function ApplicationDetails(props) {
             4th Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender">
-              <option>Kingston University-U.K.</option>
-              <option value="1">Male</option>
+            <Form.Select value={this.satate.pref4}>
+              <option disabled></option>
+              <option value="1">Kingston University-U.K.</option>
               <option value="2">Female</option>
             </Form.Select>
           </Col>
@@ -155,7 +153,7 @@ function ApplicationDetails(props) {
             5th Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender">
+            <Form.Select value={this.satate.pref5}>
               <option></option>
               <option value="1">Male</option>
               <option value="2">Female</option>
