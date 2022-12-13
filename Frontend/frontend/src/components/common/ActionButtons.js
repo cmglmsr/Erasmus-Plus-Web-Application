@@ -27,7 +27,7 @@ function ActionButtons(props) {
     const results= []
     buttons.forEach(button => {
         results.push(
-            <Row  className="m-2">
+            <Row  className="m-2" key={button.key}>
                 {button}
             </Row>
         );
@@ -35,7 +35,7 @@ function ActionButtons(props) {
 
     return(
         <Card>
-                {results}
+            {results}
         </Card>
     )
 }

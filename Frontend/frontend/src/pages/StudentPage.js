@@ -1,6 +1,7 @@
 import ProfileAction from "../components/common/ProfileAction";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useEffect } from "react";
 import ToDoList from "../components/HomePage/ToDoList";
 import Schedule from "../components/HomePage/Schedule";
 
@@ -11,10 +12,16 @@ const DUMMY_PROFILE = {
   name: "Aslı",
   surname: "Karaman",
   department: "Computer Engineering",
-  semester: 3
+  semester: 3,
 };
 
 function Student() {
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
+      console.log(response)
+    );
+  }, []);
+
   return (
     <section>
       <Row>
