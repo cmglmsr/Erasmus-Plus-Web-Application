@@ -1,5 +1,6 @@
 package com.crackware.erasmus.data.model;
 
+import com.crackware.erasmus.data.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 public class Document {
     private String name;
     private String type;
+    private Status documentStatus;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -21,9 +23,10 @@ public class Document {
 
     public Document(){}
 
-    public Document(String name, String type, byte[] data) {
+    public Document(String name, String type, byte[] data, Status documentStatus) {
         this.name = name;
         this.type = type;
         this.data = data;
+        this.documentStatus = documentStatus;
     }
 }
