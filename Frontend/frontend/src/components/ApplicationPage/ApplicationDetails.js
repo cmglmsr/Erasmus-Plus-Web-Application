@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-
+import { useState } from "react";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationDetails.module.css";
@@ -12,56 +12,89 @@ import classes from "./ApplicationDetails.module.css";
 function ApplicationDetails(props) {
   var application = props.application;
   var phoneNumber = formatPhoneNumberIntl(application.phone);
+  var semester;
+  const [isSubscribed, setIsSubscribed] = useState(true);
+  const handleChange = (event) => {
+    if (event.target.checked) {
+      console.log("Checkbox is checked");
+      semester = isSubscribed;
+      console.log(event.target);
+    } else {
+      console.log("Checkbox is NOT checked");
+      semester = isSubscribed;
+      console.log(event.target);
+
+    }
+    setIsSubscribed((current) => !current);
+  };
   return (
-    <Card >
-
+    <Card>
       <Form className="form">
-      <h3 className={classes.heading}>Application</h3>
-      <hr />
-      <h6>Contact Information</h6>
-      <hr className={classes.simple} />
-      <Table>
-        <tbody>
-          <tr>
-            <td>Email</td>
-            <td>{application.email}</td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>{application.address}</td>
-          </tr>
-          <tr>
-            <td>Phone Number</td>
-            <td>{phoneNumber}</td>
-          </tr>
-        </tbody>
-      </Table>
+        <h3 className={classes.heading}>Application</h3>
+        <hr />
+        <h6>Contact Information</h6>
+        <hr className={classes.simple} />
+        <Table>
+          <tbody>
+            <tr>
+              <td>Email</td>
+              <td>{application.email}</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{application.address}</td>
+            </tr>
+            <tr>
+              <td>Phone Number</td>
+              <td>{phoneNumber}</td>
+            </tr>
+          </tbody>
+        </Table>
 
-      <h6>Erasmus Preferences</h6>
-      <hr className={classes.simple} />
+        <h6>Erasmus Preferences</h6>
+        <hr className={classes.simple} />
         <Form.Group as={Row} className="my-3" controlId="preferredPeriod">
           <Col sm="3">Time Period</Col>
           <Col>
-            <Form.Check
-              inline
-              label="Fal Semester Only"
-              name="group1"
-              type="checkbox"
-              id={`inline-checkbox-1`}
-            />
-            <Form.Check
-              inline
-              label="Spring Semester Only"
-              name="group1"
-              type="checkbox"
-              id={`inline-checkbox-2`}
-            />
-            <Form.Check
-              inline
-              label="Fal & Spring Semesters"
-              type="checkbox"
-              id={`inline-checkbox-3`}
-            />
+            <div class="form-check">
+              <input
+                inline
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckDefault"
+                value={isSubscribed}
+                onChange={handleChange}
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+              Fal Semester Only
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                inline
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckChecked"
+                value={isSubscribed}
+                onChange={handleChange}
+              />
+              <label class="form-check-label" for="flexCheckChecked">
+              Spring Semester Only
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                inline
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckChecked"
+                value={isSubscribed}
+                onChange={handleChange}
+              />
+              <label class="form-check-label" for="flexCheckChecked">
+              Fal & Spring Semesters
+              </label>
+            </div>
           </Col>
         </Form.Group>
         <Form.Group as={Row} className="my-3" controlId="formPlaintextEmail">
