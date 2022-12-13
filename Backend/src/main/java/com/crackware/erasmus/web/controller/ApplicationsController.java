@@ -69,7 +69,23 @@ public class ApplicationsController {
 
     @GetMapping("/applications")
     public ResponseEntity<Set<ResponseApplication>> listApplications() {
-
-        return ResponseEntity.status(HttpStatus.OK).header("a","b").build();
+        Set<Application> applications = applicationService.findAll();
+        Set<ResponseApplication> responseApplications = new HashSet<>();
+        for(Application a : applications) {
+            String name = a.getStudent().getName();
+            String bilkendId = a.getStudent().getBilkentId();
+            String cgpa = a.getStudent().getCgpa();
+            String finalSchool = "";
+            String status = "";
+            if(a.getFinalSchool() != null) finalSchool = a.getFinalSchool().getName();
+            if(a.getStatus() != null) status =  a.getStatus().toString();
+            if(name == null) name = "";
+            if(bilkendId == null) bilkendId = "";
+            if(cgpa == null) cgpa = "";
+            if(finalSchool == null) finalSchool = "";
+            if(status == null) status = "";
+            responseApplications.add(new ResponseApplication(name, bilkendId, cgpa, finalSchool, status));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
     }
 }

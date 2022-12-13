@@ -7,7 +7,7 @@ function LoginPage() {
   function onLoginHandler(loginData) {
     console.log(loginData);
     fetch(
-      "http://localhost:8080/api/auth/signin", //enter api address
+      "http://localhost:8080/signin", //enter api address
       {
         method: "POST",
         body: JSON.stringify(loginData),
