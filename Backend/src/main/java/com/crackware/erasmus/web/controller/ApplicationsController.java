@@ -39,7 +39,32 @@ public class ApplicationsController {
                                     @RequestParam("pref3") String pref3,
                                     @RequestParam("pref4") String pref4,
                                     @RequestParam("pref5") String pref5) {
-
+        Student student = (Student) helperService.getUser();
+        Application application = new Application();
+        application.setDate(new Date());
+        application.setDepartment(student.getDepartment());
+        /*
+        * TO DO:
+        * Create schools beforehand
+        * Fetch them from database
+        * */
+        School s1 = new School();
+        School s2 = new School();
+        School s3 = new School();
+        School s4 = new School();
+        School s5 = new School();
+        s1.setName(pref1);
+        s2.setName(pref2);
+        s3.setName(pref3);
+        s4.setName(pref4);
+        s5.setName(pref5);
+        application.setSchool1(s1);
+        application.setSchool2(s2);
+        application.setSchool3(s3);
+        application.setSchool4(s4);
+        application.setSchool5(s5);
+        application.setStudent(student);
+        applicationService.save(application);
     }
 
     @GetMapping("/applications")

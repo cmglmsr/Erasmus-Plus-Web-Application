@@ -26,22 +26,23 @@ public class Application {
     @Enumerated(EnumType.STRING)
     private Department department;
 
-    @OneToOne
+
+    @OneToOne(cascade=CascadeType.ALL)
     private School school1;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private School school2;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private School school3;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private School school4;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private School school5;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private School finalSchool;
 
     private double points;
