@@ -17,9 +17,11 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
-      console.log(response)
-    );
+    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) => {
+      response.json().then((parsedJson) => {
+        console.log(parsedJson);
+      });
+    });
   }, []);
 
   return (
