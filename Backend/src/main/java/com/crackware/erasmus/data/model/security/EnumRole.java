@@ -6,5 +6,6 @@ public enum EnumRole {
     ROLE_FACULTY_BOARD_MEMBER,
     ROLE_ISO,
     ROLE_INSTRUCTOR,
-    ROLE_ADMIN
+    ROLE_ADMIN,
+    ROLE_ANONYMOUS
 }

@@ -17,17 +17,24 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    fetch(`http://localhost:8080/student/home`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-    }).then((response) => {
-      response.json().then((parsedJson) => {
-        console.log(parsedJson);
-      });
-    });
+    var myHeaders = new Headers();
+    myHeaders.append("Cookie", "Erasmus+=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjZW1nQGhvdG1haWwuY29tIiwiaWF0IjoxNjcwOTYxMzM5LCJleHAiOjE2NzEwNDc3Mzl9.juMWb283khGMYdrmm7cqs2faZ-_FY3zLHn375cYy8NO-EyYIcgec6dv_j9rfaKLe2KSB9yPHVSGgeVBsZP0Ppw");
+    myHeaders.append("Origin", "http://localhost:3000");
+    myHeaders.append("Referer", "http://localhost:3000/");
+    myHeaders.append("Sec-Fetch-Mode", "no-cors");
+    myHeaders.append("Host", "localhost:8080");
+    myHeaders.append("Sec-Fetch-Site", "same-site");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/student/home", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
   }, []);
 
   return (
