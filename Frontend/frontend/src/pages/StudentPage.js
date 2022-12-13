@@ -23,6 +23,7 @@ function Student() {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
       },
+      mode: "cors",
     }).then((response) => {
       response.json().then((parsedJson) => {
         console.log(parsedJson);
