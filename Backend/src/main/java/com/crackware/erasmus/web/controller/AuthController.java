@@ -67,7 +67,7 @@ public class AuthController {
         }
         catch(AuthenticationException e) {
             System.out.println("[-]Incorrect credentials");
-            return ResponseEntity.status(401).body("Incorrect username or password!");
+            return ResponseEntity.status(401).body(new MessageResponse("Incorrect Credentials!"));
         }
     }
 
