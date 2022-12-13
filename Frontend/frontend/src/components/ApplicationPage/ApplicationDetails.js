@@ -1,5 +1,5 @@
 import { formatPhoneNumberIntl } from "react-phone-number-input";
-import { useFormInputValidation } from "react-form-input-validation";
+
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -9,68 +9,36 @@ import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationDetails.module.css";
 
-const ValidationForm = (props) => {
+function ApplicationDetails(props) {
   var application = props.application;
   var phoneNumber = formatPhoneNumberIntl(application.phone);
-
-  const [fields, errors, form] = useFormInputValidation(
-    {
-      group1: "",
-      group2: "",
-      group3: "",
-      firstPreference: "",
-      secondPreference: "",
-      thirdPreference: "",
-      fourthPreference: "",
-      fifthPreference: "",
-      file: "",
-    },
-    {
-      //checkBox: "required",
-      firstPreference: "required",
-      secondPreference: "required",
-      thirdPreference: "required",
-      fourthPreference: "required",
-      fifthPreference: "required",
-      file: "required",
-    }
-  );
-
-  const onSubmit = async (event) => {
-    const isValid = await form.validate(event);
-    if (isValid) {
-      console.log(fields, errors);
-      props.application(fields);
-    }
-  };
-
   return (
-    <Card>
+    <Card >
+
       <Form className="form">
-        <h3 className={classes.heading}>Application</h3>
-        <hr />
-        <h6>Contact Information</h6>
-        <hr className={classes.simple} />
-        <Table>
-          <tbody>
-            <tr>
-              <td>Email</td>
-              <td>{application.email}</td>
-            </tr>
-            <tr>
-              <td>Address</td>
-              <td>{application.address}</td>
-            </tr>
-            <tr>
-              <td>Phone Number</td>
-              <td>{phoneNumber}</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Form>
-      <Form className="form" onSubmit={onSubmit}>
-        <h6>Erasmus Preferences</h6>
-        <hr className={classes.simple} />
+      <h3 className={classes.heading}>Application</h3>
+      <hr />
+      <h6>Contact Information</h6>
+      <hr className={classes.simple} />
+      <Table>
+        <tbody>
+          <tr>
+            <td>Email</td>
+            <td>{application.email}</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>{application.address}</td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td>{phoneNumber}</td>
+          </tr>
+        </tbody>
+      </Table>
+
+      <h6>Erasmus Preferences</h6>
+      <hr className={classes.simple} />
         <Form.Group as={Row} className="my-3" controlId="preferredPeriod">
           <Col sm="3">Time Period</Col>
           <Col>
@@ -84,7 +52,7 @@ const ValidationForm = (props) => {
             <Form.Check
               inline
               label="Spring Semester Only"
-              name="group2"
+              name="group1"
               type="checkbox"
               id={`inline-checkbox-2`}
             />
@@ -92,7 +60,6 @@ const ValidationForm = (props) => {
               inline
               label="Fal & Spring Semesters"
               type="checkbox"
-              name="group3"
               id={`inline-checkbox-3`}
             />
           </Col>
@@ -102,15 +69,13 @@ const ValidationForm = (props) => {
             1st Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender" name="firstPreference">
-              name="mail"
+            <Form.Select aria-label="Gender">
               <option>
                 Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland
               </option>
               <option value="1">Male</option>
               <option value="2">Female</option>
             </Form.Select>
-            <label className="error">{errors.mail ? errors.mail : ""}</label>
           </Col>
         </Form.Group>
         <Form.Group as={Row} className="my-3" controlId="formPlaintextEmail">
@@ -118,12 +83,11 @@ const ValidationForm = (props) => {
             2nd Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender" name="secondPreference">
+            <Form.Select aria-label="Gender">
               <option>Vrije Universiteit Amsterdam-The Netherlands</option>
               <option value="1">Male</option>
               <option value="2">Female</option>
             </Form.Select>
-            <label className="error">{errors.mail ? errors.mail : ""}</label>
           </Col>
         </Form.Group>
         <Form.Group as={Row} className="my-3" controlId="formPlaintextEmail">
@@ -131,7 +95,7 @@ const ValidationForm = (props) => {
             3rd Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender" name="thirdPreference">
+            <Form.Select aria-label="Gender">
               <option>
                 Ecole Pour Linformatique Et Les Techniques Avancees
                 (EPITA)-France
@@ -139,7 +103,6 @@ const ValidationForm = (props) => {
               <option value="1">Male</option>
               <option value="2">Female</option>
             </Form.Select>
-            <label className="error">{errors.mail ? errors.mail : ""}</label>
           </Col>
         </Form.Group>
         <Form.Group as={Row} className="my-3" controlId="formPlaintextEmail">
@@ -147,12 +110,11 @@ const ValidationForm = (props) => {
             4th Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender" name="fourthPreference">
+            <Form.Select aria-label="Gender">
               <option>Kingston University-U.K.</option>
               <option value="1">Male</option>
               <option value="2">Female</option>
             </Form.Select>
-            <label className="error">{errors.mail ? errors.mail : ""}</label>
           </Col>
         </Form.Group>
         <Form.Group as={Row} className="my-3" controlId="formPlaintextEmail">
@@ -160,12 +122,11 @@ const ValidationForm = (props) => {
             5th Preference
           </Form.Label>
           <Col>
-            <Form.Select aria-label="Gender" name="fifthPreference">
+            <Form.Select aria-label="Gender">
               <option></option>
               <option value="1">Male</option>
               <option value="2">Female</option>
             </Form.Select>
-            <label className="error">{errors.mail ? errors.mail : ""}</label>
           </Col>
         </Form.Group>
 
@@ -176,8 +137,7 @@ const ValidationForm = (props) => {
             CV
           </Form.Label>
           <Col>
-            <Form.Control name="file" type="file" />
-            <label className="error">{errors.mail ? errors.mail : ""}</label>
+            <Form.Control type="file" />
           </Col>
         </Form.Group>
 
@@ -191,6 +151,6 @@ const ValidationForm = (props) => {
       </Form>
     </Card>
   );
-};
+}
 
-export default ValidationForm;
+export default ApplicationDetails;
