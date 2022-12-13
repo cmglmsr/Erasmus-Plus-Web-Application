@@ -47,6 +47,8 @@ public class ApplicationsController {
         * TO DO:
         * Create schools beforehand
         * Fetch them from database
+        * GPA SHOULD BE MI 2.5
+        * MIN SEMESTER 3, MAX SEMESTER 5
         * */
         School s1 = new School();
         School s2 = new School();
@@ -58,6 +60,7 @@ public class ApplicationsController {
         s3.setName(pref3);
         s4.setName(pref4);
         s5.setName(pref5);
+        application.setPoints(student.calculatePoints());
         application.setSchool1(s1);
         application.setSchool2(s2);
         application.setSchool3(s3);
