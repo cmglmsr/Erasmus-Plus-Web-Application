@@ -17,31 +17,4 @@ public class Coordinator extends BaseEntity {
 
     private String signature; // String is used instead of string type
 
-
-    public void viewApplication() {
-    }
-
-    public void finalizePlacements() {
-        // Sign the string
-    }
-
-    public void setWaitingBin() {
-        // Sign the string
-    }
-
-    public void nominateStudents() {
-        // Sign the string
-    }
-
-    public void viewCourseWishlist() {
-        // Sign the string
-    }
-
-    public void processLearningAgreement() {
-        // Sign the string
-    }
-
-    public void finalCourseTransferForm() {
-        // Sign the string
-    }
 }

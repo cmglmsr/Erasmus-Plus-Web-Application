@@ -16,7 +16,8 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int studentsChoice;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<DepartmentQuota> departmentQuotas;
 
     @OneToMany
     @OrderBy("points DESC")
@@ -24,6 +25,10 @@ public class School {
 
     private String name;
 
-    private int quota;
+    public void addDepartmentQuota(DepartmentQuota departmentQuota){
+        if (!departmentQuotas.contains(departmentQuota)){
+            departmentQuotas.add(departmentQuota);
+        }
+    }
 
 }
