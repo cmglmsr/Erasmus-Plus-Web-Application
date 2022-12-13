@@ -20,8 +20,7 @@ function Student() {
     fetch(`http://localhost:8080/student/home`, {
       method: "GET",
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
+        "Content-Type": "application/json",
       },
       mode: "cors",
     }).then((response) => {
