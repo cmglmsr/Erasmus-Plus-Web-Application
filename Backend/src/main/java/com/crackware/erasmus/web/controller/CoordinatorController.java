@@ -2,19 +2,29 @@ package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.Coordinator;
 import com.crackware.erasmus.data.services.CoordinatorService;
-import org.springframework.ui.Model;
+import com.crackware.erasmus.data.services.helper.HelperService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping({"/coordinator", "coordinator"})
 public class CoordinatorController {
 
-    CoordinatorService coordinatorService;
+    private final CoordinatorService coordinatorService;
 
-    @GetMapping()
-    public String processUpdateOwnerForm(Model model) {
-        model.addAttribute(coordinatorService.findById(1L));
-       return "index.html";
+    private final HelperService helperService;
+
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService) {
+        this.coordinatorService = coordinatorService;
+        this.helperService = helperService;
+    }
+
+    @GetMapping("/home")
+    public Coordinator coordinatorHome() {
+       return (Coordinator) helperService.getUser();
+    }
+    @GetMapping("/profile")
+    public Coordinator coordinatorProfile() {
+        return (Coordinator) helperService.getUser();
     }
 
 }

@@ -42,7 +42,6 @@ public class HelperService {
 
     public BaseEntity getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getAuthorities());
         ArrayList<GrantedAuthority> authorities = new ArrayList<>(authentication.getAuthorities());
         if (authorities.size() == 0)
             return null;
