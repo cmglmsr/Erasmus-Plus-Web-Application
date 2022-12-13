@@ -17,10 +17,6 @@ public class StudentController {
     public StudentController(HelperService helperService, StudentService studentService) {
         this.helperService = helperService;
         this.studentService = studentService;
-        Student student = new Student();
-        student.setMail("erenduran02@gmail.com");
-        studentService.save(student);
-
     }
 
     @GetMapping("/home")

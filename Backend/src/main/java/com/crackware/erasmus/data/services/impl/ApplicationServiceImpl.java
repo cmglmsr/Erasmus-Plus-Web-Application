@@ -18,11 +18,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     public ApplicationServiceImpl(ApplicationRepository applicationRepository, StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-        Student s = new Student();
-        s.setName("cem");
-        s.setMail("cemg@hotmail.com");
-        s.setBilkentId("22003430");
-        studentRepository.save(s);
         this.applicationRepository = applicationRepository;
     }
 
