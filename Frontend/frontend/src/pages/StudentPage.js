@@ -17,7 +17,12 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    fetch(`http://localhost:8080/student/home`).then((response) => {
+    fetch(`http://localhost:8080/student/home`, {
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }).then((response) => {
       response.json().then((parsedJson) => {
         console.log(parsedJson);
       });
