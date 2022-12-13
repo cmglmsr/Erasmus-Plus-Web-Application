@@ -13,5 +13,5 @@ import java.util.Set;
 public class WaitList extends List{
 
     @OneToMany
-    private Set<Student> students;
+    private Set<Application> applications;
 }
