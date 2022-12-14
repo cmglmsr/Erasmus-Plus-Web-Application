@@ -1,5 +1,14 @@
-package com.example.demo.instructor;
-public class Instructor {
+package com.crackware.erasmus.data.model;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+
+@Entity
+@Getter
+@Setter
+public class Instructor extends BaseEntity{
     private String department;
     private String signature;
 
@@ -10,22 +19,6 @@ public class Instructor {
     // Parameter supplied constructor
     public Instructor(String department, String signature) {
         this.department = department;
-        this.signature = signature;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
         this.signature = signature;
     }
 

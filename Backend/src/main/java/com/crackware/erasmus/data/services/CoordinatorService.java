@@ -1,16 +1,6 @@
-package com.example.demo.Coordinator;
+package com.crackware.erasmus.data.services;
 
-import org.springframework.stereotype.Service;
+import com.crackware.erasmus.data.model.Coordinator;
 
-import java.util.List;
-@Service
-public class CoordinatorService {
-    public String printInfo() {
-        return List.of(
-                new Coordinator(
-                        "Math",
-                        "Sample signature"
-                )
-        ).toString();
-    }
+public interface CoordinatorService extends CrudService<Coordinator, Long>, EmailService{
 }

@@ -37,7 +37,7 @@ const ValidationForm = (props) => {
             name="mail"
             onBlur={form.handleBlurEvent}
             onChange={form.handleChangeEvent}
-            value={fields.email}
+            value={fields.mail}
             placeholder="Enter Email"
           />
           <label className="error">{errors.mail ? errors.mail : ""}</label>

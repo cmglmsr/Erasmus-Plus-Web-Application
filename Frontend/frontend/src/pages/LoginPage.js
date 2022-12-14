@@ -3,12 +3,17 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 function LoginPage() {
+  var error;
   function onLoginHandler(loginData) {
+    console.log(loginData);
     fetch(
-      "https://http://localhost:8080/login", //enter api address
+      "http://localhost:8080/signin", //enter api address
       {
         method: "POST",
         body: JSON.stringify(loginData),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     ).then((response) => {
       response.json().then((parsedJson) => {
@@ -37,7 +42,7 @@ function LoginPage() {
     <section>
       <Row className="justify-content-center">
         <Col xs={4}>
-          <LoginForm onLogin={onLoginHandler} />
+          <LoginForm onLogin={onLoginHandler} alert={error}/>
         </Col>
       </Row>
     </section>

@@ -1,24 +1,30 @@
-package com.example.demo.Coordinator;
+package com.crackware.erasmus.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.services.CoordinatorService;
+import com.crackware.erasmus.data.services.helper.HelperService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/v1/Coordinator")
+@RequestMapping({"/coordinator", "coordinator"})
 public class CoordinatorController {
 
     private final CoordinatorService coordinatorService;
 
-    public CoordinatorController(CoordinatorService coordinatorService) {
+    private final HelperService helperService;
+
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService) {
         this.coordinatorService = coordinatorService;
+        this.helperService = helperService;
     }
 
-    @GetMapping
-    public String printInfo() {
-        return coordinatorService.printInfo();
+    @GetMapping("/home")
+    public Coordinator coordinatorHome() {
+       return (Coordinator) helperService.getUser();
     }
+    @GetMapping("/profile")
+    public Coordinator coordinatorProfile() {
+        return (Coordinator) helperService.getUser();
+    }
+
 }

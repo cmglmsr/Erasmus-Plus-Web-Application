@@ -1,65 +1,20 @@
-package com.example.demo.Coordinator;
+package com.crackware.erasmus.data.model;
 
-import javax.swing.text.Document;
+import com.crackware.erasmus.data.model.enums.Department;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Coordinator {
-    private String department;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+@Setter
+@Getter
+@Entity
+public class Coordinator extends BaseEntity {
+
+    private Department department;
+
     private String signature; // String is used instead of string type
 
-    // Default constructor
-    public Coordinator() {
-    }
-
-    // Parameter supplied constructor
-    public Coordinator(String department, String signature) {
-        this.department = department;
-        this.signature = signature;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public void viewApplication() {
-    }
-
-    public void finalizePlacements() {
-        // Sign the string
-    }
-
-    public void setWaitingBin() {
-        // Sign the string
-    }
-
-    public void nominateStudents() {
-        // Sign the string
-    }
-
-    public void viewCourseWishlist() {
-        // Sign the string
-    }
-
-    public void processLearningAgreement() {
-        // Sign the string
-    }
-
-    public void finalCourseTransferForm() {
-        // Sign the string
-    }
-
-    public void sign(String document) {
-        // Sign the document
-    }
 }
