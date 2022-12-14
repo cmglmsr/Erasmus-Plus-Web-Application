@@ -17,10 +17,25 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    fetch("https://http://localhost:8080/student/home").then((response) =>
-    response.json().then((parsedJson) => {
-      console.log(parsedJson);
-    }));
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      mail: "cemg@hotmail.com",
+      password: "123",
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/student/home", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   }, []);
 
   return (
