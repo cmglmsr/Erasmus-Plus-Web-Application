@@ -34,6 +34,11 @@ function ApplicationDetails(props) {
   const [pref3, setPref3] = useState("0");
   const [pref4, setPref4] = useState("0");
   const [pref5, setPref5] = useState("0");
+  const [file, setFile] = useState();
+
+  function handleFile(event) {
+    setFile(event.target.files[0])
+  }
 
   const handleSelect = (event) => {
     if (event.target === document.getElementById("pref1")) {
@@ -52,7 +57,7 @@ function ApplicationDetails(props) {
       setPref5(event.target.value);
     }
   };
-  
+
   var cb;
   const [isSubscribed, setIsSubscribed] = useState(true);
   const handleChange = (event) => {
@@ -60,28 +65,43 @@ function ApplicationDetails(props) {
       var check1 = document.getElementById("check1");
       var check2 = document.getElementById("check2");
       var check3 = document.getElementById("check3");
-      if (event.target != check1 && check1.checked === true){
-        event.target.value = setIsSubscribed(event.target.value);
-          
-        console.log(event.target);
+      setIsSubscribed(event.target.value);
+      if (event.target != check1 && check1.checked === true) {
         document.getElementById("check1").click();
       }
-      if (event.target != check2 && check2.checked === true){
-        event.target.value = 2;
-        console.log(event.target);
+      if (event.target != check2 && check2.checked === true) {
         document.getElementById("check2").click();
       }
-      if (event.target != check3 && check3.checked === true){
-        event.target.value = true;
-        console.log(event.target);
+      if (event.target != check3 && check3.checked === true) {
         document.getElementById("check3").click();
       }
     }
-    setIsSubscribed((current) => !current);
   };
+
+  function onSubmit(event) {
+    event.preventDefault();
+
+    var applicationData = {
+      "semester": isSubscribed,
+      "first" : pref1,
+      "second" : pref2,
+      "third" : pref3,
+      "fourth" : pref4,
+      "fifth" : pref5,
+    }
+
+    if (file) {
+      applicationData["fileName"] = file.name;
+      applicationData["file"] = file;
+    }
+
+    console.log(applicationData);
+    props.onApplicationSubmit(applicationData);
+  }
+
   return (
     <Card>
-      <Form className="form">
+      <Form className="form" onSubmit={onSubmit}>
         <h3 className={classes.heading}>Application</h3>
         <hr />
         <h6>Contact Information</h6>
@@ -105,7 +125,12 @@ function ApplicationDetails(props) {
 
         <h6>Erasmus Preferences</h6>
         <hr className={classes.simple} />
-        <Form.Group as={Row} className="my-3" controlId="preferredPeriod">
+        <Form.Group
+          as={Row}
+          className="my-3"
+          controlId="preferredPeriod"
+          onSubmit={handleChange}
+        >
           <Col sm="3">Time Period</Col>
           <Col>
             <div className="form-check">
@@ -113,12 +138,10 @@ function ApplicationDetails(props) {
                 className="form-check-input"
                 type="checkbox"
                 id="check1"
-                value= "1"
+                value="1"
                 onChange={handleChange}
               />
-              <label className="form-check-label">
-              Fal Semester Only
-              </label>
+              <label className="form-check-label">Fal Semester Only</label>
             </div>
             <div className="form-check">
               <input
@@ -128,9 +151,7 @@ function ApplicationDetails(props) {
                 value="2"
                 onChange={handleChange}
               />
-              <label className="form-check-label">
-              Spring Semester Only
-              </label>
+              <label className="form-check-label">Spring Semester Only</label>
             </div>
             <div className="form-check">
               <input
@@ -140,9 +161,7 @@ function ApplicationDetails(props) {
                 value="3"
                 onChange={handleChange}
               />
-              <label className="form-check-label">
-              Fal & Spring Semesters
-              </label>
+              <label className="form-check-label">Fal & Spring Semesters</label>
             </div>
           </Col>
         </Form.Group>
@@ -165,7 +184,7 @@ function ApplicationDetails(props) {
             2nd Preference
           </Form.Label>
           <Col>
-          <Form.Select value={pref2} onChange={handleSelect} id="pref2">
+            <Form.Select value={pref2} onChange={handleSelect} id="pref2">
               {schoolChoices.map((school) => (
                 <option key={school.value} value={school.value}>
                   {school.label}
@@ -179,7 +198,7 @@ function ApplicationDetails(props) {
             3rd Preference
           </Form.Label>
           <Col>
-          <Form.Select value={pref3} onChange={handleSelect} id="pref3">
+            <Form.Select value={pref3} onChange={handleSelect} id="pref3">
               {schoolChoices.map((school) => (
                 <option key={school.value} value={school.value}>
                   {school.label}
@@ -193,7 +212,7 @@ function ApplicationDetails(props) {
             4th Preference
           </Form.Label>
           <Col>
-          <Form.Select value={pref4} onChange={handleSelect} id="pref4">
+            <Form.Select value={pref4} onChange={handleSelect} id="pref4">
               {schoolChoices.map((school) => (
                 <option key={school.value} value={school.value}>
                   {school.label}
@@ -207,7 +226,7 @@ function ApplicationDetails(props) {
             5th Preference
           </Form.Label>
           <Col>
-          <Form.Select value={pref5} onChange={handleSelect} id="pref5">
+            <Form.Select value={pref5} onChange={handleSelect} id="pref5">
               {schoolChoices.map((school) => (
                 <option key={school.value} value={school.value}>
                   {school.label}
@@ -224,7 +243,7 @@ function ApplicationDetails(props) {
             CV
           </Form.Label>
           <Col>
-            <Form.Control type="file" />
+            <Form.Control type="file" onChange={handleFile}/>
           </Col>
         </Form.Group>
 

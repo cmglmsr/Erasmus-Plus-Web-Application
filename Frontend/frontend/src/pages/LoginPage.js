@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 function LoginPage() {
   function onLoginHandler(loginData) {
     fetch(
-      "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
+      "https://http://localhost:8080/login", //enter api address
       {
         method: "POST",
         body: JSON.stringify(loginData),

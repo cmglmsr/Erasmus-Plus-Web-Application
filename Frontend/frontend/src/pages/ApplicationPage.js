@@ -12,12 +12,16 @@ const DUMMY_APPLICATION = {
 };
 
 function Application(props) {
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
-      console.log(response)
-    );
-  }, []);
 
+  function onApplicationSubmitHandler(applicationData) {
+    fetch(
+      "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
+      {
+        method: "POST",
+        body: JSON.stringify(applicationData),
+      }
+    );
+  }
   return (
     <section>
       <Row>
@@ -25,7 +29,7 @@ function Application(props) {
           <ProfileAction profile={props.profile} />
         </Col>
         <Col className="mx-4">
-          <ApplicationDetails application={DUMMY_APPLICATION} />
+          <ApplicationDetails application={DUMMY_APPLICATION} onApplicationSubmit={onApplicationSubmitHandler}/>
         </Col>
       </Row>
     </section>

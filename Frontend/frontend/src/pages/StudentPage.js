@@ -17,7 +17,7 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
+    fetch(`https://http://localhost:8080/student/home`).then((response) =>
       console.log(response)
     );
   }, []);
