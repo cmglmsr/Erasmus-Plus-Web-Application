@@ -1,15 +1,14 @@
 .heading {
-    text-align: center;
+  text-align: center;
 }
 
 .p {
-    display: inline;
+  display: inline;
 }
 
-.tableContainer{
-    background-color: #1E1F25;
-    border-radius: 20px;
-    height: 244px;
-    padding: 0 10px 10px 10px;
-    overflow: scroll;
+.scrollable{
+  height: 350px;
+  overflow: scroll;
+
 }
+

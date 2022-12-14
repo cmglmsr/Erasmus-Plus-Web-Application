@@ -12,7 +12,8 @@ function Schedule() {
   return (
     <Card>
       <h3 className={classes.heading}>Schedule</h3>
-      <Table striped bordered hover>
+      <div className={classes.scrollable}>
+        <Table>
       <thead>
         <tr>
           <th>#</th>
@@ -48,10 +49,28 @@ function Schedule() {
           <td></td>
           <td></td>
         </tr>
-      </tbody>
-    </Table>
+        <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+        </Table>
+      </div>
     </Card>
-    
   );
 }
 export default Schedule;

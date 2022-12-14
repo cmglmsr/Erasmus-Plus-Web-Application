@@ -12,6 +12,7 @@ import StudentPage from './pages/StudentPage';
 import LoginPage from "./pages/LoginPage";
 
 
+
 const DUMMY_PROFILE = {
   role: "Student",
   image:
@@ -37,7 +38,7 @@ function App() {
         <Route path="/profile" exact={true} element={<ProfilePage profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/application" exact={true} element={<ApplicationPage profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/application-list" exact={true} element={<ApplicationListPage profile={DUMMY_PROFILE}/>}></Route>
-        <Route path="/information" exact={true} element={<InformationPage/>}></Route>
+        <Route path="/informationPage" exact={true} element={<InformationPage/>}></Route>
         <Route path="/internationalStudentOffice/home" exact={true} element={<InternationalStudentOfficePage/>}></Route>
         <Route path="/coordinator/home" exact={true} element={<CoordinatorPage/>}></Route>
         <Route path="/student/home" exact={true} element={<StudentPage />}></Route>

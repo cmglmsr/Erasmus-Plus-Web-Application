@@ -11,7 +11,6 @@ function ToDoList() {
   return (
     <Card>
       <h3 className={classes.heading}>ToDoList</h3>
-
       <h4>
         Date:{" "}
         <p className={classes.p}>
@@ -23,59 +22,131 @@ function ToDoList() {
           })}
         </p>
       </h4>
-      <Table className={classes.table}>
-        <thead>
-          <tr>
-            <th scope="col"> Completed</th>
-            <th scope="col">Description</th>
-            <th scope="col">Due time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                />
-              </div>
-            </th>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                />
-              </div>
-            </th>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                />
-              </div>
-            </th>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </Table>
+      <div className={classes.scrollable}>
+        <Table>
+          <thead>
+            <tr>
+              <th scope="col"> Completed</th>
+              <th scope="col">Description</th>
+              <th scope="col">Due time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                </div>
+              </th>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </Table>
+      </div>
     </Card>
   );
 }

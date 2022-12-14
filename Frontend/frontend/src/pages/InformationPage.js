@@ -10,7 +10,6 @@ function InformationPage() {
       console.log(response)
     );
   }, []);
-
   return (
     <section>
       <Row>
