@@ -3,10 +3,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
 import Schedule from "../components/HomePage/Schedule";
-import ProfileSummary from "./ProfileSummary";
+import ProfileSummary from "../components/common/ProfileSummary";
 
 function Student() {
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({});
   useEffect(() => {
     var requestOptions = {
       method: "GET",

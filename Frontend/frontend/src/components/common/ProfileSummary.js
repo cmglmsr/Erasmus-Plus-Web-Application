@@ -5,6 +5,9 @@ import Card from "../UI/Card";
 
 const ProfileSummary = ({name, surname, role, semester, image, id, department}) => {
 
+  var semesterComp;
+  var table;
+
   if (role === "Student") {
     semesterComp = (
       <tr>
