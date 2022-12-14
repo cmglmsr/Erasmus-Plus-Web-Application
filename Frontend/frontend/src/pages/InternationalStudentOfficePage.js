@@ -3,28 +3,32 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ToDoList from "../components/HomePage/ToDoList";
 import Schedule from "../components/HomePage/Schedule";
-import { useEffect } from "react";
-
-const DUMMY_PROFILE = {
-  role: "International Student Office",
-  image: "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
-  id: 11111111,
-  name: "Selen",
-  surname: "Gülsever"
-};
+import { useEffect, useState } from "react";
 
 function InternationalStudentOfficePage() {
+  const [profile, setProfile] = useState();
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
-      console.log(response)
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch("http://localhost:8080/iso/home", requestOptions).then(
+        (response) =>
+            response.json().then((parsedJson) => setProfile(parsedJson))
     );
   }, []);
 
+  console.log(profile);
   return (
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction profile={DUMMY_PROFILE} />
+          <ProfileAction profile={profile} />
         </Col>
         <Col className="mx-4">
         <div>

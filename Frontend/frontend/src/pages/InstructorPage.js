@@ -1,11 +1,10 @@
 import ProfileAction from "../components/common/ProfileAction";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ToDoList from "../components/HomePage/ToDoList";
-import Schedule from "../components/HomePage/Schedule";
 import { useEffect, useState } from "react";
+import Schedule from "../components/HomePage/Schedule";
 
-function Coordinator() {
+function Student() {
   const [profile, setProfile] = useState();
   useEffect(() => {
     var requestOptions = {
@@ -17,10 +16,11 @@ function Coordinator() {
       },
     };
 
-    fetch("http://localhost:8080/coordinator/home", requestOptions).then(
+    fetch("http://localhost:8080/instructor/home", requestOptions).then(
         (response) =>
             response.json().then((parsedJson) => setProfile(parsedJson))
     );
+    
   }, []);
 
   console.log(profile);
@@ -32,10 +32,7 @@ function Coordinator() {
         </Col>
         <Col className="mx-4">
           <div>
-            <Row>
-              <ToDoList />
-            </Row>
-            <Row className="my-4">
+            <Row className="my-3">
               <Schedule />
             </Row>
           </div>
@@ -44,4 +41,4 @@ function Coordinator() {
     </section>
   );
 }
-export default Coordinator
+export default Student;

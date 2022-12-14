@@ -41,6 +41,7 @@ function App() {
         <Route path="/informationPage" exact={true} element={<InformationPage/>}></Route>
         <Route path="/internationalStudentOffice/home" exact={true} element={<InternationalStudentOfficePage/>}></Route>
         <Route path="/coordinator/home" exact={true} element={<CoordinatorPage/>}></Route>
+        <Route path="/instructor/home" exact={true} element={<CoordinatorPage/>}></Route>
         <Route path="/student/home" exact={true} element={<StudentPage />}></Route>
       </Routes>
     </Layout>
