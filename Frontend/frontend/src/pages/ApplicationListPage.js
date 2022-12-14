@@ -2,8 +2,14 @@ import ApplicationList from "../components/ApplicationListPage/ApplicationList";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProfileAction from "../components/common/ProfileAction";
+import { useEffect } from "react";
 
 function ApplicationListPage(props) {
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
+      console.log(response)
+    );
+  }, []);
   return (
     <section>
       <Row>

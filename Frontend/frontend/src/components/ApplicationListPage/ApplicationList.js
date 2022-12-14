@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
+import classes from "./ApplicationList.module.css"
 
 const APPLICATION_LIST = [
   {
@@ -40,6 +41,7 @@ function ApplicationList(props) {
     <Card>
       <h3 className="heading my-3">Applications List</h3>
       <hr />
+      <div className={classes.scrollable}>
       <Table>
         <thead>
           <tr>
@@ -78,6 +80,7 @@ function ApplicationList(props) {
           ))}
         </tbody>
       </Table>
+      </div>
     </Card>
   );
 }

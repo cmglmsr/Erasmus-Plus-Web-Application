@@ -19,20 +19,14 @@ function LoginPage() {
       response.json().then((parsedJson) => {
         if (response.status === 200) {
           if (parsedJson.roles[0] === "ROLE_STUDENT") {
-            window.location.href = "http://localhost:3000/student";
+            window.location.href = "http://localhost:3000/student/home";
           }
           else if (parsedJson.roles[0] === "ROLE_COORDINATOR") {
-            window.location.href = "http://localhost:3000/coordinator";
-          }
-          if (parsedJson.roles[0] === "ROLE_STUDENT") {
-            window.location.href = "http://localhost:3000/";
-          }
-          if (parsedJson.roles[0] === "ROLE_STUDENT") {
-            window.location.href = "http://localhost:3000/";
+            window.location.href = "http://localhost:3000/coordinator/home";
           }
         }
         else if (response.status === 401) {
-          error = parsedJson.message;
+          var error = parsedJson.message;
           console.log(error);
         }
       });

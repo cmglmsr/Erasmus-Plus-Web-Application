@@ -1,7 +1,14 @@
 .heading {
-    text-align: center;
+  text-align: center;
 }
 
 .p {
-    display: inline;
+  display: inline;
 }
+
+.scrollable{
+  height: 350px;
+  overflow: scroll;
+
+}
+
