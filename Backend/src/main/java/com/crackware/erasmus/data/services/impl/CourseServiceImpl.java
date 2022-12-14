@@ -3,10 +3,12 @@ package com.crackware.erasmus.data.services.impl;
 import com.crackware.erasmus.data.model.Course;
 import com.crackware.erasmus.data.repositories.CourseRepository;
 import com.crackware.erasmus.data.services.CourseService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
