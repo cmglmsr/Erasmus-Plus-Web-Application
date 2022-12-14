@@ -22,9 +22,7 @@ public class ExcelService {
 
     public void save(MultipartFile file) {
         try {
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaimdat");
             List<Course> courses = ExcelHelper.excelToCourses(file.getInputStream());
-            System.out.println("imdat");
             for (Course course : courses) {
                 courseService.save(course);
             }

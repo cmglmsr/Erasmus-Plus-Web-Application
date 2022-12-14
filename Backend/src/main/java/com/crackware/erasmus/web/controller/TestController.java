@@ -29,7 +29,6 @@ public class TestController {
     public void uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             if (ExcelHelper.hasExcelFormat(file)){
-                System.out.println("here");
                 fileService.save(file);
                 System.out.println("[+] File upload successful.");
             }
