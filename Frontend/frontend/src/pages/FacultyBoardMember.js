@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 function FacultyBoardMember() {
   const [profile, setProfile] = useState();
+  const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -19,7 +20,10 @@ function FacultyBoardMember() {
     };
 
     fetch("http://localhost:8080/fbm/home", requestOptions).then((response) =>
-      response.json().then((parsedJson) => setProfile(parsedJson))
+      response.json().then((parsedJson) => {
+        setProfile(parsedJson);
+        setRole(parsedJson.role.name)
+      })
     );
   }, []);
 
@@ -32,7 +36,7 @@ function FacultyBoardMember() {
             <ProfileSummary
               name={profile.name}
               surname={profile.surname}
-              role={profile.role}
+              role={role}
               semester={profile.image}
               id={profile.id}
               image={profile.image}
@@ -40,7 +44,7 @@ function FacultyBoardMember() {
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={profile.roles[0]} />
+            <ActionButtons role={roles} />
           </Row>
         </Col>
         <Col className="mx-4">
