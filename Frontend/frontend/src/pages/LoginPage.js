@@ -19,10 +19,10 @@ function LoginPage() {
       response.json().then((parsedJson) => {
         if (response.status === 200) {
           if (parsedJson.roles[0] === "ROLE_STUDENT") {
-            window.location.href = "http://localhost:3000/student";
+            window.location.href = "http://localhost:3000/student/home";
           }
           else if (parsedJson.roles[0] === "ROLE_COORDINATOR") {
-            window.location.href = "http://localhost:3000/coordinator";
+            window.location.href = "http://localhost:3000/coordinator/home";
           }
         }
         else if (response.status === 401) {
