@@ -17,9 +17,10 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    fetch(`https://http://localhost:8080/student/home`).then((response) =>
-      console.log(response)
-    );
+    fetch("https://http://localhost:8080/student/home").then((response) =>
+    response.json().then((parsedJson) => {
+      console.log(parsedJson);
+    }));
   }, []);
 
   return (
