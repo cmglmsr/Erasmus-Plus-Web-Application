@@ -23,12 +23,13 @@ function Student() {
     
   }, []);
 
+  const profileAction = <ProfileAction profile={profile} />
   console.log(profile);
   return (
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction profile={profile} />
+          {profileAction}
         </Col>
         <Col className="mx-4">
           <div>
