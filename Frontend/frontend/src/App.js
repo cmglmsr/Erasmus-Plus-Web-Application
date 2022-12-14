@@ -41,6 +41,7 @@ function App() {
         <Route path="/informationPage" exact={true} element={<InformationPage/>}></Route>
         <Route path="/internationalStudentOffice/home" exact={true} element={<InternationalStudentOfficePage/>}></Route>
         <Route path="/coordinator/home" exact={true} element={<CoordinatorPage/>}></Route>
+        <Route path="/instructor/home" exact={true} element={<CoordinatorPage/>}></Route>
         <Route path="/student/home" exact={true} element={<StudentPage />}></Route>
         <Route path="/viewApplication" exact={true} element={<ViewApplication profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/viewProfile" exact={true} element={<ViewProfile profile={DUMMY_PROFILE}/>}></Route>

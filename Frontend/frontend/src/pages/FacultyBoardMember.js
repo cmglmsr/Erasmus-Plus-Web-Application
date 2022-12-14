@@ -5,7 +5,7 @@ import ToDoList from "../components/HomePage/ToDoList";
 import Schedule from "../components/HomePage/Schedule";
 import { useEffect, useState } from "react";
 
-function InternationalStudentOfficePage() {
+function FacultyBoardMember() {
   const [profile, setProfile] = useState();
   useEffect(() => {
     var requestOptions = {
@@ -17,7 +17,7 @@ function InternationalStudentOfficePage() {
       },
     };
 
-    fetch("http://localhost:8080/iso/home", requestOptions).then((response) =>
+    fetch("http://localhost:8080/fbm/home", requestOptions).then((response) =>
       response.json().then((parsedJson) => setProfile(parsedJson))
     );
   }, []);
@@ -44,4 +44,4 @@ function InternationalStudentOfficePage() {
   );
 }
 
-export default InternationalStudentOfficePage;
+export default FacultyBoardMember;
