@@ -5,3 +5,9 @@
 .p {
     display: inline;
 }
+
+.scrollable{
+    height: 350px;
+    overflow: scroll;
+  
+  }

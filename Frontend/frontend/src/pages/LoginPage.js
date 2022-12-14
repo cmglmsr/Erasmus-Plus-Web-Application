@@ -32,7 +32,7 @@ function LoginPage() {
           }
         }
         else if (response.status === 401) {
-          error = parsedJson.message;
+          var error = parsedJson.message;
           console.log(error);
         }
       });
