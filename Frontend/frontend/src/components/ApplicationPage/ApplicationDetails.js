@@ -11,6 +11,48 @@ import classes from "./ApplicationDetails.module.css";
 function ApplicationDetails(props) {
   var application = props.application;
   var phoneNumber = formatPhoneNumberIntl(application.phone);
+
+  const schoolChoices = [
+    {
+      value: "0",
+      label: "",
+    },
+    {
+      value: "1",
+      label: "Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland",
+    },
+    { value: "2", label: "Vrije Universiteit Amsterdam-The Netherlands" },
+    {
+      value: "3",
+      label:
+        "Ecole Pour Linformatique Et Les Techniques Avancees (EPITA)-France",
+    },
+    { value: "4", label: "Kingston University-U.K." },
+  ];
+  const [pref1, setPref1] = useState("0");
+  const [pref2, setPref2] = useState("0");
+  const [pref3, setPref3] = useState("0");
+  const [pref4, setPref4] = useState("0");
+  const [pref5, setPref5] = useState("0");
+
+  const handleSelect = (event) => {
+    if (event.target === document.getElementById("pref1")) {
+      setPref1(event.target.value);
+    }
+    if (event.target === document.getElementById("pref2")) {
+      setPref2(event.target.value);
+    }
+    if (event.target === document.getElementById("pref3")) {
+      setPref3(event.target.value);
+    }
+    if (event.target === document.getElementById("pref4")) {
+      setPref4(event.target.value);
+    }
+    if (event.target === document.getElementById("pref5")) {
+      setPref5(event.target.value);
+    }
+  };
+  
   var cb;
   const [isSubscribed, setIsSubscribed] = useState(true);
   const handleChange = (event) => {
@@ -34,8 +76,6 @@ function ApplicationDetails(props) {
         console.log(event.target);
         document.getElementById("check3").click();
       }
-
-
     }
     setIsSubscribed((current) => !current);
   };
@@ -111,11 +151,12 @@ function ApplicationDetails(props) {
             1st Preference
           </Form.Label>
           <Col>
-            <Form.Select >
-              <option disabled>
-              </option>
-              <option value="1">Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland</option>
-              <option value="2">Female</option>
+            <Form.Select value={pref1} onChange={handleSelect} id="pref1">
+              {schoolChoices.map((school) => (
+                <option key={school.value} value={school.value}>
+                  {school.label}
+                </option>
+              ))}
             </Form.Select>
           </Col>
         </Form.Group>
@@ -124,10 +165,12 @@ function ApplicationDetails(props) {
             2nd Preference
           </Form.Label>
           <Col>
-            <Form.Select >
-              <option disabled></option>
-              <option value="1">Vrije Universiteit Amsterdam-The Netherlands</option>
-              <option value="2">Female</option>
+          <Form.Select value={pref2} onChange={handleSelect} id="pref2">
+              {schoolChoices.map((school) => (
+                <option key={school.value} value={school.value}>
+                  {school.label}
+                </option>
+              ))}
             </Form.Select>
           </Col>
         </Form.Group>
@@ -136,12 +179,12 @@ function ApplicationDetails(props) {
             3rd Preference
           </Form.Label>
           <Col>
-            <Form.Select>
-              <option>
-              </option>
-              <option value="1">Ecole Pour Linformatique Et Les Techniques Avancees
-                (EPITA)-France</option>
-              <option value="2">Female</option>
+          <Form.Select value={pref3} onChange={handleSelect} id="pref3">
+              {schoolChoices.map((school) => (
+                <option key={school.value} value={school.value}>
+                  {school.label}
+                </option>
+              ))}
             </Form.Select>
           </Col>
         </Form.Group>
@@ -150,10 +193,12 @@ function ApplicationDetails(props) {
             4th Preference
           </Form.Label>
           <Col>
-            <Form.Select>
-              <option disabled></option>
-              <option value="1">Kingston University-U.K.</option>
-              <option value="2">Female</option>
+          <Form.Select value={pref4} onChange={handleSelect} id="pref4">
+              {schoolChoices.map((school) => (
+                <option key={school.value} value={school.value}>
+                  {school.label}
+                </option>
+              ))}
             </Form.Select>
           </Col>
         </Form.Group>
@@ -162,10 +207,12 @@ function ApplicationDetails(props) {
             5th Preference
           </Form.Label>
           <Col>
-            <Form.Select>
-              <option></option>
-              <option value="1">Male</option>
-              <option value="2">Female</option>
+          <Form.Select value={pref5} onChange={handleSelect} id="pref5">
+              {schoolChoices.map((school) => (
+                <option key={school.value} value={school.value}>
+                  {school.label}
+                </option>
+              ))}
             </Form.Select>
           </Col>
         </Form.Group>
