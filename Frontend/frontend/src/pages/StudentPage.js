@@ -7,6 +7,7 @@ import ActionButtons from "../components/common/ActionButtons";
 
 function Student() {
   const [profile, setProfile] = useState({});
+  const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -18,7 +19,11 @@ function Student() {
     };
 
     fetch("http://localhost:8080/student/home", requestOptions).then(
-      (response) => response.json().then((parsedJson) => setProfile(parsedJson))
+      (response) =>
+        response.json().then((parsedJson) => {
+          setProfile(parsedJson);
+          setRole(parsedJson.roles[0].name)
+        })
     );
   }, []);
 
