@@ -7,10 +7,10 @@ import classes from "./ActionButton.module.css";
 
 const ActionButtons = ({role}) => {
     let buttons = [];
-    if (role === "Student") {
+    if (role === "ROLE_STUDENT") {
         buttons[0] = <Button className="button-default" key="application" as={Link} to="/application">My Application</Button>;
     }
-    else if (role === "International Student Office") {
+    else if (role === "ROLE_ISO") {
         buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/transcripts">Transcripts</Button>;
     }
     else {
@@ -19,7 +19,7 @@ const ActionButtons = ({role}) => {
         buttons[2] = <Button className="button-default" key="pre-approvals" as={Link} to="/pre-approvals">Pre-Approvals</Button>;
         buttons[3] = <Button className="button-default" key="course-transfer-list" as={Link} to="/course-transfer-list">Course Transfer</Button>;
     }
-    if (role === "Coordinator") {
+    if (role === "ROLE_COORDINATOR") {
         buttons[4] = <Button className="button-default" key="final-course-transfer" as={Link} to="/final-course-transfer">Final Course Transfer</Button>;
     }
 

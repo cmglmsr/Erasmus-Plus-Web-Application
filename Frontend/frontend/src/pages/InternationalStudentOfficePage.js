@@ -1,4 +1,5 @@
-import ProfileAction from "../components/common/ProfileAction";
+import ProfileSummary from "../components/common/ProfileSummary";
+import ActionButtons from "../components/common/ActionButtons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ToDoList from "../components/HomePage/ToDoList";
@@ -27,7 +28,20 @@ function InternationalStudentOfficePage() {
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction profile={profile} />
+          <Row>
+            <ProfileSummary
+              name={profile.name}
+              surname={profile.surname}
+              role={profile.role}
+              semester={profile.image}
+              id={profile.id}
+              image={profile.image}
+              department={profile.department}
+            />
+          </Row>
+          <Row className="my-4">
+            <ActionButtons role={profile.role} />
+          </Row>
         </Col>
         <Col className="mx-4">
           <div>
