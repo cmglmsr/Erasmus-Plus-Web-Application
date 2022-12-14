@@ -4,23 +4,21 @@ import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
 import Schedule from "../components/HomePage/Schedule";
 
-function Student() {
+function Instructor() {
   const [profile, setProfile] = useState();
   useEffect(() => {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
-      credentials: 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
     };
 
     fetch("http://localhost:8080/instructor/home", requestOptions).then(
-        (response) =>
-            response.json().then((parsedJson) => setProfile(parsedJson))
+      (response) => response.json().then((parsedJson) => setProfile(parsedJson))
     );
-    
   }, []);
 
   console.log(profile);
@@ -41,4 +39,4 @@ function Student() {
     </section>
   );
 }
-export default Student;
+export default Instructor;

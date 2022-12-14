@@ -11,15 +11,14 @@ function Coordinator() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
-      credentials: 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
     };
 
     fetch("http://localhost:8080/coordinator/home", requestOptions).then(
-        (response) =>
-            response.json().then((parsedJson) => setProfile(parsedJson))
+      (response) => response.json().then((parsedJson) => setProfile(parsedJson))
     );
   }, []);
 
@@ -44,4 +43,4 @@ function Coordinator() {
     </section>
   );
 }
-export default Coordinator
+export default Coordinator;
