@@ -10,7 +10,28 @@ function LoginPage() {
         method: "POST",
         body: JSON.stringify(loginData),
       }
-    );
+    ).then((response) => {
+      response.json().then((parsedJson) => {
+        if (response.status === 200) {
+          if (parsedJson.roles[0] === "ROLE_STUDENT") {
+            window.location.href = "http://localhost:3000/student";
+          }
+          else if (parsedJson.roles[0] === "ROLE_COORDINATOR") {
+            window.location.href = "http://localhost:3000/coordinator";
+          }
+          if (parsedJson.roles[0] === "ROLE_STUDENT") {
+            window.location.href = "http://localhost:3000/";
+          }
+          if (parsedJson.roles[0] === "ROLE_STUDENT") {
+            window.location.href = "http://localhost:3000/";
+          }
+        }
+        else if (response.status === 401) {
+          var error = parsedJson.message;
+          console.log(error);
+        }
+      });
+    });
   }
   return (
     <section>
