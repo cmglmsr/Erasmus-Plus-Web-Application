@@ -1,10 +1,11 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.message.ResponseApplication;
+import com.crackware.erasmus.data.message.ResponseSchools;
 import com.crackware.erasmus.data.model.Application;
 import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.School;
-import com.crackware.erasmus.data.model.enums.Status;
+import com.crackware.erasmus.data.services.SchoolService;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.impl.ApplicationListServiceImpl;
 import com.crackware.erasmus.data.services.impl.ApplicationServiceImpl;
@@ -18,16 +19,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
+@RequestMapping("student/")
 public class ApplicationsController {
 
     private final ApplicationListServiceImpl applicationListService;
     private final ApplicationServiceImpl applicationService;
     private final HelperService helperService;
 
-    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService) {
+    private final SchoolService schoolService;
+
+    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService) {
         this.applicationListService = applicationListService;
         this.applicationService = applicationService;
         this.helperService = helperService;
+        this.schoolService = schoolService;
     }
 
     @PostMapping("/createApplication")
@@ -69,6 +74,13 @@ public class ApplicationsController {
         application.setStudent(student);
         applicationService.save(application);
     }
+
+    @GetMapping("/createApplication")
+    public ResponseEntity<?> getApplicationPage(){
+       return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseSchools(schoolService.findAll()));
+    }
+
 
     @GetMapping("/applications")
     public ResponseEntity<Set<ResponseApplication>> listApplications() {

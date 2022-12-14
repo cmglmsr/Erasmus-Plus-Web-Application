@@ -5,9 +5,7 @@ import com.crackware.erasmus.data.model.DepartmentQuota;
 import com.crackware.erasmus.data.model.PlacementList;
 import com.crackware.erasmus.data.model.WaitList;
 import com.crackware.erasmus.data.model.enums.Department;
-import com.crackware.erasmus.data.services.ApplicationService;
-import com.crackware.erasmus.data.services.PlacementListService;
-import com.crackware.erasmus.data.services.WaitListService;
+import com.crackware.erasmus.data.services.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -21,10 +19,17 @@ public class PlacementService {
 
     private final WaitListService waitListService;
 
-    public PlacementService(ApplicationService applicationService, PlacementListService placementListService, WaitListService waitListService) {
+    private final SchoolService schoolService;
+
+    private final DepartmentQuotaService departmentQuotaService;
+
+    public PlacementService(ApplicationService applicationService, PlacementListService placementListService,
+                            WaitListService waitListService, SchoolService schoolService, DepartmentQuotaService departmentQuotaService) {
         this.applicationService = applicationService;
         this.placementListService = placementListService;
         this.waitListService = waitListService;
+        this.schoolService = schoolService;
+        this.departmentQuotaService = departmentQuotaService;
     }
 
     public void finalizePlacements(){
@@ -38,23 +43,27 @@ public class PlacementService {
             if (checkAvailabilityByDepartment(currentDepartment, current.getSchool1().getDepartmentQuotas())){
                 changeQuota(currentDepartment, current.getSchool1().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool1());
+                schoolService.save(current.getSchool1());
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool2().getDepartmentQuotas())) {
                 changeQuota(currentDepartment, current.getSchool2().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool2());
+                schoolService.save(current.getSchool2());
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool3().getDepartmentQuotas())){
                 changeQuota(currentDepartment, current.getSchool3().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool3());
+                schoolService.save(current.getSchool3());
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool4().getDepartmentQuotas())) {
                 changeQuota(currentDepartment, current.getSchool4().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool4());
+                schoolService.save(current.getSchool4());
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool5().getDepartmentQuotas())) {
                 changeQuota(currentDepartment, current.getSchool5().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool5());
-
+                schoolService.save(current.getSchool5());
             }
         }
         ArrayList<Application> finalizedOnes = new ArrayList<>();
@@ -93,6 +102,7 @@ public class PlacementService {
         for (DepartmentQuota current : departmentQuotas) {
             if (current.getDepartment() == department) {
                 current.setQuota(current.getQuota() - 1);
+                departmentQuotaService.save(current);
             }
         }
     }

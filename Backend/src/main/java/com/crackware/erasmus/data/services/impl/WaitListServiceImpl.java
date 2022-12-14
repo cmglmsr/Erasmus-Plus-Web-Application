@@ -4,10 +4,12 @@ import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.WaitList;
 import com.crackware.erasmus.data.repositories.WaitListRepository;
 import com.crackware.erasmus.data.services.WaitListService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class WaitListServiceImpl implements WaitListService {
 
     private final WaitListRepository waitListRepository;
