@@ -17,12 +17,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/")
 public class AuthController {
@@ -63,7 +63,7 @@ public class AuthController {
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, String.valueOf(jwtCookie))
                 .body(new UserInfoResponse(userDetails.getId(),
                 userDetails.getEmail(),
-                roles));
+                roles, String.valueOf(jwtCookie)));
     }
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {

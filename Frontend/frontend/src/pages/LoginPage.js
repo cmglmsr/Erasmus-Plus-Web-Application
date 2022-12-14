@@ -1,6 +1,8 @@
 import LoginForm from "../components/LoginPage/LoginForm";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Cookies from 'universal-cookie';
+
 
 function LoginPage() {
   var error;
@@ -10,14 +12,17 @@ function LoginPage() {
       "http://localhost:8080/signin", //enter api address
       {
         method: "POST",
+        credentials: 'same-origin',
         body: JSON.stringify(loginData),
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       }
     ).then((response) => {
       response.json().then((parsedJson) => {
+        const cookies = new Cookies();
         if (response.status === 200) {
+          document.cookie = parsedJson.cookie;
           if (parsedJson.roles[0] === "ROLE_STUDENT") {
             window.location.href = "http://localhost:3000/student/home";
           }
@@ -29,6 +34,7 @@ function LoginPage() {
           var error = parsedJson.message;
           console.log(error);
         }
+        console.log("COOKIE ===>", response.headers['Set-Cookie']);
       });
     });
   }

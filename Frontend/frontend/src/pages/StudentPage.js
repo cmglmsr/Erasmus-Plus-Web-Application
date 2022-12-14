@@ -17,18 +17,18 @@ const DUMMY_PROFILE = {
 
 function Student() {
   useEffect(() => {
-    var myHeaders = new Headers();
-
     var requestOptions = {
       method: "GET",
-      headers: myHeaders,
       redirect: "follow",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        "Cookie": "Erasmus+=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjZW1nQGhvdG1haWwuY29tIiwiaWF0IjoxNjcxMDM1MjEyLCJleHAiOjE2NzExMjE2MTJ9.ODn4qaBxIARCU8JDSrNApfgK7W-CK-TIzCgeP0aQZtscUDkvJAw103o_Pp-XaJxxoT17-v4pJmtQJniU635BTQ"
+      },
     };
 
-    fetch("http://localhost:8080/student/home", requestOptions)
-      .then((response) => response.json().then((parsedJson) => {console.log(parsedJson)}))
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    var x = fetch("http://localhost:8080/student/home", requestOptions)
+    console.log(x)
   }, []);
 
   return (
