@@ -11,17 +11,31 @@ import classes from "./ApplicationDetails.module.css";
 function ApplicationDetails(props) {
   var application = props.application;
   var phoneNumber = formatPhoneNumberIntl(application.phone);
-  var semester;
+  var cb;
   const [isSubscribed, setIsSubscribed] = useState(true);
   const handleChange = (event) => {
     if (event.target.checked) {
-      console.log("Checkbox is checked");
-      semester = isSubscribed;
-      console.log(semester);
-    } else {
-      console.log("Checkbox is NOT checked");
-      semester = isSubscribed;
-      console.log(semester);
+      var check1 = document.getElementById("check1");
+      var check2 = document.getElementById("check2");
+      var check3 = document.getElementById("check3");
+      if (event.target != check1 && check1.checked === true){
+        event.target.value = setIsSubscribed(event.target.value);
+          
+        console.log(event.target);
+        document.getElementById("check1").click();
+      }
+      if (event.target != check2 && check2.checked === true){
+        event.target.value = 2;
+        console.log(event.target);
+        document.getElementById("check2").click();
+      }
+      if (event.target != check3 && check3.checked === true){
+        event.target.value = true;
+        console.log(event.target);
+        document.getElementById("check3").click();
+      }
+
+
     }
     setIsSubscribed((current) => !current);
   };
@@ -58,8 +72,8 @@ function ApplicationDetails(props) {
               <input
                 className="form-check-input"
                 type="checkbox"
-                id="flexCheckDefault"
-                value={isSubscribed}
+                id="check1"
+                value= "1"
                 onChange={handleChange}
               />
               <label className="form-check-label">
@@ -70,8 +84,8 @@ function ApplicationDetails(props) {
               <input
                 className="form-check-input"
                 type="checkbox"
-                id="flexCheckChecked"
-                value={isSubscribed}
+                id="check2"
+                value="2"
                 onChange={handleChange}
               />
               <label className="form-check-label">
@@ -82,8 +96,8 @@ function ApplicationDetails(props) {
               <input
                 className="form-check-input"
                 type="checkbox"
-                id="flexCheckChecked"
-                value={isSubscribed}
+                id="check3"
+                value="3"
                 onChange={handleChange}
               />
               <label className="form-check-label">
