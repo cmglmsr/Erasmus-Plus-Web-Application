@@ -29,7 +29,6 @@ public class ExcelHelper {
     public static List<Course> excelToCourses(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
-            System.out.println("imdat12312341234");
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
 

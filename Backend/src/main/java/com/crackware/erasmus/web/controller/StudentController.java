@@ -3,10 +3,7 @@ package com.crackware.erasmus.web.controller;
 import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.services.StudentService;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "localhost://", maxAge = 3600)
 @RestController
@@ -21,7 +18,7 @@ public class StudentController {
         this.studentService = studentService;
     }
     @GetMapping("/home")
-    public Student studentHome() {
+    public Student studentHome(){
         return (Student) helperService.getUser();
     }
     @GetMapping("/profile")
