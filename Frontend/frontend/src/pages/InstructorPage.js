@@ -1,4 +1,5 @@
-import ProfileAction from "../components/common/ProfileAction";
+import ProfileSummary from "../components/common/ProfileSummary";
+import ActionButtons from "../components/common/ActionButtons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import Schedule from "../components/HomePage/Schedule";
 
 function Instructor() {
   const [profile, setProfile] = useState();
+  const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -17,7 +19,10 @@ function Instructor() {
     };
 
     fetch("http://localhost:8080/instructor/home", requestOptions).then(
-      (response) => response.json().then((parsedJson) => setProfile(parsedJson))
+      (response) => response.json().then((parsedJson) => {
+        setProfile(parsedJson);
+        setRole(parsedJson.role.name)
+      })
     );
   }, []);
 
@@ -26,7 +31,20 @@ function Instructor() {
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction profile={profile} />
+        <Row>
+            <ProfileSummary
+              name={profile.name}
+              surname={profile.surname}
+              role={role}
+              semester={profile.image}
+              id={profile.id}
+              image={profile.image}
+              department={profile.department}
+            />
+          </Row>
+          <Row className="my-4">
+            <ActionButtons role={roles} />
+          </Row>
         </Col>
         <Col className="mx-4">
           <div>

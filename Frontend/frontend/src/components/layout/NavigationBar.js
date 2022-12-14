@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function NavigationBar() {
   return (
     <header>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">
             Erasmus Bilkent

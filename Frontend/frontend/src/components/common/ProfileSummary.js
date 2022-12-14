@@ -3,17 +3,16 @@ import Container from "react-bootstrap/Container";
 import classes from "./ProfileSummary.module.css";
 import Card from "../UI/Card";
 
-function ProfileSummary(props) {
-  var profile = props.profile;
-  var role = profile.role;
-  var semester;
+const ProfileSummary = ({name, surname, role, semester, image, id, department}) => {
+
+  var semesterComp;
   var table;
 
-  if (role === "Student") {
-    semester = (
+  if (role === "ROLE_STUDENT") {
+    semesterComp = (
       <tr>
         <th>Semester</th>
-        <td>{profile.semester}</td>
+        <td>{semester}</td>
       </tr>
     );
   }
@@ -27,26 +26,26 @@ function ProfileSummary(props) {
             <img
               className={classes.image}
               alt="profileImage"
-              src={profile.image}
+              src={image}
             ></img>
           </th>
         </tr>
         <tr>
-          <th colSpan={2}>{profile.role}</th>
+          <th colSpan={2}>{role}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th>Name</th>
-          <td>{profile.name}</td>
+          <td>{name}</td>
         </tr>
         <tr>
           <th>Surname</th>
-          <td>{profile.surname}</td>
+          <td>{surname}</td>
         </tr>
         <tr>
           <th>Bilkent ID</th>
-          <td>{profile.id}</td>
+          <td>{id}</td>
         </tr>
       </tbody>
     </Table>
@@ -60,32 +59,32 @@ function ProfileSummary(props) {
             <img
               className={classes.image}
               alt="profileImage"
-              src={profile.image}
+              src={image}
             ></img>
           </th>
         </tr>
         <tr>
-          <th colSpan={2}>{profile.role}</th>
+          <th colSpan={2}>{role}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th>Name</th>
-          <td>{profile.name}</td>
+          <td>{name}</td>
         </tr>
         <tr>
           <th>Surname</th>
-          <td>{profile.surname}</td>
+          <td>{surname}</td>
         </tr>
         <tr>
           <th>Bilkent ID</th>
-          <td>{profile.id}</td>
+          <td>{id}</td>
         </tr>
         <tr>
           <th>Department</th>
-          <td>{profile.department}</td>
+          <td>{department}</td>
         </tr>
-        {semester}
+        {semesterComp}
       </tbody>
     </Table>
   </Card>

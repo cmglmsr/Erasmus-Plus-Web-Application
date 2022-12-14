@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping({"fbo", "/fbo"})
+@RequestMapping({"fbm", "/fbm"})
 public class FacultyBoardMemberController {
 
     private final HelperService helperService;
