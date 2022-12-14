@@ -10,8 +10,8 @@ import InformationPage from './pages/InformationPage';
 import InternationalStudentOfficePage from './pages/InternationalStudentOfficePage';
 import StudentPage from './pages/StudentPage';
 import LoginPage from "./pages/LoginPage";
-
-
+import ViewApplication from './pages/ViewApplicationPage';
+import ViewProfile from './pages/ViewProfilePage';
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -42,6 +42,8 @@ function App() {
         <Route path="/internationalStudentOffice/home" exact={true} element={<InternationalStudentOfficePage/>}></Route>
         <Route path="/coordinator/home" exact={true} element={<CoordinatorPage/>}></Route>
         <Route path="/student/home" exact={true} element={<StudentPage />}></Route>
+        <Route path="/viewApplication" exact={true} element={<ViewApplication profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/viewProfile" exact={true} element={<ViewProfile profile={DUMMY_PROFILE}/>}></Route>
       </Routes>
     </Layout>
   );
