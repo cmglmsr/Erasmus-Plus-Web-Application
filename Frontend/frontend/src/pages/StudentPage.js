@@ -23,7 +23,6 @@ function Student() {
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        "Cookie": "Erasmus+=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjZW1nQGhvdG1haWwuY29tIiwiaWF0IjoxNjcxMDM1MjEyLCJleHAiOjE2NzExMjE2MTJ9.ODn4qaBxIARCU8JDSrNApfgK7W-CK-TIzCgeP0aQZtscUDkvJAw103o_Pp-XaJxxoT17-v4pJmtQJniU635BTQ"
       },
     };
 
