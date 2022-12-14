@@ -1,9 +1,9 @@
-import ProfileAction from "../components/common/ProfileAction";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
 import Schedule from "../components/HomePage/Schedule";
 import ProfileSummary from "../components/common/ProfileSummary";
+import ActionButtons from "../components/common/ActionButtons";
 
 function Student() {
   const [profile, setProfile] = useState({});
@@ -22,7 +22,6 @@ function Student() {
     );
   }, []);
 
-  const profileAction = <ProfileAction profile={profile} />;
   console.log(profile);
   return (
     <section>
@@ -39,7 +38,9 @@ function Student() {
               department={profile.department}
             />
           </Row>
-          <Row className="my-4"></Row>
+          <Row className="my-4">
+            <ActionButtons role={profile.role} />
+          </Row>
         </Col>
         <Col className="mx-4">
           <div>

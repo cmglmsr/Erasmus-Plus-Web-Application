@@ -5,8 +5,7 @@ import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 import classes from "./ActionButton.module.css";
 
-function ActionButtons(props) {
-    var role = props.role;
+const ActionButtons = ({role}) => {
     let buttons = [];
     if (role === "Student") {
         buttons[0] = <Button className="button-default" as={Link} to="/application">My Application</Button>;
