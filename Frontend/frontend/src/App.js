@@ -5,9 +5,9 @@ import ProfilePage from './pages/ProfilePage';
 import HomePage from './pages/Homepage';
 import ApplicationPage from './pages/ApplicationPage';
 import ApplicationListPage from './pages/ApplicationListPage';
-import CoordinatorHomePage from './pages/CoordionatorHomePage';
+import CoordinatorPage from './pages/CoordionatorPage';
 import InformationPage from './pages/InformationPage';
-import InternationalStudentOffice from './pages/InternationalStudentOffice';
+import InternationalStudentOfficePage from './pages/InternationalStudentOfficePage';
 import StudentPage from './pages/StudentPage';
 import LoginPage from "./pages/LoginPage";
 
@@ -37,9 +37,9 @@ function App() {
         <Route path="/profile" exact={true} element={<ProfilePage profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/application" exact={true} element={<ApplicationPage profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/application-list" exact={true} element={<ApplicationListPage profile={DUMMY_PROFILE}/>}></Route>
-        <Route path="/info" exact={true} element={<InformationPage/>}></Route>
-        <Route path="/international" exact={true} element={<InternationalStudentOffice/>}></Route>
-        <Route path="/coordinator" exact={true} element={<CoordinatorHomePage/>}></Route>
+        <Route path="/information" exact={true} element={<InformationPage/>}></Route>
+        <Route path="/internationalStudentOffice/home" exact={true} element={<InternationalStudentOfficePage/>}></Route>
+        <Route path="/coordinator/home" exact={true} element={<CoordinatorPage/>}></Route>
         <Route path="/student/home" exact={true} element={<StudentPage />}></Route>
       </Routes>
     </Layout>

@@ -2,8 +2,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CourseList from "../components/InformationPage/CourseList";
 import UniversityList from "../components/InformationPage/UniversityList";
+import { useEffect } from "react";
 
 function InformationPage() {
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
+      console.log(response)
+    );
+  }, []);
+
   return (
     <section>
       <Row>

@@ -16,24 +16,24 @@ function CourseList() {
         </thead>
         <tbody>
           <tr>
-            <td>CS319-Object-Oriented Software Engineering</td>
-            <td>Computer Engineering</td>
-            <td>Mandatory</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr>
-            <td>MATH230-Probability and Statistics for Engineers</td>
-            <td>Mathematics</td>
-            <td>Mandatory</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr>
-            <td>PSYC100-Introduction to Psychology</td>
-            <td>Psychology</td>
-            <td>Elective</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr>
-            <td>CS202-Fundamental Structures of Computer Science II</td>
-            <td>Computer Engineering</td>
-            <td>Mandatory</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </Table>

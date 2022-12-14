@@ -24,45 +24,29 @@ function Schedule() {
       <tbody>
         <tr>
           <td>1</td>
-          <td>{dateState.toLocaleDateString('en-GB', {
-                 day: 'numeric',
-                 month: 'short',
-                 year: 'numeric',
-              })}</td>
-          <td>16.00</td>
-          <td>Submit Eren Duran's transcript</td>
+          <td></td>
+          <td></td>
+          <td></td>
         
         </tr>
         <tr>
           <td>2</td>
-          <td>{dateState.toLocaleDateString('en-GB', {
-                 day: 'numeric',
-                 month: 'short',
-                 year: 'numeric',
-              })}</td>
-          <td>17.00</td>
-          <td>Submit Cem Gülümser's transcript</td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <td>3</td>
-          <td>{dateState.toLocaleDateString('en-GB', {
-                 day: 'numeric',
-                 month: 'short',
-                 year: 'numeric',
-              })}</td>
-          <td>19.00</td>
-          <td>Submit Elifsena Oz's transcript</td>
+          <td></td>
+          <td></td>
+          <td></td>
       
         </tr>
         <tr>
           <td>4</td>
-          <td>{dateState.toLocaleDateString('en-GB', {
-                 day: 'numeric',
-                 month: 'short',
-                 year: 'numeric',
-              })}</td>
-          <td>20.00</td>
-          <td>Submit Arda Yıldız's transcript</td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
       </tbody>
     </Table>

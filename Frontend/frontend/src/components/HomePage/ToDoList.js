@@ -43,8 +43,8 @@ function ToDoList() {
                 />
               </div>
             </th>
-            <td>Submit Eren Duran's transcript</td>
-            <td>14.00</td>
+            <td></td>
+            <td></td>
           </tr>
           <tr>
             <th scope="row">
@@ -57,8 +57,8 @@ function ToDoList() {
                 />
               </div>
             </th>
-            <td>Submit Asli Karaman's transcript</td>
-            <td>16.00</td>
+            <td></td>
+            <td></td>
           </tr>
           <tr>
             <th scope="row">
@@ -71,8 +71,8 @@ function ToDoList() {
                 />
               </div>
             </th>
-            <td>Submit Elifsena Oz's transcript</td>
-            <td>18.00</td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </Table>

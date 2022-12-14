@@ -5,3 +5,11 @@
 .p {
     display: inline;
 }
+
+.tableContainer{
+    background-color: #1E1F25;
+    border-radius: 20px;
+    height: 244px;
+    padding: 0 10px 10px 10px;
+    overflow: scroll;
+}
