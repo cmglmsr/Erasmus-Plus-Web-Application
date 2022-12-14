@@ -7,7 +7,7 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 
 function Coordinator() {
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({});
   const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {

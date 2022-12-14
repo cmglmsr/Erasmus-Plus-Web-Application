@@ -7,7 +7,7 @@ import Schedule from "../components/HomePage/Schedule";
 import { useEffect, useState } from "react";
 
 function InternationalStudentOfficePage() {
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({});
   const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {

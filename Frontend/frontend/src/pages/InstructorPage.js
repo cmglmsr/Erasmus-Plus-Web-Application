@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Schedule from "../components/HomePage/Schedule";
 
 function Instructor() {
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({});
   const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {
