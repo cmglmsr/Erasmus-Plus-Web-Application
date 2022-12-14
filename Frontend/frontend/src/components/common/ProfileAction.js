@@ -6,10 +6,10 @@ function ProfileAction(props) {
   return (
     <div>
       <Row>
-        <ProfileSummary profile={profile} />
+        <ProfileSummary profile={props.user} />
       </Row>
       <Row className="my-4">
-        <ActionButtons role={profile.roles[0]} />
+        <ActionButtons profile={props.user.roles[0]} />
       </Row>
     </div>
   );
