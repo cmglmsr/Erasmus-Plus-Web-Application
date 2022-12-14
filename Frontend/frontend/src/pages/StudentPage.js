@@ -28,7 +28,7 @@ function Student() {
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction user={profile} />
+          <ProfileAction profile={profile} />
         </Col>
         <Col className="mx-4">
           <div>

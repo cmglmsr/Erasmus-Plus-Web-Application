@@ -3,13 +3,14 @@ import ActionButtons from "./ActionButtons";
 import Row from "react-bootstrap/Row";
 
 function ProfileAction(props) {
+  const profile = props.profile;
   return (
     <div>
       <Row>
-        <ProfileSummary profile={props.user} />
+        <ProfileSummary profile={profile} />
       </Row>
       <Row className="my-4">
-        <ActionButtons profile={props.user.roles[0]} />
+        <ActionButtons profile={profile.roles[0]} />
       </Row>
     </div>
   );
