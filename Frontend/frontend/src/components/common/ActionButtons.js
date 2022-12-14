@@ -1,9 +1,7 @@
-import Container from "react-bootstrap/esm/Container";
 import Card from "../UI/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
-import classes from "./ActionButton.module.css";
 
 const ActionButtons = ({role}) => {
     let buttons = [];
@@ -13,7 +11,7 @@ const ActionButtons = ({role}) => {
     else if (role === "ROLE_ISO") {
         buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/transcripts">Transcripts</Button>;
     }
-    else {
+    else if (role === "ROLE_INSTRUCTOR" || role === "ROLE_COORDINATOR") {
         buttons[0] = <Button className="button-default" key="application-list" as={Link} to="/application-list">Applications</Button>;
         buttons[1] = <Button className="button-default" key="placements" as={Link} to="/placements">Placements</Button>;
         buttons[2] = <Button className="button-default" key="pre-approvals" as={Link} to="/pre-approvals">Pre-Approvals</Button>;
