@@ -2,6 +2,7 @@ import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./CourseList.module.css";
 import React, { useState, useEffect } from "react";
+
 function CourseList() {
   return (
     <Card>
