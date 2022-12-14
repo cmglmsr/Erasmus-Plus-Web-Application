@@ -22,7 +22,7 @@ function Student() {
       (response) =>
         response.json().then((parsedJson) => {
           setProfile(parsedJson);
-          setRole(parsedJson.roles[0].name)
+          setRole(parsedJson.role.name)
         })
     );
   }, []);
