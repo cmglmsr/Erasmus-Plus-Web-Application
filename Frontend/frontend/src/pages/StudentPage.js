@@ -36,7 +36,7 @@ function Student() {
             <ProfileSummary
               name={profile.name}
               surname={profile.surname}
-              role={profile.role}
+              role={role}
               semester={profile.image}
               id={profile.id}
               image={profile.image}
@@ -44,7 +44,7 @@ function Student() {
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={profile.role} />
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">
