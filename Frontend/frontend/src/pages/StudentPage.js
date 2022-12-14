@@ -18,17 +18,10 @@ const DUMMY_PROFILE = {
 function Student() {
   useEffect(() => {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      mail: "cemg@hotmail.com",
-      password: "123",
-    });
 
     var requestOptions = {
       method: "GET",
       headers: myHeaders,
-      body: raw,
       redirect: "follow",
     };
 
