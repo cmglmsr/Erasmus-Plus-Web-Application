@@ -48,6 +48,19 @@ public class ExcelHelper {
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
+                        case 1:{
+                            String value = "";
+                            if (currentCell.getCellType() == CellType.NUMERIC)
+                                value = String.valueOf(currentCell.getNumericCellValue());
+                            if (currentCell.getCellType() == CellType.STRING)
+                                value = currentCell.getStringCellValue();
+                            if (!value.equals("")
+                                    && !value.equals("       Host University's Name"))
+                            {
+                                course.setHostUniversityName(value);
+                            }
+                            break;
+                        }
                         case 2:{
                             String value = "";
                             if (currentCell.getCellType() == CellType.NUMERIC)
@@ -61,7 +74,6 @@ public class ExcelHelper {
                             }
                             break;
                         }
-
                         case 3:{
                             String value = "";
                             if (currentCell.getCellType() == CellType.NUMERIC)
@@ -75,22 +87,6 @@ public class ExcelHelper {
                             }
                             break;
                         }
-
-                        case 1:{
-                            String value = "";
-                            if (currentCell.getCellType() == CellType.NUMERIC)
-                                value = String.valueOf(currentCell.getNumericCellValue());
-                            if (currentCell.getCellType() == CellType.STRING)
-                                value = currentCell.getStringCellValue();
-                            if (!value.equals("")
-                                    && !value.equals("       Host University's Name"))
-                            {
-                               course.setHostUniversityName(value);
-                            }
-                            break;
-                        }
-
-
                         case 4:{
                             String value = "";
                             if (currentCell.getCellType() == CellType.NUMERIC)
