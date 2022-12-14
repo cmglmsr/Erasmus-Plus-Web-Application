@@ -1,7 +1,6 @@
 import LoginForm from "../components/LoginPage/LoginForm";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Cookies from 'universal-cookie';
 
 
 function LoginPage() {
@@ -20,9 +19,8 @@ function LoginPage() {
       }
     ).then((response) => {
       response.json().then((parsedJson) => {
-        const cookies = new Cookies();
         if (response.status === 200) {
-          document.cookie = parsedJson.cookie;
+          document.cookie = parsedJson.cookie+ ";SameSite=None;";
           if (parsedJson.roles[0] === "ROLE_STUDENT") {
             window.location.href = "http://localhost:3000/student/home";
           }

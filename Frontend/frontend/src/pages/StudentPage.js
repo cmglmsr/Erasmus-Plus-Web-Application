@@ -27,7 +27,10 @@ function Student() {
       },
     };
 
-    var x = fetch("http://localhost:8080/student/home", requestOptions)
+    var x = fetch("http://localhost:8080/student/home", requestOptions).then(
+        (response) =>
+            response.json().then((parsedJson) => console.log(parsedJson))
+    );
     console.log(x)
   }, []);
 
