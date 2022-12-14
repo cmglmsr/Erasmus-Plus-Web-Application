@@ -10,23 +10,17 @@ function Student() {
     var requestOptions = {
       method: "GET",
       redirect: "follow",
-      credentials: "include",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
     };
 
-    async function getData() {
-      return await fetch(
-        "http://localhost:8080/student/home",
-        requestOptions
-      ).then((response) =>
-        response.json().then((parsedJson) => {
-          return parsedJson;
-        })
-      );
-    }
-    setProfile(getData());
+    fetch("http://localhost:8080/student/home", requestOptions).then(
+        (response) =>
+            response.json().then((parsedJson) => setProfile(parsedJson))
+    );
+    
   }, []);
 
   console.log(profile);
