@@ -1,10 +1,10 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
-import Schedule from "../components/HomePage/Schedule";
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import CoordinatorContext from "../context/CoordinatorContext";
+import Schedule from "../../components/HomePage/Schedule";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import CoordinatorContext from "../../context/CoordinatorContext/CoordinatorContext";
 
 function CoordinatorPage() {
   const coordinatorData = useContext(CoordinatorContext);
@@ -19,8 +19,8 @@ function CoordinatorPage() {
               name={coordinatorData.name}
               surname={coordinatorData.surname}
               role={coordinatorData.role}
-              semester=""
-              id={coordinatorData.id}
+              term=""
+              id={coordinatorData.bilkentId}
               image={coordinatorData.image}
               department={coordinatorData.department}
             />

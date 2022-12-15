@@ -1,13 +1,13 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
-import Schedule from "../components/HomePage/Schedule";
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import StudentContext from "../context/StudentContext";
-import ViewProfile from "../components/ProfilePage/ViewProfile";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import StudentContext from "../../context/StudentContext/StudentContext";
+import ViewProfile from "../../components/ProfilePage/ViewProfile";
+
 function StudentProfile() {
-  const studentData = useContext(StudentContext);
+  const [studentData, role] = useContext(StudentContext);
 
   console.log(studentData);
   return (
@@ -18,15 +18,15 @@ function StudentProfile() {
           <ProfileSummary
               name={studentData.name}
               surname={studentData.surname}
-              role={studentData.role}
-              semester={studentData.image}
-              id={studentData.id}
+              role={role}
+              term={studentData.term}
+              bilkentId={studentData.bilkentId}
               image={studentData.image}
               department={studentData.department}
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={studentData.role} />
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">
@@ -35,12 +35,12 @@ function StudentProfile() {
               <ViewProfile
                 name={studentData.name}
                 surname={studentData.surname}
-                phone={studentData.phone}
-                email={studentData.email}
+                phoneNumber={studentData.phoneNumber}
+                mail={studentData.mail}
                 dateOfBirth={studentData.dateOfBirth}
                 gender={studentData.gender}
                 cgpa={studentData.cgpa}
-                nationalId={studentData.nationalId}
+                nationalID={studentData.nationalID}
                 eng101grade={studentData.eng101grade}
                 eng102grade={studentData.eng102grade}
               />

@@ -1,11 +1,12 @@
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import ToDoList from "../../components/HomePage/ToDoList";
+import Schedule from "../../components/HomePage/Schedule";
 import { useEffect, useState } from "react";
-import Schedule from "../components/HomePage/Schedule";
 
-function Instructor() {
+function InternationalStudentOfficePage() {
   const [profile, setProfile] = useState({});
   const [role, setRole] = useState("");
   useEffect(() => {
@@ -18,8 +19,8 @@ function Instructor() {
       },
     };
 
-    fetch("http://localhost:8080/instructor/home", requestOptions).then(
-      (response) => response.json().then((parsedJson) => {
+    fetch("http://localhost:8080/iso/home", requestOptions).then((response) =>
+      response.json().then((parsedJson) => {
         setProfile(parsedJson);
         setRole(parsedJson.role.name)
       })
@@ -31,7 +32,7 @@ function Instructor() {
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-        <Row>
+          <Row>
             <ProfileSummary
               name={profile.name}
               surname={profile.surname}
@@ -43,12 +44,15 @@ function Instructor() {
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={roles} />
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">
           <div>
-            <Row className="my-3">
+            <Row>
+              <ToDoList />
+            </Row>
+            <Row className="my-4">
               <Schedule />
             </Row>
           </div>
@@ -57,4 +61,5 @@ function Instructor() {
     </section>
   );
 }
-export default Instructor;
+
+export default InternationalStudentOfficePage;

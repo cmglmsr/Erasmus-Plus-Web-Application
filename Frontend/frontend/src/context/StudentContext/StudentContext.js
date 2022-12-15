@@ -1,14 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
 export const StudentContext = createContext();
 export const StudentProvider = ({ children }) => {
-  var API = "http://localhost:8080/student/home";
 
   const [studentData, setStudentData] = useState([]);
+  const [role, setRole] = useState("");
 
   useEffect(() => {
+    var API = "http://localhost:8080/student/home";
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -21,13 +22,15 @@ export const StudentProvider = ({ children }) => {
     fetch(API, requestOptions).then((res) =>
       res.json().then((data) => {
         setStudentData(data);
+        setRole(data.role.name);
+        localStorage.setItem("role", data.role.name);
       })
     );
   }, []);
 
   console.log(studentData);
   return (
-    <StudentContext.Provider value={studentData}>
+    <StudentContext.Provider value={[studentData, role]}>
       {children}
     </StudentContext.Provider>
   );

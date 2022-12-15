@@ -1,12 +1,12 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
-import Schedule from "../components/HomePage/Schedule";
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import StudentContext from "../context/StudentContext"
+import Schedule from "../../components/HomePage/Schedule";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import StudentContext from "../../context/StudentContext/StudentContext"
 function Student() {
-  const studentData = useContext(StudentContext);
+  const [studentData, role] = useContext(StudentContext);
 
   console.log(studentData);
   return (
@@ -17,15 +17,15 @@ function Student() {
             <ProfileSummary
               name={studentData.name}
               surname={studentData.surname}
-              role={studentData.role}
-              semester={studentData.image}
-              id={studentData.id}
+              role={role}
+              term={studentData.term}
+              bilkentId={studentData.bilkentId}
               image={studentData.image}
               department={studentData.department}
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={studentData.role} />
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">

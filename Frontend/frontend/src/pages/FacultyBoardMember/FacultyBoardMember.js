@@ -1,9 +1,9 @@
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ToDoList from "../components/HomePage/ToDoList";
-import Schedule from "../components/HomePage/Schedule";
+import ToDoList from "../../components/HomePage/ToDoList";
+import Schedule from "../../components/HomePage/Schedule";
 import { useEffect, useState } from "react";
 
 function FacultyBoardMember() {

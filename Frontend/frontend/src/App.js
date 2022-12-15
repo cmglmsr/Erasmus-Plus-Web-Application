@@ -5,16 +5,18 @@ import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/Homepage";
 import ApplicationPage from "./pages/ApplicationPage";
 import ApplicationListPage from "./pages/ApplicationListPage";
-import CoordinatorPage from "./pages/CoordionatorPage";
+import CoordinatorPage from "./pages/Coordinator/CoordinatorPage";
 import InformationPage from "./pages/InformationPage";
-import InternationalStudentOfficePage from "./pages/InternationalStudentOfficePage";
-import StudentPage from "./pages/StudentPage";
+import InternationalStudentOfficePage from "./pages/InternationalStudentOffice/InternationalStudentOfficePage";
+import StudentPage from "./pages/Student/StudentPage";
 import LoginPage from "./pages/LoginPage";
 import ViewApplication from "./pages/ViewApplicationPage";
 import ViewProfile from "./pages/ViewProfilePage";
-import StudentContextLayout from "./context/StudentContextLayout";
-import CoordinatorContextLayout from "./context/CoordinatorContextLayout";
-import StudentProfile from "./pages/StudentProfile";
+import StudentContextLayout from "./context/StudentContext/StudentContextLayout";
+import CoordinatorContextLayout from "./context/CoordinatorContext/CoordinatorContextLayout";
+import StudentProfile from "./pages/Student/StudentProfile";
+import CoordinatorProfile from "./pages/Coordinator/CoordinatorProfile";
+
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -104,6 +106,11 @@ function App() {
             path="/coordinator/home"
             exact={true}
             element={<CoordinatorPage />}
+          ></Route>
+          <Route
+            path="/coordinator/profile"
+            exact={true}
+            element={<CoordinatorProfile />}
           ></Route>
         </Route>
       </Routes>

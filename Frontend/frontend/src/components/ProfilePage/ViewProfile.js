@@ -5,8 +5,8 @@ import "react-phone-input-2/lib/material.css";
 import Table from "react-bootstrap/Table";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 
-const ViewProfile = ({name, surname, phone, email, dateOfBirth, gender, cgpa, nationalId, eng101grade, eng102grade}) => {
-  var phoneNumber = formatPhoneNumberIntl(phone);
+const ViewProfile = ({name, surname, phoneNumber, mail, dateOfBirth, gender, cgpa, nationalID, eng101grade, eng102grade}) => {
+  var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
   return (
     <Card>
       <Form className="form">
@@ -26,7 +26,7 @@ const ViewProfile = ({name, surname, phone, email, dateOfBirth, gender, cgpa, na
             </tr>
             <tr>
               <td>Email</td>
-              <td>{email}</td>
+              <td>{mail}</td>
             </tr>
             <tr>
               <td>Date of Birth</td>
@@ -34,11 +34,11 @@ const ViewProfile = ({name, surname, phone, email, dateOfBirth, gender, cgpa, na
             </tr>
             <tr>
               <td>Phone</td>
-              <td>{phoneNumber}</td>
+              <td>{phoneNumberFormatted}</td>
             </tr>
             <tr>
               <td>National ID</td>
-              <td>{nationalId}</td>
+              <td>{nationalID}</td>
             </tr>
             <tr>
               <td>Gender</td>

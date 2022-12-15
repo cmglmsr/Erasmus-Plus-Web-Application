@@ -3,8 +3,15 @@ import Container from "react-bootstrap/Container";
 import classes from "./ProfileSummary.module.css";
 import Card from "../UI/Card";
 
-const ProfileSummary = ({name, surname, role, semester, image, id, department}) => {
+const ProfileSummary = ({name, surname, role, term, image, bilkentId, department}) => {
 
+  const roles = {
+    "ROLE_STUDENT": "Student",
+    "ROLE_COORDINATOR": "Coordinator",
+    "ROLE_INSTRUCTOR": "Instructor",
+    "ROLE_ISO": "International Student Office",
+    "ROLE_FBM": "Faculty Board Member",
+  }
   var semesterComp;
   var table;
 
@@ -12,12 +19,12 @@ const ProfileSummary = ({name, surname, role, semester, image, id, department}) 
     semesterComp = (
       <tr>
         <th>Semester</th>
-        <td>{semester}</td>
+        <td>{term}</td>
       </tr>
     );
   }
 
-  if(role == "International Student Office"){
+  if(role == "ROLE_ISO"){
     table = <Card>
     <Table>
       <thead className={classes.head}>
@@ -31,7 +38,7 @@ const ProfileSummary = ({name, surname, role, semester, image, id, department}) 
           </th>
         </tr>
         <tr>
-          <th colSpan={2}>{role}</th>
+          <th colSpan={2}>{roles[role]}</th>
         </tr>
       </thead>
       <tbody>
@@ -45,7 +52,7 @@ const ProfileSummary = ({name, surname, role, semester, image, id, department}) 
         </tr>
         <tr>
           <th>Bilkent ID</th>
-          <td>{id}</td>
+          <td>{bilkentId}</td>
         </tr>
       </tbody>
     </Table>
@@ -64,7 +71,7 @@ const ProfileSummary = ({name, surname, role, semester, image, id, department}) 
           </th>
         </tr>
         <tr>
-          <th colSpan={2}>{role}</th>
+          <th colSpan={2}>{roles[role]}</th>
         </tr>
       </thead>
       <tbody>
@@ -78,7 +85,7 @@ const ProfileSummary = ({name, surname, role, semester, image, id, department}) 
         </tr>
         <tr>
           <th>Bilkent ID</th>
-          <td>{id}</td>
+          <td>{bilkentId}</td>
         </tr>
         <tr>
           <th>Department</th>
