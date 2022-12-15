@@ -16,13 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @RestController
-@RequestMapping("student/")
+@RequestMapping("student")
 public class ApplicationsController {
 
     private final ApplicationService applicationService;
@@ -36,37 +33,46 @@ public class ApplicationsController {
     }
 
     @PostMapping("/createApplication")
-    public void createApplication(  @RequestParam(value = "pref1") Integer pref1,
-                                    @RequestParam(value = "pref2") Integer pref2,
-                                    @RequestParam(value = "pref3") Integer pref3,
-                                    @RequestParam(value = "pref4") Integer pref4,
-                                    @RequestParam(value = "pref5") Integer pref5) {
+    public ResponseEntity<?> createApplication(@RequestBody HashMap<String, Object> payload) {
         Student student = (Student) helperService.getUser();
+        System.out.println(student.getTerm());
+        if(Double.parseDouble(student.getCgpa()) < 2.5 | student.getTerm() > 5 | student.getTerm() < 3) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(""); // 406
+        }
+        if(student.getApplication() != null) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student already has an application!");
+        }
         Application application = new Application();
         application.setDate(new Date());
         application.setDepartment(student.getDepartment());
-        // SEND AS FORM DATA
+        // Can be sent as JSON
         /*
         * TO DO:
-        * Create schools beforehand
-        * Fetch them from database
-        * GPA SHOULD BE MI 2.5
-        * MIN SEMESTER 3, MAX SEMESTER 5
+        * Get CV
+        * Get Semester
         * */
+        System.out.println(payload);
         application.setPoints(student.calculatePoints());
-        application.setSchool1(schoolService.findById((long) pref1));
-        application.setSchool2(schoolService.findById((long) pref2));
-        application.setSchool3(schoolService.findById((long) pref3));
-        application.setSchool4(schoolService.findById((long) pref4));
-        application.setSchool5(schoolService.findById((long) pref5));
+        application.setSchool1(schoolService.findById(Long.valueOf((int)payload.get("pref1"))));
+        application.setSchool2(schoolService.findById(Long.valueOf((int)payload.get("pref2"))));
+        application.setSchool3(schoolService.findById(Long.valueOf((int)payload.get("pref3"))));
+        application.setSchool4(schoolService.findById(Long.valueOf((int)payload.get("pref4"))));
+        application.setSchool5(schoolService.findById(Long.valueOf((int)payload.get("pref5"))));
         application.setStudent(student);
+        student.setApplication(application);
         applicationService.save(application);
+        return ResponseEntity.status(HttpStatus.OK).body("");
     }
 
     @GetMapping("/getApplication")
-    public ResponseEntity<?> getApplicationPage(){
-       return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseSchools(schoolService.findAll()));
+    public ResponseEntity<ResponseApplication> getApplicationPage(){
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication() == null) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseApplication(null, null, null, null, null));
+        }
+        Application a = s.getApplication();
+        ResponseApplication r = new ResponseApplication(a);
+       return ResponseEntity.status(HttpStatus.OK).body(r);
     }
 
 
@@ -75,20 +81,38 @@ public class ApplicationsController {
         Set<Application> applications = applicationService.findAll();
         Set<ResponseApplication> responseApplications = new HashSet<>();
         for(Application a : applications) {
-            String name = a.getStudent().getName();
-            String bilkendId = a.getStudent().getBilkentId();
-            String cgpa = a.getStudent().getCgpa();
-            String finalSchool = "";
-            String status = "";
-            if(a.getFinalSchool() != null) finalSchool = a.getFinalSchool().getName();
-            if(a.getStatus() != null) status =  a.getStatus().toString();
-            if(name == null) name = "";
-            if(bilkendId == null) bilkendId = "";
-            if(cgpa == null) cgpa = "";
-            if(finalSchool == null) finalSchool = "";
-            if(status == null) status = "";
-            responseApplications.add(new ResponseApplication(name, bilkendId, cgpa, finalSchool, status));
+            ResponseApplication ra = new ResponseApplication(a);
+            responseApplications.add(ra);
         }
         return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
     }
+
+    @PostMapping("/manageApplication")
+    public ResponseEntity<ResponseApplication> manageApplication(@RequestBody HashMap<String, Object> payload) {
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication() == null) {
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(new ResponseApplication(null, null, null, null, null));
+        }
+        Application a = s.getApplication();
+        for(String parameter : payload.keySet()) {
+            if(parameter=="pref1") {
+                a.setSchool1(schoolService.findById(Long.valueOf((int)payload.get("pref1"))));
+            }
+            if(parameter=="pref2") {
+                a.setSchool2(schoolService.findById(Long.valueOf((int)payload.get("pref2"))));
+            }
+            if(parameter=="pref3") {
+                a.setSchool3(schoolService.findById(Long.valueOf((int)payload.get("pref3"))));
+            }
+            if(parameter=="pref4") {
+                a.setSchool4(schoolService.findById(Long.valueOf((int)payload.get("pref4"))));
+            }
+            if(parameter=="pref5") {
+                a.setSchool5(schoolService.findById(Long.valueOf((int)payload.get("pref5"))));
+            }
+        }
+        applicationService.save(a);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
+    }
+
 }
