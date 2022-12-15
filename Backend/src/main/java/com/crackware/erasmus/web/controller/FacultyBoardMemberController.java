@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.FacultyBoardMember;
+import com.crackware.erasmus.data.model.Instructor;
 import com.crackware.erasmus.data.model.Schedule;
 import com.crackware.erasmus.data.model.ToDoList;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
@@ -51,6 +52,8 @@ public class FacultyBoardMemberController {
         }else {
             toDoListService.save(toDoList);
         }
+        facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
+
     }
 
     @PostMapping("/schedule")
@@ -61,5 +64,7 @@ public class FacultyBoardMemberController {
         }else {
             scheduleService.save(schedule);
         }
+        facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
+
     }
 }

@@ -51,6 +51,7 @@ public class StudentController {
         }else {
             toDoListService.save(toDoList);
         }
+        studentService.save((Student) helperService.getUser());
     }
 
     @PostMapping("/schedule")
@@ -61,6 +62,7 @@ public class StudentController {
         }else {
             scheduleService.save(schedule);
         }
+        studentService.save((Student) helperService.getUser());
     }
 }
 

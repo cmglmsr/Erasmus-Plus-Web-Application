@@ -1,9 +1,6 @@
 package com.crackware.erasmus.web.controller;
 
-import com.crackware.erasmus.data.model.Coordinator;
-import com.crackware.erasmus.data.model.Document;
-import com.crackware.erasmus.data.model.Schedule;
-import com.crackware.erasmus.data.model.ToDoList;
+import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
@@ -85,6 +82,8 @@ public class CoordinatorController {
         }else {
             toDoListService.save(toDoList);
         }
+        coordinatorService.save((Coordinator) helperService.getUser());
+
     }
 
     @PostMapping("/schedule")
@@ -95,6 +94,7 @@ public class CoordinatorController {
         }else {
             scheduleService.save(schedule);
         }
+        coordinatorService.save((Coordinator) helperService.getUser());
     }
 
 }
