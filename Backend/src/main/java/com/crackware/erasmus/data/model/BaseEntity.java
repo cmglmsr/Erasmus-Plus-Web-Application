@@ -34,9 +34,6 @@ public class BaseEntity{
 
     private String mail;
 
-    @JsonIgnore
-    private String password;
-
     private String dateOfBirth;
 
 }

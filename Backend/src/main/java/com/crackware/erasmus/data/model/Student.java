@@ -5,6 +5,7 @@ import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.model.enums.Language;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class Student extends BaseEntity{
     private Set<Language> languages;
 
     @OneToOne
+    @Nullable
     private Application application;
 
     public double calculatePoints() {
