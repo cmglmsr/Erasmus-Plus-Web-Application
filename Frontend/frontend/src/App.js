@@ -10,7 +10,6 @@ import InformationPage from "./pages/InformationPage";
 import InternationalStudentOfficePage from "./pages/InternationalStudentOffice/InternationalStudentOfficePage";
 import StudentPage from "./pages/Student/StudentPage";
 import LoginPage from "./pages/LoginPage";
-import ViewApplication from "./pages/ViewApplicationPage";
 import ViewProfile from "./pages/ViewProfilePage";
 import StudentContextLayout from "./context/StudentContext/StudentContextLayout";
 import CoordinatorContextLayout from "./context/CoordinatorContext/CoordinatorContextLayout";
@@ -76,11 +75,7 @@ function App() {
           element={<CoordinatorPage />}
         ></Route>
 
-        <Route
-          path="/viewApplication"
-          exact={true}
-          element={<ViewApplication profile={DUMMY_PROFILE} />}
-        ></Route>
+
         <Route
           path="/viewProfile"
           exact={true}
@@ -98,20 +93,14 @@ function App() {
             element={<StudentProfile />}
           ></Route>
           <Route element={<ApplicationContextLayout />}>
-          <Route
-                path="/student/getApplication"
-                exact={true}
-                element={<ApplicationPage />}
-              ></Route>
-            <Route element={<ApplicationSchoolsContextLayout />}>
-              <Route
-                path="/student/createApplication"
-                exact={true}
-                element={<CreateApplication />}
-              ></Route>
-            </Route>
+            <Route
+              path="/student/getApplication"
+              exact={true}
+              element={<ApplicationPage />}
+            ></Route>
           </Route>
         </Route>
+
         <Route element={<CoordinatorContextLayout />}>
           <Route
             path="/coordinator/home"

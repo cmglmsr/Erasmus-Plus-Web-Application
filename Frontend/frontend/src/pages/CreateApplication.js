@@ -11,6 +11,7 @@ function CreateApplication() {
   const [studentData, role] = useContext(StudentContext);
   const schoolData = useContext(ApplicationSchoolsContext);
 
+  console.log("ApppplicationPage");
   console.log(schoolData);
   function onApplicationSubmitHandler(applicationData) {
     fetch(

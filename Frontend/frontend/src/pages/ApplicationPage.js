@@ -1,6 +1,6 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ApplicationDetails from "../components/ApplicationPage/ApplicationForm";
+import ApplicationDetails from "../components/ApplicationPage/ApplicationDetails";
 import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import { useContext } from "react";
