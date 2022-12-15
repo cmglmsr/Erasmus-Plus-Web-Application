@@ -11,8 +11,6 @@ import java.util.Set;
 @Service
 public class PlacementListServiceImpl implements PlacementListService {
 
-
-
     private final PlacementListRepository placementListRepository;
 
 
@@ -45,9 +43,5 @@ public class PlacementListServiceImpl implements PlacementListService {
     @Override
     public void deleteById(Long aLong) {
         placementListRepository.deleteById(aLong);
-    }
-
-    public void deleteAll(){
-        placementListRepository.deleteAll();
     }
 }
