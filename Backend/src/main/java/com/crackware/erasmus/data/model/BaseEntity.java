@@ -36,4 +36,10 @@ public class BaseEntity{
 
     private String dateOfBirth;
 
+    @OneToOne
+    private ToDoList toDoList;
+
+    @OneToOne
+    private Schedule schedule;
+
 }
