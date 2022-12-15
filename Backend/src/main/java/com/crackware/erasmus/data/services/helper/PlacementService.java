@@ -23,13 +23,16 @@ public class PlacementService {
 
     private final DepartmentQuotaService departmentQuotaService;
 
+    private final StudentService studentService;
+
     public PlacementService(ApplicationService applicationService, PlacementListService placementListService,
-                            WaitListService waitListService, SchoolService schoolService, DepartmentQuotaService departmentQuotaService) {
+                            WaitListService waitListService, SchoolService schoolService, DepartmentQuotaService departmentQuotaService, StudentService studentService) {
         this.applicationService = applicationService;
         this.placementListService = placementListService;
         this.waitListService = waitListService;
         this.schoolService = schoolService;
         this.departmentQuotaService = departmentQuotaService;
+        this.studentService = studentService;
     }
 
     public void finalizePlacements(){
@@ -44,26 +47,35 @@ public class PlacementService {
                 changeQuota(currentDepartment, current.getSchool1().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool1());
                 schoolService.save(current.getSchool1());
+                studentService.save(current.getStudent());
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool2().getDepartmentQuotas())) {
                 changeQuota(currentDepartment, current.getSchool2().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool2());
                 schoolService.save(current.getSchool2());
+                studentService.save(current.getStudent());
+
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool3().getDepartmentQuotas())){
                 changeQuota(currentDepartment, current.getSchool3().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool3());
                 schoolService.save(current.getSchool3());
+                studentService.save(current.getStudent());
+
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool4().getDepartmentQuotas())) {
                 changeQuota(currentDepartment, current.getSchool4().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool4());
                 schoolService.save(current.getSchool4());
+                studentService.save(current.getStudent());
+
 
             } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool5().getDepartmentQuotas())) {
                 changeQuota(currentDepartment, current.getSchool5().getDepartmentQuotas());
                 current.setFinalSchool(current.getSchool5());
                 schoolService.save(current.getSchool5());
+                studentService.save(current.getStudent());
+
             }
         }
         ArrayList<Application> finalizedOnes = new ArrayList<>();

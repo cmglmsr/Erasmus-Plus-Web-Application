@@ -4,9 +4,7 @@ import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
-import com.crackware.erasmus.data.services.CoordinatorService;
-import com.crackware.erasmus.data.services.ScheduleService;
-import com.crackware.erasmus.data.services.ToDoListService;
+import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
@@ -26,14 +24,20 @@ public class CoordinatorController {
 
     private final ToDoListService toDoListService;
 
+    private final TaskService taskService;
+
+    private final ToDoListItemService toDoListItemService;
+
     private final ScheduleService scheduleService;
 
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, ScheduleService scheduleService) {
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService) {
         this.coordinatorService = coordinatorService;
         //this.documentServiceSave = documentServiceSave;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
+        this.taskService = taskService;
+        this.toDoListItemService = toDoListItemService;
         this.scheduleService = scheduleService;
     }
 
@@ -47,7 +51,6 @@ public class CoordinatorController {
     }
 
     @PostMapping("/home")
-
     public void approveLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
@@ -76,24 +79,29 @@ public class CoordinatorController {
 
     @PostMapping("/todolist")
     public void coordinatorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoList toDoList = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (toDoList.isDone()){
-            toDoListService.delete(toDoList);
+        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
+
+        if (toDoListItem.isDone()){
+            toDoListItemService.delete(toDoListItem);
         }else {
-            toDoListService.save(toDoList);
+            toDoListItemService.save(toDoListItem);
         }
+        helperService.getUser().getToDoList().addItem(toDoListItem);
+        toDoListService.save(helperService.getUser().getToDoList());
         coordinatorService.save((Coordinator) helperService.getUser());
 
     }
 
     @PostMapping("/schedule")
     public void coordinatorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
-        Schedule schedule = ScheduleHelper.scheduleHelp(scheduleRequest);
-        if (schedule.isDone()){
-            scheduleService.delete(schedule);
+        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
+        if (task.isDone()){
+            taskService.delete(task);
         }else {
-            scheduleService.save(schedule);
+            taskService.save(task);
         }
+        helperService.getUser().getSchedule().addItem(task);
+        scheduleService.save(helperService.getUser().getSchedule());
         coordinatorService.save((Coordinator) helperService.getUser());
     }
 

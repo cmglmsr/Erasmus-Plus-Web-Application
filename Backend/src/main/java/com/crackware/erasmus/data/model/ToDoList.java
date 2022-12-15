@@ -3,23 +3,23 @@ package com.crackware.erasmus.data.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Getter
 @Setter
+@Getter
 public class ToDoList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String dueDate;
+    @OneToMany
+    private Set<ToDoListItem> itemSet;
 
-    private String description;
+    public void addItem(ToDoListItem item){
+        this.itemSet.add(item);
+    }
 
-    private boolean done;
 }

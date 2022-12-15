@@ -1,13 +1,11 @@
 package com.crackware.erasmus.web.controller;
 
-import com.crackware.erasmus.data.model.Schedule;
+import com.crackware.erasmus.data.model.Task;
 import com.crackware.erasmus.data.model.Student;
-import com.crackware.erasmus.data.model.ToDoList;
+import com.crackware.erasmus.data.model.ToDoListItem;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
-import com.crackware.erasmus.data.services.ScheduleService;
-import com.crackware.erasmus.data.services.StudentService;
-import com.crackware.erasmus.data.services.ToDoListService;
+import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
@@ -26,12 +24,18 @@ public class StudentController {
 
     private final ToDoListService toDoListService;
 
+    private final ToDoListItemService toDoListItemService;
+
+    private final TaskService taskService;
+
     private final ScheduleService scheduleService;
 
-    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ScheduleService scheduleService) {
+    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService) {
         this.helperService = helperService;
         this.studentService = studentService;
         this.toDoListService = toDoListService;
+        this.toDoListItemService = toDoListItemService;
+        this.taskService = taskService;
         this.scheduleService = scheduleService;
     }
     @GetMapping("/home")
@@ -45,23 +49,28 @@ public class StudentController {
 
     @PostMapping("/todolist")
     public void studentToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoList toDoList = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (toDoList.isDone()){
-            toDoListService.delete(toDoList);
+        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
+
+        if (toDoListItem.isDone()){
+            toDoListItemService.delete(toDoListItem);
         }else {
-            toDoListService.save(toDoList);
+            toDoListItemService.save(toDoListItem);
         }
+        helperService.getUser().getToDoList().addItem(toDoListItem);
+        toDoListService.save(helperService.getUser().getToDoList());
         studentService.save((Student) helperService.getUser());
     }
 
     @PostMapping("/schedule")
     public void studentSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
-        Schedule schedule = ScheduleHelper.scheduleHelp(scheduleRequest);
-        if (schedule.isDone()){
-            scheduleService.delete(schedule);
+        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
+        if (task.isDone()){
+            taskService.delete(task);
         }else {
-            scheduleService.save(schedule);
+            taskService.save(task);
         }
+        helperService.getUser().getSchedule().addItem(task);
+        scheduleService.save(helperService.getUser().getSchedule());
         studentService.save((Student) helperService.getUser());
     }
 }

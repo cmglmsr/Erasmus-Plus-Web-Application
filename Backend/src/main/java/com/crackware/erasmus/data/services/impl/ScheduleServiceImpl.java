@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Service
-public class ScheduleImpl implements ScheduleService {
+public class ScheduleServiceImpl implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
 
-    public ScheduleImpl(ScheduleRepository scheduleRepository) {
+    public ScheduleServiceImpl(ScheduleRepository scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
     }
 

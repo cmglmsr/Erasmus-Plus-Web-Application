@@ -1,13 +1,10 @@
 package com.crackware.erasmus.data.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -18,14 +15,11 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String date;
 
-    private String dueDate;
+    @OneToMany
+    private Set<Task> tasks;
 
-    private String description;
-
-    private boolean done;
-
-
-
+    public void addItem(Task item){
+        this.tasks.add(item);
+    }
 }
