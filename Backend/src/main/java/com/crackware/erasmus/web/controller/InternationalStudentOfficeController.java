@@ -1,9 +1,6 @@
 package com.crackware.erasmus.web.controller;
 
-import com.crackware.erasmus.data.model.InternationalStudentOffice;
-import com.crackware.erasmus.data.model.Student;
-import com.crackware.erasmus.data.model.Task;
-import com.crackware.erasmus.data.model.ToDoListItem;
+import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
@@ -74,7 +71,12 @@ public class InternationalStudentOfficeController {
         }else {
             toDoListItemService.save(toDoListItem);
         }
-        helperService.getUser().getToDoList().addItem(toDoListItem);
+        if (helperService.getUser().getToDoList() != null)
+            helperService.getUser().getToDoList().addItem(toDoListItem);
+        else {
+            helperService.getUser().setToDoList(new ToDoList());
+            helperService.getUser().getToDoList().addItem(toDoListItem);
+        }
         toDoListService.save(helperService.getUser().getToDoList());
         isoService.save((InternationalStudentOffice) helperService.getUser());
     }
@@ -87,7 +89,12 @@ public class InternationalStudentOfficeController {
         }else {
             taskService.save(task);
         }
-        helperService.getUser().getSchedule().addItem(task);
+        if (helperService.getUser().getSchedule() != null)
+            helperService.getUser().getSchedule().addItem(task);
+        else {
+            helperService.getUser().setSchedule(new Schedule());
+            helperService.getUser().getSchedule().addItem(task);
+        }
         scheduleService.save(helperService.getUser().getSchedule());
         isoService.save((InternationalStudentOffice) helperService.getUser());
     }

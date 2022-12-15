@@ -86,7 +86,12 @@ public class CoordinatorController {
         }else {
             toDoListItemService.save(toDoListItem);
         }
-        helperService.getUser().getToDoList().addItem(toDoListItem);
+        if (helperService.getUser().getToDoList() != null)
+            helperService.getUser().getToDoList().addItem(toDoListItem);
+        else {
+            helperService.getUser().setToDoList(new ToDoList());
+            helperService.getUser().getToDoList().addItem(toDoListItem);
+        }
         toDoListService.save(helperService.getUser().getToDoList());
         coordinatorService.save((Coordinator) helperService.getUser());
 
@@ -100,7 +105,12 @@ public class CoordinatorController {
         }else {
             taskService.save(task);
         }
-        helperService.getUser().getSchedule().addItem(task);
+        if (helperService.getUser().getSchedule() != null)
+            helperService.getUser().getSchedule().addItem(task);
+        else {
+            helperService.getUser().setSchedule(new Schedule());
+            helperService.getUser().getSchedule().addItem(task);
+        }
         scheduleService.save(helperService.getUser().getSchedule());
         coordinatorService.save((Coordinator) helperService.getUser());
     }
