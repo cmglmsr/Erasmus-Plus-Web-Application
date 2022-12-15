@@ -35,14 +35,15 @@ function CoordinatorProfile() {
               <ViewProfile
                 name={coordinatorData.name}
                 surname={coordinatorData.surname}
-                phoneNumber={coordinatorData.phoneNumber}
+                phoneNumber=""
                 mail={coordinatorData.mail}
                 dateOfBirth={coordinatorData.dateOfBirth}
-                gender={coordinatorData.gender}
-                cgpa={coordinatorData.cgpa}
-                nationalID={coordinatorData.nationalID}
-                eng101grade={coordinatorData.eng101grade}
-                eng102grade={coordinatorData.eng102grade}
+                role={role}
+                gender=""
+                cgpa=""
+                nationalID=""
+                eng101grade=""
+                eng102grade=""
               />
             </Row>
           </div>

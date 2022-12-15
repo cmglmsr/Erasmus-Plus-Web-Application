@@ -1,5 +1,4 @@
 import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/Container";
 import classes from "./ProfileSummary.module.css";
 import Card from "../UI/Card";
 
@@ -24,7 +23,7 @@ const ProfileSummary = ({name, surname, role, term, image, bilkentId, department
     );
   }
 
-  if(role == "ROLE_ISO"){
+  if(role === "ROLE_ISO"){
     table = <Card>
     <Table>
       <thead className={classes.head}>

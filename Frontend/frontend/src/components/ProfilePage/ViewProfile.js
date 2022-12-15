@@ -5,7 +5,19 @@ import "react-phone-input-2/lib/material.css";
 import Table from "react-bootstrap/Table";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 
-const ViewProfile = ({name, surname, phoneNumber, mail, dateOfBirth, gender, cgpa, nationalID, eng101grade, eng102grade}) => {
+const ViewProfile = ({
+  name,
+  surname,
+  phoneNumber,
+  mail,
+  dateOfBirth,
+  gender,
+  cgpa,
+  role,
+  nationalID,
+  eng101grade,
+  eng102grade,
+}) => {
   var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
   return (
     <Card>
@@ -32,35 +44,47 @@ const ViewProfile = ({name, surname, phoneNumber, mail, dateOfBirth, gender, cgp
               <td>Date of Birth</td>
               <td>{dateOfBirth}</td>
             </tr>
-            <tr>
-              <td>Phone</td>
-              <td>{phoneNumberFormatted}</td>
-            </tr>
-            <tr>
-              <td>National ID</td>
-              <td>{nationalID}</td>
-            </tr>
-            <tr>
-              <td>Gender</td>
-              <td>{gender}</td>
-            </tr>
-            <tr>
-              <td>CGPA</td>
-              <td>{cgpa}</td>
-            </tr>
-            <tr>
-              <td>ENG101 Grade</td>
-              <td>{eng101grade}</td>
-            </tr>
-            <tr>
-              <td>ENG102 Grade</td>
-              <td>{eng102grade}</td>
-            </tr>
+            {phoneNumber && (
+              <tr>
+                <td>Phone</td>
+                <td>{phoneNumberFormatted}</td>
+              </tr>
+            )}
+            {nationalID && (
+              <tr>
+                <td>National ID</td>
+                <td>{nationalID}</td>
+              </tr>
+            )}
+            {gender && (
+              <tr>
+                <td>Gender</td>
+                <td>{gender}</td>
+              </tr>
+            )}
+            {cgpa && (
+              <tr>
+                <td>CGPA</td>
+                <td>{cgpa}</td>
+              </tr>
+            )}
+            {eng101grade && (
+              <tr>
+                <td>ENG101 Grade</td>
+                <td>{eng101grade}</td>
+              </tr>
+            )}
+            {eng102grade && (
+              <tr>
+                <td>ENG102 Grade</td>
+                <td>{eng102grade}</td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </Form>
     </Card>
   );
-}
+};
 
 export default ViewProfile;
