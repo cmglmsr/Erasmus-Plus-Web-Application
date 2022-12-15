@@ -18,9 +18,17 @@ function Application(props) {
       "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
       {
         method: "POST",
+        credentials: 'same-origin',
         body: JSON.stringify(applicationData),
+        headers: {
+          "Content-Type": "application/json"
+        },
       }
-    );
+    ).then((response) => {
+      response.json().then((parsedJson) => {
+        console.log(parsedJson);
+      });
+    });
   }
   return (
     <section>
