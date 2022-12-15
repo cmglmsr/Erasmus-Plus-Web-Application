@@ -19,11 +19,11 @@ export const ApplicationProvider = ({ children }) => {
 
     fetch(API, requestOptions).then((res) =>
       res.json().then((data) => {
+        console.log("statussss" + res.status);
         if (res.status === 406) {
           window.location.href =
             "http://localhost:3000/student/createApplication";
         } else if (res.status === 200) {
-          console.log(data);
           setApplicationData(data);
         }
       })
