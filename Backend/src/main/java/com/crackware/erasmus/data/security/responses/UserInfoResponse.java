@@ -1,5 +1,6 @@
 package com.crackware.erasmus.data.security.responses;
 
+import com.crackware.erasmus.data.model.security.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +11,13 @@ import java.util.List;
 public class UserInfoResponse {
     private Long id;
     private String email;
-    private List<String> roles;
+    private String role;
     private String cookie;
 
-    public UserInfoResponse(Long id, String email, List<String> roles, String cookie) {
+    public UserInfoResponse(Long id, String email, String role, String cookie) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        this.role = role;
         this.cookie = cookie;
     }
 }
