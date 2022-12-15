@@ -17,17 +17,16 @@ export const ApplicationProvider = ({ children }) => {
       },
     };
 
-    fetch(API, requestOptions).then((res) =>
-      res.json().then((data) => {
-        if (res.status === 406) {
-          window.location.href =
-            "http://localhost:3000/student/createApplication";
-        } else if (res.status === 200) {
-          console.log(data);
+    fetch(API, requestOptions).then((res) => {
+      if (res.status === 406) {
+        window.location.href =
+          "http://localhost:3000/student/createApplication";
+      } else if (res.status === 200) {
+        res.json().then((data) => {
           setApplicationData(data);
-        }
-      })
-    );
+        });
+      }
+    });
   }, []);
 
   console.log(applicationData);
