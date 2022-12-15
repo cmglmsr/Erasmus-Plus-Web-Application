@@ -1,7 +1,7 @@
 import ProfileAction from "../components/common/ProfileAction";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ViewApplication from "../components/ApplicationPage/ViewApplication";
+import ViewApplication from "../components/ApplicationPage/ApplicationDetails";
 import { useEffect } from "react";
 
 const DUMMY_APPLICATION = {

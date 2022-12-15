@@ -1,15 +1,34 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ApplicationDetails from "../components/ApplicationPage/ApplicationForm";
+import ApplicationForm from "../components/ApplicationPage/ApplicationForm";
 import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
+import StudentContext from "../context/StudentContext/StudentContext";
 import { useContext } from "react";
-import ApplicationContext from "../context/ApplicationContext/ApplicationContext";
+import ApplicationSchoolsContext from "../context/ApplicationContext/ApplicationSchoolsContext";
 
-function ApplicationPage() {
+function CreateApplication() {
   const [studentData, role] = useContext(StudentContext);
-  const [applicationData] = useContext(ApplicationContext);
+  const schoolData = useContext(ApplicationSchoolsContext);
 
+  console.log(schoolData);
+  function onApplicationSubmitHandler(applicationData) {
+    fetch(
+      "http://localhost:8080/student/createApplication", //enter api address
+      {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify(applicationData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
+      response.json().then((parsedJson) => {
+        console.log(parsedJson);
+      });
+    });
+  }
   return (
     <section>
       <Row>
@@ -30,20 +49,15 @@ function ApplicationPage() {
           </Row>
         </Col>
         <Col className="mx-4">
-          <ApplicationDetails
+          <ApplicationForm
             phoneNumber={studentData.phoneNumber}
             mail={studentData.mail}
             address={studentData.address}
-            first={applicationData.pref1}
-            second={applicationData.pref2}
-            third={applicationData.pref3}
-            fourth={applicationData.pref4}
-            fifth={applicationData.pref5}
-            cv=""
+            onApplicationSubmit={onApplicationSubmitHandler}
           />
         </Col>
       </Row>
     </section>
   );
 }
-export default ApplicationPage;
+export default CreateApplication;

@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/Homepage";
-import ApplicationPage from "./pages/ApplicationPage";
+import ApplicationPage from "./pages/CreateApplication";
 import ApplicationListPage from "./pages/ApplicationListPage";
 import CoordinatorPage from "./pages/Coordinator/CoordinatorPage";
 import InformationPage from "./pages/InformationPage";
@@ -16,6 +16,9 @@ import StudentContextLayout from "./context/StudentContext/StudentContextLayout"
 import CoordinatorContextLayout from "./context/CoordinatorContext/CoordinatorContextLayout";
 import StudentProfile from "./pages/Student/StudentProfile";
 import CoordinatorProfile from "./pages/Coordinator/CoordinatorProfile";
+import CreateApplication from "./pages/CreateApplication";
+import ApplicationSchoolsContextLayout from "./context/ApplicationContext/ApplicationSchoolContextLayout";
+import ApplicationContextLayout from "./context/ApplicationContext/ApplicationContextLayout";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -94,11 +97,20 @@ function App() {
             exact={true}
             element={<StudentProfile />}
           ></Route>
+          <Route element={<ApplicationContextLayout />}>
           <Route
-            path="/student/createApplication"
-            exact={true}
-            element={<ApplicationPage profile={DUMMY_PROFILE} />}
-          ></Route>
+                path="/student/getApplication"
+                exact={true}
+                element={<ApplicationPage />}
+              ></Route>
+            <Route element={<ApplicationSchoolsContextLayout />}>
+              <Route
+                path="/student/createApplication"
+                exact={true}
+                element={<CreateApplication />}
+              ></Route>
+            </Route>
+          </Route>
         </Route>
         <Route element={<CoordinatorContextLayout />}>
           <Route

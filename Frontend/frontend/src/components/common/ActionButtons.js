@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const ActionButtons = ({role}) => {
     let buttons = [];
     if (role === "ROLE_STUDENT") {
-        buttons[0] = <Button className="button-default" key="application" as={Link} to="/application">My Application</Button>;
+        buttons[0] = <Button className="button-default" key="application" as={Link} to="/student/getApplication">My Application</Button>;
     }
     else if (role === "ROLE_ISO") {
         buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/transcripts">Transcripts</Button>;
