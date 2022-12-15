@@ -21,6 +21,5 @@ public class ScheduleRequest {
     private String description;
 
     @NotNull
-    @AssertTrue
     private boolean done;
 }
