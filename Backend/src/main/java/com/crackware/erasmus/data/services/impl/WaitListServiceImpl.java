@@ -44,4 +44,11 @@ public class WaitListServiceImpl implements WaitListService {
     public void deleteById(Long aLong) {
         waitListRepository.deleteById(aLong);
     }
+
+    @Override
+    public void deleteAll() {
+        waitListRepository.deleteAll();
+    }
+
+
 }

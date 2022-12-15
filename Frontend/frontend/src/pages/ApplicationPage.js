@@ -18,7 +18,7 @@ function Application(props) {
 
   function onApplicationSubmitHandler(applicationData) {
     fetch(
-      "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
+      "http://localhost:8080/student/createApplication", //enter api address
       {
         method: "POST",
         credentials: 'same-origin',

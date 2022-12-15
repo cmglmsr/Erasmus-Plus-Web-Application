@@ -26,7 +26,6 @@ public class Application {
     @Enumerated(EnumType.STRING)
     private Department department;
 
-
     @OneToOne(cascade=CascadeType.ALL)
     private School school1;
 

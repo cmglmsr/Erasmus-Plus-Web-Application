@@ -40,8 +40,10 @@ public class PlacementService {
         Collections.sort(applications, (lhs, rhs) -> Double.compare(rhs.getPoints(), lhs.getPoints()));
 
         for (int i = 0; i < applications.size(); i++) {
-            Application current = applications.get(0);
+            Application current = applications.get(i);
             Department currentDepartment = current.getDepartment();
+            System.out.println(current.getStudent().getName());
+            System.out.println(current.getSchool1().getName());
 
             if (checkAvailabilityByDepartment(currentDepartment, current.getSchool1().getDepartmentQuotas())){
                 changeQuota(currentDepartment, current.getSchool1().getDepartmentQuotas());
@@ -93,6 +95,8 @@ public class PlacementService {
         WaitList waitList = new WaitList();
         waitList.setApplications(new HashSet<>(waitingList));
 
+        placementListService.deleteAll();
+        waitListService.deleteAll();
         placementListService.save(placementList);
         waitListService.save(waitList);
     }
