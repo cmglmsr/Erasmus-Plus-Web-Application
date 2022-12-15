@@ -19,21 +19,22 @@ function LoginPage() {
       }
     ).then((response) => {
       response.json().then((parsedJson) => {
+        console.log(parsedJson);
         if (response.status === 200) {
           document.cookie = parsedJson.cookie+ ";SameSite=None;";
-          if (parsedJson.roles[0] === "ROLE_STUDENT") {
+          if (parsedJson.role === "ROLE_STUDENT") {
             window.location.href = "http://localhost:3000/student/home";
           }
-          else if (parsedJson.roles[0] === "ROLE_COORDINATOR") {
+          else if (parsedJson.role === "ROLE_COORDINATOR") {
             window.location.href = "http://localhost:3000/coordinator/home";
           }
-          else if (parsedJson.roles[0] === "ROLE_INSTRUCTOR") {
+          else if (parsedJson.role === "ROLE_INSTRUCTOR") {
             window.location.href = "http://localhost:3000/instructor/home";
           }
-          else if (parsedJson.roles[0] === "ROLE_ISO") {
+          else if (parsedJson.role === "ROLE_ISO") {
             window.location.href = "http://localhost:3000/iso/home";
           }
-          else if (parsedJson.roles[0] === "ROLE_FBM") {
+          else if (parsedJson.role === "ROLE_FBM") {
             window.location.href = "http://localhost:3000/fbm/home";
           }
         }

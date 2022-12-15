@@ -1,17 +1,12 @@
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Card from "../UI/Card";
 import classes from "./ProfileDetails.module.css";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import Table from "react-bootstrap/Table";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 
-function ViewProfile(props) {
-  var profile = props.profile;
-  var phoneNumber = formatPhoneNumberIntl(profile.phone);
+const ViewProfile = ({name, surname, phone, email, dateOfBirth, gender, cgpa, nationalId, eng101grade, eng102grade}) => {
+  var phoneNumber = formatPhoneNumberIntl(phone);
   return (
     <Card>
       <Form className="form">
@@ -23,19 +18,19 @@ function ViewProfile(props) {
           <tbody>
             <tr>
               <td>Name</td>
-              <td>{profile.name}</td>
+              <td>{name}</td>
             </tr>
             <tr>
               <td>Surname</td>
-              <td>{profile.surname}</td>
+              <td>{surname}</td>
             </tr>
             <tr>
               <td>Email</td>
-              <td>{profile.email}</td>
+              <td>{email}</td>
             </tr>
             <tr>
               <td>Date of Birth</td>
-              <td>{profile.dateOfBirth}</td>
+              <td>{dateOfBirth}</td>
             </tr>
             <tr>
               <td>Phone</td>
@@ -43,15 +38,23 @@ function ViewProfile(props) {
             </tr>
             <tr>
               <td>National ID</td>
-              <td>{profile.nationalId}</td>
+              <td>{nationalId}</td>
             </tr>
             <tr>
               <td>Gender</td>
-              <td>{profile.gender}</td>
+              <td>{gender}</td>
             </tr>
             <tr>
               <td>CGPA</td>
-              <td>{profile.cgpa}</td>
+              <td>{cgpa}</td>
+            </tr>
+            <tr>
+              <td>ENG101 Grade</td>
+              <td>{eng101grade}</td>
+            </tr>
+            <tr>
+              <td>ENG102 Grade</td>
+              <td>{eng102grade}</td>
             </tr>
           </tbody>
         </Table>

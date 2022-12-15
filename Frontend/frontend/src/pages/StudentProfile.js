@@ -4,8 +4,9 @@ import { useContext } from "react";
 import Schedule from "../components/HomePage/Schedule";
 import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
-import StudentContext from "../context/StudentContext"
-function Student() {
+import StudentContext from "../context/StudentContext";
+import ViewProfile from "../components/ProfilePage/ViewProfile";
+function StudentProfile() {
   const studentData = useContext(StudentContext);
 
   console.log(studentData);
@@ -14,7 +15,7 @@ function Student() {
       <Row>
         <Col xs={3} className="mx-3">
           <Row>
-            <ProfileSummary
+          <ProfileSummary
               name={studentData.name}
               surname={studentData.surname}
               role={studentData.role}
@@ -31,7 +32,18 @@ function Student() {
         <Col className="mx-4">
           <div>
             <Row className="my-3">
-              <Schedule />
+              <ViewProfile
+                name={studentData.name}
+                surname={studentData.surname}
+                phone={studentData.phone}
+                email={studentData.email}
+                dateOfBirth={studentData.dateOfBirth}
+                gender={studentData.gender}
+                cgpa={studentData.cgpa}
+                nationalId={studentData.nationalId}
+                eng101grade={studentData.eng101grade}
+                eng102grade={studentData.eng102grade}
+              />
             </Row>
           </div>
         </Col>
@@ -39,4 +51,4 @@ function Student() {
     </section>
   );
 }
-export default Student;
+export default StudentProfile;
