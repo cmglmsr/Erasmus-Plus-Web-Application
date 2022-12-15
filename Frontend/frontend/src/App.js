@@ -17,7 +17,6 @@ import CoordinatorContextLayout from "./context/CoordinatorContext/CoordinatorCo
 import StudentProfile from "./pages/Student/StudentProfile";
 import CoordinatorProfile from "./pages/Coordinator/CoordinatorProfile";
 
-
 const DUMMY_PROFILE = {
   role: "Student",
   image: "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
@@ -47,11 +46,6 @@ function App() {
           path="/profile"
           exact={true}
           element={<ProfilePage profile={DUMMY_PROFILE} />}
-        ></Route>
-        <Route
-          path="/application"
-          exact={true}
-          element={<ApplicationPage profile={DUMMY_PROFILE} />}
         ></Route>
         <Route
           path="/application-list"
@@ -99,6 +93,11 @@ function App() {
             path="/student/profile"
             exact={true}
             element={<StudentProfile />}
+          ></Route>
+          <Route
+            path="/student/createApplication"
+            exact={true}
+            element={<ApplicationPage profile={DUMMY_PROFILE} />}
           ></Route>
         </Route>
         <Route element={<CoordinatorContextLayout />}>
