@@ -4,7 +4,6 @@ import { createContext } from "react";
 
 export const ApplicationContext = createContext();
 export const ApplicationProvider = ({ children }) => {
-
   const [applicationData, setApplicationData] = useState([]);
 
   useEffect(() => {
@@ -20,8 +19,13 @@ export const ApplicationProvider = ({ children }) => {
 
     fetch(API, requestOptions).then((res) =>
       res.json().then((data) => {
-        console.log(data);
-        setApplicationData(data);
+        if (res.status === 406) {
+          window.location.href =
+            "http://localhost:3000/student/createApplication";
+        } else if (res.status === 200) {
+          console.log(data);
+          setApplicationData(data);
+        }
       })
     );
   }, []);
