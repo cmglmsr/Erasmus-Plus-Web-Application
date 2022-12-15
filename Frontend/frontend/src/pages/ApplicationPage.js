@@ -1,8 +1,10 @@
-import ProfileAction from "../components/common/ProfileAction";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ApplicationDetails from "../components/ApplicationPage/ApplicationDetails";
-import { useEffect } from "react";
+import ProfileSummary from "../components/common/ProfileSummary";
+import ActionButtons from "../components/common/ActionButtons";
+import StudentContext from "../context/StudentContext/StudentContext";
+import { useContext } from "react";
 
 const DUMMY_APPLICATION = {
   id: "1",
@@ -12,6 +14,7 @@ const DUMMY_APPLICATION = {
 };
 
 function Application(props) {
+  const [studentData, role] = useContext(StudentContext);
 
   function onApplicationSubmitHandler(applicationData) {
     fetch(
@@ -34,7 +37,20 @@ function Application(props) {
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction profile={props.profile} />
+        <Row>
+            <ProfileSummary
+              name={studentData.name}
+              surname={studentData.surname}
+              role={role}
+              term={studentData.term}
+              bilkentId={studentData.bilkentId}
+              image={studentData.image}
+              department={studentData.department}
+            />
+          </Row>
+          <Row className="my-4">
+            <ActionButtons role={role} />
+          </Row>
         </Col>
         <Col className="mx-4">
           <ApplicationDetails application={DUMMY_APPLICATION} onApplicationSubmit={onApplicationSubmitHandler}/>

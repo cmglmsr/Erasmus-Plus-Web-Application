@@ -4,7 +4,8 @@ import { useContext } from "react";
 import Schedule from "../../components/HomePage/Schedule";
 import ProfileSummary from "../../components/common/ProfileSummary";
 import ActionButtons from "../../components/common/ActionButtons";
-import StudentContext from "../../context/StudentContext/StudentContext"
+import StudentContext from "../../context/StudentContext/StudentContext";
+
 function Student() {
   const [studentData, role] = useContext(StudentContext);
 
