@@ -13,4 +13,6 @@ import java.util.Set;
 public class WishList extends List{
     @OneToMany
     private Set<Course> courses;
+
+
 }
