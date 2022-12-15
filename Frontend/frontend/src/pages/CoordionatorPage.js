@@ -7,7 +7,8 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 
 function Coordinator() {
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({});
+  const [role, setRole] = useState("");
   useEffect(() => {
     var requestOptions = {
       method: "GET",
@@ -19,7 +20,10 @@ function Coordinator() {
     };
 
     fetch("http://localhost:8080/coordinator/home", requestOptions).then(
-      (response) => response.json().then((parsedJson) => setProfile(parsedJson))
+      (response) => response.json().then((parsedJson) => {
+        setProfile(parsedJson);
+        setRole(parsedJson.role.name)
+      })
     );
   }, []);
 
@@ -32,7 +36,7 @@ function Coordinator() {
             <ProfileSummary
               name={profile.name}
               surname={profile.surname}
-              role={profile.role}
+              role={role}
               semester={profile.image}
               id={profile.id}
               image={profile.image}
@@ -40,7 +44,7 @@ function Coordinator() {
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={profile.role} />
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">

@@ -8,7 +8,7 @@ const ProfileSummary = ({name, surname, role, semester, image, id, department}) 
   var semesterComp;
   var table;
 
-  if (role === "Student") {
+  if (role === "ROLE_STUDENT") {
     semesterComp = (
       <tr>
         <th>Semester</th>
