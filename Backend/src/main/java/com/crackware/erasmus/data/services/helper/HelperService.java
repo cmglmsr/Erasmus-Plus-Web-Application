@@ -51,7 +51,7 @@ public class HelperService {
         if (authorities.get(0) == null)
             return null;
         String mail = authentication.getName();
-        switch (currentRole.getName()){
+        switch (currentRole.getName()) {
             case ROLE_ADMIN: return adminService.findByEmail(mail);
             case ROLE_ISO: return isoService.findByEmail(mail);
             case ROLE_STUDENT: return studentService.findByEmail(mail);

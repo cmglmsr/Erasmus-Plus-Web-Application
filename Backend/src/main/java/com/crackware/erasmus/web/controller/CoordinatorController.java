@@ -1,29 +1,50 @@
 package com.crackware.erasmus.web.controller;
 
-import com.crackware.erasmus.data.model.Coordinator;
-import com.crackware.erasmus.data.model.Document;
+import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
-import com.crackware.erasmus.data.services.CoordinatorService;
+import com.crackware.erasmus.data.security.requests.ScheduleRequest;
+import com.crackware.erasmus.data.security.requests.ToDoRequest;
+import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import com.crackware.erasmus.data.services.impl.DocumentServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.crackware.erasmus.data.services.helper.ScheduleHelper;
+import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping({"/coordinator", "coordinator"})
 public class CoordinatorController {
 
     private final CoordinatorService coordinatorService;
-    //private final DocumentServiceImpl documentServiceSave;
+
     private final HelperService helperService;
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService) {
+    private final ToDoListService toDoListService;
+
+    private final TaskService taskService;
+
+    private final ToDoListItemService toDoListItemService;
+
+    private final ScheduleService scheduleService;
+
+    private final DocumentService documentService;
+
+
+
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService) {
         this.coordinatorService = coordinatorService;
-        //this.documentServiceSave = documentServiceSave;
         this.helperService = helperService;
+        this.toDoListService = toDoListService;
+        this.taskService = taskService;
+        this.toDoListItemService = toDoListItemService;
+        this.scheduleService = scheduleService;
+        this.documentService = documentService;
     }
 
     @GetMapping("/home")
@@ -35,32 +56,74 @@ public class CoordinatorController {
         return (Coordinator) helperService.getUser();
     }
 
-    @PostMapping("/home")
-
-    public void approveLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
-        String name = learningAgreementFile.getName();
-        String type = learningAgreementFile.getContentType();
-        Status documentStatus = Status.APPROVED;
-        byte[] dataSize = learningAgreementFile.getBytes();
-        Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
-
-        // Save the document
-        //documentServiceSave.save(learningAgreementDocument);
-        // Print out an approved message
-        System.out.println("[+] Learning agreement file approved.");
+    @PostMapping("/todolist")
+    public void coordinatorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
+        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
+        if (helperService.getUser().getToDoList() == null){
+            helperService.getUser().setToDoList(new ToDoList());
+        }
+        if (toDoListItem.isDone()){
+            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
+                    toDoRequest.getDueDate());
+        }else {
+            toDoListItemService.save(toDoListItem);
+            if (helperService.getUser().getToDoList() != null)
+                helperService.getUser().getToDoList().addItem(toDoListItem);
+            else {
+                helperService.getUser().setToDoList(new ToDoList());
+                helperService.getUser().getToDoList().addItem(toDoListItem);
+            }
+            toDoListService.save(helperService.getUser().getToDoList());
+            coordinatorService.save((Coordinator) helperService.getUser());
+        }
     }
 
-    public void rejectLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
-        String name = learningAgreementFile.getName();
-        String type = learningAgreementFile.getContentType();
-        Status documentStatus = Status.DENIED;
-        byte[] dataSize = learningAgreementFile.getBytes();
-        Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
+    @PostMapping("/schedule")
+    public void coordinatorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
+        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
+        if (helperService.getUser().getSchedule() == null){
+            helperService.getUser().setSchedule(new Schedule());
+        }
+        if (task.isDone()){
+            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
+                    scheduleRequest.getDueDate());
+        }else {
+            taskService.save(task);
+            if (helperService.getUser().getSchedule() != null)
+                helperService.getUser().getSchedule().addItem(task);
+            else {
+                helperService.getUser().setSchedule(new Schedule());
+                helperService.getUser().getSchedule().addItem(task);
+            }
+            scheduleService.save(helperService.getUser().getSchedule());
+            coordinatorService.save((Coordinator) helperService.getUser());
+        }
+    }
 
-        // Save the document
-        //documentServiceSave.save(learningAgreementDocument);
-        // Print out an approved message
-        System.out.println("[-] Learning agreement file rejected.");
+    @PostMapping("/learningAgreement/approve")
+    public void approveLearningAgreement(@RequestParam(name = "id") String id){
+        Document agreement = documentService.findById(Long.valueOf(id));
+        agreement.setDocumentStatus(Status.APPROVED);
+        documentService.save(agreement);
+    }
+
+    @PostMapping("/learningAgreement/reject")
+    public void rejectLearningAgreement(@RequestParam(name = "id") String id){
+        Document agreement = documentService.findById(Long.valueOf(id));
+        agreement.setDocumentStatus(Status.DENIED);
+        documentService.save(agreement);
+    }
+
+    @GetMapping("/learningAgreements")
+    public Set<Document> getAgreements(){
+        ArrayList<Document> documents = new ArrayList<>(documentService.findAll());
+        HashSet<Document> learningAgreements = new HashSet<>();
+        for (Document document : documents) {
+            if (document.getType() == "learningAgreement") {
+                learningAgreements.add(document);
+            }
+        }
+        return learningAgreements;
     }
 
 }

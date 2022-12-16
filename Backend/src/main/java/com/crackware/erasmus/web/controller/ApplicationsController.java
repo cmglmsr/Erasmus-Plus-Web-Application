@@ -5,102 +5,128 @@ import com.crackware.erasmus.data.message.ResponseSchools;
 import com.crackware.erasmus.data.model.Application;
 import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.School;
+import com.crackware.erasmus.data.model.enums.Status;
+import com.crackware.erasmus.data.services.ApplicationService;
 import com.crackware.erasmus.data.services.SchoolService;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.impl.ApplicationListServiceImpl;
 import com.crackware.erasmus.data.services.impl.ApplicationServiceImpl;
+import com.crackware.erasmus.data.services.impl.SchoolServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @RestController
-@RequestMapping("student/")
+@RequestMapping("student")
 public class ApplicationsController {
 
-    private final ApplicationListServiceImpl applicationListService;
-    private final ApplicationServiceImpl applicationService;
+    private final ApplicationService applicationService;
     private final HelperService helperService;
-
     private final SchoolService schoolService;
 
     public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService) {
-        this.applicationListService = applicationListService;
         this.applicationService = applicationService;
         this.helperService = helperService;
         this.schoolService = schoolService;
     }
 
     @PostMapping("/createApplication")
-    public void createApplication(@RequestParam("email") String email,
-                                    @RequestParam("address") String address,
-                                    @RequestParam("phone_number") String phoneNumber,
-                                    @RequestParam("pref1") String pref1,
-                                    @RequestParam("pref2") String pref2,
-                                    @RequestParam("pref3") String pref3,
-                                    @RequestParam("pref4") String pref4,
-                                    @RequestParam("pref5") String pref5) {
+    public ResponseEntity<?> createApplication(@RequestBody HashMap<String, Object> payload) {
         Student student = (Student) helperService.getUser();
+        System.out.println(student.getTerm());
+        if(Double.parseDouble(student.getCgpa()) < 2.5 | student.getTerm() > 5 | student.getTerm() < 3) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student ineligible for application!"); // 406
+        }
+        if(student.getApplication() != null) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student already has an application!");
+        }
         Application application = new Application();
         application.setDate(new Date());
         application.setDepartment(student.getDepartment());
+        // Can be sent as JSON
         /*
-        * TO DO:
-        * Create schools beforehand
-        * Fetch them from database
-        * GPA SHOULD BE MI 2.5
-        * MIN SEMESTER 3, MAX SEMESTER 5
+        * TODO:
+        * Get CV
+        * Get Semester
         * */
-        School s1 = new School();
-        School s2 = new School();
-        School s3 = new School();
-        School s4 = new School();
-        School s5 = new School();
-        s1.setName(pref1);
-        s2.setName(pref2);
-        s3.setName(pref3);
-        s4.setName(pref4);
-        s5.setName(pref5);
         application.setPoints(student.calculatePoints());
-        application.setSchool1(s1);
-        application.setSchool2(s2);
-        application.setSchool3(s3);
-        application.setSchool4(s4);
-        application.setSchool5(s5);
+        application.setSchool1(schoolService.findById(Long.valueOf((String)payload.get("pref1"))));
+        application.setSchool2(schoolService.findById(Long.valueOf((String)payload.get("pref2"))));
+        application.setSchool3(schoolService.findById(Long.valueOf((String)payload.get("pref3"))));
+        application.setSchool4(schoolService.findById(Long.valueOf((String)payload.get("pref4"))));
+        application.setSchool5(schoolService.findById(Long.valueOf((String)payload.get("pref5"))));
+        application.setTerm((String)payload.get("term"));
+        application.setStatus(Status.PENDING);
         application.setStudent(student);
+        student.setApplication(application);
         applicationService.save(application);
+        return ResponseEntity.status(HttpStatus.OK).body("Application has been created.");
     }
 
-    @GetMapping("/createApplication")
-    public ResponseEntity<?> getApplicationPage(){
-       return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseSchools(schoolService.findAll()));
+    @GetMapping("/getApplication")
+    public ResponseEntity<ResponseApplication> getApplicationPage(){
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication() == null) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseApplication(null, null, null, null, null));
+        }
+        Application a = s.getApplication();
+        ResponseApplication r = new ResponseApplication(a);
+       return ResponseEntity.status(HttpStatus.OK).body(r);
     }
-
 
     @GetMapping("/applications")
     public ResponseEntity<Set<ResponseApplication>> listApplications() {
         Set<Application> applications = applicationService.findAll();
         Set<ResponseApplication> responseApplications = new HashSet<>();
         for(Application a : applications) {
-            String name = a.getStudent().getName();
-            String bilkendId = a.getStudent().getBilkentId();
-            String cgpa = a.getStudent().getCgpa();
-            String finalSchool = "";
-            String status = "";
-            if(a.getFinalSchool() != null) finalSchool = a.getFinalSchool().getName();
-            if(a.getStatus() != null) status =  a.getStatus().toString();
-            if(name == null) name = "";
-            if(bilkendId == null) bilkendId = "";
-            if(cgpa == null) cgpa = "";
-            if(finalSchool == null) finalSchool = "";
-            if(status == null) status = "";
-            responseApplications.add(new ResponseApplication(name, bilkendId, cgpa, finalSchool, status));
+            ResponseApplication ra = new ResponseApplication(a);
+            responseApplications.add(ra);
         }
         return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
+    }
+
+    @PostMapping("/manageApplication")
+    public ResponseEntity<ResponseApplication> manageApplication(@RequestBody HashMap<String, Object> payload) {
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication() == null) {
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(new ResponseApplication(null, null, null, null, null));
+        }
+        Application a = s.getApplication();
+        for(String parameter : payload.keySet()) {
+            if(parameter=="pref1") {
+                a.setSchool1(schoolService.findById(Long.valueOf((String)payload.get("pref1"))));
+            }
+            if(parameter=="pref2") {
+                a.setSchool2(schoolService.findById(Long.valueOf((String)payload.get("pref2"))));
+            }
+            if(parameter=="pref3") {
+                a.setSchool3(schoolService.findById(Long.valueOf((String)payload.get("pref3"))));
+            }
+            if(parameter=="pref4") {
+                a.setSchool4(schoolService.findById(Long.valueOf((String)payload.get("pref4"))));
+            }
+            if(parameter=="pref5") {
+                a.setSchool5(schoolService.findById(Long.valueOf((String)payload.get("pref5"))));
+            }
+        }
+        a.setStatus(Status.MANAGED);
+        applicationService.save(a);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
+    }
+
+    @GetMapping("/deleteApplication")
+    public ResponseEntity<?> deleteApplication() {
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication()==null) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student does not have an application!");
+        }
+        Application a = s.getApplication();
+        s.setApplication(null);
+        a.setStudent(null);
+        applicationService.delete(a);
+        return ResponseEntity.status(HttpStatus.OK).body("Application has been deleted.");
     }
 }

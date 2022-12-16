@@ -61,7 +61,6 @@ public class WebSecurityConfig {
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/h2/**").permitAll()
                 .antMatchers("/signin/**").permitAll()
-                .antMatchers("/student/createApplication/**").access("hasRole('ROLE_STUDENT')")
                 .antMatchers("/student/**").access("hasRole('ROLE_STUDENT')")
                 .antMatchers("/coordinator/**").access("hasRole('ROLE_COORDINATOR')")
                 .antMatchers("/fbo/**").access("hasRole('ROLE_FACULTY_BOARD_MEMBER')")

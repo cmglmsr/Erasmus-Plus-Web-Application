@@ -1,17 +1,24 @@
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Card from "../UI/Card";
 import classes from "./ProfileDetails.module.css";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import Table from "react-bootstrap/Table";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 
-function ViewProfile(props) {
-  var profile = props.profile;
-  var phoneNumber = formatPhoneNumberIntl(profile.phone);
+const ViewProfile = ({
+  name,
+  surname,
+  phoneNumber,
+  mail,
+  dateOfBirth,
+  gender,
+  cgpa,
+  role,
+  nationalID,
+  eng101grade,
+  eng102grade,
+}) => {
+  var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
   return (
     <Card>
       <Form className="form">
@@ -23,41 +30,61 @@ function ViewProfile(props) {
           <tbody>
             <tr>
               <td>Name</td>
-              <td>{profile.name}</td>
+              <td>{name}</td>
             </tr>
             <tr>
               <td>Surname</td>
-              <td>{profile.surname}</td>
+              <td>{surname}</td>
             </tr>
             <tr>
               <td>Email</td>
-              <td>{profile.email}</td>
+              <td>{mail}</td>
             </tr>
             <tr>
               <td>Date of Birth</td>
-              <td>{profile.dateOfBirth}</td>
+              <td>{dateOfBirth}</td>
             </tr>
-            <tr>
-              <td>Phone</td>
-              <td>{phoneNumber}</td>
-            </tr>
-            <tr>
-              <td>National ID</td>
-              <td>{profile.nationalId}</td>
-            </tr>
-            <tr>
-              <td>Gender</td>
-              <td>{profile.gender}</td>
-            </tr>
-            <tr>
-              <td>CGPA</td>
-              <td>{profile.cgpa}</td>
-            </tr>
+            {phoneNumber && (
+              <tr>
+                <td>Phone</td>
+                <td>{phoneNumberFormatted}</td>
+              </tr>
+            )}
+            {nationalID && (
+              <tr>
+                <td>National ID</td>
+                <td>{nationalID}</td>
+              </tr>
+            )}
+            {gender && (
+              <tr>
+                <td>Gender</td>
+                <td>{gender}</td>
+              </tr>
+            )}
+            {cgpa && (
+              <tr>
+                <td>CGPA</td>
+                <td>{cgpa}</td>
+              </tr>
+            )}
+            {eng101grade && (
+              <tr>
+                <td>ENG101 Grade</td>
+                <td>{eng101grade}</td>
+              </tr>
+            )}
+            {eng102grade && (
+              <tr>
+                <td>ENG102 Grade</td>
+                <td>{eng102grade}</td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </Form>
     </Card>
   );
-}
+};
 
 export default ViewProfile;

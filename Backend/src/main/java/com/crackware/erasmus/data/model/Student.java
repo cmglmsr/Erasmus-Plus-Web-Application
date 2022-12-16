@@ -3,11 +3,13 @@ package com.crackware.erasmus.data.model;
 
 import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.model.enums.Language;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -18,6 +20,9 @@ public class Student extends BaseEntity{
     @Enumerated
     private Department department;
 
+    private String gender;
+
+    private String nationalID;
     private String cgpa;
     private String eng101grade;
     private String eng102grade;
@@ -30,15 +35,26 @@ public class Student extends BaseEntity{
 
     private String phoneNumber;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<WishlistCourse> courseWishlist;
+
     @ElementCollection(targetClass= Language.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="student_languages")
     @Column(name="languages")
     private Set<Language> languages;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Nullable
     private Application application;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @Nullable
+    private Document preApproval;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @Nullable
+    private Document learningAgreement;
 
     public double calculatePoints() {
         double total = 0; double eng101 = 0; double eng102 = 0;

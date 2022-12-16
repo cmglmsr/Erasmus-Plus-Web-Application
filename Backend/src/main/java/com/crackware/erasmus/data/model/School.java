@@ -2,6 +2,7 @@ package com.crackware.erasmus.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,9 +17,10 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DepartmentQuota> departmentQuotas;
 
+    // might delete ?
     @OneToMany
     @OrderBy("points DESC")
     private Set<Application> applications;

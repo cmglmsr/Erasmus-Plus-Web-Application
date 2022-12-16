@@ -4,4 +4,6 @@ import com.crackware.erasmus.data.model.DepartmentQuota;
 import org.springframework.data.repository.CrudRepository;
 
 public interface DepartmentQuotaRepository extends CrudRepository<DepartmentQuota, Long> {
+    @Override
+    void deleteAll();
 }

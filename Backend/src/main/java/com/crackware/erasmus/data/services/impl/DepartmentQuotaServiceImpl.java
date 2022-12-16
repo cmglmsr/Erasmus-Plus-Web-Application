@@ -44,4 +44,9 @@ public class DepartmentQuotaServiceImpl implements DepartmentQuotaService {
     public void deleteById(Long aLong) {
         departmentQuotaRepository.deleteById(aLong);
     }
+
+    @Override
+    public void deleteAll() {
+        departmentQuotaRepository.deleteAll();
+    }
 }

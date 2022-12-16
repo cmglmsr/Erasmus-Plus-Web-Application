@@ -63,7 +63,7 @@ public class AuthController {
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, String.valueOf(jwtCookie))
                 .body(new UserInfoResponse(userDetails.getId(),
                 userDetails.getEmail(),
-                roles, String.valueOf(jwtCookie)));
+                roles.get(0), String.valueOf(jwtCookie)));
     }
     @PostMapping("/signout")
     public ResponseEntity<?> logoutUser() {

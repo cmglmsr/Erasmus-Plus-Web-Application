@@ -5,4 +5,6 @@ import com.crackware.erasmus.data.model.WaitList;
 import org.springframework.data.repository.CrudRepository;
 
 public interface WaitListRepository extends CrudRepository<WaitList,Long> {
+    @Override
+    void deleteAll();
 }

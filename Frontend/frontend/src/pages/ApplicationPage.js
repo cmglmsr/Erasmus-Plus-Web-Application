@@ -1,38 +1,50 @@
-import ProfileAction from "../components/common/ProfileAction";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ApplicationDetails from "../components/ApplicationPage/ApplicationDetails";
-import { useEffect } from "react";
+import ProfileSummary from "../components/common/ProfileSummary";
+import ActionButtons from "../components/common/ActionButtons";
+import { useContext } from "react";
+import StudentContext from "../context/StudentContext/StudentContext";
 
-const DUMMY_APPLICATION = {
-  id: "1",
-  email: "elifsena.oz@ug.bilkent.edu.tr",
-  address: "Döşemealtı / Antalya",
-  phone: "+905056547992",
-};
+function ApplicationPage() {
+  const [studentData, role, application] = useContext(StudentContext);
 
-function Application(props) {
-
-  function onApplicationSubmitHandler(applicationData) {
-    fetch(
-      "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
-      {
-        method: "POST",
-        body: JSON.stringify(applicationData),
-      }
-    );
-  }
   return (
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-          <ProfileAction profile={props.profile} />
+          <Row>
+            <ProfileSummary
+              name={studentData.name}
+              surname={studentData.surname}
+              role={role}
+              term={studentData.term}
+              bilkentId={studentData.bilkentId}
+              image={studentData.image}
+              department={studentData.department}
+            />
+          </Row>
+          <Row className="my-4">
+            <ActionButtons role={role} />
+          </Row>
         </Col>
         <Col className="mx-4">
-          <ApplicationDetails application={DUMMY_APPLICATION} onApplicationSubmit={onApplicationSubmitHandler}/>
+          <ApplicationDetails
+            phoneNumber={studentData.phoneNumber}
+            mail={studentData.mail}
+            address={studentData.address}
+            first={application.pref1}
+            second={application.pref2}
+            third={application.pref3}
+            fourth={application.pref4}
+            fifth={application.pref5}
+            status={application.status}
+            term={application.term}
+            cv="CEM DID NOT UPLOAD YOUR CV, THAT LAZY ASS BITCH"
+          />
         </Col>
       </Row>
     </section>
   );
 }
-export default Application;
+export default ApplicationPage;

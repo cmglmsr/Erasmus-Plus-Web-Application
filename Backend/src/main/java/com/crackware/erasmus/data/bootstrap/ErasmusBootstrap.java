@@ -1,0 +1,219 @@
+package com.crackware.erasmus.data.bootstrap;
+
+import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.model.Schedule;
+import com.crackware.erasmus.data.model.Student;
+import com.crackware.erasmus.data.model.Task;
+import com.crackware.erasmus.data.model.enums.Department;
+import com.crackware.erasmus.data.model.security.EnumRole;
+import com.crackware.erasmus.data.model.security.Role;
+import com.crackware.erasmus.data.model.security.User;
+import com.crackware.erasmus.data.repositories.CoordinatorRepository;
+import com.crackware.erasmus.data.repositories.ScheduleRepository;
+import com.crackware.erasmus.data.repositories.TaskRepository;
+import com.crackware.erasmus.data.repositories.security.RoleRepository;
+import com.crackware.erasmus.data.repositories.security.UserRepository;
+import com.crackware.erasmus.data.services.StudentService;
+import com.crackware.erasmus.data.services.ToDoListItemService;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+
+@Component
+public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+
+    private final StudentService studentService;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final CoordinatorRepository coordinatorRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final TaskRepository taskRepository;
+    private final ToDoListItemService toDoListItemService;
+
+    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository, ScheduleRepository scheduleRepository, TaskRepository taskRepository, ToDoListItemService toDoListItemService) {
+        this.studentService = studentService;
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+        this.coordinatorRepository = coordinatorRepository;
+        this.scheduleRepository = scheduleRepository;
+        this.taskRepository = taskRepository;
+        this.toDoListItemService = toDoListItemService;
+    }
+
+    @Override
+    @Transactional
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        // set schedule
+        Schedule schedule = new Schedule();
+        Task task = new Task();
+        task.setDate("18.12.2022");
+        task.setDone(false);
+        task.setDescription("ereni sikme günü");
+        task.setDueDate("18.12.2022");
+        schedule.addItem(task);
+        taskRepository.save(task);
+        scheduleRepository.save(schedule);
+
+        // set roles
+        Role sRole = new Role();
+        Role cRole = new Role();
+        cRole.setName(EnumRole.ROLE_COORDINATOR);
+        sRole.setName(EnumRole.ROLE_STUDENT);
+        roleRepository.save(sRole);
+        roleRepository.save(cRole);
+
+        // set users
+        User uCem = new User();
+        User uEren = new User();
+        User uElif = new User();
+        User uAsli = new User();
+        User uArda = new User();
+        User uCanAlkan = new User();
+        User uAysegulDuran = new User();
+        uCem.setEmail("cemg@hotmail.com");
+        uCem.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> cemRoles = new HashSet<>(); cemRoles.add(sRole);
+        uCem.setRoles(cemRoles);
+        userRepository.save(uCem);
+        uElif.setEmail("eoz@hotmail.com");
+        uElif.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> elifRoles = new HashSet<>(); elifRoles.add(sRole);
+        uElif.setRoles(elifRoles);
+        userRepository.save(uElif);
+        uEren.setEmail("eduran@hotmail.com");
+        uEren.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> erenRoles = new HashSet<>(); erenRoles.add(sRole);
+        uEren.setRoles(erenRoles);
+        userRepository.save(uEren);
+        uAsli.setEmail("akaraman@hotmail.com");
+        uAsli.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> asliRoles = new HashSet<>(); asliRoles.add(sRole);
+        uAsli.setRoles(asliRoles);
+        userRepository.save(uAsli);
+        uArda.setEmail("ayildiz@hotmail.com");
+        uArda.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> ardaRoles = new HashSet<>(); ardaRoles.add(sRole);
+        uArda.setRoles(ardaRoles);
+        userRepository.save(uArda);
+        uCanAlkan.setEmail("calkan@hotmail.com");
+        uCanAlkan.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> calkanRoles = new HashSet<>(); calkanRoles.add(cRole);
+        uCanAlkan.setRoles(calkanRoles);
+        userRepository.save(uCanAlkan);
+        uAysegulDuran.setEmail("aduran@hotmail.com");
+        uAysegulDuran.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> aduranRoles = new HashSet<>(); aduranRoles.add(cRole);
+        uAysegulDuran.setRoles(aduranRoles);
+        userRepository.save(uAysegulDuran);
+
+        // set students
+        Student cem = new Student();
+        Student eren = new Student();
+        Student elif = new Student();
+        Student asli = new Student();
+        Student arda = new Student();
+        cem.setDateOfBirth("23.04.2001");
+        cem.setMail("cemg@hotmail.com");
+        cem.setName("Cem");
+        cem.setSurname("Gülümser");
+        cem.setAddress("Izmir/Göztepe");
+        cem.setBilkentId("22003430");
+        cem.setCgpa("3.63");
+        cem.setDepartment(Department.CS);
+        cem.setEng101grade("A");
+        cem.setEng102grade("A");
+        cem.setGender("Male");
+        cem.setNationalID("41266758526");
+        cem.setPhoneNumber("905376314257");
+        cem.setTerm(5);
+        cem.setRole(sRole);
+        cem.setSchedule(schedule);
+        studentService.save(cem);
+        eren.setDateOfBirth("21.02.2001");
+        eren.setMail("eduran@hotmail.com");
+        eren.setName("Eren");
+        eren.setSurname("Duran");
+        eren.setAddress("Ankara/Yenimahalle");
+        eren.setBilkentId("22003932");
+        eren.setCgpa("3.31");
+        eren.setDepartment(Department.CS);
+        eren.setEng101grade("A");
+        eren.setEng102grade("B");
+        eren.setGender("Male");
+        eren.setNationalID("12312312321");
+        eren.setPhoneNumber("905314258778");
+        eren.setTerm(5);
+        eren.setRole(sRole);
+        studentService.save(eren);
+        elif.setDateOfBirth("25.06.2001");
+        elif.setMail("eoz@hotmail.com");
+        elif.setName("Elif");
+        elif.setSurname("Öz");
+        elif.setAddress("Antalya/Döşemealtı");
+        elif.setBilkentId("22004141");
+        elif.setCgpa("3.98");
+        elif.setDepartment(Department.CS);
+        elif.setEng101grade("A");
+        elif.setEng102grade("A");
+        elif.setGender("Female");
+        elif.setNationalID("12312312321");
+        elif.setPhoneNumber("905314258778");
+        elif.setTerm(5);
+        elif.setRole(sRole);
+        studentService.save(elif);
+        asli.setDateOfBirth("13.06.2001");
+        asli.setMail("akaraman@hotmail.com");
+        asli.setName("Asli");
+        asli.setSurname("Karaman");
+        asli.setAddress("Ankara/Cayyolu");
+        asli.setBilkentId("22002121");
+        asli.setCgpa("3.40");
+        asli.setDepartment(Department.CS);
+        asli.setEng101grade("A");
+        asli.setEng102grade("B-");
+        asli.setGender("Female");
+        asli.setNationalID("34534565754");
+        asli.setPhoneNumber("905314258778");
+        asli.setTerm(5);
+        asli.setRole(sRole);
+        studentService.save(asli);
+        arda.setDateOfBirth("11.03.2001");
+        arda.setMail("ayildiz@hotmail.com");
+        arda.setName("Arda");
+        arda.setSurname("Yıldız");
+        arda.setAddress("Ankara/Cayyolu");
+        arda.setBilkentId("22001111");
+        arda.setCgpa("3.50");
+        arda.setDepartment(Department.CS);
+        arda.setEng101grade("B-");
+        arda.setEng102grade("B-");
+        arda.setGender("Male");
+        arda.setNationalID("14614668965");
+        arda.setPhoneNumber("905314258778");
+        arda.setTerm(5);
+        arda.setRole(sRole);
+        studentService.save(arda);
+
+        // set coordinators
+        Coordinator calkan = new Coordinator();
+        calkan.setDepartment(Department.CS);
+        calkan.setRole(cRole);
+        calkan.setMail("calkan@hotmail.com");
+        calkan.setName("Can");
+        calkan.setSurname("Alkan");
+        calkan.setDateOfBirth("21.04.1980");
+        coordinatorRepository.save(calkan);
+        Coordinator aduran = new Coordinator();
+        aduran.setDepartment(Department.CS);
+        aduran.setRole(cRole);
+        aduran.setMail("aduran@hotmail.com");
+        aduran.setName("Ayşegül");
+        aduran.setSurname("Duran");
+        aduran.setDateOfBirth("21.04.1985");
+        coordinatorRepository.save(aduran);
+    }
+}

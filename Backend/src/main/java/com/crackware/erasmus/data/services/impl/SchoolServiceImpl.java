@@ -43,4 +43,8 @@ public class SchoolServiceImpl implements SchoolService {
     public void deleteById(Long aLong) {
         schoolRepository.deleteById(aLong);
     }
+
+    @Override
+    public void deleteAll() { schoolRepository.deleteAll();}
+
 }

@@ -2,15 +2,15 @@ package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.services.helper.ExcelHelper;
 import com.crackware.erasmus.data.services.helper.ExcelService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.crackware.erasmus.data.services.helper.SchoolsHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.io.FileNotFoundException;
 
 
 @Controller
@@ -21,7 +21,7 @@ public class TestController {
     private final ExcelService fileService;
 
 
-    public TestController(ExcelService fileService) {
+    public TestController(ExcelService fileService, SchoolsHelper sh) {
         this.fileService = fileService;
     }
 
