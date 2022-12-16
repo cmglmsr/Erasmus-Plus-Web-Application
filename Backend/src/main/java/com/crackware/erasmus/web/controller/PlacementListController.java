@@ -5,6 +5,7 @@ import com.crackware.erasmus.data.model.Application;
 import com.crackware.erasmus.data.model.PlacementList;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.services.ApplicationService;
+import com.crackware.erasmus.data.services.PlacementListService;
 import com.crackware.erasmus.data.services.helper.PlacementService;
 import com.crackware.erasmus.data.services.impl.PlacementListServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -23,15 +24,18 @@ import java.util.Set;
 @RequestMapping({ "/coordinator/placements"})
 public class PlacementListController {
     private final PlacementService placementService;
-    private final PlacementListServiceImpl placementListService;
+    private final PlacementListService placementListService;
 
-    public PlacementListController(PlacementService placementService, PlacementListServiceImpl placementListService) {
+    private final ApplicationService applicationService;
+
+    public PlacementListController(PlacementService placementService, PlacementListService placementListService, ApplicationService applicationService) {
         this.placementService = placementService;
         this.placementListService = placementListService;
+        this.applicationService = applicationService;
     }
 
-    @GetMapping("/finalize")
-    public void finalizePlacements() {
+    @GetMapping("/create")
+    public void makePlacements() {
         placementService.finalizePlacements();
     }
 
@@ -47,4 +51,19 @@ public class PlacementListController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
     }
+
+    @GetMapping("/finalize")
+    public void finalizePlacements(){
+        ArrayList<PlacementList> placementLists = new ArrayList<>();
+        placementLists.addAll(placementListService.findAll());
+        PlacementList placementList = placementLists.get(0);
+
+        for (Application application: placementList.getApplications()){
+            if (application.getStatus() == Status.APPROVED){
+                application.setStatus(Status.FINALIZED);
+                applicationService.save(application);
+            }
+        }
+    }
+
 }
