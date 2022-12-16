@@ -15,9 +15,9 @@ import StudentContextLayout from "./context/StudentContext/StudentContextLayout"
 import CoordinatorContextLayout from "./context/CoordinatorContext/CoordinatorContextLayout";
 import StudentProfile from "./pages/Student/StudentProfile";
 import CoordinatorProfile from "./pages/Coordinator/CoordinatorProfile";
-import CreateApplication from "./pages/CreateApplication";
-import ApplicationContextLayout from "./context/ApplicationContext/ApplicationContextLayout";
+import CreateApplication from "./pages/Student/CreateApplication";
 import ApplicationSchoolContextLayout from "./context/ApplicationContext/ApplicationSchoolContextLayout";
+import ManageApplication from "./pages/Student/ManageApplication";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -97,13 +97,18 @@ function App() {
               exact={true}
               element={<CreateApplication />}
             ></Route>
-            <Route element={<ApplicationContextLayout />}>
-              <Route
-                path="/student/getApplication"
-                exact={true}
-                element={<ApplicationPage />}
-              ></Route>
-            </Route>
+
+            <Route
+              path="/student/getApplication"
+              exact={true}
+              element={<ApplicationPage />}
+            ></Route>
+
+            <Route
+              path="/student/manageApplication"
+              exact={true}
+              element={<ManageApplication />}
+            ></Route>
           </Route>
         </Route>
 

@@ -52,5 +52,7 @@ public class Application {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private String term;
+
     private Date date;
 }

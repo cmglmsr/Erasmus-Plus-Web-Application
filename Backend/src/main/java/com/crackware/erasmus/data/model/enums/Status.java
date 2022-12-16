@@ -2,6 +2,7 @@ package com.crackware.erasmus.data.model.enums;
 
 public enum Status {
     CV,
+    PENDING,
     APPROVED,
     MANAGED,
     FINALIZED,

@@ -18,6 +18,7 @@ public class SchoolsHelper {
 
     public SchoolsHelper(SchoolService schoolService) {
         this.schoolService = schoolService;
+        this.setSchoolRepository();
     }
 
     private HashSet<DepartmentQuota> newSet() {

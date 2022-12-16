@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
+import { useNavigate} from 'react-router-dom';
 
 const timePeriod = {
   1: "Fall Semester",
@@ -26,6 +27,23 @@ const ApplicationDetails = ({
   cv,
 }) => {
   var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
+  const navigate = useNavigate();
+
+  function onDelete() {
+    fetch("http://localhost:8080/student/deleteApplication", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: document.cookie,
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        window.confirm("Application Deleted");
+        navigate('/student/home');
+      }
+    });
+  }
   return (
     <Card>
       <Form className="form">
@@ -89,12 +107,20 @@ const ApplicationDetails = ({
             </tr>
           </tbody>
         </Table>
-        <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail" >
+        <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Col className="text-center">
-            <Button variant="primary" className="button-default mx-3">
+            <Button
+              variant="primary"
+              className="button-default mx-3"
+              href="/student/manageApplication"
+            >
               Manage Application
             </Button>
-            <Button variant="primary" className="btn-danger  mx-3">
+            <Button
+              variant="primary"
+              className="btn-danger mx-3"
+              onClick={onDelete}
+            >
               Delete Application
             </Button>
           </Col>

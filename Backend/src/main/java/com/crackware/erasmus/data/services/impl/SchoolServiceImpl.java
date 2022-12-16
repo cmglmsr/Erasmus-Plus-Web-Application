@@ -46,4 +46,5 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public void deleteAll() { schoolRepository.deleteAll();}
+
 }
