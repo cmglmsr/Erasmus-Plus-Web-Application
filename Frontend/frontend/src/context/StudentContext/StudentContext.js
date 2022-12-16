@@ -36,6 +36,7 @@ export const StudentProvider = ({ children }) => {
           "pref4id" : data.application.school4.id,
           "pref5" : data.application.school5.name,
           "pref5id" : data.application.school5.id,
+          "term" : data.application.term,
           "status" : data.application.status,
         })
         localStorage.setItem("role", data.role.name);

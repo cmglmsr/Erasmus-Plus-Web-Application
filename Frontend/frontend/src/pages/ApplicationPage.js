@@ -40,7 +40,8 @@ function ApplicationPage() {
             fourth={application.pref4}
             fifth={application.pref5}
             status={application.status}
-            cv=""
+            term={application.term}
+            cv="CEM DID NOT UPLOAD YOUR CV, THAT LAZY ASS BITCH"
           />
         </Col>
       </Row>

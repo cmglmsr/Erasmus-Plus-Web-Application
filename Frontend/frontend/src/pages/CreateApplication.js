@@ -18,13 +18,16 @@ function CreateApplication() {
         body: JSON.stringify(applicationData),
         headers: {
           "Content-Type": "application/json",
-          "Cookie": document.cookie 
+          Cookie: document.cookie,
         },
       }
     ).then((response) => {
-      response.json().then((parsedJson) => {
-        console.log(parsedJson);
-      });
+      if (response.status == 200) {
+        response.json().then((parsedJson) => {
+          console.log(parsedJson);
+          window.location.href = "http://localhost:3000/student/getApplication";
+        });
+      }
     });
   }
   return (

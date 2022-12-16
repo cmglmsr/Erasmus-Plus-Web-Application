@@ -124,7 +124,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
                 value="1"
                 onChange={handleChange}
               />
-              <label className="form-check-label">Fal Semester Only</label>
+              <label className="form-check-label">Fall Semester Only</label>
             </div>
             <div className="form-check">
               <input
@@ -144,7 +144,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
                 value="3"
                 onChange={handleChange}
               />
-              <label className="form-check-label">Fal & Spring Semesters</label>
+              <label className="form-check-label">Fall & Spring Semesters</label>
             </div>
           </Col>
         </Form.Group>

@@ -1,15 +1,19 @@
-
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 import Form from "react-bootstrap/Form";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
 
+const timePeriod = {
+  1: "Fall Semester",
+  2: "Spring Semester",
+  3: "Fall & Spring Semester",
+};
 const ApplicationDetails = ({
   mail,
   address,
   phoneNumber,
-  timePeriod,
+  term,
   first,
   second,
   third,
@@ -42,17 +46,27 @@ const ApplicationDetails = ({
             </tr>
           </tbody>
         </Table>
+        <h6>Status</h6>
+        <hr className={classes.simple} />
+        <Table>
+          <tbody>
+            <tr>
+              <td>Status</td>
+              <td>{status}</td>
+            </tr>
+          </tbody>
+        </Table>
         <h6>Erasmus Preferences</h6>
         <hr className={classes.simple} />
         <Table>
           <tbody>
-          <tr>
+            <tr>
               <td>Status</td>
               <td>{status}</td>
             </tr>
             <tr>
               <td>Time Period</td>
-              <td>{timePeriod}</td>
+              <td>{timePeriod[term]}</td>
             </tr>
             <tr>
               <td>1st Preference</td>
