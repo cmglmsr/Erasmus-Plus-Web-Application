@@ -30,14 +30,17 @@ public class CoordinatorController {
 
     private final ScheduleService scheduleService;
 
+    private final DocumentService documentService;
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService) {
+
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService) {
         this.coordinatorService = coordinatorService;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
         this.taskService = taskService;
         this.toDoListItemService = toDoListItemService;
         this.scheduleService = scheduleService;
+        this.documentService = documentService;
     }
 
     @GetMapping("/home")
@@ -49,7 +52,7 @@ public class CoordinatorController {
         return (Coordinator) helperService.getUser();
     }
 
-    @PostMapping("/home")
+    @PostMapping("/approve")
     public void approveLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
@@ -58,12 +61,13 @@ public class CoordinatorController {
         Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
 
         // Save the document
-        //documentServiceSave.save(learningAgreementDocument);
+        documentService.save(learningAgreementDocument);
         // Print out an approved message
         System.out.println("[+] Learning agreement file approved.");
     }
 
 
+    @PostMapping("/reject")
     public void rejectLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
@@ -72,7 +76,7 @@ public class CoordinatorController {
         Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
 
         // Save the document
-        //documentServiceSave.save(learningAgreementDocument);
+        documentService.save(learningAgreementDocument);
         // Print out an approved message
         System.out.println("[-] Learning agreement file rejected.");
     }

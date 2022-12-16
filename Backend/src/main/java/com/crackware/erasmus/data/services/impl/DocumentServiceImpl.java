@@ -3,10 +3,12 @@ package com.crackware.erasmus.data.services.impl;
 import com.crackware.erasmus.data.model.Document;
 import com.crackware.erasmus.data.repositories.DocumentRepository;
 import com.crackware.erasmus.data.services.DocumentService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class DocumentServiceImpl implements DocumentService {
 
     private final DocumentRepository documentRepository;
