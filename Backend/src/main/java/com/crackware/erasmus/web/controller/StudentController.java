@@ -93,7 +93,6 @@ public class StudentController {
             scheduleService.save(helperService.getUser().getSchedule());
             studentService.save((Student) helperService.getUser());
         }
-
     }
 
     @PostMapping("/upload/learningAgreement")

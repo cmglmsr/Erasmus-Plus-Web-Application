@@ -77,17 +77,6 @@ public class ApplicationsController {
        return ResponseEntity.status(HttpStatus.OK).body(r);
     }
 
-    @GetMapping("/applications")
-    public ResponseEntity<Set<ResponseApplication>> listApplications() {
-        Set<Application> applications = applicationService.findAll();
-        Set<ResponseApplication> responseApplications = new HashSet<>();
-        for(Application a : applications) {
-            ResponseApplication ra = new ResponseApplication(a);
-            responseApplications.add(ra);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
-    }
-
     @PostMapping("/manageApplication")
     public ResponseEntity<ResponseApplication> manageApplication(@RequestBody HashMap<String, Object> payload) {
         Student s = (Student) helperService.getUser();
