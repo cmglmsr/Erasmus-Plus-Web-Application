@@ -8,21 +8,22 @@ const timePeriod = {
   2: "Spring Semester",
   3: "Fall & Spring Semester",
 };
-const ApplicationDetailsCoordinator = ({
-  fullname,
-  id,
-  school,
-  status,
-  pref1,
-  pref2,
-  pref3,
-  pref4,
-  pref5,
-  term,
-  uid,
-  cgpa,
-}) => {
-  
+const ApplicationDetailsCoordinator = ({ application }) => {
+  const {
+    fullname,
+    id,
+    school,
+    status,
+    pref1,
+    pref2,
+    pref3,
+    pref4,
+    pref5,
+    term,
+    uid,
+    cgpa,
+  } = application[0];
+
   return (
     <Card>
       <Form className="form">

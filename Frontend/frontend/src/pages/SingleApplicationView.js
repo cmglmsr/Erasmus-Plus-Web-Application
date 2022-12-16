@@ -10,11 +10,11 @@ import ApplicationDetailsCoordinator from "../components/ApplicationPage/Applica
 
 function SingleApplicationView() {
   const [coordinatorData, role] = useContext(CoordinatorContext);
-  const applicationData = useContext(ApplicationListContext);
+  const {applicationList} = useContext(ApplicationListContext);
   const params = useParams();
-  const application = applicationData.filter(
+  const application = applicationList.filter(
     (application) => application.id === params.id
-  )[0];
+  );
 
   return (
     <section>
@@ -37,18 +37,7 @@ function SingleApplicationView() {
         </Col>
         <Col className="mx-3">
           <ApplicationDetailsCoordinator
-            fullname={application.fullname}
-            id={application.id}
-            school={application.school}
-            term={application.timePeriod}
-            status={application.status}
-            uid={application.uid}
-            pref1={application.pref1}
-            pref2={application.pref2}
-            pref3={application.pref3}
-            pref4={application.pref4}
-            pref5={application.pref5}
-            cgpa={application.cgpa}
+            application={application}
           />
         </Col>
       </Row>
