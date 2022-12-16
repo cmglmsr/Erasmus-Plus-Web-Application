@@ -5,19 +5,19 @@ import com.crackware.erasmus.data.model.School;
 import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.repositories.DepartmentQuotaRepository;
 import com.crackware.erasmus.data.repositories.SchoolRepository;
+import com.crackware.erasmus.data.services.SchoolService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class SchoolsHelper {
-    private final SchoolRepository schoolRepository;
-    private final DepartmentQuotaRepository departmentQuotaRepository;
+    private final SchoolService schoolService;
 
-    public SchoolsHelper(SchoolRepository schoolRepository, DepartmentQuotaRepository departmentQuotaRepository) {
-        this.schoolRepository = schoolRepository;
-        this.departmentQuotaRepository = departmentQuotaRepository;
+    public SchoolsHelper(SchoolService schoolService) {
+        this.schoolService = schoolService;
     }
 
     private HashSet<DepartmentQuota> newSet() {
@@ -38,14 +38,15 @@ public class SchoolsHelper {
         return s;
     }
 
-    public ArrayList<School> getSchools() {
-        return (ArrayList<School>) schoolRepository.findAll();
+    public Set<School> getSchools() {
+        return schoolService.findAll();
     }
 
-    public void setSchoolRepository() {
+    public boolean setSchoolRepository() {
         // TODO delete quotas, department quotas, schools
-        departmentQuotaRepository.deleteAll();
-        schoolRepository.deleteAll();
+        if(!getSchools().isEmpty()) {
+            return false;
+        }
         School s1 = new School();
         School s2 = new School();
         School s3 = new School();
@@ -109,20 +110,21 @@ public class SchoolsHelper {
         s14.setDepartmentQuotas(se14);
         s15.setDepartmentQuotas(se15);
 
-        schoolRepository.save(s1);
-        schoolRepository.save(s2);
-        schoolRepository.save(s3);
-        schoolRepository.save(s4);
-        schoolRepository.save(s5);
-        schoolRepository.save(s6);
-        schoolRepository.save(s7);
-        schoolRepository.save(s8);
-        schoolRepository.save(s9);
-        schoolRepository.save(s10);
-        schoolRepository.save(s11);
-        schoolRepository.save(s12);
-        schoolRepository.save(s13);
-        schoolRepository.save(s14);
-        schoolRepository.save(s15);
+        schoolService.save(s1);
+        schoolService.save(s2);
+        schoolService.save(s3);
+        schoolService.save(s4);
+        schoolService.save(s5);
+        schoolService.save(s6);
+        schoolService.save(s7);
+        schoolService.save(s8);
+        schoolService.save(s9);
+        schoolService.save(s10);
+        schoolService.save(s11);
+        schoolService.save(s12);
+        schoolService.save(s13);
+        schoolService.save(s14);
+        schoolService.save(s15);
+        return true;
     }
 }

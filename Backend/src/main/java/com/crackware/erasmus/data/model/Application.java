@@ -2,6 +2,7 @@ package com.crackware.erasmus.data.model;
 
 import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.model.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,8 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
+    @JsonIgnore
     private Student student;
 
     @Enumerated(EnumType.STRING)
