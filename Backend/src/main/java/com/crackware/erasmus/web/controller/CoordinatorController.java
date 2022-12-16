@@ -52,7 +52,7 @@ public class CoordinatorController {
         return (Coordinator) helperService.getUser();
     }
 
-    @PostMapping("/home")
+    @PostMapping("/approve")
     public void approveLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
@@ -67,6 +67,7 @@ public class CoordinatorController {
     }
 
 
+    @PostMapping("/reject")
     public void rejectLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
