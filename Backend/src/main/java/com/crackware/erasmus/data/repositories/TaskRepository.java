@@ -4,4 +4,5 @@ import com.crackware.erasmus.data.model.Task;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TaskRepository extends CrudRepository<Task, Long> {
+    public void deleteAllByDescriptionAndDueDate(String description, String dueDate);
 }

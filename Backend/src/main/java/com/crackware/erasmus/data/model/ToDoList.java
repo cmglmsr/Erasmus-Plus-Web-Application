@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,11 +16,14 @@ public class ToDoList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<ToDoListItem> itemSet;
 
-    public void addItem(ToDoListItem item){
-        this.itemSet.add(item);
+    public void addItem(ToDoListItem toDoListItem){
+        if (itemSet != null && !itemSet.contains(toDoListItem)){
+            itemSet.add(toDoListItem);
+        }
     }
+
 
 }

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,10 +19,12 @@ public class Schedule {
     private Long id;
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Task> tasks;
 
-    public void addItem(Task item){
-        this.tasks.add(item);
+    public void addItem(Task task){
+        if (tasks != null && !tasks.contains(task)){
+            tasks.add(task);
+        }
     }
 }
