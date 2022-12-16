@@ -8,10 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
 @Getter
 @Setter
-public class Course {
+@Entity
+public class WishlistCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,4 +19,5 @@ public class Course {
     private String hostUniversityName;
     private String department;
     private String courseCode;
+    private String link;
 }

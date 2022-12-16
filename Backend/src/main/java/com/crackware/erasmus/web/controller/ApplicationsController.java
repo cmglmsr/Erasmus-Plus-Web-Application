@@ -54,11 +54,11 @@ public class ApplicationsController {
         * */
         System.out.println(payload);
         application.setPoints(student.calculatePoints());
-        application.setSchool1(schoolService.findById(Long.valueOf((int)payload.get("pref1"))));
-        application.setSchool2(schoolService.findById(Long.valueOf((int)payload.get("pref2"))));
-        application.setSchool3(schoolService.findById(Long.valueOf((int)payload.get("pref3"))));
-        application.setSchool4(schoolService.findById(Long.valueOf((int)payload.get("pref4"))));
-        application.setSchool5(schoolService.findById(Long.valueOf((int)payload.get("pref5"))));
+        application.setSchool1(schoolService.findById(Long.valueOf((String)payload.get("pref1"))));
+        application.setSchool2(schoolService.findById(Long.valueOf((String)payload.get("pref2"))));
+        application.setSchool3(schoolService.findById(Long.valueOf((String)payload.get("pref3"))));
+        application.setSchool4(schoolService.findById(Long.valueOf((String)payload.get("pref4"))));
+        application.setSchool5(schoolService.findById(Long.valueOf((String)payload.get("pref5"))));
         application.setStudent(student);
         student.setApplication(application);
         applicationService.save(application);
