@@ -5,6 +5,7 @@ import com.crackware.erasmus.data.message.ResponseSchools;
 import com.crackware.erasmus.data.model.Application;
 import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.School;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.services.ApplicationService;
 import com.crackware.erasmus.data.services.SchoolService;
 import com.crackware.erasmus.data.services.helper.HelperService;
@@ -111,6 +112,7 @@ public class ApplicationsController {
                 a.setSchool5(schoolService.findById(Long.valueOf((int)payload.get("pref5"))));
             }
         }
+        a.setStatus(Status.MANAGED);
         applicationService.save(a);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
     }

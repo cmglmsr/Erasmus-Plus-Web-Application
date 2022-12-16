@@ -19,7 +19,7 @@ import java.io.IOException;
 public class CoordinatorController {
 
     private final CoordinatorService coordinatorService;
-    //private final DocumentServiceImpl documentServiceSave;
+
     private final HelperService helperService;
 
     private final ToDoListService toDoListService;
@@ -33,7 +33,6 @@ public class CoordinatorController {
 
     public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService) {
         this.coordinatorService = coordinatorService;
-        //this.documentServiceSave = documentServiceSave;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
         this.taskService = taskService;
