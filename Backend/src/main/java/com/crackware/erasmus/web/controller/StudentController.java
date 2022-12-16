@@ -37,7 +37,7 @@ public class StudentController {
         this.scheduleService = scheduleService;
     }
     @GetMapping("/home")
-    public Student studentHome(){
+    public Student studentHome() {
         return (Student) helperService.getUser();
     }
     @GetMapping("/profile")
