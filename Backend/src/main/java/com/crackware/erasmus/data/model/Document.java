@@ -16,10 +16,11 @@ public class Document {
     private String name;
     private String type;
     private Status documentStatus;
+
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Lob
     private byte[] data;
 
