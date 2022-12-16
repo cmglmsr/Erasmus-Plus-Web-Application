@@ -16,7 +16,7 @@ function ApplicationList() {
       <div className={classes.scrollable}>
         <Table>
           <thead>
-            <tr>
+            <tr key="head">
               <th>Fullname</th>
               <th>ID </th>
               <th>CGPA</th>
