@@ -20,18 +20,18 @@ public class FileUploadServiceImpl implements FileUploadService {
     public FileUploadServiceImpl(DocumentRepository documentRepository) {
         this.documentRepository = documentRepository;
     }
-
+    @Override
     public Document store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Document FileDB = new Document(fileName, file.getContentType(), file.getBytes(), Status.WAITING_COORDINATOR);
 
         return documentRepository.save(FileDB);
     }
-
+    @Override
     public Document getFile(Long id) {
         return documentRepository.findById(id).get();
     }
-
+    @Override
     public Stream<Document> getAllFiles() {
         return (Stream<Document>) documentRepository.findAll();
     }
