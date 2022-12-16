@@ -82,8 +82,6 @@ public class FacultyBoardMemberController {
             toDoListService.save(helperService.getUser().getToDoList());
             facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
         }
-
-
     }
 
     @PostMapping("/schedule")
@@ -106,8 +104,6 @@ public class FacultyBoardMemberController {
             scheduleService.save(helperService.getUser().getSchedule());
             facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
         }
-
-
     }
 
     @PostMapping("/preapproval/approve/{id}")
@@ -115,11 +111,9 @@ public class FacultyBoardMemberController {
         Document document = documentService.findById(Long.valueOf(id));
         document.setDocumentStatus(Status.APPROVED);
         documentService.save(document);
-
     }
 
-
-    @PostMapping("/preapproval/reject{id}")
+    @PostMapping("/preapproval/reject/{id}")
     public void rejectPreApproval(@PathVariable String id){
         Document document = documentService.findById(Long.valueOf(id));
         document.setDocumentStatus(Status.DENIED);
