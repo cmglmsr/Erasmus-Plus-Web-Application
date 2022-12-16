@@ -140,7 +140,6 @@ public class CoordinatorController {
                 responseFiles.add(rf);
             }
         }
-        a
         return ResponseEntity.status(HttpStatus.OK).body(responseFiles);
     }
 
