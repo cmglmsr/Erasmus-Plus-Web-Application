@@ -30,19 +30,21 @@ const ApplicationDetails = ({
   const navigate = useNavigate();
 
   function onDelete() {
-    fetch("http://localhost:8080/student/deleteApplication", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: document.cookie,
-      },
-    }).then((response) => {
-      if (response.status === 200) {
-        window.confirm("Application Deleted");
-        navigate('/student/home');
-      }
-    });
+    if (window.confirm("Are you sure?")) {
+      fetch("http://localhost:8080/student/deleteApplication", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: document.cookie,
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          window.confirm("Application Deleted");
+          navigate('/student/home');
+        }
+      });
+    }
   }
   return (
     <Card>
