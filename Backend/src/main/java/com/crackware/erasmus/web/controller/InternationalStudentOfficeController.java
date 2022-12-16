@@ -53,7 +53,7 @@ public class InternationalStudentOfficeController {
     }
 
     @PostMapping("/home")
-    public void uploadFile(@RequestParam("transcript") MultipartFile transcript) throws IOException {
+    public void uploadTranscript(@RequestParam("transcript") MultipartFile transcript) throws IOException {
         try {
             fileUploadService.store(transcript);
             System.out.println("[+] Transcript upload successful.");

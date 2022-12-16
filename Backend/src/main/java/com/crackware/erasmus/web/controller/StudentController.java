@@ -7,9 +7,12 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
+import com.crackware.erasmus.data.services.impl.FileUploadServiceImpl;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @CrossOrigin(origins = "localhost://", maxAge = 3600)
 @RestController
@@ -28,13 +31,16 @@ public class StudentController {
 
     private final ScheduleService scheduleService;
 
-    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService) {
+    private final FileUploadServiceImpl fileUploadService;
+
+    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, FileUploadServiceImpl fileUploadService) {
         this.helperService = helperService;
         this.studentService = studentService;
         this.toDoListService = toDoListService;
         this.toDoListItemService = toDoListItemService;
         this.taskService = taskService;
         this.scheduleService = scheduleService;
+        this.fileUploadService = fileUploadService;
     }
     @GetMapping("/home")
     public Student studentHome() {
@@ -89,6 +95,16 @@ public class StudentController {
             studentService.save((Student) helperService.getUser());
         }
 
+    }
+
+    @PostMapping("/submitLearningAgreement")
+    public void submitLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreement) throws IOException {
+        try {
+            fileUploadService.store(learningAgreement);
+            System.out.println("[+] Learning agreement upload successful.");
+        } catch (IOException e) {
+            System.out.println("[-] Learning agreement upload failed.");
+        }
     }
 }
 
