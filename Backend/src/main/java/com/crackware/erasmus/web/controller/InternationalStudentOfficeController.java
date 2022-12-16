@@ -7,7 +7,6 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
-import com.crackware.erasmus.data.services.impl.FileUploadServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class InternationalStudentOfficeController {
 
     private final HelperService helperService;
-    private final FileUploadServiceImpl fileUploadService;
+    private final DocumentService documentService;
 
     private final ToDoListService toDoListService;
 
@@ -32,11 +31,12 @@ public class InternationalStudentOfficeController {
     private final InternationalStudentOfficeService isoService;
     public InternationalStudentOfficeController(HelperService helperService, StudentService studentService,
                                                 InternationalStudentOfficeService isoService,
-                                                FileUploadServiceImpl fileUploadService,
-                                                ToDoListService toDoListService, ScheduleService scheduleService, TaskService taskService, ToDoListItemService toDoListItemService) {
+                                                DocumentService documentService,
+                                                ToDoListService toDoListService, ScheduleService scheduleService,
+                                                TaskService taskService, ToDoListItemService toDoListItemService) {
         this.helperService = helperService;
         this.isoService = isoService;
-        this.fileUploadService = fileUploadService;
+        this.documentService = documentService;
         this.toDoListService = toDoListService;
         this.scheduleService = scheduleService;
         this.taskService = taskService;
@@ -52,14 +52,13 @@ public class InternationalStudentOfficeController {
         return (InternationalStudentOffice) helperService.getUser();
     }
 
-    @PostMapping("/home")
+    @PostMapping("/upload/transcript")
     public void uploadTranscript(@RequestParam("transcript") MultipartFile transcript) throws IOException {
-        try {
-            fileUploadService.store(transcript);
-            System.out.println("[+] Transcript upload successful.");
-        } catch (IOException e) {
-            System.out.println("[-] Transcript upload failed.");
-        }
+        Document document = new Document();
+        document.setType(transcript.getContentType());
+        document.setName(transcript.getName());
+        document.setData(transcript.getBytes());
+        documentService.save(document);
     }
 
     @PostMapping("/todolist")

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +34,7 @@ public class CoordinatorController {
     private final ScheduleService scheduleService;
 
     private final DocumentService documentService;
+
 
 
     public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService) {
@@ -114,7 +116,14 @@ public class CoordinatorController {
 
     @GetMapping("/learningAgreements")
     public Set<Document> getAgreements(){
-        return new HashSet<>(documentService.findAll());
+        ArrayList<Document> documents = new ArrayList<>(documentService.findAll());
+        HashSet<Document> learningAgreements = new HashSet<>();
+        for (Document document : documents) {
+            if (document.getType() == "learningAgreement") {
+                learningAgreements.add(document);
+            }
+        }
+        return learningAgreements;
     }
 
 }

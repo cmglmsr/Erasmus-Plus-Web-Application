@@ -103,6 +103,9 @@ public class StudentController {
             learning.setType(learningAgreement.getContentType());
             learning.setData(learningAgreement.getBytes());
             documentService.save(learning);
+            Student curr = (Student) helperService.getUser();
+            curr.setLearningAgreement(learning);
+            studentService.save(curr);
     }
 
     @GetMapping("learningAgreement")
@@ -118,6 +121,9 @@ public class StudentController {
         preApproval.setType(preApprovalFile.getContentType());
         preApproval.setName(preApprovalFile.getName());
         documentService.save(preApproval);
+        Student curr = (Student) helperService.getUser();
+        curr.setPreApproval(preApproval);
+        studentService.save(curr);
     }
 
     @GetMapping("/preapproval")
