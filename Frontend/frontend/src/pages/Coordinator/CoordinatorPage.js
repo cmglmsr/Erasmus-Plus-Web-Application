@@ -7,7 +7,7 @@ import ActionButtons from "../../components/common/ActionButtons";
 import CoordinatorContext from "../../context/CoordinatorContext/CoordinatorContext";
 
 function CoordinatorPage() {
-  const coordinatorData = useContext(CoordinatorContext);
+  const [coordinatorData, role] = useContext(CoordinatorContext);
 
   console.log(coordinatorData);
   return (
@@ -18,7 +18,7 @@ function CoordinatorPage() {
             <ProfileSummary
               name={coordinatorData.name}
               surname={coordinatorData.surname}
-              role={coordinatorData.role}
+              role={role}
               term=""
               id={coordinatorData.bilkentId}
               image={coordinatorData.image}
@@ -26,7 +26,7 @@ function CoordinatorPage() {
             />
           </Row>
           <Row className="my-4">
-            <ActionButtons role={coordinatorData.role} />
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">

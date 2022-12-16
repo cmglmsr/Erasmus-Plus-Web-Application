@@ -65,11 +65,6 @@ function App() {
           element={<InternationalStudentOfficePage />}
         ></Route>
         <Route
-          path="/coordinator/home"
-          exact={true}
-          element={<CoordinatorPage />}
-        ></Route>
-        <Route
           path="/instructor/home"
           exact={true}
           element={<CoordinatorPage />}

@@ -22,6 +22,7 @@ export const CoordinatorProvider = ({ children }) => {
 
     fetch(API, requestOptions).then((res) =>
       res.json().then((data) => {
+        console.log("dataaaaaaaaaaaaa" + data);
         setcoordinatorData(data);
         setRole(data.role.name);
       })
