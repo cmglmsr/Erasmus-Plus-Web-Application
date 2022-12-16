@@ -5,6 +5,7 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import { useContext } from "react";
 import StudentContext from "../context/StudentContext/StudentContext";
+import ApplicationContext from "../context/ApplicationContext/ApplicationContext";
 
 function ApplicationPage() {
   const [studentData, role] = useContext(StudentContext);

@@ -9,7 +9,6 @@ import { useContext } from "react";
 function CreateApplication() {
   const [studentData, role] = useContext(StudentContext);
 
-  console.log("ApppplicationPage");
   function onApplicationSubmitHandler(applicationData) {
     fetch(
       "http://localhost:8080/student/createApplication", //enter api address
