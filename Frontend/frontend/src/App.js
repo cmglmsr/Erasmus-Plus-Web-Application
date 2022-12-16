@@ -65,7 +65,6 @@ function App() {
           path="/viewProfile"
           exact={true}
           element={<ViewProfile profile={DUMMY_PROFILE} />}
-
         ></Route>
         <Route element={<StudentContextLayout />}>
           <Route
@@ -113,13 +112,14 @@ function App() {
           ></Route>
           <Route element={<ApplicationListContextLayout />}>
             <Route
+              path="/coordinator/applications/:id"
+              exact={true}
+              element={<SingleApplicationView />}
+            ></Route>
+            <Route
               path="/coordinator/applications"
               exact={true}
               element={<ApplicationListPage />}
-            ></Route>
-            <Route
-              path="/coordinator/applications/:id"
-              element={<SingleApplicationView />}
             ></Route>
           </Route>
         </Route>

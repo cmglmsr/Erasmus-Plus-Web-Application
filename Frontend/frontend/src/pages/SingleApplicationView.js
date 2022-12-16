@@ -30,7 +30,7 @@ function SingleApplicationView() {
           </Row>
         </Col>
         <Col className="mx-3">
-          <ApplicationDetailsCoordinator          />
+          <ApplicationDetailsCoordinator/>
         </Col>
       </Row>
     </section>
