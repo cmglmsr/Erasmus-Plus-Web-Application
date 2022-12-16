@@ -97,13 +97,13 @@ function App() {
               exact={true}
               element={<CreateApplication />}
             ></Route>
-            </Route>
             <Route element={<ApplicationContextLayout />}>
               <Route
                 path="/student/getApplication"
                 exact={true}
                 element={<ApplicationPage />}
               ></Route>
+            </Route>
           </Route>
         </Route>
 
