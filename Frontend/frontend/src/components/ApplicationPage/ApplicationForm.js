@@ -3,25 +3,42 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
 import ApplicationSchoolsContext from "../../context/ApplicationContext/ApplicationSchoolsContext";
 
-const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
+const ApplicationForm = ({
+  mail,
+  address,
+  phoneNumber,
+  onApplicationSubmit,
+  manage,
+  first,
+  second,
+  third,
+  fourth,
+  fifth,
+  status,
+  term,
+}) => {
   var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
   const schoolData = useContext(ApplicationSchoolsContext);
+  var check1 = document.getElementById("check1");
+  var check2 = document.getElementById("check2");
+  var check3 = document.getElementById("check3");
 
-  const [pref1, setPref1] = useState("0");
-  const [pref2, setPref2] = useState("0");
-  const [pref3, setPref3] = useState("0");
-  const [pref4, setPref4] = useState("0");
-  const [pref5, setPref5] = useState("0");
+  const [pref1, setPref1] = useState();
+  const [pref2, setPref2] = useState();
+  const [pref3, setPref3] = useState();
+  const [pref4, setPref4] = useState();
+  const [pref5, setPref5] = useState();
   const [file, setFile] = useState();
-
+  const [isSubscribed, setIsSubscribed] = useState();
+  
   function handleFile(event) {
-    setFile(event.target.files[0])
+    setFile(event.target.files[0]);
   }
 
   const handleSelect = (event) => {
@@ -42,12 +59,8 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
     }
   };
 
-  const [isSubscribed, setIsSubscribed] = useState(true);
   const handleChange = (event) => {
     if (event.target.checked) {
-      var check1 = document.getElementById("check1");
-      var check2 = document.getElementById("check2");
-      var check3 = document.getElementById("check3");
       setIsSubscribed(event.target.value);
       if (event.target !== check1 && check1.checked === true) {
         document.getElementById("check1").click();
@@ -65,13 +78,13 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
     event.preventDefault();
 
     var applicationData = {
-      "term": isSubscribed,
-      "pref1" : pref1,
-      "pref2" : pref2,
-      "pref3" : pref3,
-      "pref4" : pref4,
-      "pref5" : pref5,
-    }
+      term: isSubscribed,
+      pref1: pref1,
+      pref2: pref2,
+      pref3: pref3,
+      pref4: pref4,
+      pref5: pref5,
+    };
 
     if (file) {
       applicationData["fileName"] = file.name;
@@ -108,11 +121,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
 
         <h6>Erasmus Preferences</h6>
         <hr className={classes.simple} />
-        <Form.Group
-          as={Row}
-          className="my-3"
-          controlId="preferredPeriod"
-        >
+        <Form.Group as={Row} className="my-3" controlId="preferredPeriod">
           <Col sm="3">Time Period</Col>
           <Col>
             <div className="form-check">
@@ -143,7 +152,9 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
                 value="3"
                 onChange={handleChange}
               />
-              <label className="form-check-label">Fall & Spring Semesters</label>
+              <label className="form-check-label">
+                Fall & Spring Semesters
+              </label>
             </div>
           </Col>
         </Form.Group>
@@ -168,7 +179,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref2} onChange={handleSelect} id="pref2">
-            <option key="0" value="0" />
+              <option key="0" value="0" />
               {schoolData.map((school) => (
                 <option key={school.id} value={school.id}>
                   {school.name}
@@ -183,7 +194,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref3} onChange={handleSelect} id="pref3">
-            <option key="0" value="0" />
+              <option key="0" value="0" />
               {schoolData.map((school) => (
                 <option key={school.id} value={school.id}>
                   {school.name}
@@ -198,7 +209,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref4} onChange={handleSelect} id="pref4">
-            <option key="0" value="0" />
+              <option key="0" value="0" />
               {schoolData.map((school) => (
                 <option key={school.id} value={school.id}>
                   {school.name}
@@ -213,7 +224,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref5} onChange={handleSelect} id="pref5">
-            <option key="0" value="0" />
+              <option key="0" value="0" />
               {schoolData.map((school) => (
                 <option key={school.id} value={school.id}>
                   {school.name}
@@ -230,7 +241,7 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
             CV
           </Form.Label>
           <Col>
-            <Form.Control type="file" onChange={handleFile}/>
+            <Form.Control type="file" onChange={handleFile} />
           </Col>
         </Form.Group>
 
@@ -244,6 +255,6 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
       </Form>
     </Card>
   );
-}
+};
 
 export default ApplicationForm;

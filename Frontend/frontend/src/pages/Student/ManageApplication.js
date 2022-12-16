@@ -1,19 +1,19 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ApplicationForm from "../components/ApplicationPage/ApplicationForm";
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import StudentContext from "../context/StudentContext/StudentContext";
+import ApplicationForm from "../../components/ApplicationPage/ApplicationForm";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import StudentContext from "../../context/StudentContext/StudentContext";
 import { useContext } from "react";
 import { useNavigate} from 'react-router-dom';
 
-function CreateApplication() {
+function ManageApplication() {
   const navigate = useNavigate();
-  const [studentData, role] = useContext(StudentContext);
+  const [studentData, role, application] = useContext(StudentContext);
 
   function onApplicationSubmitHandler(applicationData) {
     fetch(
-      "http://localhost:8080/student/createApplication", //enter api address
+      "http://localhost:8080/student/manageApplication", //enter api address
       {
         method: "POST",
         credentials: "include",
@@ -24,7 +24,8 @@ function CreateApplication() {
         },
       }
     ).then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
+        window.confirm("Application Updated");
         navigate('/student/getApplication');
       }
     });
@@ -53,6 +54,14 @@ function CreateApplication() {
             phoneNumber={studentData.phoneNumber}
             mail={studentData.mail}
             address={studentData.address}
+            manage={true}
+            first={application.pref1id}
+            second={application.pref2id}
+            third={application.pref3id}
+            fourth={application.pref4id}
+            fifth={application.pref5id}
+            status={application.status}
+            term={application.term}
             onApplicationSubmit={onApplicationSubmitHandler}
           />
         </Col>
@@ -60,4 +69,4 @@ function CreateApplication() {
     </section>
   );
 }
-export default CreateApplication;
+export default ManageApplication;

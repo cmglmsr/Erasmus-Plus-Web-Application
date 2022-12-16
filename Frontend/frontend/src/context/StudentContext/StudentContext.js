@@ -24,7 +24,7 @@ export const StudentProvider = ({ children }) => {
       res.json().then((data) => {
         setStudentData(data);
         setRole(data.role.name);
-        setApplication({
+        var application = {
           "id" : data.application.id,
           "pref1" : data.application.school1.name,
           "pref1id" : data.application.school1.id,
@@ -38,7 +38,8 @@ export const StudentProvider = ({ children }) => {
           "pref5id" : data.application.school5.id,
           "term" : data.application.term,
           "status" : data.application.status,
-        })
+        }
+        setApplication(application);
         localStorage.setItem("role", data.role.name);
       })
     ).catch((e) => {console.log(e);})

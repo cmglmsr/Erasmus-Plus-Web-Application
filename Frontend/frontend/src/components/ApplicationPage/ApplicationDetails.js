@@ -91,10 +91,10 @@ const ApplicationDetails = ({
         </Table>
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail" >
           <Col className="text-center">
-            <Button variant="primary" className="button-default mx-3">
+            <Button variant="primary" className="button-default mx-3" href="/student/manageApplication">
               Manage Application
             </Button>
-            <Button variant="primary" className="btn-danger  mx-3">
+            <Button variant="primary" className="btn-danger mx-3">
               Delete Application
             </Button>
           </Col>
