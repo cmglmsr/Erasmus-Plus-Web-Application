@@ -1,24 +1,24 @@
-import ProfileSummary from "../../components/common/ProfileSummary";
-import ActionButtons from "../../components/common/ActionButtons";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
-import Schedule from "../../components/HomePage/Schedule";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import ViewProfile from "../../components/ProfilePage/ViewProfile";
 import InstructorContext from "../../context/InstructorContext/InstructorContext";
 
-function Instructor() {
+function InstructoProfile() {
   const [instructorData, role] = useContext(InstructorContext);
-  console.log("instuctor ");
+    
   return (
     <section>
       <Row>
         <Col xs={3} className="mx-3">
-        <Row>
-            <ProfileSummary
+          <Row>
+          <ProfileSummary
               name={instructorData.name}
               surname={instructorData.surname}
               role={role}
-              term={instructorData.term}
+              term=""
               bilkentId={instructorData.bilkentId}
               image={instructorData.image}
               department={instructorData.department}
@@ -31,7 +31,18 @@ function Instructor() {
         <Col className="mx-4">
           <div>
             <Row className="my-3">
-              <Schedule />
+              <ViewProfile
+                name={instructorData.name}
+                surname={instructorData.surname}
+                phoneNumber={instructorData.phoneNumber}
+                mail={instructorData.mail}
+                dateOfBirth={instructorData.dateOfBirth}
+                gender={instructorData.gender}
+                cgpa={instructorData.cgpa}
+                nationalID={instructorData.nationalID}
+                eng101grade={instructorData.eng101grade}
+                eng102grade={instructorData.eng102grade}
+              />
             </Row>
           </div>
         </Col>
@@ -39,4 +50,4 @@ function Instructor() {
     </section>
   );
 }
-export default Instructor;
+export default InstructoProfile;

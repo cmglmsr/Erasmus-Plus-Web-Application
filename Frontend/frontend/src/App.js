@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import ProfilePage from "./pages/ProfilePage";
-import HomePage from "./pages/Homepage";
 import ApplicationPage from "./pages/ApplicationPage";
 import ApplicationListPage from "./pages/ApplicationListPage";
 import CoordinatorPage from "./pages/Coordinator/CoordinatorPage";
@@ -18,6 +17,10 @@ import CoordinatorProfile from "./pages/Coordinator/CoordinatorProfile";
 import CreateApplication from "./pages/Student/CreateApplication";
 import ApplicationSchoolContextLayout from "./context/ApplicationContext/ApplicationSchoolContextLayout";
 import ManageApplication from "./pages/Student/ManageApplication";
+import InstructorContextLayout from "./context/InstructorContext/InstructorContextLayout";
+import { Navigate } from 'react-router';
+import InstructorPage from "./pages/Instructor/InstructorPage";
+import InstructorProfile from "./pages/Instructor/InstructorProfile";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -38,11 +41,8 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route
-          path="/"
-          exact={true}
-          element={<HomePage profile={DUMMY_PROFILE} />}
-        ></Route>
+        <Route path="/" element={ <Navigate to="login" />}>
+        </Route>
         <Route path="/login" exact={true} element={<LoginPage />}></Route>
         <Route
           path="/profile"
@@ -63,11 +63,6 @@ function App() {
           path="/internationalStudentOffice/home"
           exact={true}
           element={<InternationalStudentOfficePage />}
-        ></Route>
-        <Route
-          path="/instructor/home"
-          exact={true}
-          element={<CoordinatorPage />}
         ></Route>
 
         <Route
@@ -117,6 +112,19 @@ function App() {
             path="/coordinator/profile"
             exact={true}
             element={<CoordinatorProfile />}
+          ></Route>
+        </Route>
+
+        <Route element={<InstructorContextLayout />}>
+          <Route
+            path="/instructor/home"
+            exact={true}
+            element={<InstructorPage />}
+          ></Route>
+          <Route
+            path="/instructor/profile"
+            exact={true}
+            element={<InstructorProfile />}
           ></Route>
         </Route>
       </Routes>

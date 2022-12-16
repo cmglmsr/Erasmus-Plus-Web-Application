@@ -7,7 +7,7 @@ export const ApplicationProvider = ({ children }) => {
   const [applicationList, setApplicationList] = useState([]);
 
   useEffect(() => {
-    var API = "http://localhost:8080/student/applicationList";
+    var API = "http://localhost:8080/coordinator/applications";
     var requestOptions = {
       method: "GET",
       redirect: "follow",
