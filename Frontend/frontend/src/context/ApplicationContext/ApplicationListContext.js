@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
-export const ApplicationContext = createContext();
-export const ApplicationProvider = ({ children }) => {
+export const ApplicationListContext = createContext();
+export const ApplicationListProvider = ({ children }) => {
   const [applicationList, setApplicationList] = useState([]);
 
   useEffect(() => {
@@ -21,14 +21,14 @@ export const ApplicationProvider = ({ children }) => {
         res.json().then((data) => {
           setApplicationList(data);
         });
-    });
+    }).catch((e) => {console.log(e)});
   }, []);
 
   console.log(applicationList);
   return (
-    <ApplicationContext.Provider value={applicationList}>
+    <ApplicationListContext.Provider value={applicationList}>
       {children}
-    </ApplicationContext.Provider>
+    </ApplicationListContext.Provider>
   );
 };
-export default ApplicationContext;
+export default ApplicationListContext;

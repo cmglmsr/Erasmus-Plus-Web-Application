@@ -18,9 +18,10 @@ import CreateApplication from "./pages/Student/CreateApplication";
 import ApplicationSchoolContextLayout from "./context/ApplicationContext/ApplicationSchoolContextLayout";
 import ManageApplication from "./pages/Student/ManageApplication";
 import InstructorContextLayout from "./context/InstructorContext/InstructorContextLayout";
-import { Navigate } from 'react-router';
+import { Navigate } from "react-router";
 import InstructorPage from "./pages/Instructor/InstructorPage";
 import InstructorProfile from "./pages/Instructor/InstructorProfile";
+import ApplicationListContextLayout from "./context/ApplicationContext/ApplicationListContextLayout";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -41,18 +42,12 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={ <Navigate to="login" />}>
-        </Route>
+        <Route path="/" element={<Navigate to="login" />}></Route>
         <Route path="/login" exact={true} element={<LoginPage />}></Route>
         <Route
           path="/profile"
           exact={true}
           element={<ProfilePage profile={DUMMY_PROFILE} />}
-        ></Route>
-        <Route
-          path="/application-list"
-          exact={true}
-          element={<ApplicationListPage profile={DUMMY_PROFILE} />}
         ></Route>
         <Route
           path="/informationPage"
@@ -113,6 +108,13 @@ function App() {
             exact={true}
             element={<CoordinatorProfile />}
           ></Route>
+          <Route element={<ApplicationListContextLayout />}>
+            <Route
+              path="/coordinator/applications"
+              exact={true}
+              element={<ApplicationListPage />}
+            ></Route>
+          </Route>
         </Route>
 
         <Route element={<InstructorContextLayout />}>

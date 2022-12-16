@@ -17,58 +17,56 @@ function NavigationBar() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              {role === "ROLE_STUDENT" && (
+            {role === "ROLE_STUDENT" && (
+              <Nav className="ms-auto">
                 <Nav.Link as={Link} to="/student/home">
                   Home
                 </Nav.Link>
-              )}
-              {role === "ROLE_COORDINATOR" && (
-                <Nav.Link as={Link} to="/coordinator/home">
-                  Home
-                </Nav.Link>
-              )}
-              {role === "ROLE_INSTRUCTOR" && (
-                <Nav.Link as={Link} to="/instructor/home">
-                  Home
-                </Nav.Link>
-              )}
-              {role === "ROLE_ISO" && (
-                <Nav.Link as={Link} to="/iso/home">
-                  Home
-                </Nav.Link>
-              )}
-              {role === "ROLE_FBM" && (
-                <Nav.Link as={Link} to="/fbm/home">
-                  Home
-                </Nav.Link>
-              )}
-              {role === "ROLE_STUDENT" && (
                 <Nav.Link as={Link} to="/student/profile">
                   Profile
                 </Nav.Link>
-              )}
-              {role === "ROLE_COORDINATOR" && (
+              </Nav>
+            )}
+            {role === "ROLE_COORDINATOR" && (
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/coordinator/home">
+                  Home
+                </Nav.Link>
                 <Nav.Link as={Link} to="/coordinator/profile">
                   Profile
                 </Nav.Link>
-              )}
-              {role === "ROLE_INSTRUCTOR" && (
+              </Nav>
+            )}
+            {role === "ROLE_INSTRUCTOR" && (
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/instructor/home">
+                  Home
+                </Nav.Link>
                 <Nav.Link as={Link} to="/instructor/profile">
                   Profile
                 </Nav.Link>
-              )}
-              {role === "ROLE_ISO" && (
+              </Nav>
+            )}
+            {role === "ROLE_ISO" && (
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/iso/home">
+                  Home
+                </Nav.Link>
                 <Nav.Link as={Link} to="/iso/profile">
                   Profile
                 </Nav.Link>
-              )}
-              {role === "ROLE_FBM" && (
+              </Nav>
+            )}
+            {role === "ROLE_FBM" && (
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/fbm/home">
+                  Home
+                </Nav.Link>
                 <Nav.Link as={Link} to="/fbm/profile">
                   Profile
                 </Nav.Link>
-              )}
-            </Nav>
+              </Nav>
+            )}
             <Form>
               <Button variant="danger" as={Link} to="/logout">
                 Logout
