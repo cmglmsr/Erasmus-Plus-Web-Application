@@ -3,31 +3,16 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
+import ApplicationSchoolsContext from "../../context/ApplicationContext/ApplicationSchoolsContext";
 
 const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
   var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
+  const schoolData = useContext(ApplicationSchoolsContext);
 
-  const schoolChoices = [
-    {
-      value: "0",
-      label: "",
-    },
-    {
-      value: "1",
-      label: "Ecole Polytechnique Federale de Lausanne (EPFL)-Switzerland",
-    },
-    { value: "2", label: "Vrije Universiteit Amsterdam-The Netherlands" },
-    {
-      value: "3",
-      label:
-        "Ecole Pour Linformatique Et Les Techniques Avancees (EPITA)-France",
-    },
-    { value: "4", label: "Kingston University-U.K." },
-  ];
   const [pref1, setPref1] = useState("0");
   const [pref2, setPref2] = useState("0");
   const [pref3, setPref3] = useState("0");
@@ -169,9 +154,10 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref1} onChange={handleSelect} id="pref1">
-              {schoolChoices.map((school) => (
-                <option key={school.value} value={school.value}>
-                  {school.label}
+              <option key="0" value="0" />
+              {schoolData.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.name}
                 </option>
               ))}
             </Form.Select>
@@ -183,9 +169,10 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref2} onChange={handleSelect} id="pref2">
-              {schoolChoices.map((school) => (
-                <option key={school.value} value={school.value}>
-                  {school.label}
+            <option key="0" value="0" />
+              {schoolData.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.name}
                 </option>
               ))}
             </Form.Select>
@@ -197,9 +184,10 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref3} onChange={handleSelect} id="pref3">
-              {schoolChoices.map((school) => (
-                <option key={school.value} value={school.value}>
-                  {school.label}
+            <option key="0" value="0" />
+              {schoolData.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.name}
                 </option>
               ))}
             </Form.Select>
@@ -211,9 +199,10 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref4} onChange={handleSelect} id="pref4">
-              {schoolChoices.map((school) => (
-                <option key={school.value} value={school.value}>
-                  {school.label}
+            <option key="0" value="0" />
+              {schoolData.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.name}
                 </option>
               ))}
             </Form.Select>
@@ -225,9 +214,10 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           </Form.Label>
           <Col>
             <Form.Select value={pref5} onChange={handleSelect} id="pref5">
-              {schoolChoices.map((school) => (
-                <option key={school.value} value={school.value}>
-                  {school.label}
+            <option key="0" value="0" />
+              {schoolData.map((school) => (
+                <option key={school.id} value={school.id}>
+                  {school.name}
                 </option>
               ))}
             </Form.Select>

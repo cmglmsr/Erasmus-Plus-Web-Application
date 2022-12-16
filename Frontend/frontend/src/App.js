@@ -76,7 +76,6 @@ function App() {
           element={<CoordinatorPage />}
         ></Route>
 
-
         <Route
           path="/viewProfile"
           exact={true}
@@ -99,13 +98,13 @@ function App() {
               exact={true}
               element={<ApplicationPage />}
             ></Route>
-          </Route>
-          <Route element={<ApplicationContextLayout />}>
-            <Route
-              path="/student/getApplication"
-              exact={true}
-              element={<ApplicationPage />}
-            ></Route>
+            <Route element={<ApplicationContextLayout />}>
+              <Route
+                path="/student/getApplication"
+                exact={true}
+                element={<ApplicationPage />}
+              ></Route>
+            </Route>
           </Route>
         </Route>
 
