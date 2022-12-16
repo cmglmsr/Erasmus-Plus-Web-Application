@@ -2,26 +2,21 @@ import Form from "react-bootstrap/Form";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
+import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import ApplicationListContext from "../../context/ApplicationContext/ApplicationListContext";
 
 const timePeriod = {
   1: "Fall Semester",
   2: "Spring Semester",
   3: "Fall & Spring Semester",
 };
-const ApplicationDetailsCoordinator = ({
-  fullname,
-  id,
-  school,
-  status,
-  pref1,
-  pref2,
-  pref3,
-  pref4,
-  pref5,
-  term,
-  uid,
-  cgpa,
-}) => {
+const ApplicationDetailsCoordinator = () => {
+    const applicationList = useContext(ApplicationListContext);
+    const params = useParams();
+    const application = applicationList.filter(
+      (application) => application.id === params.id
+    )[0];
   
   return (
     <Card>
@@ -34,15 +29,15 @@ const ApplicationDetailsCoordinator = ({
           <tbody>
             <tr>
               <td>Full Name</td>
-              <td>{fullname}</td>
+              <td>{application.fullname}</td>
             </tr>
             <tr>
               <td>Bilkent ID</td>
-              <td>{id}</td>
+              <td>{application.id}</td>
             </tr>
             <tr>
               <td>CGPA</td>
-              <td>{cgpa}</td>
+              <td>{application.cgpa}</td>
             </tr>
           </tbody>
         </Table>
@@ -52,7 +47,7 @@ const ApplicationDetailsCoordinator = ({
           <tbody>
             <tr>
               <td>Status</td>
-              <td>{status}</td>
+              <td>{application.status}</td>
             </tr>
           </tbody>
         </Table>
@@ -62,27 +57,27 @@ const ApplicationDetailsCoordinator = ({
           <tbody>
             <tr>
               <td>Time Period</td>
-              <td>{timePeriod[term]}</td>
+              <td>{timePeriod[application.term]}</td>
             </tr>
             <tr>
               <td>1st Preference</td>
-              <td>{pref1}</td>
+              <td>{application.pref1}</td>
             </tr>
             <tr>
               <td>2nd Preference</td>
-              <td>{pref2}</td>
+              <td>{application.pref2}</td>
             </tr>
             <tr>
               <td>3rd Preference</td>
-              <td>{pref3}</td>
+              <td>{application.pref3}</td>
             </tr>
             <tr>
               <td>4th Preference</td>
-              <td>{pref4}</td>
+              <td>{application.pref4}</td>
             </tr>
             <tr>
               <td>5th Preference</td>
-              <td>{pref5}</td>
+              <td>{application.pref5}</td>
             </tr>
           </tbody>
         </Table>
