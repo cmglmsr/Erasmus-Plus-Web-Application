@@ -7,6 +7,9 @@ const ActionButtons = ({role}) => {
     let buttons = [];
     if (role === "ROLE_STUDENT") {
         buttons[0] = <Button className="button-default" key="application" as={Link} to="/student/getApplication">My Application</Button>;
+        buttons[1] = <Button className="button-default" key="createCourseWishlist" as={Link} to="/student/createCourseWishlist">Course Wishlist</Button>;
+        buttons[2] = <Button className="button-default" key="uploadPreApproval" as={Link} to="/student/uploadPreApproval">Upload Pre-Approval</Button>;
+        buttons[3] = <Button className="button-default" key="uploadLearningAgreement" as={Link} to="/student/uploadLearningAgreement">Upload Learnin Agreement</Button>;
     }
     else if (role === "ROLE_ISO") {
         buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/transcripts">Transcripts</Button>;

@@ -5,8 +5,10 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import StudentContext from "../context/StudentContext/StudentContext";
 import { useContext } from "react";
+import { useNavigate} from 'react-router-dom';
 
 function CreateApplication() {
+  const navigate = useNavigate();
   const [studentData, role] = useContext(StudentContext);
 
   function onApplicationSubmitHandler(applicationData) {
@@ -23,10 +25,7 @@ function CreateApplication() {
       }
     ).then((response) => {
       if (response.status == 200) {
-        response.json().then((parsedJson) => {
-          console.log(parsedJson);
-          window.location.href = "http://localhost:3000/student/getApplication";
-        });
+        navigate('/student/getApplication');
       }
     });
   }

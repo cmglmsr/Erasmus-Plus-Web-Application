@@ -1,4 +1,7 @@
 import { formatPhoneNumberIntl } from "react-phone-number-input";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
@@ -61,10 +64,6 @@ const ApplicationDetails = ({
         <Table>
           <tbody>
             <tr>
-              <td>Status</td>
-              <td>{status}</td>
-            </tr>
-            <tr>
               <td>Time Period</td>
               <td>{timePeriod[term]}</td>
             </tr>
@@ -88,12 +87,18 @@ const ApplicationDetails = ({
               <td>5th Preference</td>
               <td>{fifth}</td>
             </tr>
-            <tr>
-              <td>CV</td>
-              <td>{cv}</td>
-            </tr>
           </tbody>
         </Table>
+        <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail" >
+          <Col className="text-center">
+            <Button variant="primary" className="button-default mx-3">
+              Manage Application
+            </Button>
+            <Button variant="primary" className="btn-danger  mx-3">
+              Delete Application
+            </Button>
+          </Col>
+        </Form.Group>
       </Form>
     </Card>
   );

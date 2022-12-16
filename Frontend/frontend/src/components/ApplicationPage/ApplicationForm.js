@@ -112,7 +112,6 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
           as={Row}
           className="my-3"
           controlId="preferredPeriod"
-          onSubmit={handleChange}
         >
           <Col sm="3">Time Period</Col>
           <Col>
