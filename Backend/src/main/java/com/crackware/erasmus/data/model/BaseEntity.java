@@ -28,10 +28,10 @@ public class BaseEntity{
 
     private String dateOfBirth;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ToDoList toDoList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Schedule schedule;
 
 }

@@ -45,4 +45,9 @@ public class TaskImpl implements TaskService {
     public void deleteById(Long aLong) {
         taskRepository.deleteById(aLong);
     }
+
+    @Override
+    public void deleteAllByDescriptionAndDueDate(String description, String dueDate) {
+        taskRepository.deleteAllByDescriptionAndDueDate(description, dueDate);
+    }
 }

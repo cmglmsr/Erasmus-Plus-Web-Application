@@ -40,48 +40,54 @@ public class PlacementService {
         ArrayList<School> schools = new ArrayList<>(schoolService.findAll());
         resetQuotas(schools);
 
+        // Reset final schools in case of someone cancelling their application
+        resetFinalSchools(applications);
+
+
         for (int i = 0; i < applications.size(); i++) {
             Application current = applications.get(i);
             Department currentDepartment = current.getDepartment();
+            if (current.getStatus() != Status.CANCELLED){
+                if (checkAvailabilityByDepartment(currentDepartment, current.getSchool1().getDepartmentQuotas())){
+                    changeQuota(currentDepartment, current.getSchool1().getDepartmentQuotas());
+                    current.setFinalSchool(current.getSchool1());
+                    current.setStatus(Status.APPROVED);
+                    schoolService.save(current.getSchool1());
+                    applicationService.save(current);
 
-            if (checkAvailabilityByDepartment(currentDepartment, current.getSchool1().getDepartmentQuotas())){
-                changeQuota(currentDepartment, current.getSchool1().getDepartmentQuotas());
-                current.setFinalSchool(current.getSchool1());
-                current.setStatus(Status.APPROVED);
-                schoolService.save(current.getSchool1());
-                applicationService.save(current);
-
-            } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool2().getDepartmentQuotas())) {
-                changeQuota(currentDepartment, current.getSchool2().getDepartmentQuotas());
-                current.setFinalSchool(current.getSchool2());
-                current.setStatus(Status.APPROVED);
-                schoolService.save(current.getSchool2());
-                applicationService.save(current);
-
-
-            } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool3().getDepartmentQuotas())){
-                changeQuota(currentDepartment, current.getSchool3().getDepartmentQuotas());
-                current.setFinalSchool(current.getSchool3());
-                current.setStatus(Status.APPROVED);
-                schoolService.save(current.getSchool3());
-                applicationService.save(current);
+                } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool2().getDepartmentQuotas())) {
+                    changeQuota(currentDepartment, current.getSchool2().getDepartmentQuotas());
+                    current.setFinalSchool(current.getSchool2());
+                    current.setStatus(Status.APPROVED);
+                    schoolService.save(current.getSchool2());
+                    applicationService.save(current);
 
 
-            } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool4().getDepartmentQuotas())) {
-                changeQuota(currentDepartment, current.getSchool4().getDepartmentQuotas());
-                current.setFinalSchool(current.getSchool4());
-                current.setStatus(Status.APPROVED);
-                schoolService.save(current.getSchool4());
-                applicationService.save(current);
+                } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool3().getDepartmentQuotas())){
+                    changeQuota(currentDepartment, current.getSchool3().getDepartmentQuotas());
+                    current.setFinalSchool(current.getSchool3());
+                    current.setStatus(Status.APPROVED);
+                    schoolService.save(current.getSchool3());
+                    applicationService.save(current);
 
 
-            } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool5().getDepartmentQuotas())) {
-                changeQuota(currentDepartment, current.getSchool5().getDepartmentQuotas());
-                current.setFinalSchool(current.getSchool5());
-                current.setStatus(Status.APPROVED);
-                schoolService.save(current.getSchool5());
-                applicationService.save(current);
+                } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool4().getDepartmentQuotas())) {
+                    changeQuota(currentDepartment, current.getSchool4().getDepartmentQuotas());
+                    current.setFinalSchool(current.getSchool4());
+                    current.setStatus(Status.APPROVED);
+                    schoolService.save(current.getSchool4());
+                    applicationService.save(current);
+
+
+                } else if (checkAvailabilityByDepartment(currentDepartment, current.getSchool5().getDepartmentQuotas())) {
+                    changeQuota(currentDepartment, current.getSchool5().getDepartmentQuotas());
+                    current.setFinalSchool(current.getSchool5());
+                    current.setStatus(Status.APPROVED);
+                    schoolService.save(current.getSchool5());
+                    applicationService.save(current);
+                }
             }
+
         }
         ArrayList<Application> applications2 = new ArrayList<>(applicationService.findAll());
         ArrayList<Application> finalizedOnes = new ArrayList<>();
@@ -148,6 +154,12 @@ public class PlacementService {
                 departmentQuotaService.save(q);
             }
             schoolService.save(s);
+        }
+    }
+
+    private void resetFinalSchools(ArrayList<Application> applications) {
+        for(Application application : applications) {
+           application.setFinalSchool(null);
         }
     }
 

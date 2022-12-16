@@ -45,4 +45,9 @@ public class ToDoListItemServiceImpl implements ToDoListItemService {
     public void deleteById(Long aLong) {
         toDoListItemRepository.deleteById(aLong);
     }
+
+    @Override
+    public void deleteAllByDescriptionAndDueDate(String description, String dueDate) {
+        toDoListItemRepository.deleteAllByDescriptionAndDueDate(description,dueDate);
+    }
 }
