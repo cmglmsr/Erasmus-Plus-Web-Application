@@ -9,8 +9,10 @@ import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +35,9 @@ public class FacultyBoardMemberController {
 
     private final DocumentService documentService;
 
-    public FacultyBoardMemberController(HelperService helperService, FacultyBoardMemberService facultyBoardMemberService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService) {
+    private final ImageService imageService;
+
+    public FacultyBoardMemberController(HelperService helperService, FacultyBoardMemberService facultyBoardMemberService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService) {
         this.helperService = helperService;
         this.facultyBoardMemberService = facultyBoardMemberService;
         this.toDoListService = toDoListService;
@@ -41,6 +45,7 @@ public class FacultyBoardMemberController {
         this.toDoListItemService = toDoListItemService;
         this.scheduleService = scheduleService;
         this.documentService = documentService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/home")
@@ -50,6 +55,11 @@ public class FacultyBoardMemberController {
     @GetMapping("/profile")
     public FacultyBoardMember facultyBoardMemberProfile() {
         return (FacultyBoardMember) helperService.getUser();
+    }
+
+    @PostMapping("/profile/edit")
+    public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
+        imageService.saveImageFile(profilePic);
     }
 
     @PostMapping("/todolist")
