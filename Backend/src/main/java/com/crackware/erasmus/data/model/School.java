@@ -20,11 +20,6 @@ public class School {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DepartmentQuota> departmentQuotas;
 
-    // might delete ?
-    @OneToMany
-    @OrderBy("points DESC")
-    private Set<Application> applications;
-
     private String name;
 
     public void addDepartmentQuota(DepartmentQuota departmentQuota){
