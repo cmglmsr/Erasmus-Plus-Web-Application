@@ -93,6 +93,7 @@ public class CoordinatorController {
         return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
     }
 
+
     @PostMapping("/schedule")
     public void coordinatorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
         Task task = ScheduleHelper.scheduleHelp(scheduleRequest);

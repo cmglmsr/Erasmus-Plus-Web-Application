@@ -28,19 +28,19 @@ public class Application {
     @Enumerated(EnumType.STRING)
     private Department department;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
     private School school1;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
     private School school2;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
     private School school3;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
     private School school4;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
     private School school5;
 
     @OneToOne(cascade=CascadeType.ALL)
