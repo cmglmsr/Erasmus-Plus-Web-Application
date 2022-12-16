@@ -12,6 +12,8 @@ import StudentPage from './pages/StudentPage';
 import LoginPage from "./pages/LoginPage";
 import ViewApplication from './pages/ViewApplicationPage';
 import ViewProfile from './pages/ViewProfilePage';
+import WishList from './pages/WishListPage';
+import StudentsCourseList from './components/WishList/StudentsCourseList';
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -45,6 +47,7 @@ function App() {
         <Route path="/student/home" exact={true} element={<StudentPage />}></Route>
         <Route path="/viewApplication" exact={true} element={<ViewApplication profile={DUMMY_PROFILE}/>}></Route>
         <Route path="/viewProfile" exact={true} element={<ViewProfile profile={DUMMY_PROFILE}/>}></Route>
+        <Route path="/wishlist" exact={true} element={<WishList profile={DUMMY_PROFILE}/>}></Route>
       </Routes>
     </Layout>
   );

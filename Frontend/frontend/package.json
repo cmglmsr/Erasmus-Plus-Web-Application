@@ -12,6 +12,7 @@
     "popper.js": "^1.16.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
+    "react-delete-row": "^1.0.0",
     "react-dom": "^18.2.0",
     "react-form-input-validation": "^2.1.0",
     "react-hook-form": "^7.40.0",
