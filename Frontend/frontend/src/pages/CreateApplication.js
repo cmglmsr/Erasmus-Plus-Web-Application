@@ -5,14 +5,11 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import StudentContext from "../context/StudentContext/StudentContext";
 import { useContext } from "react";
-import ApplicationSchoolsContext from "../context/ApplicationContext/ApplicationSchoolsContext";
 
 function CreateApplication() {
   const [studentData, role] = useContext(StudentContext);
-  const schoolData = useContext(ApplicationSchoolsContext);
 
   console.log("ApppplicationPage");
-  console.log(schoolData);
   function onApplicationSubmitHandler(applicationData) {
     fetch(
       "http://localhost:8080/student/createApplication", //enter api address

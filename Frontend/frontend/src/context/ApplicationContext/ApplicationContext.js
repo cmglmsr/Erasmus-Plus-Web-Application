@@ -18,13 +18,13 @@ export const ApplicationProvider = ({ children }) => {
     };
 
     fetch(API, requestOptions).then((res) => {
-      if (res.status === 406) {
-        window.location.href =
-          "http://localhost:3000/student/createApplication";
-      } else if (res.status === 200) {
+      if (res.status === 200) {
         res.json().then((data) => {
           setApplicationData(data);
         });
+      } else if (res.status === 406) {
+        window.location.href =
+          "http://localhost:3000/student/createApplication";
       }
     });
   }, []);
