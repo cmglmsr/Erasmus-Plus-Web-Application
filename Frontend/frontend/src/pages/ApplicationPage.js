@@ -8,8 +8,7 @@ import StudentContext from "../context/StudentContext/StudentContext";
 import ApplicationContext from "../context/ApplicationContext/ApplicationContext";
 
 function ApplicationPage() {
-  const [studentData, role] = useContext(StudentContext);
-  const [applicationData] = useContext(ApplicationContext);
+  const [studentData, role, application] = useContext(StudentContext);
 
   return (
     <section>
@@ -35,11 +34,12 @@ function ApplicationPage() {
             phoneNumber={studentData.phoneNumber}
             mail={studentData.mail}
             address={studentData.address}
-            first={applicationData.pref1}
-            second={applicationData.pref2}
-            third={applicationData.pref3}
-            fourth={applicationData.pref4}
-            fifth={applicationData.pref5}
+            first={application.pref1}
+            second={application.pref2}
+            third={application.pref3}
+            fourth={application.pref4}
+            fifth={application.pref5}
+            status={application.status}
             cv=""
           />
         </Col>

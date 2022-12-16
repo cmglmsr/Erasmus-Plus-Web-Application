@@ -7,6 +7,7 @@ export const StudentProvider = ({ children }) => {
 
   const [studentData, setStudentData] = useState([]);
   const [role, setRole] = useState("");
+  const [application, setApplication] = useState([]);
 
   useEffect(() => {
     var API = "http://localhost:8080/student/home";
@@ -23,6 +24,20 @@ export const StudentProvider = ({ children }) => {
       res.json().then((data) => {
         setStudentData(data);
         setRole(data.role.name);
+        setApplication({
+          "id" : data.application.id,
+          "pref1" : data.application.school1.name,
+          "pref1id" : data.application.school1.id,
+          "pref2" : data.application.school2.name,
+          "pref2id" : data.application.school2.id,
+          "pref3" : data.application.school3.name,
+          "pref3id" : data.application.school3.id,
+          "pref4" : data.application.school4.name,
+          "pref4id" : data.application.school4.id,
+          "pref5" : data.application.school5.name,
+          "pref5id" : data.application.school5.id,
+          "status" : data.application.status,
+        })
         localStorage.setItem("role", data.role.name);
       })
     ).catch((e) => {console.log(e);})
@@ -30,7 +45,7 @@ export const StudentProvider = ({ children }) => {
 
   console.log(studentData);
   return (
-    <StudentContext.Provider value={[studentData, role]}>
+    <StudentContext.Provider value={[studentData, role, application]}>
       {children}
     </StudentContext.Provider>
   );

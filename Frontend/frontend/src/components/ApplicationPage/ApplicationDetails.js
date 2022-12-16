@@ -15,9 +15,10 @@ const ApplicationDetails = ({
   third,
   fourth,
   fifth,
+  status,
   cv,
 }) => {
-  var phoneNumberFormatted = formatPhoneNumberIntl(phoneNumber);
+  var phoneNumberFormatted = formatPhoneNumberIntl("+" + phoneNumber);
   return (
     <Card>
       <Form className="form">
@@ -45,6 +46,10 @@ const ApplicationDetails = ({
         <hr className={classes.simple} />
         <Table>
           <tbody>
+          <tr>
+              <td>Status</td>
+              <td>{status}</td>
+            </tr>
             <tr>
               <td>Time Period</td>
               <td>{timePeriod}</td>
