@@ -4,10 +4,17 @@ import Card from "../UI/Card";
 import classes from "./ApplicationList.module.css";
 import { ApplicationListContext } from "../../context/ApplicationContext/ApplicationListContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ApplicationList() {
   const applicationList = useContext(ApplicationListContext);
+  const navigate = useNavigate();
 
+  function ViewApplication() {
+    var id = this.key;
+    navigate(`/coordinator/application/${id}`);
+  }
+  
   console.log(applicationList);
   return (
     <Card>
@@ -27,14 +34,14 @@ function ApplicationList() {
           </thead>
           <tbody>
             {applicationList.map((application) => (
-              <tr key={application.id}>
+              <tr key={application.uid}>
                 <td>{application.fullname}</td>
                 <td>{application.id}</td>
                 <td>{application.cgpa}</td>
                 <td>{application.school ? application.school : "Not Determined"}</td>
                 <td>{application.status}</td>
                 <td>
-                  <Button key={application.id} className="button-default">View Application</Button>
+                  <Button key={application.uid} className="button-default" onClick={ViewApplication}>View Application</Button>
                 </td>
               </tr>
             ))}
