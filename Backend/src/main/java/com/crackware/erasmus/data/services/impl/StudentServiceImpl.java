@@ -48,7 +48,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public BaseEntity findByEmail(String email) {
-        System.out.println("AAAAAA" + studentRepository.findByMail(email).getRole().getName());
         return studentRepository.findByMail(email);
     }
 }
