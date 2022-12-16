@@ -20,18 +20,18 @@ function ApplicationList() {
               <th>Fullname</th>
               <th>ID </th>
               <th>CGPA</th>
-              <th>School</th>
+              <th>Placement</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {applicationList.map((application) => (
-              <tr>
-                <td>{application.fullName}</td>
-                <td>{application.studentId}</td>
-                <td>{application.CGPA}</td>
-                <td>{application.placement}</td>
+              <tr key={application.id}>
+                <td>{application.fullname}</td>
+                <td>{application.id}</td>
+                <td>{application.cgpa}</td>
+                <td>{application.school ? application.school : "Not Determined"}</td>
                 <td>{application.status}</td>
                 <td>
                   <Button key={application.id} className="button-default">View Application</Button>
