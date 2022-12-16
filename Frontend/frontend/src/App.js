@@ -16,7 +16,6 @@ import CoordinatorContextLayout from "./context/CoordinatorContext/CoordinatorCo
 import StudentProfile from "./pages/Student/StudentProfile";
 import CoordinatorProfile from "./pages/Coordinator/CoordinatorProfile";
 import CreateApplication from "./pages/CreateApplication";
-import ApplicationSchoolsContextLayout from "./context/ApplicationContext/ApplicationSchoolContextLayout";
 import ApplicationContextLayout from "./context/ApplicationContext/ApplicationContextLayout";
 import ApplicationSchoolContextLayout from "./context/ApplicationContext/ApplicationSchoolContextLayout";
 
@@ -96,7 +95,7 @@ function App() {
             <Route
               path="/student/createApplication"
               exact={true}
-              element={<ApplicationPage />}
+              element={<CreateApplication />}
             ></Route>
             <Route element={<ApplicationContextLayout />}>
               <Route
