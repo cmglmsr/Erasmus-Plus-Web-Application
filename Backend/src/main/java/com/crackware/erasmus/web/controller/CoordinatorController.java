@@ -54,27 +54,6 @@ public class CoordinatorController {
         return (Coordinator) helperService.getUser();
     }
 
-    @PostMapping("/learningAgreement/approve")
-    public void approveLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
-        String name = learningAgreementFile.getName();
-        String type = learningAgreementFile.getContentType();
-        Status documentStatus = Status.APPROVED;
-        byte[] dataSize = learningAgreementFile.getBytes();
-        Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
-        documentService.save(learningAgreementDocument);
-    }
-
-
-    @PostMapping("/learningAgreement/reject")
-    public void rejectLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
-        String name = learningAgreementFile.getName();
-        String type = learningAgreementFile.getContentType();
-        Status documentStatus = Status.DENIED;
-        byte[] dataSize = learningAgreementFile.getBytes();
-        Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
-        documentService.save(learningAgreementDocument);
-    }
-
     @PostMapping("/todolist")
     public void coordinatorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
         ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
@@ -95,8 +74,6 @@ public class CoordinatorController {
             toDoListService.save(helperService.getUser().getToDoList());
             coordinatorService.save((Coordinator) helperService.getUser());
         }
-
-
     }
 
     @PostMapping("/schedule")
@@ -119,7 +96,6 @@ public class CoordinatorController {
             scheduleService.save(helperService.getUser().getSchedule());
             coordinatorService.save((Coordinator) helperService.getUser());
         }
-
     }
 
     @PostMapping("/learningAgreement/approve")
@@ -129,7 +105,7 @@ public class CoordinatorController {
         documentService.save(agreement);
     }
 
-    @PostMapping("/learningAgreement/approve")
+    @PostMapping("/learningAgreement/reject")
     public void rejectLearningAgreement(@RequestParam(name = "id") String id){
         Document agreement = documentService.findById(Long.valueOf(id));
         agreement.setDocumentStatus(Status.DENIED);

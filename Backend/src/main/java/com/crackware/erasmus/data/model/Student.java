@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -33,6 +34,9 @@ public class Student extends BaseEntity{
     private String address;
 
     private String phoneNumber;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<WishlistCourse> courseWishlist;
 
     @ElementCollection(targetClass= Language.class)
     @Enumerated(EnumType.STRING)
