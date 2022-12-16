@@ -1,20 +1,32 @@
 import ApplicationList from "../components/ApplicationListPage/ApplicationList";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ProfileAction from "../components/common/ProfileAction";
-import { useEffect } from "react";
+import { useContext } from "react";
+import ProfileSummary from "../components/common/ProfileSummary";
+import ActionButtons from "../components/common/ActionButtons";
+import CoordinatorContext from "../context/CoordinatorContext/CoordinatorContext";
 
-function ApplicationListPage(props) {
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) =>
-      console.log(response)
-    );
-  }, []);
+function ApplicationListPage() {
+  const [coordinatorData, role] = useContext(CoordinatorContext);
+
   return (
     <section>
       <Row>
-        <Col xs={3} className="mx-3">
-          <ProfileAction profile={props.profile} />
+      <Col xs={3} className="mx-3">
+          <Row>
+            <ProfileSummary
+              name={coordinatorData.name}
+              surname={coordinatorData.surname}
+              role={role}
+              term=""
+              id={coordinatorData.bilkentId}
+              image={coordinatorData.image}
+              department={coordinatorData.department}
+            />
+          </Row>
+          <Row className="my-4">
+            <ActionButtons role={role} />
+          </Row>
         </Col>
         <Col className="mx-3">
           <ApplicationList/>
