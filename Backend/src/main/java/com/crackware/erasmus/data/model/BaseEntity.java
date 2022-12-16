@@ -26,6 +26,9 @@ public class BaseEntity{
 
     private String mail;
 
+    @Lob
+    private Byte[] image;
+
     private String dateOfBirth;
 
     @OneToOne(cascade = CascadeType.ALL)
