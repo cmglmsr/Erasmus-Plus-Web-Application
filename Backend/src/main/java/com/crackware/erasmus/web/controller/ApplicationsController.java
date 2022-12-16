@@ -37,7 +37,7 @@ public class ApplicationsController {
         Student student = (Student) helperService.getUser();
         System.out.println(student.getTerm());
         if(Double.parseDouble(student.getCgpa()) < 2.5 | student.getTerm() > 5 | student.getTerm() < 3) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(""); // 406
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student ineligible for application!"); // 406
         }
         if(student.getApplication() != null) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student already has an application!");
