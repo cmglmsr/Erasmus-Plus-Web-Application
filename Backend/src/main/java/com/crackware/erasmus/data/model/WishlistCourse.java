@@ -1,5 +1,6 @@
 package com.crackware.erasmus.data.model;
 
+import com.crackware.erasmus.data.model.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,4 +21,5 @@ public class WishlistCourse {
     private String department;
     private String courseCode;
     private String link;
+    private Status status;
 }

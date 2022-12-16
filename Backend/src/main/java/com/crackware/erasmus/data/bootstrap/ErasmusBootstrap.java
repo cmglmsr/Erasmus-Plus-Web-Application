@@ -1,15 +1,20 @@
 package com.crackware.erasmus.data.bootstrap;
 
 import com.crackware.erasmus.data.model.Coordinator;
+import com.crackware.erasmus.data.model.Schedule;
 import com.crackware.erasmus.data.model.Student;
+import com.crackware.erasmus.data.model.Task;
 import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.model.security.EnumRole;
 import com.crackware.erasmus.data.model.security.Role;
 import com.crackware.erasmus.data.model.security.User;
 import com.crackware.erasmus.data.repositories.CoordinatorRepository;
+import com.crackware.erasmus.data.repositories.ScheduleRepository;
+import com.crackware.erasmus.data.repositories.TaskRepository;
 import com.crackware.erasmus.data.repositories.security.RoleRepository;
 import com.crackware.erasmus.data.repositories.security.UserRepository;
 import com.crackware.erasmus.data.services.StudentService;
+import com.crackware.erasmus.data.services.ToDoListItemService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -24,17 +29,34 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final CoordinatorRepository coordinatorRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final TaskRepository taskRepository;
+    private final ToDoListItemService toDoListItemService;
 
-    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository) {
+    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository, ScheduleRepository scheduleRepository, TaskRepository taskRepository, ToDoListItemService toDoListItemService) {
         this.studentService = studentService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.coordinatorRepository = coordinatorRepository;
+        this.scheduleRepository = scheduleRepository;
+        this.taskRepository = taskRepository;
+        this.toDoListItemService = toDoListItemService;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        // set schedule
+        Schedule schedule = new Schedule();
+        Task task = new Task();
+        task.setDate("18.12.2022");
+        task.setDone(false);
+        task.setDescription("ereni sikme günü");
+        task.setDueDate("18.12.2022");
+        schedule.addItem(task);
+        taskRepository.save(task);
+        scheduleRepository.save(schedule);
 
         // set roles
         Role sRole = new Role();
@@ -109,6 +131,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         cem.setPhoneNumber("905376314257");
         cem.setTerm(5);
         cem.setRole(sRole);
+        cem.setSchedule(schedule);
         studentService.save(cem);
         eren.setDateOfBirth("21.02.2001");
         eren.setMail("eduran@hotmail.com");

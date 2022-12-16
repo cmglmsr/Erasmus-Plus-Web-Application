@@ -48,7 +48,7 @@ public class ApplicationsController {
         application.setDepartment(student.getDepartment());
         // Can be sent as JSON
         /*
-        * TO DO:
+        * TODO:
         * Get CV
         * Get Semester
         * */
@@ -63,7 +63,7 @@ public class ApplicationsController {
         application.setStudent(student);
         student.setApplication(application);
         applicationService.save(application);
-        return ResponseEntity.status(HttpStatus.OK).body("");
+        return ResponseEntity.status(HttpStatus.OK).body("Application has been created.");
     }
 
     @GetMapping("/getApplication")
@@ -76,7 +76,6 @@ public class ApplicationsController {
         ResponseApplication r = new ResponseApplication(a);
        return ResponseEntity.status(HttpStatus.OK).body(r);
     }
-
 
     @GetMapping("/applications")
     public ResponseEntity<Set<ResponseApplication>> listApplications() {
@@ -118,4 +117,16 @@ public class ApplicationsController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
     }
 
+    @GetMapping("/deleteApplication")
+    public ResponseEntity<?> deleteApplication() {
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication()==null) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student does not have an application!");
+        }
+        Application a = s.getApplication();
+        s.setApplication(null);
+        a.setStudent(null);
+        applicationService.delete(a);
+        return ResponseEntity.status(HttpStatus.OK).body("Application has been deleted.");
+    }
 }

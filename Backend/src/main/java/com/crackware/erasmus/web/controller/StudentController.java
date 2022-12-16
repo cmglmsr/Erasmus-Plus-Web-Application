@@ -96,7 +96,7 @@ public class StudentController {
 
     }
 
-    @PostMapping("/upload/LearningAgreement")
+    @PostMapping("/upload/learningAgreement")
     public void submitLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreement) throws IOException {
             Document learning = new Document();
             learning.setName(learningAgreement.getName());
