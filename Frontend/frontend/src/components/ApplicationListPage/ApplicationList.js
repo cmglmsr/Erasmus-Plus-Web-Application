@@ -12,7 +12,7 @@ function ApplicationList() {
 
   function ViewApplication() {
     var id = this.key;
-    navigate(`/coordinator/application/${id}`);
+    navigate(`/coordinator/applications/${id}`);
   }
   
   console.log(applicationList);

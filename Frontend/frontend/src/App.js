@@ -117,7 +117,7 @@ function App() {
               element={<ApplicationListPage />}
             ></Route>
             <Route
-              path="/coordinator/application/:id"
+              path="/coordinator/applications/:id"
               exact={true}
               element={<SingleApplicationView />}
             ></Route>
