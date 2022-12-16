@@ -8,9 +8,9 @@ import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
 
 const timePeriod = {
-  1: "Fall Semester",
-  2: "Spring Semester",
-  3: "Fall & Spring Semester",
+  "1": "Fall Semester",
+  "2": "Spring Semester",
+  "3": "Fall & Spring Semester",
 };
 const ApplicationDetails = ({
   mail,

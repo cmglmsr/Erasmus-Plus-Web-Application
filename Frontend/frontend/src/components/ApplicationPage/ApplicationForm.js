@@ -76,7 +76,7 @@ const ApplicationForm = ({
 
   function onSubmit(event) {
     event.preventDefault();
-
+    console.log(isSubscribed);
     var applicationData = {
       term: isSubscribed,
       pref1: pref1,
