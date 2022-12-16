@@ -47,7 +47,7 @@ public class PlacementService {
         for (int i = 0; i < applications.size(); i++) {
             Application current = applications.get(i);
             Department currentDepartment = current.getDepartment();
-            if (current.getStatus() != Status.CANCELLED){
+            if (current.getStatus() != Status.CANCELLED && current.getStatus() != Status.FINALIZED){
                 if (checkAvailabilityByDepartment(currentDepartment, current.getSchool1().getDepartmentQuotas())){
                     changeQuota(currentDepartment, current.getSchool1().getDepartmentQuotas());
                     current.setFinalSchool(current.getSchool1());
