@@ -25,7 +25,7 @@ export const StudentProvider = ({ children }) => {
         setRole(data.role.name);
         localStorage.setItem("role", data.role.name);
       })
-    );
+    ).catch((e) => {console.log(e);})
   }, []);
 
   console.log(studentData);

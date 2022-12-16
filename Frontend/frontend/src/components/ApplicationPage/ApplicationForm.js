@@ -65,12 +65,12 @@ const ApplicationForm = ({mail, address, phoneNumber, onApplicationSubmit}) => {
     event.preventDefault();
 
     var applicationData = {
-      "semester": isSubscribed,
-      "first" : pref1,
-      "second" : pref2,
-      "third" : pref3,
-      "fourth" : pref4,
-      "fifth" : pref5,
+      "term": isSubscribed,
+      "pref1" : pref1,
+      "pref2" : pref2,
+      "pref3" : pref3,
+      "pref4" : pref4,
+      "pref5" : pref5,
     }
 
     if (file) {

@@ -11,7 +11,7 @@ function LoginPage() {
       "http://localhost:8080/signin", //enter api address
       {
         method: "POST",
-        credentials: 'same-origin',
+        credentials: 'include',
         body: JSON.stringify(loginData),
         headers: {
           "Content-Type": "application/json"
@@ -19,9 +19,13 @@ function LoginPage() {
       }
     ).then((response) => {
       response.json().then((parsedJson) => {
-        console.log(parsedJson);
+        console.log("a" + parsedJson);
         if (response.status === 200) {
+          
+          /// DONT EVER TOUCH THIS LINE
           document.cookie = parsedJson.cookie+ ";SameSite=None;";
+          // DANGER DANGER DANGER
+
           if (parsedJson.role === "ROLE_STUDENT") {
             window.location.href = "http://localhost:3000/student/home";
           }

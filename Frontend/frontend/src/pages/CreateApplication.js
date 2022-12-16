@@ -15,10 +15,11 @@ function CreateApplication() {
       "http://localhost:8080/student/createApplication", //enter api address
       {
         method: "POST",
-        credentials: "same-origin",
+        credentials: "include",
         body: JSON.stringify(applicationData),
         headers: {
           "Content-Type": "application/json",
+          "Cookie": document.cookie 
         },
       }
     ).then((response) => {
