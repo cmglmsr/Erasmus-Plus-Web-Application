@@ -31,7 +31,7 @@ const ApplicationDetails = ({
 
   function onDelete() {
     fetch("http://localhost:8080/student/deleteApplication", {
-      method: "POST",
+      method: "GET",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
