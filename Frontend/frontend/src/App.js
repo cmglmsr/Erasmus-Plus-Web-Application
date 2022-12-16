@@ -22,6 +22,7 @@ import { Navigate } from "react-router";
 import InstructorPage from "./pages/Instructor/InstructorPage";
 import InstructorProfile from "./pages/Instructor/InstructorProfile";
 import ApplicationListContextLayout from "./context/ApplicationContext/ApplicationListContextLayout";
+import SingleApplicationView from "./pages/SingleApplicationView";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -64,6 +65,7 @@ function App() {
           path="/viewProfile"
           exact={true}
           element={<ViewProfile profile={DUMMY_PROFILE} />}
+
         ></Route>
         <Route element={<StudentContextLayout />}>
           <Route
@@ -76,6 +78,7 @@ function App() {
             exact={true}
             element={<StudentProfile />}
           ></Route>
+
           <Route element={<ApplicationSchoolContextLayout />}>
             <Route
               path="/student/createApplication"
@@ -113,6 +116,10 @@ function App() {
               path="/coordinator/applications"
               exact={true}
               element={<ApplicationListPage />}
+            ></Route>
+            <Route
+              path="/coordinator/applications/:id"
+              element={<SingleApplicationView />}
             ></Route>
           </Route>
         </Route>

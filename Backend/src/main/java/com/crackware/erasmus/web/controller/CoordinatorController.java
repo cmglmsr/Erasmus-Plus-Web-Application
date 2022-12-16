@@ -100,6 +100,15 @@ public class CoordinatorController {
         return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
     }
 
+    @GetMapping("/applications/{id}")
+    public ResponseEntity<ResponseApplication> getApplication(@PathVariable String id) {
+        if(applicationService.findById(Long.valueOf(id))==null) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication());
+        }
+        Application a = applicationService.findById(Long.valueOf(id));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
+    }
+
     @PostMapping("/schedule")
     public void coordinatorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
         Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
@@ -149,8 +158,5 @@ public class CoordinatorController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(responseFiles);
     }
-
-
-
 }
 

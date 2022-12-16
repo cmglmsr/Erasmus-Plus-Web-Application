@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.*;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
@@ -110,6 +111,7 @@ public class StudentController {
             learning.setType(learningAgreement.getContentType());
             learning.setData(learningAgreement.getBytes());
             documentService.save(learning);
+            learning.setDocumentStatus(Status.WAITING_COORDINATOR);
             Student curr = (Student) helperService.getUser();
             curr.setLearningAgreement(learning);
             studentService.save(curr);
@@ -128,6 +130,7 @@ public class StudentController {
         preApproval.setType(preApprovalFile.getContentType());
         preApproval.setName(preApprovalFile.getName());
         documentService.save(preApproval);
+        preApproval.setDocumentStatus(Status.WAITING_COORDINATOR);
         Student curr = (Student) helperService.getUser();
         curr.setPreApproval(preApproval);
         studentService.save(curr);

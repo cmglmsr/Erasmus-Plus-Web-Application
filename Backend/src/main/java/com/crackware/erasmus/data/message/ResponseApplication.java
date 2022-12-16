@@ -22,6 +22,10 @@ public class ResponseApplication {
     private String pref4;
     private String pref5;
     private String timePeriod;
+    private Long uid;
+
+    public ResponseApplication() {}
+
     public ResponseApplication(String fullname, String id, String cgpa, String school, String status) {
         this.fullname = fullname;
         this.id = id;
@@ -69,6 +73,7 @@ public class ResponseApplication {
         if(a.getSchool5() != null) {
             this.pref5 = a.getSchool5().getName();
         }
+        this.uid = a.getId();
 
     }
 }

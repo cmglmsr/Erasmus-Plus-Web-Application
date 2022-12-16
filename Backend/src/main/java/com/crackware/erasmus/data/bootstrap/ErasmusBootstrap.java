@@ -61,10 +61,13 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         // set roles
         Role sRole = new Role();
         Role cRole = new Role();
+        Role fRole = new Role();
         cRole.setName(EnumRole.ROLE_COORDINATOR);
         sRole.setName(EnumRole.ROLE_STUDENT);
+        fRole.setName(EnumRole.ROLE_FACULTY_BOARD_MEMBER);
         roleRepository.save(sRole);
         roleRepository.save(cRole);
+        roleRepository.save(fRole);
 
         // set users
         User uCem = new User();
