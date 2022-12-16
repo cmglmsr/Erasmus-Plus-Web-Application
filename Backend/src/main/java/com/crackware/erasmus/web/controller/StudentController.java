@@ -32,7 +32,9 @@ public class StudentController {
 
     private final DocumentService documentService;
 
-    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, DocumentService documentService) {
+    private final ImageService imageService;
+
+    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService) {
         this.helperService = helperService;
         this.studentService = studentService;
         this.toDoListService = toDoListService;
@@ -40,6 +42,7 @@ public class StudentController {
         this.taskService = taskService;
         this.scheduleService = scheduleService;
         this.documentService = documentService;
+        this.imageService = imageService;
     }
     @GetMapping("/home")
     public Student studentHome() {
@@ -48,6 +51,11 @@ public class StudentController {
     @GetMapping("/profile")
     public Student studentProfile() {
         return (Student) helperService.getUser();
+    }
+
+    @PostMapping("/profile/edit")
+    public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
+        imageService.saveImageFile(profilePic);
     }
 
     @PostMapping("/todolist")

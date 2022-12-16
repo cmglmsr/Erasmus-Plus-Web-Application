@@ -8,8 +8,10 @@ import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 
 @RestController
@@ -28,13 +30,16 @@ public class InstructorController {
 
     private final ToDoListService toDoListService;
 
-    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService) {
+    private final ImageService imageService;
+
+    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService, ImageService imageService) {
         this.helperService = helperService;
         this.instructorService = instructorService;
         this.scheduleService = scheduleService;
         this.toDoListItemService = toDoListItemService;
         this.taskService = taskService;
         this.toDoListService = toDoListService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/home")
@@ -44,6 +49,11 @@ public class InstructorController {
     @GetMapping("/profile")
     public Instructor instructorProfile() {
         return (Instructor) helperService.getUser();
+    }
+
+    @PostMapping("/profile/edit")
+    public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
+        imageService.saveImageFile(profilePic);
     }
 
     @PostMapping("/todolist")

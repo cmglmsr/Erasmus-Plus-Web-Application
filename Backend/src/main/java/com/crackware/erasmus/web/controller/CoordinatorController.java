@@ -13,8 +13,10 @@ import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.*;
@@ -40,8 +42,9 @@ public class CoordinatorController {
 
     private final ApplicationService applicationService;
 
+    private final ImageService imageService;
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ApplicationService applicationService) {
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ApplicationService applicationService, ImageService imageService) {
         this.coordinatorService = coordinatorService;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
@@ -50,6 +53,7 @@ public class CoordinatorController {
         this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.applicationService = applicationService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/home")
@@ -60,7 +64,10 @@ public class CoordinatorController {
     public Coordinator coordinatorProfile() {
         return (Coordinator) helperService.getUser();
     }
-
+    @PostMapping("/profile/edit")
+    public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
+        imageService.saveImageFile(profilePic);
+    }
     @PostMapping("/todolist")
     public void coordinatorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
         ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);

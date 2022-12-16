@@ -1,12 +1,12 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.Admin;
-import com.crackware.erasmus.data.model.Coordinator;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping({"admin", "admin.html"})
@@ -17,17 +17,19 @@ public class AdminController {
     private final InternationalStudentOfficeService internationalStudentOfficeService;
     private final FacultyBoardMemberService facultyBoardMemberService;
 
+    private final ImageService imageService;
     private final HelperService helperService;
 
     public AdminController(StudentService studentService, InstructorService instructorService,
                            CoordinatorService coordinatorService,
                            InternationalStudentOfficeService internationalStudentOfficeService,
-                           FacultyBoardMemberService facultyBoardMemberService, HelperService helperService) {
+                           FacultyBoardMemberService facultyBoardMemberService, ImageService imageService, HelperService helperService) {
         this.studentService = studentService;
         this.instructorService = instructorService;
         this.coordinatorService = coordinatorService;
         this.internationalStudentOfficeService = internationalStudentOfficeService;
         this.facultyBoardMemberService = facultyBoardMemberService;
+        this.imageService = imageService;
         this.helperService = helperService;
     }
 
@@ -40,6 +42,10 @@ public class AdminController {
         return (Admin) helperService.getUser();
     }
 
+    @PostMapping("/profile/edit")
+    public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
+        imageService.saveImageFile(profilePic);
+    }
 
 
 
