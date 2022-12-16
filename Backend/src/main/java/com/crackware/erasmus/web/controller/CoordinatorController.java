@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping({"/coordinator", "coordinator"})
@@ -52,33 +54,25 @@ public class CoordinatorController {
         return (Coordinator) helperService.getUser();
     }
 
-    @PostMapping("/approve")
+    @PostMapping("/learningAgreement/approve")
     public void approveLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
         Status documentStatus = Status.APPROVED;
         byte[] dataSize = learningAgreementFile.getBytes();
         Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
-
-        // Save the document
         documentService.save(learningAgreementDocument);
-        // Print out an approved message
-        System.out.println("[+] Learning agreement file approved.");
     }
 
 
-    @PostMapping("/reject")
+    @PostMapping("/learningAgreement/reject")
     public void rejectLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreementFile) throws IOException {
         String name = learningAgreementFile.getName();
         String type = learningAgreementFile.getContentType();
         Status documentStatus = Status.DENIED;
         byte[] dataSize = learningAgreementFile.getBytes();
         Document learningAgreementDocument = new Document(name, type, dataSize, documentStatus);
-
-        // Save the document
         documentService.save(learningAgreementDocument);
-        // Print out an approved message
-        System.out.println("[-] Learning agreement file rejected.");
     }
 
     @PostMapping("/todolist")
@@ -126,6 +120,25 @@ public class CoordinatorController {
             coordinatorService.save((Coordinator) helperService.getUser());
         }
 
+    }
+
+    @PostMapping("/learningAgreement/approve")
+    public void approveLearningAgreement(@RequestParam(name = "id") String id){
+        Document agreement = documentService.findById(Long.valueOf(id));
+        agreement.setDocumentStatus(Status.APPROVED);
+        documentService.save(agreement);
+    }
+
+    @PostMapping("/learningAgreement/approve")
+    public void rejectLearningAgreement(@RequestParam(name = "id") String id){
+        Document agreement = documentService.findById(Long.valueOf(id));
+        agreement.setDocumentStatus(Status.DENIED);
+        documentService.save(agreement);
+    }
+
+    @GetMapping("/learningAgreements")
+    public Set<Document> getAgreements(){
+        return new HashSet<>(documentService.findAll());
     }
 
 }

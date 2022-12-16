@@ -92,4 +92,18 @@ public class FacultyBoardMemberController {
 
 
     }
+
+    @PostMapping("/preapproval/approve")
+    public void approvePreApproval(){
+
+    }
+
+
+    @PostMapping("/preapproval/reject")
+    public void rejectPreApproval(){
+
+    }
+
+
+
 }

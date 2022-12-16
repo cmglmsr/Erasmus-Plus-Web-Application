@@ -7,7 +7,6 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
-import com.crackware.erasmus.data.services.impl.FileUploadServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,16 +30,16 @@ public class StudentController {
 
     private final ScheduleService scheduleService;
 
-    private final FileUploadServiceImpl fileUploadService;
+    private final DocumentService documentService;
 
-    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, FileUploadServiceImpl fileUploadService) {
+    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, DocumentService documentService) {
         this.helperService = helperService;
         this.studentService = studentService;
         this.toDoListService = toDoListService;
         this.toDoListItemService = toDoListItemService;
         this.taskService = taskService;
         this.scheduleService = scheduleService;
-        this.fileUploadService = fileUploadService;
+        this.documentService = documentService;
     }
     @GetMapping("/home")
     public Student studentHome() {
@@ -97,14 +96,36 @@ public class StudentController {
 
     }
 
-    @PostMapping("/submitLearningAgreement")
+    @PostMapping("/upload/LearningAgreement")
     public void submitLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreement) throws IOException {
-        try {
-            fileUploadService.store(learningAgreement);
-            System.out.println("[+] Learning agreement upload successful.");
-        } catch (IOException e) {
-            System.out.println("[-] Learning agreement upload failed.");
-        }
+            Document learning = new Document();
+            learning.setName(learningAgreement.getName());
+            learning.setType(learningAgreement.getContentType());
+            learning.setData(learningAgreement.getBytes());
+            documentService.save(learning);
     }
+
+    @GetMapping("learningAgreement")
+    public Document viewLearningAgreement(){
+        Student student = (Student) helperService.getUser();
+        return student.getLearningAgreement();
+    }
+
+    @PostMapping("/upload/preapproval")
+    public void uploadPreApproval(@RequestParam("preApproval") MultipartFile preApprovalFile) throws IOException {
+        Document preApproval = new Document();
+        preApproval.setData(preApprovalFile.getBytes());
+        preApproval.setType(preApprovalFile.getContentType());
+        preApproval.setName(preApprovalFile.getName());
+        documentService.save(preApproval);
+    }
+
+    @GetMapping("/preapproval")
+    public Document showPreApproval(){
+        Student student = (Student) helperService.getUser();
+        return (student.getPreApproval());
+    }
+
+
 }
 

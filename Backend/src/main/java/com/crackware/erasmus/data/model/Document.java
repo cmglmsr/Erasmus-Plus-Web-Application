@@ -1,7 +1,9 @@
 package com.crackware.erasmus.data.model;
 
 import com.crackware.erasmus.data.model.enums.Status;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 

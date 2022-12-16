@@ -40,9 +40,17 @@ public class Student extends BaseEntity{
     @Column(name="languages")
     private Set<Language> languages;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Nullable
     private Application application;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @Nullable
+    private Document preApproval;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @Nullable
+    private Document learningAgreement;
 
     public double calculatePoints() {
         double total = 0; double eng101 = 0; double eng102 = 0;
