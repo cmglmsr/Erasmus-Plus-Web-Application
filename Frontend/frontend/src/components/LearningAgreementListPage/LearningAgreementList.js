@@ -57,7 +57,7 @@ function LearningAgreementList() {
     };
 
     fetch(API, requestOptions).then((res) => {
-      navigate("/coordinator/learningAgreements");
+      window.location.href();
     });
   }
 
@@ -71,7 +71,7 @@ function LearningAgreementList() {
     };
 
     fetch(API, requestOptions).then((res) => {
-      navigate("/coordinator/learningAgreements");
+      window.location.href();
     });
   }
 
