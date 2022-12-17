@@ -9,7 +9,8 @@ import UnapprovedCourse from "../components/WishList/UnapprovedCourse";
 import ProfileSummary from "../components/common/ProfileSummary";
 import { useEffect, useState } from "react";
 import ApprovedCoursesList from "../components/WishList/ApprovedCoursesList";
-
+import StudentContext from "../context/StudentContext/StudentContext";
+import { useContext } from "react";
 function WishListPage() {
   const [profile, role] = useContext(StudentContext);
   console.log(profile);

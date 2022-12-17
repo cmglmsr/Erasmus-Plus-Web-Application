@@ -101,7 +101,7 @@ function App() {
             ></Route>
 
             <Route
-              path="/student/createWishlist"
+              path="/student/createCourseWishlist"
               exact={true}
               element={<WishListPage />}
             ></Route>
