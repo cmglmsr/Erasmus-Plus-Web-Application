@@ -29,7 +29,7 @@ export const StudentProvider = ({ children }) => {
         if (data.application !== null) {
           var application = {
             id: data.application.uid,
-            bilkentId : data.application.id,
+            bilkentId: data.application.id,
             pref1: data.application.school1.name,
             pref1id: data.application.school1.id,
             pref2: data.application.school2.name,
@@ -48,9 +48,10 @@ export const StudentProvider = ({ children }) => {
           console.log(window.location.href);
           if (
             window.location.href ===
-            "http://localhost:3030/student/getApplication"
+            'http://localhost:3000/student/getApplication'
           ) {
-            navigate("../student/createApplication", { replace: true });
+            console.log("here");
+            navigate("./student/createApplication");
           }
         }
       })

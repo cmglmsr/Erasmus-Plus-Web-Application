@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import { useState } from "react";
 
 function LoginPage() {
-  var error;
+  const [error, setError] = useState("")
   function onLoginHandler(loginData) {
     console.log(loginData);
     fetch(
@@ -43,8 +43,8 @@ function LoginPage() {
           }
         }
         else if (response.status === 401) {
-          error = parsedJson.message;
-          console.log(error);
+          setError(parsedJson.message);
+          window.confirm("Invalid credentials.");
         }
         console.log("COOKIE ===>", response.headers['Set-Cookie']);
       });
@@ -54,7 +54,7 @@ function LoginPage() {
     <section>
       <Row className="justify-content-center">
         <Col xs={4}>
-          <LoginForm onLogin={onLoginHandler} alert={error}/>
+          <LoginForm onLogin={onLoginHandler} error={error}/>
         </Col>
       </Row>
     </section>

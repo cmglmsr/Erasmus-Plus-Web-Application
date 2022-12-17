@@ -115,16 +115,17 @@ function App() {
           ></Route>
           <Route element={<ApplicationListContextLayout />}>
             <Route
-              path="/coordinator/applications/:id"
-              exact={true}
-              element={<SingleApplicationView />}
-            ></Route>
-            <Route
               path="/coordinator/applications"
               exact={true}
               element={<ApplicationListPage />}
             ></Route>
           </Route>
+          
+          <Route
+              path="/coordinator/applications/:uid"
+              exact={true}
+              element={<SingleApplicationView />}
+            ></Route>
         </Route>
 
         <Route element={<InstructorContextLayout />}>

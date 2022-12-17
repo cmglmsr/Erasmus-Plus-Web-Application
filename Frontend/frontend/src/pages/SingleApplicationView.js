@@ -3,11 +3,10 @@ import Row from "react-bootstrap/Row";
 import { useContext } from "react";
 import ProfileSummary from "../components/common/ProfileSummary";
 import CoordinatorContext from "../context/CoordinatorContext/CoordinatorContext";
-
 import ActionButtons from "../components/common/ActionButtons";
 import ApplicationDetailsCoordinator from "../components/ApplicationPage/ApplicationDetailsCoordinator";
 
-function SingleApplicationView() {
+const SingleApplicationView = () => {
   const [coordinatorData, role] = useContext(CoordinatorContext);
 
   return (
@@ -30,10 +29,10 @@ function SingleApplicationView() {
           </Row>
         </Col>
         <Col className="mx-3">
-          <ApplicationDetailsCoordinator/>
+          <ApplicationDetailsCoordinator />
         </Col>
       </Row>
     </section>
   );
-}
+};
 export default SingleApplicationView;
