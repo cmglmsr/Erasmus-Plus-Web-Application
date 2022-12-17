@@ -4,7 +4,6 @@ import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ApplicationContext from "../../context/ApplicationContext/ApplicationContext";
 
 const timePeriod = {
   1: "Fall Semester",
@@ -34,7 +33,7 @@ const ApplicationDetailsCoordinator = () => {
         });
       }
     );
-  }, []);
+  }, [params.uid]);
 
   return (
     <Card>

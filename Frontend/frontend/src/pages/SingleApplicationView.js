@@ -3,10 +3,8 @@ import Row from "react-bootstrap/Row";
 import { useContext } from "react";
 import ProfileSummary from "../components/common/ProfileSummary";
 import CoordinatorContext from "../context/CoordinatorContext/CoordinatorContext";
-import { useParams } from "react-router-dom";
 import ActionButtons from "../components/common/ActionButtons";
 import ApplicationDetailsCoordinator from "../components/ApplicationPage/ApplicationDetailsCoordinator";
-import ApplicationContext from "../context/ApplicationContext/ApplicationContext";
 
 const SingleApplicationView = () => {
   const [coordinatorData, role] = useContext(CoordinatorContext);
