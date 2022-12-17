@@ -13,9 +13,70 @@ function LearningAgreementList() {
   console.log(learningAgreementList);
 
   function handleInput(e) {
+
+    //navigate(`/coordinator/applications/${uid}`)
+  }
+  
+  function downloadForm(e) {
     console.log(e.target.value);
     const uid = e.target.value;
-    //navigate(`/coordinator/applications/${uid}`)
+    console.log("a" + uid);
+    var API = `http://localhost:8080/coordinator/learningAgreement/download/${uid}`;
+    var requestOptions = {
+      method: "POST",
+      redirect: "follow",
+      credentials: "include",
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      res.blob().then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(
+            new Blob([blob]),
+        );
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute(
+            'download',
+            `LearningAgreement.pdf`,
+        );
+        link.click();
+      });
+    })
+  }
+
+  function approve(event) {
+    console.log(event.target.value);
+    const uid = event.target.value;
+
+    var API = `http://localhost:8080/coordinator/learningAgreement/approve/${uid}`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      window.location.reload();
+    });
+  }
+
+  function reject(event) {
+    console.log(event.target.value);
+    const uid = event.target.value;
+    
+    var API = `http://localhost:8080/coordinator/learningAgreement/reject/${uid}`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+    };
+
+    fetch(API, requestOptions).then((res) => {{
+      console.log(res);
+      window.location.reload();
+    }
+    });
   }
 
   console.log(learningAgreementList);
@@ -41,32 +102,32 @@ function LearningAgreementList() {
                 <td className={classes.center}>{learningAgreement.fullName}</td>
                 <td className={classes.center}>{learningAgreement.id}</td>
                 <td className={classes.center}>{learningAgreement.cgpa}</td>
-                <td className= {classes.center}>
+                <td className={classes.center}>
                   <Button
-                    key={learningAgreement.uid}
+                    key={`download-${learningAgreement.uid}`}
                     value={learningAgreement.uid}
                     className="button-default"
-                    onClick={(e) => handleInput(e, "value")}
+                    onClick={e => downloadForm(e, "value")}
                   >
                     Download
                   </Button>
                 </td>
                 <td className= {classes.center}>
                   <Button
-                    key={learningAgreement.uid}
+                    key={`approve-${learningAgreement.uid}`}
                     value={learningAgreement.uid}
-                    className= {classes.button1}
-                    onClick={(e) => handleInput(e, "value")}
+                    className="btn-success"
+                    onClick={approve}
                   >
                     Approve
                   </Button>
                 </td>
                 <td className= {classes.center}>
                   <Button
-                    key={learningAgreement.uid}
+                    key={`reject-${learningAgreement.uid}`}
                     value={learningAgreement.uid}
-                    className = {classes.button2}
-                    onClick={(e) => handleInput(e, "value")}
+                    className ="btn-danger"
+                    onClick={reject}
                   >
                     Reject
                   </Button>
