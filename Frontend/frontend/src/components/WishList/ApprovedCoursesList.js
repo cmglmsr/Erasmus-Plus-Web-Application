@@ -21,9 +21,8 @@ function ApprovedCoursesList(props) {
         method: "GET",
         credentials: "include"
       }
-    ).then(res => res.json).then(result => {
-      console.log(result);
-      ApprovedCourses = result;
+    ).then(res => res.json()).then(result => {
+      setCoursesList(result);
     });
   } 
 
@@ -31,6 +30,8 @@ function ApprovedCoursesList(props) {
   const [courseCode, setCourseCode] = useState("");
   const [hostUniversityName, setUniversity] = useState("");
   const [approvedNotapproved, setApprovedNotapproved] = useState("")
+  const [coursesList, setCoursesList] = useState([])
+
   getApprovedCourses();
   useEffect(() => {
    course = {courseName: courseName, courseCode: courseCode, hostUniversityName: hostUniversityName, approvedNotapproved: "Approved"};
@@ -54,7 +55,7 @@ function ApprovedCoursesList(props) {
               </tr>
             </thead>
             <tbody>
-              {ApprovedCourses.map((item, i) => {
+              {coursesList.map((item, i) => {
                 return (
                   <ReactDeleteRow
                     deleteElement={<i className={classes.button}>ADD</i>}
