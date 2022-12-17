@@ -2,6 +2,7 @@ package com.crackware.erasmus.data.bootstrap;
 
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Department;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.model.security.EnumRole;
 import com.crackware.erasmus.data.model.security.Role;
 import com.crackware.erasmus.data.model.security.User;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.HashSet;
 
 @Component
@@ -261,7 +263,15 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         instructorEray.setDepartment(Department.CS);
 
         // set applications
-
+        /*
+        Application a1 = new Application();
+        a1.setStudent(cem);
+        a1.setStatus(Status.PENDING);
+        a1.setDate(new Date());
+        a1.setDepartment(Department.CS);
+        a1.setPoints(cem.calculatePoints());
+        a1.setTerm("0");
+        a1.setSchool1();*/
 
         // set approved courses
         /*
