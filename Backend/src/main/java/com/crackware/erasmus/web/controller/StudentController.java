@@ -8,6 +8,8 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -145,6 +147,15 @@ public class StudentController {
     public Document showPreApproval(){
         Student student = (Student) helperService.getUser();
         return (student.getPreApproval());
+    }
+
+    @GetMapping("/download/preapproval")
+    public ResponseEntity<byte[]> getPreApproval() {
+        Student s = (Student) helperService.getUser();
+        if(s.getPreApproval()==null||s.getPreApproval().getData()==null) {
+            return null;
+        }
+        return ResponseEntity.ok().body(s.getPreApproval().getData());
     }
 
     @GetMapping("/approvedCoursesList")
