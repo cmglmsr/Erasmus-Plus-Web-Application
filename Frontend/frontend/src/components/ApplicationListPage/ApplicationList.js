@@ -9,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 function ApplicationList() {
   const applicationList = useContext(ApplicationListContext);
   const navigate = useNavigate();
+  console.log(applicationList);
 
-  function ViewApplication() {
-    var id = this.key;
-    console.log("view" + id);
-    navigate(`/coordinator/applications/${id}`);
-  }
+  function handleInput(e) {
+    console.log(e.target.value);
+    const uid = e.target.value;
+    navigate(`/coordinator/applications/${uid}`)
+  };
   
   console.log(applicationList);
   return (
@@ -42,7 +43,7 @@ function ApplicationList() {
                 <td>{application.school ? application.school : "Not Determined"}</td>
                 <td>{application.status}</td>
                 <td>
-                  <Button key={application.uid} className="button-default" onClick={ViewApplication}>View Application</Button>
+                  <Button key={application.uid} value={application.uid} className="button-default" onClick={e => handleInput(e, "value")}>View Application</Button>
                 </td>
               </tr>
             ))}
