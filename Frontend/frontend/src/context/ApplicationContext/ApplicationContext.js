@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+import { useParams } from "react-router-dom";
 
 export const ApplicationContext = createContext();
 export const ApplicationProvider = ({ children }) => {
-  const [applicationData, setApplicationData] = useState([]);
+  const [applicationData, setApplicationData] = useState({});
+  const params = useParams();
 
   useEffect(() => {
-    var API = "http://localhost:8080/student/getApplication";
+    var API = `http://localhost:8080/coordinator/applications/${params.uid}`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -18,18 +20,14 @@ export const ApplicationProvider = ({ children }) => {
     };
 
     fetch(API, requestOptions).then((res) => {
-      if (res.status === 406) {
-        window.location.href =
-          "http://localhost:3000/student/createApplication";
-      } else if (res.status === 200) {
         res.json().then((data) => {
+          console.log("aaaaaaaaaaaaaaaa" + data);
           setApplicationData(data);
         });
       }
-    });
+    );
   }, []);
 
-  console.log(applicationData);
   return (
     <ApplicationContext.Provider value={applicationData}>
       {children}

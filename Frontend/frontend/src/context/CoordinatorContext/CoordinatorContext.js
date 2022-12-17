@@ -28,7 +28,6 @@ export const CoordinatorProvider = ({ children }) => {
     );
   }, []);
 
-  console.log(coordinatorData);
   return (
     <CoordinatorContext.Provider value={[coordinatorData, role]}>
       {children}

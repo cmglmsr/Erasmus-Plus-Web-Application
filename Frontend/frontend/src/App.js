@@ -25,6 +25,7 @@ import ApplicationListContextLayout from "./context/ApplicationContext/Applicati
 import SingleApplicationView from "./pages/SingleApplicationView";
 import WishListPage from "./pages/WishListPage";
 import ViewWishlistsPage from "./pages/ViewWishlistsPage";
+import ApplicationContextLayout from "./context/ApplicationContext/ApplicationContextLayout";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -114,14 +115,16 @@ function App() {
           ></Route>
           <Route element={<ApplicationListContextLayout />}>
             <Route
-              path="/coordinator/applications/:id"
-              exact={true}
-              element={<SingleApplicationView />}
-            ></Route>
-            <Route
               path="/coordinator/applications"
               exact={true}
               element={<ApplicationListPage />}
+            ></Route>
+          </Route>
+          <Route element={<ApplicationContextLayout />}>
+          <Route
+              path="/coordinator/applications/:uid"
+              exact={true}
+              element={<SingleApplicationView />}
             ></Route>
           </Route>
         </Route>
