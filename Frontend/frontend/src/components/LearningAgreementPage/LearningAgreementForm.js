@@ -46,7 +46,7 @@ const LearningAgreementForm = ({ status }) => {
     };
 
     fetch(
-      "http://localhost:8080/student/upload/learningagreement",
+      "http://localhost:8080/student/upload/learningAgreement",
       requestOptions
     )
       .then((response) => {
@@ -65,7 +65,7 @@ const LearningAgreementForm = ({ status }) => {
 
   function downloadForm(event) {
     event.preventDefault();
-    var API = `http://localhost:8080/student/download/learningagreement`;
+    var API = `http://localhost:8080/student/download/learningAgreement`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
