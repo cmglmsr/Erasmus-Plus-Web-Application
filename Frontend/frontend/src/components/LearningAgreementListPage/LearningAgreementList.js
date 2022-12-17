@@ -3,32 +3,31 @@ import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
 import classes from "./LearningAgreementList.module.css";
 import { LearningAgreementListContext } from "../../context/LearningAgreementContext/LearningAgreementListContext";
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 function LearningAgreementList() {
   const learningAgreementList = useContext(LearningAgreementListContext);
   const navigate = useNavigate();
   console.log(learningAgreementList);
 
-  const selectDownloadNumber = numberSelected => {
-    downloadForm(numberSelected)
-  }
+  const selectDownloadNumber = (numberSelected) => {
+    downloadForm(numberSelected.target.value);
+  };
 
-  const selectApproveNumber = numberSelected => {
-    approve(numberSelected)
-  }
+  const selectApproveNumber = (numberSelected) => {
+    approve(numberSelected.target.value);
+  };
 
-  const selectRejectNumber = numberSelected => {
-    reject(numberSelected)
-  }
+  const selectRejectNumber = (numberSelected) => {
+    reject(numberSelected.target.value);
+  };
   function handleInput(e) {
-
     //navigate(`/coordinator/applications/${documentId}`)
   }
-  
+
   function downloadForm(number) {
+    console.log(number);
     var API = `http://localhost:8080/coordinator/learningAgreement/download/${number}`;
     var requestOptions = {
       method: "POST",
@@ -39,45 +38,41 @@ function LearningAgreementList() {
     fetch(API, requestOptions).then((res) => {
       res.blob().then((blob) => {
         // Create blob link to download
-        const url = window.URL.createObjectURL(
-            new Blob([blob]),
-        );
-        const link = document.createElement('a');
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute(
-            'download',
-            `LearningAgreement.pdf`,
-        );
+        link.setAttribute("download", `LearningAgreement.pdf`);
         link.click();
       });
-    })
+    });
   }
 
   function approve(number) {
+    console.log(number);
     var API = `http://localhost:8080/coordinator/learningAgreement/approve/${number}`;
     var requestOptions = {
-      method: "GET",
+      method: "POST",
       redirect: "follow",
       credentials: "include",
     };
 
     fetch(API, requestOptions).then((res) => {
-      window.location.reload();
     });
   }
 
   function reject(number) {
+    console.log(number);
     var API = `http://localhost:8080/coordinator/learningAgreement/reject/${number}`;
     var requestOptions = {
-      method: "GET",
+      method: "POST",
       redirect: "follow",
       credentials: "include",
     };
 
-    fetch(API, requestOptions).then((res) => {{
-      console.log(res);
-      window.location.reload();
-    }
+    fetch(API, requestOptions).then((res) => {
+      {
+        console.log(res);
+      }
     });
   }
 
@@ -93,18 +88,41 @@ function LearningAgreementList() {
               <th className={classes.heading}>Fullname</th>
               <th className={classes.heading}>ID </th>
               <th className={classes.heading}>CGPA</th>
+              <th className={classes.heading}>Status</th>
+              <th className={classes.heading}>Actions</th>
               <th className={classes.heading}>Download</th>
-              <th className={classes.heading}>Approve</th>
-              <th className={classes.heading}>Reject</th>
             </tr>
           </thead>
           <tbody>
             {learningAgreementList.map((learningAgreement) => (
               <tr key={learningAgreement.documentId}>
-                <td className={classes.center}>{learningAgreement.fullName}</td>
+                <td className={classes.center}>{learningAgreement.fullname}</td>
                 <td className={classes.center}>{learningAgreement.id}</td>
                 <td className={classes.center}>{learningAgreement.cgpa}</td>
-                <td className= {classes.center}>
+                <td className={classes.center}>{learningAgreement.status}</td>
+                {learningAgreement.status === "WAITING_COORDINATOR" ? (
+                  <td className={classes.center}>
+                    <Button
+                      key={learningAgreement.documentId}
+                      value={learningAgreement.documentId}
+                      className="btn-success mx-2"
+                      onClick={selectApproveNumber}
+                    >
+                      Approve
+                    </Button>
+                    <Button
+                      key={learningAgreement.documentId}
+                      value={learningAgreement.documentId}
+                      className="btn-danger mx-2"
+                      onClick={selectRejectNumber}
+                    >
+                      Reject
+                    </Button>
+                  </td>
+                ) : (
+                  (<td className={classes.center}>No actions available.</td>)
+                )}
+                <td className={classes.center}>
                   <Button
                     key={learningAgreement.documentId}
                     value={learningAgreement.documentId}
@@ -112,26 +130,6 @@ function LearningAgreementList() {
                     onClick={selectDownloadNumber}
                   >
                     Download
-                  </Button>
-                </td>
-                <td className= {classes.center}>
-                  <Button
-                    key={learningAgreement.documentId}
-                    value={learningAgreement.documentId}
-                    className="btn-success"
-                    onClick={selectApproveNumber}
-                  >
-                    Approve
-                  </Button>
-                </td>
-                <td className= {classes.center}>
-                  <Button
-                    key={learningAgreement.documentId}
-                    value={learningAgreement.documentId}
-                    className ="btn-danger"
-                    onClick={selectRejectNumber}
-                  >
-                    Reject
                   </Button>
                 </td>
               </tr>
