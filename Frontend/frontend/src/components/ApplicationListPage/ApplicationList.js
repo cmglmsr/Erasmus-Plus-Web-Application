@@ -12,6 +12,7 @@ function ApplicationList() {
 
   function ViewApplication() {
     var id = this.key;
+    console.log("view" + id);
     navigate(`/coordinator/applications/${id}`);
   }
   

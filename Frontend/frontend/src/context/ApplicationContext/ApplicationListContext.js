@@ -22,7 +22,7 @@ export const ApplicationListProvider = ({ children }) => {
           setApplicationList(data);
         });
     }).catch((e) => {console.log(e)});
-  }, []);
+  }, [setApplicationList]);
 
   console.log(applicationList);
   return (
