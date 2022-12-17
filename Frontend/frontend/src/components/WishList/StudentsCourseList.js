@@ -45,10 +45,10 @@ function StudentsCourseList(props) {
       {
         method: "POST",
         credentials: "include",
-        body: JSON.stringify(wishlist),
+        body: JSON.stringify(mapItem),
       }
     );
-    console.log("FRONTENDIN ALLAHI GORMEK ISTIYOR", wishlist)
+    console.log("FRONTENDIN ALLAHI GORMEK ISTIYOR", mapItem)
   }
 
   return (
