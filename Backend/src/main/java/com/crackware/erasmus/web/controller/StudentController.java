@@ -8,7 +8,7 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -155,7 +155,9 @@ public class StudentController {
         if(s.getPreApproval()==null||s.getPreApproval().getData()==null) {
             return null;
         }
-        return ResponseEntity.ok().body(s.getPreApproval().getData());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + s.getPreApproval().getName() + "\"")
+                .body(s.getPreApproval().getData());
     }
 
     @GetMapping("/approvedCoursesList")
