@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+export const FbmContext = createContext();
 
-export const IsoContext = createContext();
-export const IsoProvider = ({ children }) => {
+export const FbmProvider = ({ children }) => {
 
-  const [isoData, setisoData] = useState([]);
+  const [fbmData, setfbmData] = useState([]);
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    var API = "http://localhost:8080/iso/home";
+    var API = "http://localhost:8080/fbm/home";
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -21,18 +21,18 @@ export const IsoProvider = ({ children }) => {
 
     fetch(API, requestOptions).then((res) =>
       res.json().then((data) => {
-        setisoData(data);
+        setfbmData(data);
         setRole(data.role.name);
         localStorage.setItem("role", data.role.name);
       })
     );
   }, []);
 
-  console.log(isoData);
+  console.log(fbmData);
   return (
-    <IsoContext.Provider value={[isoData, role]}>
+    <FbmContext.Provider value={[fbmData, role]}>
       {children}
-    </IsoContext.Provider>
+    </FbmContext.Provider>
   );
 };
-export default InstructorContext;
+export default FbmProvider;
