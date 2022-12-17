@@ -38,18 +38,17 @@ function StudentsCourseList(props) {
 
   function onSubmit() {
     fetch(
-      "http://localhost:8080/student/createCourseWishlist", //enter api address
-      {
-        method: "POST",
-        credentials: "include",
-        contentType: "application/json",
-        body: JSON.stringify(mapItem),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+        "http://localhost:8080/student/createCourseWishlist", //enter api address
+        {
+          method: "POST",
+          credentials: "include",
+          contentType: "application/json",
+          body: JSON.stringify(mapItem),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
     );
-    console.log("FRONTENDIN ALLAHI GORMEK ISTIYOR", mapItem);
   }
 
   return (
