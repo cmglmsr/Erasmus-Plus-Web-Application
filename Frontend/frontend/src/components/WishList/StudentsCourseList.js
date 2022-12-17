@@ -58,7 +58,7 @@ function StudentsCourseList(props) {
           <h3 className="heading my-3">Wishlist</h3>
           <hr />
           <div className={classes.scrollable}>
-            <Table>
+            <Table className={classes.size}>
               <thead>
                 <tr>
                   <th>Course Name</th>
