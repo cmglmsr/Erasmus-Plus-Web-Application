@@ -166,6 +166,7 @@ public class CoordinatorController {
                         s.getName() + " " + s.getSurname(),
                         s.getBilkentId(),
                         s.getCgpa(),
+                        s.getLearningAgreement().getDocumentStatus().toString(),
                         s.getLearningAgreement().getId().toString());
                 response.add(rd);
             }

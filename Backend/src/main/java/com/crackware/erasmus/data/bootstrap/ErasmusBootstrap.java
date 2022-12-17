@@ -247,9 +247,9 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         Coordinator aduran = new Coordinator();
         aduran.setDepartment(Department.CS);
         aduran.setRole(cRole);
-        aduran.setMail("aduran@hotmail.com");
+        aduran.setMail("adundar@hotmail.com");
         aduran.setName("Ayşegül");
-        aduran.setSurname("Duran");
+        aduran.setSurname("Dündar");
         aduran.setDateOfBirth("21.04.1985");
         coordinatorRepository.save(aduran);
 

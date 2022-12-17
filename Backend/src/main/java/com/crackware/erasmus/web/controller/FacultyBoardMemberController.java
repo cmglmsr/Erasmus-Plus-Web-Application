@@ -10,6 +10,7 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -125,6 +126,17 @@ public class FacultyBoardMemberController {
         documentService.save(document);
     }
 
+    @GetMapping("/download/preapproval/{id}")
+    public ResponseEntity<byte[]> getPreApproval(@PathVariable String id) {
+        Document preApproval = documentService.findById(Long.valueOf(id));
+        if(preApproval==null) {
+            return null;
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + preApproval.getName() + ".pdf" + "\"")
+                .body(preApproval.getData());
+    }
+
     @GetMapping("/preapprovals")
     public ResponseEntity<ArrayList<ResponseDocument>> preApprovals(){
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
@@ -135,6 +147,7 @@ public class FacultyBoardMemberController {
                         s.getName() + " " + s.getSurname(),
                         s.getBilkentId(),
                         s.getCgpa(),
+                        s.getPreApproval().getDocumentStatus().toString(),
                         s.getPreApproval().getId().toString());
                 response.add(rd);
             }
