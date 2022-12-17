@@ -70,20 +70,20 @@ const PreApprovalForm = ({ status }) => {
     };
 
     fetch(API, requestOptions).then((res) => {
-        res.blob();
-    }).then((blob) => {
-      // Create blob link to download
-      const url = window.URL.createObjectURL(
-          new Blob([blob]),
-      );
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute(
-          'download',
-          `PreApproval.pdf`,
-      );
-      link.click();
-    });
+        res.blob().then((blob) => {
+          // Create blob link to download
+          const url = window.URL.createObjectURL(
+              new Blob([blob]),
+          );
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute(
+              'download',
+              `PreApproval.pdf`,
+          );
+          link.click();
+        });
+    })
   }
 
   return (

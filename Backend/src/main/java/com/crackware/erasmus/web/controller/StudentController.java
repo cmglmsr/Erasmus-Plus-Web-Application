@@ -160,6 +160,17 @@ public class StudentController {
                 .body(s.getPreApproval().getData());
     }
 
+    @GetMapping("/download/learningAgreement")
+    public ResponseEntity<byte[]> getLearningAgreement() {
+        Student s = (Student) helperService.getUser();
+        if(s.getLearningAgreement()==null||s.getLearningAgreement().getData()==null) {
+            return null;
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + s.getLearningAgreement().getName() + ".pdf" + "\"")
+                .body(s.getLearningAgreement().getData());
+    }
+
     @GetMapping("/approvedCoursesList")
     public Set<Course> showCourses(){
         Student s = (Student) helperService.getUser();

@@ -72,18 +72,21 @@ const LearningAgreementForm = ({ status }) => {
       credentials: "include",
     };
 
-    fetch(API, requestOptions)
-      .then((res) => {
-        res.blob();
-      })
-      .then((blob) => {
+    fetch(API, requestOptions).then((res) => {
+      res.blob().then((blob) => {
         // Create blob link to download
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
+        const url = window.URL.createObjectURL(
+            new Blob([blob]),
+        );
+        const link = document.createElement('a');
         link.href = url;
-        link.setAttribute("download", `PreApproval.pdf`);
+        link.setAttribute(
+            'download',
+            `LearningAgreement.pdf`,
+        );
         link.click();
       });
+    })
   }
 
   return (
