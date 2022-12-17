@@ -3,8 +3,8 @@ import Card from "../UI/Card";
 import Table from "react-bootstrap/Table";
 import classes from "./ApplicationForm.module.css";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import ApplicationListContext from "../../context/ApplicationContext/ApplicationListContext";
+import { useEffect, useState } from "react";
+import ApplicationContext from "../../context/ApplicationContext/ApplicationContext";
 
 const timePeriod = {
   1: "Fall Semester",
@@ -12,12 +12,29 @@ const timePeriod = {
   3: "Fall & Spring Semester",
 };
 const ApplicationDetailsCoordinator = () => {
-    const applicationList = useContext(ApplicationListContext);
-    const params = useParams();
-    const application = applicationList.filter(
-      (application) => application.id === params.id
-    )[0];
-  
+  const [applicationData, setApplicationData] = useState({});
+  const params = useParams();
+
+  useEffect(() => {
+    var API = `http://localhost:8080/coordinator/applciations/${params.uid}`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(API, requestOptions).then((res) => {
+        res.json().then((data) => {
+          console.log("aaaaaaaaaaaaaaaa" + data);
+          setApplicationData(data);
+        });
+      }
+    );
+  }, []);
+
   return (
     <Card>
       <Form className="form">
@@ -29,15 +46,15 @@ const ApplicationDetailsCoordinator = () => {
           <tbody>
             <tr>
               <td>Full Name</td>
-              <td>{application.fullname}</td>
+              <td>{applicationData.fullname}</td>
             </tr>
             <tr>
               <td>Bilkent ID</td>
-              <td>{application.id}</td>
+              <td>{applicationData.id}</td>
             </tr>
             <tr>
               <td>CGPA</td>
-              <td>{application.cgpa}</td>
+              <td>{applicationData.cgpa}</td>
             </tr>
           </tbody>
         </Table>
@@ -47,7 +64,7 @@ const ApplicationDetailsCoordinator = () => {
           <tbody>
             <tr>
               <td>Status</td>
-              <td>{application.status}</td>
+              <td>{applicationData.status}</td>
             </tr>
           </tbody>
         </Table>
@@ -57,27 +74,27 @@ const ApplicationDetailsCoordinator = () => {
           <tbody>
             <tr>
               <td>Time Period</td>
-              <td>{timePeriod[application.term]}</td>
+              <td>{timePeriod[applicationData.term]}</td>
             </tr>
             <tr>
               <td>1st Preference</td>
-              <td>{application.pref1}</td>
+              <td>{applicationData.pref1}</td>
             </tr>
             <tr>
               <td>2nd Preference</td>
-              <td>{application.pref2}</td>
+              <td>{applicationData.pref2}</td>
             </tr>
             <tr>
               <td>3rd Preference</td>
-              <td>{application.pref3}</td>
+              <td>{applicationData.pref3}</td>
             </tr>
             <tr>
               <td>4th Preference</td>
-              <td>{application.pref4}</td>
+              <td>{applicationData.pref4}</td>
             </tr>
             <tr>
               <td>5th Preference</td>
-              <td>{application.pref5}</td>
+              <td>{applicationData.pref5}</td>
             </tr>
           </tbody>
         </Table>
