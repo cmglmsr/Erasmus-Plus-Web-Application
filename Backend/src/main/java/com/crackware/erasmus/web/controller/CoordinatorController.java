@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.message.ResponseApplication;
+import com.crackware.erasmus.data.message.ResponseDocument;
 import com.crackware.erasmus.data.message.ResponseFile;
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
@@ -44,7 +45,9 @@ public class CoordinatorController {
 
     private final ImageService imageService;
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ApplicationService applicationService, ImageService imageService) {
+    private final StudentService studentService;
+
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ApplicationService applicationService, ImageService imageService, StudentService studentService) {
         this.coordinatorService = coordinatorService;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
@@ -54,6 +57,7 @@ public class CoordinatorController {
         this.documentService = documentService;
         this.applicationService = applicationService;
         this.imageService = imageService;
+        this.studentService = studentService;
     }
 
     @GetMapping("/home")
@@ -139,7 +143,7 @@ public class CoordinatorController {
     }
 
     @PostMapping("/learningAgreement/reject/{id}")
-    public void rejectLearningAgreement(@PathVariable String id){
+    public void rejectLearningAgreement(@PathVariable String id) {
         Document agreement = documentService.findById(Long.valueOf(id));
         agreement.setDocumentStatus(Status.DENIED);
         documentService.save(agreement);
@@ -153,17 +157,20 @@ public class CoordinatorController {
     }
 
     @GetMapping("/learningAgreements")
-    public ResponseEntity<List<ResponseFile>> getAgreements(){
-        ArrayList<Document> al = new ArrayList<>(documentService.findAll());
-        List<ResponseFile> responseFiles = new ArrayList<>();
-        for(Document d : al) {
-            ResponseFile rf;
-            if(d.getName().equals("learningAgreement")) {
-                rf = new ResponseFile(d.getName(), d.getType(),d.getId().toString(), d.getDocumentStatus());
-                responseFiles.add(rf);
+    public ResponseEntity<List<ResponseDocument>> getAgreements() {
+        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+        ArrayList<ResponseDocument> response = new ArrayList<>();
+        for(Student s : students) {
+            if(s.getLearningAgreement()!=null) {
+                ResponseDocument rd = new ResponseDocument(
+                        s.getName() + " " + s.getSurname(),
+                        s.getBilkentId(),
+                        s.getCgpa(),
+                        s.getLearningAgreement().getId().toString());
+                response.add(rd);
             }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(responseFiles);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
 
