@@ -6,6 +6,9 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import CoordinatorContext from "../context/CoordinatorContext/CoordinatorContext";
 
+
+
+
 function ApplicationListPage() {
   const [coordinatorData, role] = useContext(CoordinatorContext);
 
