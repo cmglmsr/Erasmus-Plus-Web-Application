@@ -157,13 +157,11 @@ public class StudentController {
         ArrayList<Course> courses = new ArrayList<>(courseService.findAll());
         ArrayList<Course> returnCourses = new ArrayList<>();
         for(Course c : courses) {
-            if(c.getHostUniversityName().equals(school.getName())) {
+            if(c.getHostUniversityName()!=null && c.getHostUniversityName().equals(school.getName())) {
                 returnCourses.add(c);
             }
         }
         return new HashSet<>(returnCourses);
     }
-
-
 }
 

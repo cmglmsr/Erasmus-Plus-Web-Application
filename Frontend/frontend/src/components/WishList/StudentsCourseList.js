@@ -46,7 +46,7 @@ function StudentsCourseList(props) {
         method: "POST",
         credentials: "include",
         contentType: "application/json",
-        body: JSON.stringify(mapItem),
+        body: mapItem,
       }
     );
     console.log("FRONTENDIN ALLAHI GORMEK ISTIYOR", mapItem)
