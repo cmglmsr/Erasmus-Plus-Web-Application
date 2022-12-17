@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
+import {cleanCookies} from "universal-cookie/es6/utils";
 
 function NavigationBar() {
   var role = localStorage.getItem("role");
@@ -11,6 +12,7 @@ function NavigationBar() {
   const navigate = useNavigate();
 
   function logout() {
+    cleanCookies()
     var API = "http://localhost:8080/logout";
     var requestOptions = {
       method: "GET",
