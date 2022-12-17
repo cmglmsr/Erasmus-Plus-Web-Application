@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
 import classes from "./LearningAgreementList.module.css";
 import { LearningAgreementListContext } from "../../context/LearningAgreementContext/LearningAgreementListContext";
-import { useContext } from "react";
+import {useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,16 +12,24 @@ function LearningAgreementList() {
   const navigate = useNavigate();
   console.log(learningAgreementList);
 
+  const selectDownloadNumber = numberSelected => {
+    downloadForm(numberSelected)
+  }
+
+  const selectApproveNumber = numberSelected => {
+    approve(numberSelected)
+  }
+
+  const selectRejectNumber = numberSelected => {
+    reject(numberSelected)
+  }
   function handleInput(e) {
 
     //navigate(`/coordinator/applications/${uid}`)
   }
   
-  function downloadForm(e) {
-    console.log(e.target.value);
-    const uid = e.target.value;
-    console.log("a" + uid);
-    var API = `http://localhost:8080/coordinator/learningAgreement/download/${uid}`;
+  function downloadForm(number) {
+    var API = `http://localhost:8080/coordinator/learningAgreement/download/${number}`;
     var requestOptions = {
       method: "POST",
       redirect: "follow",
@@ -45,11 +53,8 @@ function LearningAgreementList() {
     })
   }
 
-  function approve(event) {
-    console.log(event.target.value);
-    const uid = event.target.value;
-
-    var API = `http://localhost:8080/coordinator/learningAgreement/approve/${uid}`;
+  function approve(number) {
+    var API = `http://localhost:8080/coordinator/learningAgreement/approve/${number}`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -61,11 +66,8 @@ function LearningAgreementList() {
     });
   }
 
-  function reject(event) {
-    console.log(event.target.value);
-    const uid = event.target.value;
-    
-    var API = `http://localhost:8080/coordinator/learningAgreement/reject/${uid}`;
+  function reject(number) {
+    var API = `http://localhost:8080/coordinator/learningAgreement/reject/${number}`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -107,7 +109,7 @@ function LearningAgreementList() {
                     key={`download-${learningAgreement.uid}`}
                     value={learningAgreement.uid}
                     className="button-default"
-                    onClick={e => downloadForm(e, "value")}
+                    onClick={selectDownloadNumber}
                   >
                     Download
                   </Button>
@@ -117,7 +119,7 @@ function LearningAgreementList() {
                     key={`approve-${learningAgreement.uid}`}
                     value={learningAgreement.uid}
                     className="btn-success"
-                    onClick={approve}
+                    onClick={selectApproveNumber}
                   >
                     Approve
                   </Button>
@@ -127,7 +129,7 @@ function LearningAgreementList() {
                     key={`reject-${learningAgreement.uid}`}
                     value={learningAgreement.uid}
                     className ="btn-danger"
-                    onClick={reject}
+                    onClick={selectRejectNumber}
                   >
                     Reject
                   </Button>
