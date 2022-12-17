@@ -15,8 +15,9 @@ const ApplicationDetailsCoordinator = () => {
   const [applicationData, setApplicationData] = useState({});
   const params = useParams();
 
+
   useEffect(() => {
-    var API = `http://localhost:8080/coordinator/applciations/${params.uid}`;
+    var API = `http://localhost:8080/coordinator/applications/${params.uid}`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
