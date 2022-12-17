@@ -125,7 +125,7 @@ const PreApprovalForm = ({ status }) => {
             PreApproval Form
           </Form.Label>
           <Col>
-            <Form.Control type="file" onChange={handleFile} />
+            <Form.Control type="file" onChange={handleFile} accept=".pdf"/>
           </Col>
         </Form.Group>
 
