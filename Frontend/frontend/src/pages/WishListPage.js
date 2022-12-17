@@ -24,8 +24,8 @@ function WishListPage() {
               name={profile.name}
               surname={profile.surname}
               role={role}
-              semester={profile.image}
-              id={profile.id}
+              term={profile.term}
+              bilkentId={profile.bilkentId}
               image={profile.image}
               department={profile.department}
             />
