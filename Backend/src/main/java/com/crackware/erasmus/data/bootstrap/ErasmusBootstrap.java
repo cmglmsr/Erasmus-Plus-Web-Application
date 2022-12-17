@@ -2,12 +2,18 @@ package com.crackware.erasmus.data.bootstrap;
 
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Department;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.model.security.EnumRole;
 import com.crackware.erasmus.data.model.security.Role;
 import com.crackware.erasmus.data.model.security.User;
+import com.crackware.erasmus.data.repositories.CoordinatorRepository;
+import com.crackware.erasmus.data.repositories.FacultyBoardMemberRepository;
+import com.crackware.erasmus.data.repositories.ScheduleRepository;
+import com.crackware.erasmus.data.repositories.TaskRepository;
 import com.crackware.erasmus.data.repositories.security.RoleRepository;
 import com.crackware.erasmus.data.repositories.security.UserRepository;
-import com.crackware.erasmus.data.services.*;
+import com.crackware.erasmus.data.services.StudentService;
+import com.crackware.erasmus.data.services.ToDoListItemService;
 import com.crackware.erasmus.data.services.helper.ExcelService;
 import com.crackware.erasmus.web.controller.TestController;
 import org.apache.commons.compress.utils.IOUtils;
@@ -20,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.HashSet;
 
 @Component
@@ -28,37 +36,46 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final StudentService studentService;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
-    private final CoordinatorService coordinatorService;
+    private final CoordinatorRepository coordinatorRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final TaskRepository taskRepository;
     private final ToDoListItemService toDoListItemService;
-
-    private final ToDoListService toDoListService;
-    private final FacultyBoardMemberService facultyBoardMemberService;
+    private final FacultyBoardMemberRepository facultyBoardMemberRepository;
     private final TestController testController;
     private final ExcelService excelService;
 
-    private final InstructorService instructorService;
-
     public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository,
-                            UserRepository userRepository, CoordinatorService coordinatorService,
+                            UserRepository userRepository, CoordinatorRepository coordinatorRepository,
+                            ScheduleRepository scheduleRepository, TaskRepository taskRepository,
                             ToDoListItemService toDoListItemService,
-                            ToDoListService toDoListService, FacultyBoardMemberService facultyBoardMemberService,
-                            TestController testController, ExcelService excelService, InstructorService instructorService) {
+                            FacultyBoardMemberRepository facultyBoardMemberRepository,
+                            TestController testController, ExcelService excelService) {
         this.studentService = studentService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
-        this.coordinatorService = coordinatorService;
-        this.toDoListService = toDoListService;
-        this.facultyBoardMemberService = facultyBoardMemberService;
+        this.coordinatorRepository = coordinatorRepository;
+        this.scheduleRepository = scheduleRepository;
+        this.taskRepository = taskRepository;
         this.toDoListItemService = toDoListItemService;
+        this.facultyBoardMemberRepository = facultyBoardMemberRepository;
         this.testController = testController;
         this.excelService = excelService;
-        this.instructorService = instructorService;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
+        // set schedule
+        Schedule schedule = new Schedule();
+        Task task = new Task();
+        task.setDate("18.12.2022");
+        task.setDone(false);
+        task.setDescription("test desc");
+        task.setDueDate("18.12.2022");
+        schedule.addItem(task);
+        taskRepository.save(task);
+        scheduleRepository.save(schedule);
 
         // set roles
         Role sRole = new Role();
@@ -151,6 +168,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         cem.setPhoneNumber("905376314257");
         cem.setTerm(5);
         cem.setRole(sRole);
+        cem.setSchedule(schedule);
         studentService.save(cem);
         eren.setDateOfBirth("21.02.2001");
         eren.setMail("eduran@hotmail.com");
@@ -225,36 +243,15 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         calkan.setName("Can");
         calkan.setSurname("Alkan");
         calkan.setDateOfBirth("21.04.1980");
-        ToDoList toDoList1 = new ToDoList();
-        ToDoListItem toDoListItem1 = new ToDoListItem();
-        toDoList1.setItemSet(new HashSet<>());
-        toDoListItem1.setDueDate("25.12.2022");
-        toDoListItem1.setDone(false);
-        toDoListItem1.setDescription("Can Alkan's To-Do List");
-        toDoList1.addItem(toDoListItem1);
-        calkan.setToDoList(toDoList1);
-        toDoListItemService.save(toDoListItem1);
-        toDoListService.save(toDoList1);
-        coordinatorService.save(calkan);
-
-        Coordinator adundar = new Coordinator();
-        adundar.setDepartment(Department.CS);
-        adundar.setRole(cRole);
-        adundar.setMail("adundar@hotmail.com");
-        adundar.setName("Ayşegül");
-        adundar.setSurname("Dundar");
-        adundar.setDateOfBirth("21.04.1985");
-        ToDoList toDoList2 = new ToDoList();
-        ToDoListItem toDoListItem2 = new ToDoListItem();
-        toDoList2.setItemSet(new HashSet<>());
-        toDoListItem2.setDueDate("25.12.2022");
-        toDoListItem2.setDone(false);
-        toDoListItem2.setDescription("Aysegul Dundar's To-Do List");
-        toDoList2.addItem(toDoListItem2);
-        adundar.setToDoList(toDoList2);
-        toDoListItemService.save(toDoListItem2);
-        toDoListService.save(toDoList2);
-        coordinatorService.save(adundar);
+        coordinatorRepository.save(calkan);
+        Coordinator aduran = new Coordinator();
+        aduran.setDepartment(Department.CS);
+        aduran.setRole(cRole);
+        aduran.setMail("aduran@hotmail.com");
+        aduran.setName("Ayşegül");
+        aduran.setSurname("Duran");
+        aduran.setDateOfBirth("21.04.1985");
+        coordinatorRepository.save(aduran);
 
         // set fba
         FacultyBoardMember fbaSaksoy = new FacultyBoardMember();
@@ -263,17 +260,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         fbaSaksoy.setRole(fRole);
         fbaSaksoy.setDateOfBirth("19.03.1975");
         fbaSaksoy.setSurname("Aksoy");
-        ToDoList toDoList3 = new ToDoList();
-        ToDoListItem toDoListItem3 = new ToDoListItem();
-        toDoList3.setItemSet(new HashSet<>());
-        toDoListItem3.setDueDate("25.12.2022");
-        toDoListItem3.setDone(false);
-        toDoListItem3.setDescription("Selim Aksoy's To-Do List");
-        toDoList3.addItem(toDoListItem3);
-        fbaSaksoy.setToDoList(toDoList3);
-        toDoListItemService.save(toDoListItem3);
-        toDoListService.save(toDoList3);
-        facultyBoardMemberService.save(fbaSaksoy);
+        facultyBoardMemberRepository.save(fbaSaksoy);
 
         // set coordinators
         Instructor instructorEray = new Instructor();
@@ -283,18 +270,6 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         instructorEray.setDateOfBirth("09.11.2001");
         instructorEray.setSurname("Tüzün");
         instructorEray.setDepartment(Department.CS);
-        ToDoList toDoList4 = new ToDoList();
-        toDoList4.setItemSet(new HashSet<>());
-        ToDoListItem toDoListItem4 = new ToDoListItem();
-        toDoListItem4.setDueDate("25.12.2022");
-        toDoListItem4.setDone(false);
-        toDoListItem4.setDescription("Eray Tuzun's To-Do List");
-        toDoList4.addItem(toDoListItem4);
-        instructorEray.setToDoList(toDoList4);
-        toDoListItemService.save(toDoListItem4);
-        toDoListService.save(toDoList4);
-        instructorService.save(instructorEray);
-
 
         // set applications
         /*
@@ -317,21 +292,5 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         } catch(Exception e) {
             System.out.println("[-] Excel file cannot be parsed!");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

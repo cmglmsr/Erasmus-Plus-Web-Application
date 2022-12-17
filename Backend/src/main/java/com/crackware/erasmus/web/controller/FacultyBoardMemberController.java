@@ -1,5 +1,6 @@
 package com.crackware.erasmus.web.controller;
 
+import com.crackware.erasmus.data.message.ResponseDocument;
 import com.crackware.erasmus.data.message.ResponseFile;
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
@@ -7,6 +8,7 @@ import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
+import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,22 +29,28 @@ public class FacultyBoardMemberController {
 
     private final ToDoListService toDoListService;
 
+    private final TaskService taskService;
+
     private final ToDoListItemService toDoListItemService;
+
+    private final ScheduleService scheduleService;
 
     private final DocumentService documentService;
 
     private final ImageService imageService;
 
-    public FacultyBoardMemberController(HelperService helperService,
-                                        FacultyBoardMemberService facultyBoardMemberService,
-                                        ToDoListService toDoListService, ToDoListItemService toDoListItemService,
-                                        DocumentService documentService, ImageService imageService) {
+    private final StudentService studentService;
+
+    public FacultyBoardMemberController(HelperService helperService, FacultyBoardMemberService facultyBoardMemberService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService, StudentService studentService) {
         this.helperService = helperService;
         this.facultyBoardMemberService = facultyBoardMemberService;
         this.toDoListService = toDoListService;
+        this.taskService = taskService;
         this.toDoListItemService = toDoListItemService;
+        this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.imageService = imageService;
+        this.studentService = studentService;
     }
 
     @GetMapping("/home")
@@ -81,6 +89,28 @@ public class FacultyBoardMemberController {
         }
     }
 
+    @PostMapping("/schedule")
+    public void fbmSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
+        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
+        if (helperService.getUser().getSchedule() == null){
+            helperService.getUser().setSchedule(new Schedule());
+        }
+        if (task.isDone()){
+            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
+                    scheduleRequest.getDueDate());
+        }else {
+            taskService.save(task);
+            if (helperService.getUser().getSchedule() != null)
+                helperService.getUser().getSchedule().addItem(task);
+            else {
+                helperService.getUser().setSchedule(new Schedule());
+                helperService.getUser().getSchedule().addItem(task);
+            }
+            scheduleService.save(helperService.getUser().getSchedule());
+            facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
+        }
+    }
+
     @PostMapping("/preapproval/approve/{id}")
     public void approvePreApproval(@PathVariable String id){
         Document document = documentService.findById(Long.valueOf(id));
@@ -96,16 +126,19 @@ public class FacultyBoardMemberController {
     }
 
     @GetMapping("/preapprovals")
-    public ResponseEntity<ArrayList<ResponseFile>> preApprovals(){
-        ArrayList<Document> documents = new ArrayList<>(documentService.findAll());
-        ArrayList<ResponseFile> preApps = new ArrayList<>();
-        for (Document document : documents) {
-            ResponseFile rf;
-            if (document.getName().equals("preApproval")) {
-                rf = new ResponseFile(document.getName(), document.getType(),document.getId().toString(), document.getDocumentStatus());
-                preApps.add(rf);
+    public ResponseEntity<ArrayList<ResponseDocument>> preApprovals(){
+        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+        ArrayList<ResponseDocument> response = new ArrayList<>();
+        for(Student s : students) {
+            if(s.getPreApproval()!=null) {
+                ResponseDocument rd = new ResponseDocument(
+                        s.getName() + " " + s.getSurname(),
+                        s.getBilkentId(),
+                        s.getCgpa(),
+                        s.getPreApproval().getId().toString());
+                response.add(rd);
             }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(preApps);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

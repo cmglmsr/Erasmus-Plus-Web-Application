@@ -25,7 +25,7 @@ function LearningAgreementList() {
   }
   function handleInput(e) {
 
-    //navigate(`/coordinator/applications/${uid}`)
+    //navigate(`/coordinator/applications/${documentId}`)
   }
   
   function downloadForm(number) {
@@ -100,14 +100,14 @@ function LearningAgreementList() {
           </thead>
           <tbody>
             {learningAgreementList.map((learningAgreement) => (
-              <tr key={learningAgreement.uid}>
+              <tr key={learningAgreement.documentId}>
                 <td className={classes.center}>{learningAgreement.fullName}</td>
                 <td className={classes.center}>{learningAgreement.id}</td>
                 <td className={classes.center}>{learningAgreement.cgpa}</td>
-                <td className={classes.center}>
+                <td className= {classes.center}>
                   <Button
-                    key={`download-${learningAgreement.uid}`}
-                    value={learningAgreement.uid}
+                    key={learningAgreement.documentId}
+                    value={learningAgreement.documentId}
                     className="button-default"
                     onClick={selectDownloadNumber}
                   >
@@ -116,8 +116,8 @@ function LearningAgreementList() {
                 </td>
                 <td className= {classes.center}>
                   <Button
-                    key={`approve-${learningAgreement.uid}`}
-                    value={learningAgreement.uid}
+                    key={learningAgreement.documentId}
+                    value={learningAgreement.documentId}
                     className="btn-success"
                     onClick={selectApproveNumber}
                   >
@@ -126,8 +126,8 @@ function LearningAgreementList() {
                 </td>
                 <td className= {classes.center}>
                   <Button
-                    key={`reject-${learningAgreement.uid}`}
-                    value={learningAgreement.uid}
+                    key={learningAgreement.documentId}
+                    value={learningAgreement.documentId}
                     className ="btn-danger"
                     onClick={selectRejectNumber}
                   >
