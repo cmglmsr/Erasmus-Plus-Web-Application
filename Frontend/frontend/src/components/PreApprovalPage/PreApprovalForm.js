@@ -19,19 +19,21 @@ const PreApprovalForm = ({ status }) => {
     var data = new FormData();
     data.append("preApproval", file);
 
-    fetch(
-        "http://localhost:8080/student/upload/preapproval", //enter api address
-        {
-          method: "POST",
-          credentials: "include",
-          body: data,
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Accept": "application/json",
-            "type": "formData",
-          },
-        }
-      ).then((response) => {
+    var myHeaders = new Headers();
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: data,
+      credentials: 'include',
+      redirect: 'follow'
+    };
+
+
+    fetch("http://localhost:8080/student/upload/preapproval", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error)).then((response) => {
         if (response.status === 200) {
           window.confirm("Preapproval Uploaded.");
         }
