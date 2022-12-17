@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
 import classes from "./LearningAgreementList.module.css";
 import { LearningAgreementListContext } from "../../context/LearningAgreementContext/LearningAgreementListContext";
-import { useContext } from "react";
+import {useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -12,10 +12,73 @@ function LearningAgreementList() {
   const navigate = useNavigate();
   console.log(learningAgreementList);
 
+  const selectDownloadNumber = numberSelected => {
+    downloadForm(numberSelected)
+  }
+
+  const selectApproveNumber = numberSelected => {
+    approve(numberSelected)
+  }
+
+  const selectRejectNumber = numberSelected => {
+    reject(numberSelected)
+  }
   function handleInput(e) {
-    console.log(e.target.value);
-    const uid = e.target.value;
-    //navigate(`/coordinator/applications/${uid}`)
+
+    //navigate(`/coordinator/applications/${documentId}`)
+  }
+  
+  function downloadForm(number) {
+    var API = `http://localhost:8080/coordinator/learningAgreement/download/${number}`;
+    var requestOptions = {
+      method: "POST",
+      redirect: "follow",
+      credentials: "include",
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      res.blob().then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(
+            new Blob([blob]),
+        );
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute(
+            'download',
+            `LearningAgreement.pdf`,
+        );
+        link.click();
+      });
+    })
+  }
+
+  function approve(number) {
+    var API = `http://localhost:8080/coordinator/learningAgreement/approve/${number}`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      window.location.reload();
+    });
+  }
+
+  function reject(number) {
+    var API = `http://localhost:8080/coordinator/learningAgreement/reject/${number}`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+    };
+
+    fetch(API, requestOptions).then((res) => {{
+      console.log(res);
+      window.location.reload();
+    }
+    });
   }
 
   console.log(learningAgreementList);
@@ -37,36 +100,36 @@ function LearningAgreementList() {
           </thead>
           <tbody>
             {learningAgreementList.map((learningAgreement) => (
-              <tr key={learningAgreement.uid}>
+              <tr key={learningAgreement.documentId}>
                 <td className={classes.center}>{learningAgreement.fullName}</td>
                 <td className={classes.center}>{learningAgreement.id}</td>
                 <td className={classes.center}>{learningAgreement.cgpa}</td>
                 <td className= {classes.center}>
                   <Button
-                    key={learningAgreement.uid}
-                    value={learningAgreement.uid}
+                    key={learningAgreement.documentId}
+                    value={learningAgreement.documentId}
                     className="button-default"
-                    onClick={(e) => handleInput(e, "value")}
+                    onClick={selectDownloadNumber}
                   >
                     Download
                   </Button>
                 </td>
                 <td className= {classes.center}>
                   <Button
-                    key={learningAgreement.uid}
-                    value={learningAgreement.uid}
-                    className= {classes.button1}
-                    onClick={(e) => handleInput(e, "value")}
+                    key={learningAgreement.documentId}
+                    value={learningAgreement.documentId}
+                    className="btn-success"
+                    onClick={selectApproveNumber}
                   >
                     Approve
                   </Button>
                 </td>
                 <td className= {classes.center}>
                   <Button
-                    key={learningAgreement.uid}
-                    value={learningAgreement.uid}
-                    className = {classes.button2}
-                    onClick={(e) => handleInput(e, "value")}
+                    key={learningAgreement.documentId}
+                    value={learningAgreement.documentId}
+                    className ="btn-danger"
+                    onClick={selectRejectNumber}
                   >
                     Reject
                   </Button>

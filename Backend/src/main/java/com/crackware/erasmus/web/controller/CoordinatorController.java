@@ -11,6 +11,7 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -150,10 +151,15 @@ public class CoordinatorController {
     }
 
     @PostMapping("/learningAgreement/download/{id}")
-    public ResponseEntity<byte[]> downloadLearningAgreement(@PathVariable String id){
-        Document agreement = documentService.findById(Long.valueOf(id));
-        documentService.save(agreement);
-        return ResponseEntity.status(HttpStatus.OK).body(agreement.getData());
+    public ResponseEntity<byte[]> downloadLearningAgreement(@PathVariable int id){
+        Document learningAgreement = documentService.findById((long) id);
+
+        if(learningAgreement == null) {
+            return null;
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + learningAgreement.getName() + ".pdf" + "\"")
+                .body(learningAgreement.getData());
     }
 
     @GetMapping("/learningAgreements")
