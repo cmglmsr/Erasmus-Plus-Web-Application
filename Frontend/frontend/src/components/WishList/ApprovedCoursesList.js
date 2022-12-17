@@ -14,27 +14,24 @@ var ApprovedCourses = [];
 var course = "";
 function ApprovedCoursesList(props) {
 
-  function getApprovedCourses() {
-    fetch(
-      "http://localhost:8080/student/approvedCoursesList", //enter api address
-      {
-        method: "GET",
-        credentials: "include"
-      }
-    ).then(res => res.json).then(result => {
-      console.log(result);
-      ApprovedCourses = result;
-    });
-  } 
-
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [hostUniversityName, setUniversity] = useState("");
   const [approvedNotapproved, setApprovedNotapproved] = useState("")
-  getApprovedCourses();
+  const [coursesList, setCoursesList] = useState([])
+
   useEffect(() => {
    course = {courseName: courseName, courseCode: courseCode, hostUniversityName: hostUniversityName, approvedNotapproved: "Approved"};
    props.getCourse(course)
+    fetch(
+        "http://localhost:8080/student/approvedCoursesList", //enter api address
+        {
+          method: "GET",
+          credentials: "include"
+        }
+    ).then(res => res.json()).then(result => {
+      setCoursesList(result);
+    });
   },[courseName, courseCode, hostUniversityName, "Approved"]);
 
   return (
@@ -54,7 +51,7 @@ function ApprovedCoursesList(props) {
               </tr>
             </thead>
             <tbody>
-              {ApprovedCourses.map((item, i) => {
+              {coursesList.map((item, i) => {
                 return (
                   <ReactDeleteRow
                     deleteElement={<i className={classes.button}>ADD</i>}
