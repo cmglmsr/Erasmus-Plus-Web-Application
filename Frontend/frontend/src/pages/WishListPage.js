@@ -11,18 +11,8 @@ import { useEffect, useState } from "react";
 import ApprovedCoursesList from "../components/WishList/ApprovedCoursesList";
 
 function WishListPage() {
-  const [profile, setProfile] = useState({});
-  const [role, setRole] = useState("");
-  useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  });
+  const [profile, role] = useContext(StudentContext);
+  console.log(profile);
 
   return (
     <section>
