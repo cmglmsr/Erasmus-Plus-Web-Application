@@ -1,14 +1,12 @@
 package com.crackware.erasmus.data.bootstrap;
 
-import com.crackware.erasmus.data.model.Coordinator;
-import com.crackware.erasmus.data.model.Schedule;
-import com.crackware.erasmus.data.model.Student;
-import com.crackware.erasmus.data.model.Task;
+import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.model.security.EnumRole;
 import com.crackware.erasmus.data.model.security.Role;
 import com.crackware.erasmus.data.model.security.User;
 import com.crackware.erasmus.data.repositories.CoordinatorRepository;
+import com.crackware.erasmus.data.repositories.FacultyBoardMemberRepository;
 import com.crackware.erasmus.data.repositories.ScheduleRepository;
 import com.crackware.erasmus.data.repositories.TaskRepository;
 import com.crackware.erasmus.data.repositories.security.RoleRepository;
@@ -32,8 +30,9 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final ScheduleRepository scheduleRepository;
     private final TaskRepository taskRepository;
     private final ToDoListItemService toDoListItemService;
+    private final FacultyBoardMemberRepository facultyBoardMemberRepository;
 
-    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository, ScheduleRepository scheduleRepository, TaskRepository taskRepository, ToDoListItemService toDoListItemService) {
+    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository, ScheduleRepository scheduleRepository, TaskRepository taskRepository, ToDoListItemService toDoListItemService, FacultyBoardMemberRepository facultyBoardMemberRepository) {
         this.studentService = studentService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -41,6 +40,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         this.scheduleRepository = scheduleRepository;
         this.taskRepository = taskRepository;
         this.toDoListItemService = toDoListItemService;
+        this.facultyBoardMemberRepository = facultyBoardMemberRepository;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         Task task = new Task();
         task.setDate("18.12.2022");
         task.setDone(false);
-        task.setDescription("ereni sikme günü");
+        task.setDescription("test desc");
         task.setDueDate("18.12.2022");
         schedule.addItem(task);
         taskRepository.save(task);
@@ -76,7 +76,8 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         User uAsli = new User();
         User uArda = new User();
         User uCanAlkan = new User();
-        User uAysegulDuran = new User();
+        User uAysegulDundar = new User();
+        User uSaksoy = new User();
         uCem.setEmail("cemg@hotmail.com");
         uCem.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
         HashSet<Role> cemRoles = new HashSet<>(); cemRoles.add(sRole);
@@ -107,11 +108,16 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         HashSet<Role> calkanRoles = new HashSet<>(); calkanRoles.add(cRole);
         uCanAlkan.setRoles(calkanRoles);
         userRepository.save(uCanAlkan);
-        uAysegulDuran.setEmail("aduran@hotmail.com");
-        uAysegulDuran.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        uAysegulDundar.setEmail("adundar@hotmail.com");
+        uAysegulDundar.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
         HashSet<Role> aduranRoles = new HashSet<>(); aduranRoles.add(cRole);
-        uAysegulDuran.setRoles(aduranRoles);
-        userRepository.save(uAysegulDuran);
+        uAysegulDundar.setRoles(aduranRoles);
+        userRepository.save(uAysegulDundar);
+        uSaksoy.setEmail("saksoy@hotmail.com");
+        uSaksoy.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> saksoyRoles = new HashSet<>(); saksoyRoles.add(fRole);
+        uSaksoy.setRoles(saksoyRoles);
+        userRepository.save(uSaksoy);
 
         // set students
         Student cem = new Student();
@@ -218,5 +224,14 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         aduran.setSurname("Duran");
         aduran.setDateOfBirth("21.04.1985");
         coordinatorRepository.save(aduran);
+
+        // set fba
+        FacultyBoardMember fbaSaksoy = new FacultyBoardMember();
+        fbaSaksoy.setMail("saksoy@hotmail.com");
+        fbaSaksoy.setName("Selim");
+        fbaSaksoy.setRole(fRole);
+        fbaSaksoy.setDateOfBirth("19.03.1975");
+        fbaSaksoy.setSurname("Aksoy");
+        facultyBoardMemberRepository.save(fbaSaksoy);
     }
 }

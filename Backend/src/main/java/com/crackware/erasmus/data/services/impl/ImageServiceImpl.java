@@ -54,12 +54,12 @@ public class ImageServiceImpl implements ImageService {
 
         Role currentRole = user.getRole();
         switch (currentRole.getName()) {
-            case ROLE_ADMIN: adminService.save((Admin) user);
-            case ROLE_ISO: isoService.save((InternationalStudentOffice) user);
-            case ROLE_STUDENT: studentService.save((Student) user);
-            case ROLE_INSTRUCTOR: instructorService.save((Instructor) user);
-            case ROLE_COORDINATOR: coordinatorService.save((Coordinator) user);
-            case ROLE_FACULTY_BOARD_MEMBER: facultyBoardMemberService.save((FacultyBoardMember) user);
+            case ROLE_ADMIN: adminService.save((Admin) user); break;
+            case ROLE_ISO: isoService.save((InternationalStudentOffice) user);break;
+            case ROLE_STUDENT: studentService.save((Student) user);break;
+            case ROLE_INSTRUCTOR: instructorService.save((Instructor) user);break;
+            case ROLE_COORDINATOR: coordinatorService.save((Coordinator) user);break;
+            case ROLE_FACULTY_BOARD_MEMBER: facultyBoardMemberService.save((FacultyBoardMember) user);break;
         }
     }
 }

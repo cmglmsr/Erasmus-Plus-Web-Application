@@ -1,5 +1,6 @@
 package com.crackware.erasmus.web.controller;
 
+import com.crackware.erasmus.data.message.ResponseFile;
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
@@ -8,6 +9,8 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +18,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -121,17 +125,16 @@ public class FacultyBoardMemberController {
     }
 
     @GetMapping("/preapprovals")
-    public Set<Document> preApprovals(){
+    public ResponseEntity<ArrayList<ResponseFile>> preApprovals(){
         ArrayList<Document> documents = new ArrayList<>(documentService.findAll());
-        HashSet<Document> learningAgreements = new HashSet<>();
+        ArrayList<ResponseFile> preApps = new ArrayList<>();
         for (Document document : documents) {
-            if (document.getType() == "preApproval") {
-                learningAgreements.add(document);
+            ResponseFile rf;
+            if (document.getName().equals("preApproval")) {
+                rf = new ResponseFile(document.getName(), document.getType(),document.getId().toString(), document.getDocumentStatus());
+                preApps.add(rf);
             }
         }
-        return learningAgreements;
+        return ResponseEntity.status(HttpStatus.OK).body(preApps);
     }
-
-
-
 }

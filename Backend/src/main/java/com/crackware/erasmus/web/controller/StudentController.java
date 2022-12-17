@@ -124,7 +124,7 @@ public class StudentController {
     }
 
     @PostMapping("/upload/preapproval")
-    public void uploadPreApproval(@RequestParam("preApproval") MultipartFile preApprovalFile) throws IOException {
+        public void uploadPreApproval(@RequestParam("preApproval") MultipartFile preApprovalFile) throws IOException {
         Document preApproval = new Document();
         preApproval.setData(preApprovalFile.getBytes());
         preApproval.setType(preApprovalFile.getContentType());

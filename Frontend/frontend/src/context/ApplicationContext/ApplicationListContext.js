@@ -20,6 +20,7 @@ export const ApplicationListProvider = ({ children }) => {
     fetch(API, requestOptions).then((res) => {
         res.json().then((data) => {
           setApplicationList(data);
+          console.log("AAAAAAAAAAAAAAAAAA" + data)
         });
     }).catch((e) => {console.log(e)});
   }, [setApplicationList]);
