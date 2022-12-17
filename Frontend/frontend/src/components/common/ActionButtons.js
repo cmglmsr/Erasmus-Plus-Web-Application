@@ -15,12 +15,12 @@ const ActionButtons = ({role}) => {
         buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/transcripts">Transcripts</Button>;
     }
     else if (role === "ROLE_INSTRUCTOR" || role === "ROLE_COORDINATOR") {
-        buttons[1] = <Button className="button-default" key="placements" as={Link} to="/placements">Placements</Button>;
         buttons[2] = <Button className="button-default" key="pre-approvals" as={Link} to="/pre-approvals">Pre-Approvals</Button>;
         buttons[3] = <Button className="button-default" key="course-transfer-list" as={Link} to="/course-transfer-list">Course Transfer</Button>;
     }
     if (role === "ROLE_COORDINATOR") {
         buttons[0] = <Button className="button-default" key="application-list" as={Link} to="/coordinator/applications">Applications</Button>;
+        buttons[1] = <Button className="button-default" key="placements" as={Link} to="/coordinator/placements">Placements</Button>;
         buttons[4] = <Button className="button-default" key="final-course-transfer" as={Link} to="/final-course-transfer">Final Course Transfer</Button>;
     }
 
