@@ -45,7 +45,7 @@ function StudentsCourseList(props) {
       {
         method: "POST",
         credentials: "include",
-        contentType: "application/json; charset=utf-8",
+        contentType: "application/json",
         body: JSON.stringify(mapItem),
       }
     );
