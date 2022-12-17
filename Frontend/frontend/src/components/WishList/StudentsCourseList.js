@@ -14,13 +14,13 @@ const wishlist = [
   {
     courseName: "aa",
     courseCode: "bb",
-    university: "cc",
+    hostUniversityName: "cc",
     approvedNotapproved: "Approved",
   },
   {
     courseName: "bb",
     courseCode: "cc",
-    university: "ff",
+    hostUniversityName: "ff",
     approvedNotapproved: "Approved",
   },
 ];
@@ -81,7 +81,7 @@ function StudentsCourseList(props) {
                   >
                     <td>{item.courseName}</td>
                     <td>{item.courseCode}</td>
-                    <td>{item.university}</td>
+                    <td>{item.hostUniversityName}</td>
                     <td>{item.approvedNotapproved}</td>
                   </ReactDeleteRow>
                 );
