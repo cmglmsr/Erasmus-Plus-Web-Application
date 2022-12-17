@@ -147,6 +147,15 @@ public class StudentController {
         return (student.getPreApproval());
     }
 
+    @GetMapping("/download/preapproval")
+    public byte[] getPreApproval() {
+        Student s = (Student) helperService.getUser();
+        if(s.getPreApproval()==null||s.getPreApproval().getData()==null) {
+            return null;
+        }
+        return s.getPreApproval().getData();
+    }
+
     @GetMapping("/approvedCoursesList")
     public Set<Course> showCourses(){
         Student s = (Student) helperService.getUser();

@@ -70,12 +70,15 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         Role sRole = new Role();
         Role cRole = new Role();
         Role fRole = new Role();
+        Role iRole = new Role();
         cRole.setName(EnumRole.ROLE_COORDINATOR);
         sRole.setName(EnumRole.ROLE_STUDENT);
         fRole.setName(EnumRole.ROLE_FACULTY_BOARD_MEMBER);
+        iRole.setName(EnumRole.ROLE_INSTRUCTOR);
         roleRepository.save(sRole);
         roleRepository.save(cRole);
         roleRepository.save(fRole);
+        roleRepository.save(iRole);
 
         // set users
         User uCem = new User();
@@ -86,6 +89,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         User uCanAlkan = new User();
         User uAysegulDundar = new User();
         User uSaksoy = new User();
+        User uEray = new User();
         uCem.setEmail("cemg@hotmail.com");
         uCem.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
         HashSet<Role> cemRoles = new HashSet<>(); cemRoles.add(sRole);
@@ -126,6 +130,11 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         HashSet<Role> saksoyRoles = new HashSet<>(); saksoyRoles.add(fRole);
         uSaksoy.setRoles(saksoyRoles);
         userRepository.save(uSaksoy);
+        uEray.setEmail("etuzun@hotmail.com");
+        uEray.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> erayRoles = new HashSet<>(); erayRoles.add(iRole);
+        uEray.setRoles(erayRoles);
+        userRepository.save(uEray);
 
         // set students
         Student cem = new Student();
@@ -241,6 +250,18 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         fbaSaksoy.setDateOfBirth("19.03.1975");
         fbaSaksoy.setSurname("Aksoy");
         facultyBoardMemberRepository.save(fbaSaksoy);
+
+        // set coordinators
+        Instructor instructorEray = new Instructor();
+        instructorEray.setMail("etuzun@hotmail.com");
+        instructorEray.setName("Eray");
+        instructorEray.setRole(iRole);
+        instructorEray.setDateOfBirth("09.11.2001");
+        instructorEray.setSurname("Tüzün");
+        instructorEray.setDepartment(Department.CS);
+
+        // set applications
+
 
         // set approved courses
         /*
