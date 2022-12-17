@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Set;
 
 @CrossOrigin(origins = "localhost://", maxAge = 3600)
 @RestController
@@ -35,7 +36,9 @@ public class StudentController {
 
     private final ImageService imageService;
 
-    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService) {
+    private final CourseService courseService;
+
+    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService, CourseService courseService) {
         this.helperService = helperService;
         this.studentService = studentService;
         this.toDoListService = toDoListService;
@@ -44,6 +47,7 @@ public class StudentController {
         this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.imageService = imageService;
+        this.courseService = courseService;
     }
     @GetMapping("/home")
     public Student studentHome() {
@@ -140,6 +144,11 @@ public class StudentController {
     public Document showPreApproval(){
         Student student = (Student) helperService.getUser();
         return (student.getPreApproval());
+    }
+
+    @GetMapping("/approvedCoursesList")
+    public Set<Course> showCourses(){
+        return courseService.findAll();
     }
 
 
