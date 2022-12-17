@@ -9,20 +9,28 @@ import ReactDeleteRow from "react-delete-row";
 import classes from "./ApprovedCoursesList.module.css";
 import StudentsCourseList from "./StudentsCourseList";
 
-const ApprovedCourses = [
-  { courseName: "aa", courseCode: "bb", university: "cc", approvedNotapproved: "Approved" },
-  { courseName: "dd", courseCode: "ee", university: "ff", approvedNotapproved: "Approved" },
-  { courseName: "ee", courseCode: "ee", university: "ff", approvedNotapproved: "Approved" },
-  ,
-];
+var ApprovedCourses = [];
 
 var course = "";
 function ApprovedCoursesList(props) {
+
+  function getApprovedCourses() {
+    fetch(
+      "http://localhost:8080/student/approvedCoursesList", //enter api address
+      {
+        method: "GET",
+      }
+    ).then(res => res.json).then(result => {
+      console.log(result);
+      ApprovedCourses = {courseName: "aaaa" , courseCode: "bbbbb", university: "cccccc", approvedNotapproved: "approved"};
+    });
+  } 
+
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [university, setUniversity] = useState("");
   const [approvedNotapproved, setApprovedNotapproved] = useState("")
-
+  getApprovedCourses();
   useEffect(() => {
    course = {courseName: courseName, courseCode: courseCode, university: university, approvedNotapproved: "Approved"};
    props.getCourse(course)

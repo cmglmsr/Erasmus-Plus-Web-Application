@@ -1,0 +1,33 @@
+.scrollable {
+  padding: 1rem;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: cadetblue;
+  border-radius: 100px;
+}
+
+.button {
+  background-color: cadetblue;
+  border: none;
+  color: white;
+  padding: 20px 30px;
+  text-align: center;
+  text-decoration: "a";
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  
+}

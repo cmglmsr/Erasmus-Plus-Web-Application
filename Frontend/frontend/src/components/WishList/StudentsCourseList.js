@@ -25,8 +25,12 @@ const wishlist = [
   },
 ];
 
+
+
 function StudentsCourseList(props) {
   const [mapItem, setMapItem] = useState([]);
+
+
   function gettingCourse(value) {
     if (value.courseCode != "") {
       console.log(value);
@@ -36,13 +40,19 @@ function StudentsCourseList(props) {
   }
 
   function onSubmit(event) {
-    event.preventDefault();
-    var wishlistData = wishlist
-    props.onWishlistSubmit(wishlistData);
+    fetch(
+      "http://localhost:8080/student/createCourseWishlist", //enter api address
+      {
+        method: "POST",
+        body: JSON.stringify(wishlist),
+      }
+    );
   }
 
+  console.log(wishlist)
   return (
     <div>
+      <Form className="form" onSubmit={onSubmit}>
       <Card>
         <h3 className="heading my-3">Wishlist</h3>
         <hr />
@@ -81,7 +91,7 @@ function StudentsCourseList(props) {
         </div>
         <Form.Group as={Row} className="my-4" controlId="formPlaintextEmail">
           <Col className="text-center">
-            <Button variant="primary" className="button-default" type="submit" onSubmit={onSubmit}>
+            <Button variant="primary" className="button-default" type="submit">
               Send to Instructor
             </Button>
           </Col>
@@ -97,6 +107,7 @@ function StudentsCourseList(props) {
           getCourse={(e) => gettingCourse(e)}
         ></UnapprovedCourse>
       </Row>
+      </Form>
     </div>
   );
 }

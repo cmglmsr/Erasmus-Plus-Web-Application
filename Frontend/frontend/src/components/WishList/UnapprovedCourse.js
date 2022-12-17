@@ -27,15 +27,6 @@ function UnapprovedCourseList(props) {
     props.getCourse(course);
   }, [courseName, courseCode, university, "Approved"]);
 
-  function onSubmit(event) {
-    event.preventDefault();
-    var unApprovedCourse = {
-      "courseName": courseName,
-      "courseCode" : courseCode,
-      "university" : university,
-    }
-    props.onUnapprovedSubmit(unApprovedCourse);
-  }
 
   return (
     <Card>
@@ -100,7 +91,7 @@ function UnapprovedCourseList(props) {
                 setCourseCode(courseCode1);
                 setUniversity(university1);
                 approvedNotapproved = "Not approved"
-              }} onSubmit={onSubmit}
+              }} 
             >
               Add Course
             </Button>

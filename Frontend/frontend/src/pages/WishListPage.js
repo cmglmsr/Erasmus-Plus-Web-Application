@@ -24,26 +24,6 @@ function WishListPage() {
     };
   });
 
-  function onWishlistSubmitHandler(wishlistData) {
-    fetch(
-      "http://localhost:8080/student/createWishlist", 
-      {
-        method: "POST",
-        body: JSON.stringify(wishlistData),
-      }
-    );
-  }
-
-  function onUnapprovedSubmitHandler(unApprovedCourse) {
-    fetch(
-      "http://localhost:8080/student/addCourseToWishlist", 
-      {
-        method: "POST",
-        body: JSON.stringify(unApprovedCourse),
-      }
-    );
-  }
-
   return (
     <section>
       <Row>
@@ -63,7 +43,7 @@ function WishListPage() {
         <Col className="mx-4">
           <div>
             <Row className="mx-5">
-              <StudentCourseList onWishlistSubmit = {onWishlistSubmitHandler} onUnapprovedSubmit = {onUnapprovedSubmitHandler}></StudentCourseList>
+              <StudentCourseList></StudentCourseList>
             </Row>
           </div>
         </Col>

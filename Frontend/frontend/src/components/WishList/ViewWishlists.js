@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./ViewWishlists.module.css"
 
+
 function ViewWishlists() {
   const wishlists = [
     {
@@ -28,10 +29,10 @@ function ViewWishlists() {
         department: "Computer Engineering",
     },
   ];
-  function viewWishlists() {
-    var id = this.key;
-    console.log("view" + id);
-    //navigate(`/coordinator/applications/${id}`);
+
+  const navigate = useNavigate();
+  function viewStudentsWishlist() {
+    navigate(`/studentsWishlist`);
   }
   return (
     <Card>
@@ -47,15 +48,15 @@ function ViewWishlists() {
             </tr>
           </thead>
           <tbody>
-            {wishlists.map((application) => (
-              <tr key={application.uid}>
-                <td>{application.studentName}</td>
-                <td>{application.department}</td>
+            {wishlists.map((wishlist) => (
+              <tr key={wishlist.uid}>
+                <td>{wishlist.studentName}</td>
+                <td>{wishlist.department}</td>
                 <td>
                   <Button
-                    key={application.uid}
+                    key={wishlist.uid}
                     className="button-default"
-                    onClick={viewWishlists}
+                    onClick={viewStudentsWishlist}
                   >
                     View WishList
                   </Button>
