@@ -14,28 +14,24 @@ var ApprovedCourses = [];
 var course = "";
 function ApprovedCoursesList(props) {
 
-  function getApprovedCourses() {
-    fetch(
-      "http://localhost:8080/student/approvedCoursesList", //enter api address
-      {
-        method: "GET",
-        credentials: "include"
-      }
-    ).then(res => res.json()).then(result => {
-      setCoursesList(result);
-    });
-  } 
-
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [hostUniversityName, setUniversity] = useState("");
   const [approvedNotapproved, setApprovedNotapproved] = useState("")
   const [coursesList, setCoursesList] = useState([])
 
-  getApprovedCourses();
   useEffect(() => {
    course = {courseName: courseName, courseCode: courseCode, hostUniversityName: hostUniversityName, approvedNotapproved: "Approved"};
    props.getCourse(course)
+    fetch(
+        "http://localhost:8080/student/approvedCoursesList", //enter api address
+        {
+          method: "GET",
+          credentials: "include"
+        }
+    ).then(res => res.json()).then(result => {
+      setCoursesList(result);
+    });
   },[courseName, courseCode, hostUniversityName, "Approved"]);
 
   return (

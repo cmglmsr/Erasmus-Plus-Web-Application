@@ -35,8 +35,9 @@ public class PlacementListController {
     }
 
     @GetMapping("/create")
-    public void makePlacements() {
+    public ResponseEntity<?> makePlacements() {
         placementService.finalizePlacements();
+        return ResponseEntity.status(HttpStatus.OK).body("Placements have been created.");
     }
 
     @GetMapping()
@@ -56,8 +57,11 @@ public class PlacementListController {
     }
 
     @GetMapping("/finalize")
-    public void finalizePlacements(){
+    public ResponseEntity<?> finalizePlacements(){
         ArrayList<PlacementList> placementLists = new ArrayList<>();
+        if(placementListService.findAll().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("No placements found!");
+        }
         placementLists.addAll(placementListService.findAll());
         PlacementList placementList = placementLists.get(0);
 
@@ -67,6 +71,7 @@ public class PlacementListController {
                 applicationService.save(application);
             }
         }
+        return ResponseEntity.status(HttpStatus.OK).body("Placements have been finalized");
     }
 
 }
