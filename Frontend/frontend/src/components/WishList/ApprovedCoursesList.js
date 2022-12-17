@@ -22,7 +22,7 @@ function ApprovedCoursesList(props) {
       }
     ).then(res => res.json).then(result => {
       console.log(result);
-      ApprovedCourses = {courseName: "aaaa" , courseCode: "bbbbb", university: "cccccc", approvedNotapproved: "approved"};
+      ApprovedCourses = result;
     });
   } 
 
