@@ -104,7 +104,7 @@ function App() {
           ></Route>
 
           <Route
-            path="/student/learningAgreementUpload"
+            path="/student/learningAgreement"
             exact={true}
             element={<LearningAgreementUpload />}
           ></Route>

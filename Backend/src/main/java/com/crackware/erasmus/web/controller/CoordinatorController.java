@@ -145,6 +145,13 @@ public class CoordinatorController {
         documentService.save(agreement);
     }
 
+    @PostMapping("/learningAgreement/download/{id}")
+    public ResponseEntity<byte[]> downloadLearningAgreement(@PathVariable String id){
+        Document agreement = documentService.findById(Long.valueOf(id));
+        documentService.save(agreement);
+        return ResponseEntity.status(HttpStatus.OK).body(agreement.getData());
+    }
+
     @GetMapping("/learningAgreements")
     public ResponseEntity<List<ResponseFile>> getAgreements(){
         ArrayList<Document> al = new ArrayList<>(documentService.findAll());
