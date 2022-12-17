@@ -28,6 +28,7 @@ import ViewWishlistsPage from "./pages/ViewWishlistsPage";
 import StudentsWishlistPage from "./pages/StudentsWishlistPage";
 import PlacementListContextLayout from "./context/PlacementListContext/PlacementListContextLayout";
 import PlacementListPage from "./pages/Coordinator/PlacementListPage";
+import PreApprovalUpload from "./pages/Student/PreApprovalUpload";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -83,6 +84,18 @@ function App() {
             element={<StudentProfile />}
           ></Route>
 
+          <Route
+            path="/student/manageApplication"
+            exact={true}
+            element={<ManageApplication />}
+          ></Route>
+
+          <Route
+            path="/student/preApproval"
+            exact={true}
+            element={<PreApprovalUpload />}
+          ></Route>
+
           <Route element={<ApplicationSchoolContextLayout />}>
             <Route
               path="/student/createApplication"
@@ -94,12 +107,6 @@ function App() {
               path="/student/getApplication"
               exact={true}
               element={<ApplicationPage />}
-            ></Route>
-
-            <Route
-              path="/student/manageApplication"
-              exact={true}
-              element={<ManageApplication />}
             ></Route>
 
             <Route

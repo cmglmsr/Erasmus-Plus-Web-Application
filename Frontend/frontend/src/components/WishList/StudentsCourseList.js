@@ -39,18 +39,18 @@ function StudentsCourseList(props) {
     }
   }
 
-  function onSubmit(event) {
+  function onSubmit(){
     fetch(
       "http://localhost:8080/student/createCourseWishlist", //enter api address
       {
         method: "POST",
         credentials: "include",
-        body: JSON.stringify(wishlist),
+        body: JSON.stringify(mapItem),
       }
     );
+    console.log("FRONTENDIN ALLAHI GORMEK ISTIYOR", mapItem)
   }
 
-  console.log(wishlist)
   return (
     <div>
       <Form className="form" onSubmit={onSubmit}>

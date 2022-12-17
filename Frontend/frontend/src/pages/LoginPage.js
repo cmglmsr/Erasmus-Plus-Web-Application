@@ -21,7 +21,8 @@ function LoginPage() {
       response.json().then((parsedJson) => {
         console.log("a" + parsedJson);
         if (response.status === 200) {
-          
+          localStorage.setItem("role", parsedJson.role);
+
           /// DONT EVER TOUCH THIS LINE
           document.cookie = parsedJson.cookie+ ";SameSite=None;";
           // DANGER DANGER DANGER
