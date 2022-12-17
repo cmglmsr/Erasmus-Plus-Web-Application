@@ -11,8 +11,17 @@ function NavigationBar() {
   const navigate = useNavigate();
 
   function logout() {
-    document.cookie="";
-    navigate("/login");
+    var API = "http://localhost:8080/logout";
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(API, requestOptions).then((res) => navigate("/login"));
   }
   return (
     <header>
