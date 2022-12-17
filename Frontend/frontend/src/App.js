@@ -38,6 +38,8 @@ import IsoPage from "./pages/Iso/IsoPage";
 import IsoProfile from "./pages/Iso/IsoProfile";
 import LearningAgreementListPage from "./pages/LearningAgreementListPage";
 import LearningAgreementListContextLayout from "./context/LearningAgreementContext/LearningAgreementListContextLayout";
+import PreApprovalListPage from "./pages/PreApprovalListPage";
+import PreApprovalListContextLayout from "./context/PreApprovalContext/PreApprovalListContextLayout";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -197,6 +199,15 @@ function App() {
             exact={true}
             element={<FbmProfile />}
           ></Route>
+          <Route element={<PreApprovalListContextLayout />}>
+            <Route
+              path="/fbm/preApprovals"
+              exact={true}
+              element={<PreApprovalListPage />}
+            ></Route>
+          </Route>
+
+
         </Route>
 
         <Route element={<IsoContextLayout />}>
