@@ -88,7 +88,7 @@ const LearningAgreementForm = ({ status }) => {
 
   return (
     <Card>
-      <Form className="form" onSubmit={onSubmit}>
+      <Form className="form" >
         <h3 className={classes.heading}>Learning Agreement Form</h3>
         <hr />
         <h5>Status</h5>
@@ -121,7 +121,7 @@ const LearningAgreementForm = ({ status }) => {
             >
               Download Template
             </Button>
-            <Button variant="primary" className="button-default" type="submit">
+            <Button variant="primary" className="button-default" type="submit" onClick={onSubmit}>
               Save Changes
             </Button>
             {download}
