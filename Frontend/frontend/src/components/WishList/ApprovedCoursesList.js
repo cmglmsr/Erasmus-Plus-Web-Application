@@ -40,7 +40,7 @@ function ApprovedCoursesList(props) {
         <h3 className="heading my-3">Approved Courses List</h3>
         <hr />
         <div className={classes.scrollable}>
-          <Table>
+          <Table className={classes.size}>
             <thead>
               <tr>
                 <th>Course Name</th>
