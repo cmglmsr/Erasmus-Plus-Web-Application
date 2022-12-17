@@ -109,7 +109,7 @@ const LearningAgreementForm = ({ status }) => {
             Learning Agreement Form
           </Form.Label>
           <Col>
-            <Form.Control type="file" />
+            <Form.Control onChange={handleFile} type="file" />
           </Col>
         </Form.Group>
 
