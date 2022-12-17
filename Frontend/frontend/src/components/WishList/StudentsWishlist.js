@@ -46,15 +46,7 @@ function StudentsWishlist() {
       });
     }
   };
-  function onSubmit(event){
-    fetch(
-      "https://react-course-bd5d1-default-rtdb.firebaseio.com/meetups.json", //enter api address
-      {
-        method: "POST",
-        body: JSON.stringify(approvedCourses),
-      }
-    );
-  }
+ 
 
   const courses = [
     {

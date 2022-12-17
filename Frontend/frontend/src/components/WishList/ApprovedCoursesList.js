@@ -69,7 +69,7 @@ function ApprovedCoursesList(props) {
                     <td>{item.courseName}</td>
                     <td>{item.courseCode}</td>
                     <td>{item.hostUniversityName}</td>
-                    <td>{item.approvedNotapproved}</td>
+                    <td>Approved</td>
                   </ReactDeleteRow>
                 );
               })}
