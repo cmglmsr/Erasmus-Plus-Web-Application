@@ -156,7 +156,7 @@ public class StudentController {
             return null;
         }
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + s.getPreApproval().getName() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + s.getPreApproval().getName() + ".pdf" + "\"")
                 .body(s.getPreApproval().getData());
     }
 
