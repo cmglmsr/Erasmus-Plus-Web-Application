@@ -38,3 +38,7 @@
   border-radius: 12px;
   
 }
+
+.size{
+  resize: none
+}

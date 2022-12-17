@@ -29,6 +29,7 @@ import StudentsWishlistPage from "./pages/StudentsWishlistPage";
 import PlacementListContextLayout from "./context/PlacementListContext/PlacementListContextLayout";
 import PlacementListPage from "./pages/Coordinator/PlacementListPage";
 import PreApprovalUpload from "./pages/Student/PreApprovalUpload";
+import LearningAgreementUpload from "./pages/Student/LearningAgreementUpload";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -94,6 +95,12 @@ function App() {
             path="/student/preApproval"
             exact={true}
             element={<PreApprovalUpload />}
+          ></Route>
+
+          <Route
+            path="/student/learningAgreementUpload"
+            exact={true}
+            element={<LearningAgreementUpload />}
           ></Route>
 
           <Route element={<ApplicationSchoolContextLayout />}>
