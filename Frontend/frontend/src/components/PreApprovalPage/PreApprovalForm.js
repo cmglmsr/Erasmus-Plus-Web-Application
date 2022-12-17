@@ -66,14 +66,22 @@ const PreApprovalForm = ({ status }) => {
       method: "GET",
       redirect: "follow",
       credentials: "include",
-      headers : {
-        "Accept-Encoding" : "gzip, deflate, br",
-      }
     };
 
     fetch(API, requestOptions).then((res) => {
-      res.json().then((data) => {
-      });
+        res.blob();
+    }).then((blob) => {
+      // Create blob link to download
+      const url = window.URL.createObjectURL(
+          new Blob([blob]),
+      );
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute(
+          'download',
+          `PreApproval.pdf`,
+      );
+      link.click();
     });
   }
 
