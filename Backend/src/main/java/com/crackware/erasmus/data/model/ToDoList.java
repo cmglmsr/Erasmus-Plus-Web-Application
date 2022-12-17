@@ -16,7 +16,7 @@ public class ToDoList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private Set<ToDoListItem> itemSet;
 
     public void addItem(ToDoListItem toDoListItem){

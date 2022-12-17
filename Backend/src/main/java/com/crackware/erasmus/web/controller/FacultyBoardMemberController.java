@@ -7,7 +7,6 @@ import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping({"fbm", "/fbm"})
@@ -31,23 +27,20 @@ public class FacultyBoardMemberController {
 
     private final ToDoListService toDoListService;
 
-    private final TaskService taskService;
-
     private final ToDoListItemService toDoListItemService;
-
-    private final ScheduleService scheduleService;
 
     private final DocumentService documentService;
 
     private final ImageService imageService;
 
-    public FacultyBoardMemberController(HelperService helperService, FacultyBoardMemberService facultyBoardMemberService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService) {
+    public FacultyBoardMemberController(HelperService helperService,
+                                        FacultyBoardMemberService facultyBoardMemberService,
+                                        ToDoListService toDoListService, ToDoListItemService toDoListItemService,
+                                        DocumentService documentService, ImageService imageService) {
         this.helperService = helperService;
         this.facultyBoardMemberService = facultyBoardMemberService;
         this.toDoListService = toDoListService;
-        this.taskService = taskService;
         this.toDoListItemService = toDoListItemService;
-        this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.imageService = imageService;
     }
@@ -84,28 +77,6 @@ public class FacultyBoardMemberController {
                 helperService.getUser().getToDoList().addItem(toDoListItem);
             }
             toDoListService.save(helperService.getUser().getToDoList());
-            facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
-        }
-    }
-
-    @PostMapping("/schedule")
-    public void fbmSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
-        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
-        if (helperService.getUser().getSchedule() == null){
-            helperService.getUser().setSchedule(new Schedule());
-        }
-        if (task.isDone()){
-            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
-                    scheduleRequest.getDueDate());
-        }else {
-            taskService.save(task);
-            if (helperService.getUser().getSchedule() != null)
-                helperService.getUser().getSchedule().addItem(task);
-            else {
-                helperService.getUser().setSchedule(new Schedule());
-                helperService.getUser().getSchedule().addItem(task);
-            }
-            scheduleService.save(helperService.getUser().getSchedule());
             facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
         }
     }

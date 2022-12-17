@@ -8,7 +8,6 @@ import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +31,7 @@ public class CoordinatorController {
 
     private final ToDoListService toDoListService;
 
-    private final TaskService taskService;
-
     private final ToDoListItemService toDoListItemService;
-
-    private final ScheduleService scheduleService;
 
     private final DocumentService documentService;
 
@@ -44,13 +39,14 @@ public class CoordinatorController {
 
     private final ImageService imageService;
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ApplicationService applicationService, ImageService imageService) {
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService,
+                                 ToDoListService toDoListService, ToDoListItemService toDoListItemService,
+                                 DocumentService documentService, ApplicationService applicationService,
+                                 ImageService imageService) {
         this.coordinatorService = coordinatorService;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
-        this.taskService = taskService;
         this.toDoListItemService = toDoListItemService;
-        this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.applicationService = applicationService;
         this.imageService = imageService;
@@ -107,28 +103,6 @@ public class CoordinatorController {
         }
         Application a = applicationService.findById(Long.valueOf(id));
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
-    }
-
-    @PostMapping("/schedule")
-    public void coordinatorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
-        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
-        if (helperService.getUser().getSchedule() == null){
-            helperService.getUser().setSchedule(new Schedule());
-        }
-        if (task.isDone()){
-            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
-                    scheduleRequest.getDueDate());
-        }else {
-            taskService.save(task);
-            if (helperService.getUser().getSchedule() != null)
-                helperService.getUser().getSchedule().addItem(task);
-            else {
-                helperService.getUser().setSchedule(new Schedule());
-                helperService.getUser().getSchedule().addItem(task);
-            }
-            scheduleService.save(helperService.getUser().getSchedule());
-            coordinatorService.save((Coordinator) helperService.getUser());
-        }
     }
 
     @PostMapping("/learningAgreement/approve/{id}")
