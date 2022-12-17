@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -147,7 +149,19 @@ public class StudentController {
 
     @GetMapping("/approvedCoursesList")
     public Set<Course> showCourses(){
-        return courseService.findAll();
+        Student s = (Student) helperService.getUser();
+        if(s.getApplication() == null || s.getApplication().getStatus() != Status.FINALIZED) {
+            return new HashSet<>();
+        }
+        School school = s.getApplication().getFinalSchool();
+        ArrayList<Course> courses = new ArrayList<>(courseService.findAll());
+        ArrayList<Course> returnCourses = new ArrayList<>();
+        for(Course c : courses) {
+            if(c.getHostUniversityName().equals(school.getName())) {
+                returnCourses.add(c);
+            }
+        }
+        return new HashSet<>(returnCourses);
     }
 
 

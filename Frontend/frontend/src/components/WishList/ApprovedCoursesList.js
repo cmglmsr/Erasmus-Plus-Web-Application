@@ -13,7 +13,6 @@ var ApprovedCourses = [];
 
 var course = "";
 function ApprovedCoursesList(props) {
-
   function getApprovedCourses() {
     fetch(
       "http://localhost:8080/student/approvedCoursesList", //enter api address
