@@ -6,6 +6,7 @@ import Card from "../UI/Card";
 import classes from "./PreApprovalForm.module.css";
 import { Table } from "react-bootstrap";
 import { useState } from "react";
+import template from "../../assets/preappTemplate.pdf";
 
 const PreApprovalForm = ({ status }) => {
   const [file, setFile] = useState({});
@@ -131,7 +132,7 @@ const PreApprovalForm = ({ status }) => {
 
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Col className="text-center">
-          <Button 
+          <Button href={template}
               variant="primary"
               className="button-default mx-3"
               onClick={downloadTemplate}
