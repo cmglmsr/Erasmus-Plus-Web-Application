@@ -77,7 +77,7 @@ function StudentsWishlist() {
   ];
 
   return (
-    <Form  className="form" onSubmit={onSubmit}>
+    <Form  className="form" >
     <Card>
       <h3 className="heading my-3">Aslı Karaman's WishList</h3>
       <hr />
