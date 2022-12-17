@@ -92,9 +92,6 @@ public class Student extends BaseEntity{
         }
         double thsCgpa = Double.parseDouble(this.cgpa);
         total = eng101 + eng102 + ((thsCgpa/4)*50);
-        System.out.println("eng101 grade "+ eng101);
-        System.out.println("eng102 grade "+ eng102);
-        System.out.println("total: " + total);
         return total;
     }
 }

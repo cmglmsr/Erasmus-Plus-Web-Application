@@ -19,6 +19,7 @@ function ApprovedCoursesList(props) {
       "http://localhost:8080/student/approvedCoursesList", //enter api address
       {
         method: "GET",
+        credentials: "include"
       }
     ).then(res => res.json).then(result => {
       console.log(result);

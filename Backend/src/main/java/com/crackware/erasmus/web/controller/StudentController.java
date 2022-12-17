@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Set;
 
-@CrossOrigin(origins = "localhost://", maxAge = 3600)
 @RestController
 @RequestMapping( "/student")
 public class StudentController {
