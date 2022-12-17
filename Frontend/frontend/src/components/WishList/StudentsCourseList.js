@@ -44,6 +44,7 @@ function StudentsCourseList(props) {
       "http://localhost:8080/student/createCourseWishlist", //enter api address
       {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify(wishlist),
       }
     );
