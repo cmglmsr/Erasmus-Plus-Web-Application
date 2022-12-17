@@ -57,7 +57,7 @@ function LearningAgreementList() {
     };
 
     fetch(API, requestOptions).then((res) => {
-      window.location.href();
+      window.location.reload();
     });
   }
 
@@ -71,7 +71,7 @@ function LearningAgreementList() {
     };
 
     fetch(API, requestOptions).then((res) => {
-      window.location.href();
+      window.location.reload();
     });
   }
 
