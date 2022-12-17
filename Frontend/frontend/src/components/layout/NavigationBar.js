@@ -3,11 +3,28 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {cleanCookies} from "universal-cookie/es6/utils";
 
 function NavigationBar() {
   var role = localStorage.getItem("role");
   console.log("navvv" + role);
+  const navigate = useNavigate();
+
+  function logout() {
+    cleanCookies()
+    var API = "http://localhost:8080/logout";
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(API, requestOptions).then((res) => navigate("/login"));
+  }
   return (
     <header>
       <Navbar bg="dark" variant="dark">
@@ -68,7 +85,7 @@ function NavigationBar() {
               </Nav>
             )}
             <Form>
-              <Button variant="danger" as={Link} to="/logout">
+              <Button variant="danger" as={Link} onClick={logout}>
                 Logout
               </Button>
             </Form>

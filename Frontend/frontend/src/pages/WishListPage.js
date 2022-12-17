@@ -10,6 +10,7 @@ import ProfileSummary from "../components/common/ProfileSummary";
 import { useEffect, useState } from "react";
 import ApprovedCoursesList from "../components/WishList/ApprovedCoursesList";
 import StudentContext from "../context/StudentContext/StudentContext";
+import ActionButtons from "../components/common/ActionButtons";
 import { useContext } from "react";
 function WishListPage() {
   const [profile, role] = useContext(StudentContext);
@@ -29,6 +30,9 @@ function WishListPage() {
               image={profile.image}
               department={profile.department}
             />
+          </Row>
+          <Row className="my-4">
+            <ActionButtons role={role} />
           </Row>
         </Col>
         <Col className="mx-4">

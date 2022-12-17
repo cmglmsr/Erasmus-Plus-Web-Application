@@ -6,6 +6,7 @@ import Card from "../UI/Card";
 import classes from "./LearningAgreementForm.module.css";
 import { Table } from "react-bootstrap";
 import { useState } from "react";
+import template from "../../assets/learningAgreement.pdf";
 
 const LearningAgreementForm = ({ status }) => {
   const [file, setFile] = useState({});
@@ -44,7 +45,10 @@ const LearningAgreementForm = ({ status }) => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/student/upload/learningagreement", requestOptions)
+    fetch(
+      "http://localhost:8080/student/upload/learningAgreement",
+      requestOptions
+    )
       .then((response) => {
         response.text();
         if (response.status === 200) {
@@ -59,27 +63,35 @@ const LearningAgreementForm = ({ status }) => {
       .then((response) => {});
   }
 
-  function downloadForm() {
-    var API = `http://localhost:8080/student/download/learningagreement`;
+  function downloadForm(event) {
+    event.preventDefault();
+    var API = `http://localhost:8080/student/download/learningAgreement`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     };
 
     fetch(API, requestOptions).then((res) => {
-      res.json().then((data) => {
-        console.log("aaaaaaaaaaaaaaaa" + data);
+      res.blob().then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(
+            new Blob([blob]),
+        );
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute(
+            'download',
+            `LearningAgreement.pdf`,
+        );
+        link.click();
       });
-    });
+    })
   }
 
   return (
     <Card>
-      <Form className="form" onSubmit={onSubmit}>
+      <Form className="form" >
         <h3 className={classes.heading}>Learning Agreement Form</h3>
         <hr />
         <h5>Status</h5>
@@ -100,13 +112,19 @@ const LearningAgreementForm = ({ status }) => {
             Learning Agreement Form
           </Form.Label>
           <Col>
-            <Form.Control type="file" />
+            <Form.Control onChange={handleFile} type="file" />
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Col className="text-center">
-            <Button variant="primary" className="button-default" type="submit">
+            <Button href={template}
+              variant="primary"
+              className="button-default mx-3"
+            >
+              Download Template
+            </Button>
+            <Button variant="primary" className="button-default" type="submit" onClick={onSubmit}>
               Save Changes
             </Button>
             {download}

@@ -1,15 +1,11 @@
-import ApplicationList from "../components/ApplicationListPage/ApplicationList";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
 import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import CoordinatorContext from "../context/CoordinatorContext/CoordinatorContext";
-
-
-
-
-function ApplicationListPage() {
+import LearningAgreementList from "../components/LearningAgreementListPage/LearningAgreementList";
+function LearningAgreementListPage() {
   const [coordinatorData, role] = useContext(CoordinatorContext);
 
   return (
@@ -32,11 +28,11 @@ function ApplicationListPage() {
           </Row>
         </Col>
         <Col className="mx-3">
-          <ApplicationList/>
+          <LearningAgreementList/>
         </Col>
       </Row>
     </section>
   );
 }
 
-export default ApplicationListPage;
+export default LearningAgreementListPage;

@@ -11,7 +11,7 @@ function LearningAgreementUpload() {
 
   var status;
 
-  if (studentData.preApproval === null) {
+  if (studentData.learningAgreement === null) {
     status = "NOT UPLOADED";
   }
   else {

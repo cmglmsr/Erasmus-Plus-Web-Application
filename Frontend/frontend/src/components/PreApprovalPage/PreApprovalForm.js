@@ -6,6 +6,7 @@ import Card from "../UI/Card";
 import classes from "./PreApprovalForm.module.css";
 import { Table } from "react-bootstrap";
 import { useState } from "react";
+import template from "../../assets/preappTemplate.pdf";
 
 const PreApprovalForm = ({ status }) => {
   const [file, setFile] = useState({});
@@ -69,39 +70,22 @@ const PreApprovalForm = ({ status }) => {
     };
 
     fetch(API, requestOptions).then((res) => {
-        res.blob();
-    }).then((blob) => {
-      // Create blob link to download
-      const url = window.URL.createObjectURL(
-          new Blob([blob]),
-      );
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute(
-          'download',
-          `PreApproval.pdf`,
-      );
-      link.click();
-    });
+        res.blob().then((blob) => {
+          // Create blob link to download
+          const url = window.URL.createObjectURL(
+              new Blob([blob]),
+          );
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute(
+              'download',
+              `PreApproval.pdf`,
+          );
+          link.click();
+        });
+    })
   }
 
-  function downloadTemplate() {
-    var API = `http://localhost:8080/student/download/preapproval`;
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    fetch(API, requestOptions).then((res) => {
-      res.json().then((data) => {
-        console.log("aaaaaaaaaaaaaaaa" + data);
-      });
-    });
-  }
   return (
     <Card>
       <Form className="form">
@@ -125,16 +109,15 @@ const PreApprovalForm = ({ status }) => {
             PreApproval Form
           </Form.Label>
           <Col>
-            <Form.Control type="file" onChange={handleFile} />
+            <Form.Control type="file" onChange={handleFile} accept=".pdf"/>
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Col className="text-center">
-          <Button 
+          <Button href={template}
               variant="primary"
               className="button-default mx-3"
-              onClick={downloadTemplate}
             >
               Download Template
             </Button>
