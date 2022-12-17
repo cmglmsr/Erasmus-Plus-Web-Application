@@ -13,11 +13,17 @@ import com.crackware.erasmus.data.repositories.security.RoleRepository;
 import com.crackware.erasmus.data.repositories.security.UserRepository;
 import com.crackware.erasmus.data.services.StudentService;
 import com.crackware.erasmus.data.services.ToDoListItemService;
+import com.crackware.erasmus.web.controller.TestController;
+import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
 
 @Component
@@ -31,8 +37,9 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final TaskRepository taskRepository;
     private final ToDoListItemService toDoListItemService;
     private final FacultyBoardMemberRepository facultyBoardMemberRepository;
+    private final TestController testController;
 
-    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository, ScheduleRepository scheduleRepository, TaskRepository taskRepository, ToDoListItemService toDoListItemService, FacultyBoardMemberRepository facultyBoardMemberRepository) {
+    public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository, UserRepository userRepository, CoordinatorRepository coordinatorRepository, ScheduleRepository scheduleRepository, TaskRepository taskRepository, ToDoListItemService toDoListItemService, FacultyBoardMemberRepository facultyBoardMemberRepository, TestController testController) {
         this.studentService = studentService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -41,6 +48,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         this.taskRepository = taskRepository;
         this.toDoListItemService = toDoListItemService;
         this.facultyBoardMemberRepository = facultyBoardMemberRepository;
+        this.testController = testController;
     }
 
     @Override
@@ -233,5 +241,16 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         fbaSaksoy.setDateOfBirth("19.03.1975");
         fbaSaksoy.setSurname("Aksoy");
         facultyBoardMemberRepository.save(fbaSaksoy);
+
+        // set approved courses
+        /*
+        try {
+            File file = new File("src/main/resources/Book1.xlsx");
+            FileInputStream input = new FileInputStream(file);
+            MultipartFile multipartFile = new MockMultipartFile("file",
+                    file.getName(), "text/plain", IOUtils.toByteArray(input));
+        } catch(Exception e) {
+            System.out.println("[-] Excel file cannot be parsed!");
+        }*/
     }
 }

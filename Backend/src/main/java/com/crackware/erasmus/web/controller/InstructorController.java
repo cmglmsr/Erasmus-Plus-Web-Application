@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.*;
+import com.crackware.erasmus.data.model.enums.Department;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
@@ -12,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 @RestController
@@ -32,7 +35,9 @@ public class InstructorController {
 
     private final ImageService imageService;
 
-    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService, ImageService imageService) {
+    private final StudentService studentService;
+
+    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService, ImageService imageService, StudentService studentService) {
         this.helperService = helperService;
         this.instructorService = instructorService;
         this.scheduleService = scheduleService;
@@ -40,6 +45,7 @@ public class InstructorController {
         this.taskService = taskService;
         this.toDoListService = toDoListService;
         this.imageService = imageService;
+        this.studentService = studentService;
     }
 
     @GetMapping("/home")
@@ -76,7 +82,6 @@ public class InstructorController {
             toDoListService.save(helperService.getUser().getToDoList());
             instructorService.save((Instructor) helperService.getUser());
         }
-
     }
 
     @PostMapping("/schedule")
@@ -99,8 +104,18 @@ public class InstructorController {
             scheduleService.save(helperService.getUser().getSchedule());
             instructorService.save((Instructor) helperService.getUser());
         }
-
-
     }
 
+    @GetMapping("/wishlists")
+    public void getWishlists() {
+        Instructor instructor = (Instructor) helperService.getUser();
+        Department department = instructor.getDepartment();
+        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+        ArrayList<Student> departmentStudents = new ArrayList<>();
+        for(Student s : students) {
+            if(s.getDepartment()==department) {
+                departmentStudents.add(s);
+            }
+        }
+    }
 }

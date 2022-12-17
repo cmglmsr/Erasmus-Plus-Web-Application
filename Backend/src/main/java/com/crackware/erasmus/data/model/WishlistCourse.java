@@ -22,4 +22,5 @@ public class WishlistCourse {
     private String courseCode;
     private String link;
     private Status status;
+    private String approvedNotApproved;
 }

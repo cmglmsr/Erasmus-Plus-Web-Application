@@ -41,11 +41,14 @@ public class PlacementListController {
 
     @GetMapping()
     public ResponseEntity<Set<ResponseApplication>> listPlacements() {
+        Set<ResponseApplication> responseApplications = new HashSet<>();
+        if(placementListService.findAll().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(responseApplications);
+        }
         ArrayList<PlacementList> placementLists = new ArrayList<>();
         placementLists.addAll(placementListService.findAll());
         PlacementList placementList = placementLists.get(0);
         Set<Application> applications = placementList.getApplications();
-        Set<ResponseApplication> responseApplications = new HashSet<>();
         for(Application a : applications) {
             responseApplications.add(new ResponseApplication(a));
         }

@@ -13,5 +13,4 @@ public class Instructor extends BaseEntity{
 
     private Department department;
 
-
 }
