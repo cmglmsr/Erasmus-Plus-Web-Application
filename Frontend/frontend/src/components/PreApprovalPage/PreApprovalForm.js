@@ -10,6 +10,21 @@ import { useState } from "react";
 const PreApprovalForm = ({ status }) => {
   const [file, setFile] = useState({});
 
+  var download = "";
+
+  if (status == "UPLOADED") {
+    download = (
+      <Button
+        variant="primary"
+        className="button-default mx-3"
+        type="submit"
+        onClick={downloadForm}
+      >
+        Download
+      </Button>
+    );
+  }
+
   function handleFile(event) {
     setFile(event.target.files[0]);
   }
@@ -33,7 +48,7 @@ const PreApprovalForm = ({ status }) => {
       .then((response) => {
         response.text();
         if (response.status === 200) {
-          window.confirm("Preapproval Uploaded.");
+          window.confirm("PreApproval Uploaded.");
           window.location.reload();
         }
       })
@@ -44,9 +59,44 @@ const PreApprovalForm = ({ status }) => {
       .then((response) => {});
   }
 
+  function downloadForm(event) {
+    event.preventDefault();
+    var API = `http://localhost:8080/student/download/preapproval`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+      headers : {
+        "Accept-Encoding" : "gzip, deflate, br",
+      }
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      res.json().then((data) => {
+      });
+    });
+  }
+
+  function downloadTemplate() {
+    var API = `http://localhost:8080/student/download/preapproval`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      res.json().then((data) => {
+        console.log("aaaaaaaaaaaaaaaa" + data);
+      });
+    });
+  }
   return (
     <Card>
-      <Form className="form" onSubmit={onSubmit}>
+      <Form className="form">
         <h3 className={classes.heading}>PreApproval Form</h3>
         <hr />
         <h5>Status</h5>
@@ -73,9 +123,22 @@ const PreApprovalForm = ({ status }) => {
 
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Col className="text-center">
-            <Button variant="primary" className="button-default" type="submit">
+          <Button 
+              variant="primary"
+              className="button-default mx-3"
+              onClick={downloadTemplate}
+            >
+              Download Template
+            </Button>
+            <Button
+              variant="primary"
+              className="button-default mx-3"
+              type="submit"
+              onClick={onSubmit}
+            >
               Save Changes
             </Button>
+            {download}
           </Col>
         </Form.Group>
       </Form>

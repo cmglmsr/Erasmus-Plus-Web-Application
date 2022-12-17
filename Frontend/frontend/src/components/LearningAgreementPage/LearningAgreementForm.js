@@ -5,10 +5,76 @@ import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
 import classes from "./LearningAgreementForm.module.css";
 import { Table } from "react-bootstrap";
+import { useState } from "react";
 
 const LearningAgreementForm = ({ status }) => {
+  const [file, setFile] = useState({});
+
+  var download = "";
+
+  if (status == "UPLOADED") {
+    download = (
+      <Button
+        variant="primary"
+        className="button-default mx-3"
+        type="submit"
+        onClick={downloadForm}
+      >
+        Download
+      </Button>
+    );
+  }
+
+  function handleFile(event) {
+    setFile(event.target.files[0]);
+  }
+
   function onSubmit(event) {
     event.preventDefault();
+    var data = new FormData();
+    data.append("learningAgreement", file);
+
+    var myHeaders = new Headers();
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: data,
+      credentials: "include",
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8080/student/upload/learningagreement", requestOptions)
+      .then((response) => {
+        response.text();
+        if (response.status === 200) {
+          window.confirm("Learning Agreement Uploaded.");
+          window.location.reload();
+        }
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error))
+      .then((response) => {});
+  }
+
+  function downloadForm() {
+    var API = `http://localhost:8080/student/download/learningagreement`;
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    fetch(API, requestOptions).then((res) => {
+      res.json().then((data) => {
+        console.log("aaaaaaaaaaaaaaaa" + data);
+      });
+    });
   }
 
   return (
@@ -43,6 +109,7 @@ const LearningAgreementForm = ({ status }) => {
             <Button variant="primary" className="button-default" type="submit">
               Save Changes
             </Button>
+            {download}
           </Col>
         </Form.Group>
       </Form>
