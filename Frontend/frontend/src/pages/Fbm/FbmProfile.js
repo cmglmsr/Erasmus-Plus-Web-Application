@@ -4,10 +4,10 @@ import { useContext } from "react";
 import ProfileSummary from "../../components/common/ProfileSummary";
 import ActionButtons from "../../components/common/ActionButtons";
 import ViewProfile from "../../components/ProfilePage/ViewProfile";
-import InstructorContext from "../../context/InstructorContext/InstructorContext";
+import FbmContext from "../../context/FbmContext/FbmContext";
 
-function InstructoProfile() {
-  const [instructorData, role] = useContext(InstructorContext);
+function FbmProfile() {
+  const [fbmData, role] = useContext(FbmContext);
     
   return (
     <section>
@@ -15,13 +15,13 @@ function InstructoProfile() {
         <Col xs={3} className="mx-3">
           <Row>
           <ProfileSummary
-              name={instructorData.name}
-              surname={instructorData.surname}
+              name={fbmData.name}
+              surname={fbmData.surname}
               role={role}
               term=""
-              bilkentId={instructorData.bilkentId}
-              image={instructorData.image}
-              department={instructorData.department}
+              bilkentId={fbmData.bilkentId}
+              image={fbmData.image}
+              department={fbmData.department}
             />
           </Row>
           <Row className="my-4">
@@ -32,12 +32,12 @@ function InstructoProfile() {
           <div>
             <Row className="my-3">
               <ViewProfile
-                name={instructorData.name}
-                surname={instructorData.surname}
-                phoneNumber={instructorData.phoneNumber}
-                mail={instructorData.mail}
-                dateOfBirth={instructorData.dateOfBirth}
-                gender={instructorData.gender}
+                name={fbmData.name}
+                surname={fbmData.surname}
+                phoneNumber={fbmData.phoneNumber}
+                mail={fbmData.mail}
+                dateOfBirth={fbmData.dateOfBirth}
+                gender={fbmData.gender}
               />
             </Row>
           </div>
@@ -46,4 +46,4 @@ function InstructoProfile() {
     </section>
   );
 }
-export default InstructoProfile;
+export default FbmProfile;

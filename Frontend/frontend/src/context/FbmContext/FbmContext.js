@@ -35,4 +35,4 @@ export const FbmProvider = ({ children }) => {
     </FbmContext.Provider>
   );
 };
-export default FbmProvider;
+export default FbmContext;

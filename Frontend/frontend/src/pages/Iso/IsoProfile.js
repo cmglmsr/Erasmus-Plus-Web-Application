@@ -4,10 +4,10 @@ import { useContext } from "react";
 import ProfileSummary from "../../components/common/ProfileSummary";
 import ActionButtons from "../../components/common/ActionButtons";
 import ViewProfile from "../../components/ProfilePage/ViewProfile";
-import InstructorContext from "../../context/InstructorContext/InstructorContext";
+import IsoContext from "../../context/IsoContext/IsoContext";
 
-function InstructoProfile() {
-  const [instructorData, role] = useContext(InstructorContext);
+function IsoProfile() {
+  const [isoData, role] = useContext(IsoContext);
     
   return (
     <section>
@@ -15,13 +15,13 @@ function InstructoProfile() {
         <Col xs={3} className="mx-3">
           <Row>
           <ProfileSummary
-              name={instructorData.name}
-              surname={instructorData.surname}
+              name={isoData.name}
+              surname={isoData.surname}
               role={role}
               term=""
-              bilkentId={instructorData.bilkentId}
-              image={instructorData.image}
-              department={instructorData.department}
+              bilkentId={isoData.bilkentId}
+              image={isoData.image}
+              department={isoData.department}
             />
           </Row>
           <Row className="my-4">
@@ -32,12 +32,12 @@ function InstructoProfile() {
           <div>
             <Row className="my-3">
               <ViewProfile
-                name={instructorData.name}
-                surname={instructorData.surname}
-                phoneNumber={instructorData.phoneNumber}
-                mail={instructorData.mail}
-                dateOfBirth={instructorData.dateOfBirth}
-                gender={instructorData.gender}
+                name={isoData.name}
+                surname={isoData.surname}
+                phoneNumber={isoData.phoneNumber}
+                mail={isoData.mail}
+                dateOfBirth={isoData.dateOfBirth}
+                gender={isoData.gender}
               />
             </Row>
           </div>
@@ -46,4 +46,4 @@ function InstructoProfile() {
     </section>
   );
 }
-export default InstructoProfile;
+export default IsoProfile;

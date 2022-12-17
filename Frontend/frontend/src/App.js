@@ -30,6 +30,12 @@ import PlacementListContextLayout from "./context/PlacementListContext/Placement
 import PlacementListPage from "./pages/Coordinator/PlacementListPage";
 import PreApprovalUpload from "./pages/Student/PreApprovalUpload";
 import LearningAgreementUpload from "./pages/Student/LearningAgreementUpload";
+import FbmContextLayout from "./context/FbmContext/FbmContextLayout";
+import FbmPage from "./pages/Fbm/FbmPage";
+import FbmProfile from "./pages/Fbm/FbmProfile";
+import IsoContextLayout from "./context/IsoContext/IsoContextLayout";
+import IsoPage from "./pages/Iso/IsoPage";
+import IsoProfile from "./pages/Iso/IsoProfile";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -168,6 +174,34 @@ function App() {
             element={<InstructorProfile />}
           ></Route>
         </Route>
+
+        <Route element={<FbmContextLayout />}>
+          <Route
+            path="/fbm/home"
+            exact={true}
+            element={<FbmPage />}
+          ></Route>
+          <Route
+            path="/fbm/profile"
+            exact={true}
+            element={<FbmProfile />}
+          ></Route>
+        </Route>
+
+        <Route element={<IsoContextLayout />}>
+          <Route
+            path="/iso/home"
+            exact={true}
+            element={<IsoPage/>}
+          ></Route>
+          <Route
+            path="/iso/profile"
+            exact={true}
+            element={<IsoProfile />}
+          ></Route>
+        </Route>
+
+        
 
         <Route
           path="/viewWishlists"

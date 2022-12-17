@@ -35,4 +35,4 @@ export const IsoProvider = ({ children }) => {
     </IsoContext.Provider>
   );
 };
-export default InstructorContext;
+export default IsoContext;
