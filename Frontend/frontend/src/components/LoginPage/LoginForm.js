@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormInputValidation } from "react-form-input-validation";
 import Col from "react-bootstrap/Col";
-
+import Alert from 'react-bootstrap/Alert';
 import Card from "../UI/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -29,7 +29,7 @@ const ValidationForm = (props) => {
     <Card>
       <Form className="form" onSubmit={onSubmit}>
         <h3 className="heading">Login</h3>
-        <hr/>
+        <hr/>        
         <Form.Group className="mb-3" controlId="loginEmailInput">
           <Form.Label>Email</Form.Label>
           <Form.Control

@@ -8,7 +8,7 @@ import InstructorContext from "../../context/InstructorContext/InstructorContext
 
 function Instructor() {
   const [instructorData, role] = useContext(InstructorContext);
-  console.log("instuctor ");
+  console.log("instuctor");
   return (
     <section>
       <Row>
