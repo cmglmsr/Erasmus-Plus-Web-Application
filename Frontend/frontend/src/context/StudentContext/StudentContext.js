@@ -47,9 +47,8 @@ export const StudentProvider = ({ children }) => {
         } else {
           console.log(window.location.href);
           if (
-            window.location.href !==
-            'http://localhost:3000/student/home'
-
+            window.location.href ===
+            'http://localhost:3000/student/getApplication'
           ) {
             console.log("here");
             navigate("./student/createApplication");
