@@ -53,7 +53,7 @@ function StudentsCourseList(props) {
 
   return (
     <div>
-      <Form className="form" onSubmit={() => onSubmit}>
+      <Form className="form" onSubmit={onSubmit}>
       <Card>
         <h3 className="heading my-3">Wishlist</h3>
         <hr />
