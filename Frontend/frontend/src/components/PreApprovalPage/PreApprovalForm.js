@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
 import classes from "./PreApprovalForm.module.css";
 import { Table } from "react-bootstrap";
-import {useState }from "react";
+import { useState } from "react";
 
 const PreApprovalForm = ({ status }) => {
   const [file, setFile] = useState({});
@@ -22,22 +22,26 @@ const PreApprovalForm = ({ status }) => {
     var myHeaders = new Headers();
 
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: data,
-      credentials: 'include',
-      redirect: 'follow'
+      credentials: "include",
+      redirect: "follow",
     };
 
-
     fetch("http://localhost:8080/student/upload/preapproval", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error)).then((response) => {
+      .then((response) => {
+        response.text();
         if (response.status === 200) {
           window.confirm("Preapproval Uploaded.");
+          window.location.reload();
         }
-      });
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => console.log("error", error))
+      .then((response) => {});
   }
 
   return (
