@@ -28,13 +28,13 @@ function ApprovedCoursesList(props) {
 
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
-  const [university, setUniversity] = useState("");
+  const [hostUniversityName, setUniversity] = useState("");
   const [approvedNotapproved, setApprovedNotapproved] = useState("")
   getApprovedCourses();
   useEffect(() => {
-   course = {courseName: courseName, courseCode: courseCode, university: university, approvedNotapproved: "Approved"};
+   course = {courseName: courseName, courseCode: courseCode, hostUniversityName: hostUniversityName, approvedNotapproved: "Approved"};
    props.getCourse(course)
-  },[courseName, courseCode, university, "Approved"]);
+  },[courseName, courseCode, hostUniversityName, "Approved"]);
 
   return (
     <div>
@@ -62,13 +62,13 @@ function ApprovedCoursesList(props) {
                     onDelete={(item) => {
                       setCourseName(item.courseName);
                       setCourseCode(item.courseCode);
-                      setUniversity(item.university);
+                      setUniversity(item.hostUniversityName);
                       setApprovedNotapproved("Approved")
                     }}
                   >
                     <td>{item.courseName}</td>
                     <td>{item.courseCode}</td>
-                    <td>{item.university}</td>
+                    <td>{item.hostUniversityName}</td>
                     <td>{item.approvedNotapproved}</td>
                   </ReactDeleteRow>
                 );

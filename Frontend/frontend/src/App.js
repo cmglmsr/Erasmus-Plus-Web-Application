@@ -99,6 +99,12 @@ function App() {
               exact={true}
               element={<ManageApplication />}
             ></Route>
+
+            <Route
+              path="/student/wishlist"
+              exact={true}
+              element={<WishListPage />}
+            ></Route>
           </Route>
         </Route>
 
@@ -120,12 +126,12 @@ function App() {
               element={<ApplicationListPage />}
             ></Route>
           </Route>
-          
+
           <Route
-              path="/coordinator/applications/:uid"
-              exact={true}
-              element={<SingleApplicationView />}
-            ></Route>
+            path="/coordinator/applications/:uid"
+            exact={true}
+            element={<SingleApplicationView />}
+          ></Route>
         </Route>
 
         <Route element={<InstructorContextLayout />}>
@@ -140,8 +146,6 @@ function App() {
             element={<InstructorProfile />}
           ></Route>
         </Route>
-
-        <Route path="/wishlist" exact={true} element={<WishListPage />}></Route>
 
         <Route
           path="/viewWishlists"
