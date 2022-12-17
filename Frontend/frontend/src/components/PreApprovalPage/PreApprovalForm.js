@@ -5,10 +5,37 @@ import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
 import classes from "./PreApprovalForm.module.css";
 import { Table } from "react-bootstrap";
+import {useState }from "react";
 
 const PreApprovalForm = ({ status }) => {
+  const [file, setFile] = useState({});
+
+  function handleFile(event) {
+    setFile(event.target.files[0]);
+  }
+
   function onSubmit(event) {
     event.preventDefault();
+    var data = new FormData();
+    data.append("preApproval", file);
+
+    fetch(
+        "http://localhost:8080/student/upload/preapproval", //enter api address
+        {
+          method: "POST",
+          credentials: "include",
+          body: data,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Accept": "application/json",
+            "type": "formData",
+          },
+        }
+      ).then((response) => {
+        if (response.status === 200) {
+          window.confirm("Preapproval Uploaded.");
+        }
+      });
   }
 
   return (
@@ -29,12 +56,12 @@ const PreApprovalForm = ({ status }) => {
         <h5>Document</h5>
         <hr />
 
-        <Form.Group as={Row} className="my-3">
+        <Form.Group as={Row} controlId="formFile" className="my-3">
           <Form.Label column sm="3">
             PreApproval Form
           </Form.Label>
           <Col>
-            <Form.Control type="file" />
+            <Form.Control type="file" onChange={handleFile} />
           </Col>
         </Form.Group>
 
