@@ -6,6 +6,7 @@ import Card from "../UI/Card";
 import classes from "./LearningAgreementForm.module.css";
 import { Table } from "react-bootstrap";
 import { useState } from "react";
+import template from "../../assets/learningAgreement.pdf";
 
 const LearningAgreementForm = ({ status }) => {
   const [file, setFile] = useState({});
@@ -44,7 +45,10 @@ const LearningAgreementForm = ({ status }) => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/student/upload/learningagreement", requestOptions)
+    fetch(
+      "http://localhost:8080/student/upload/learningagreement",
+      requestOptions
+    )
       .then((response) => {
         response.text();
         if (response.status === 200) {
@@ -59,22 +63,27 @@ const LearningAgreementForm = ({ status }) => {
       .then((response) => {});
   }
 
-  function downloadForm() {
+  function downloadForm(event) {
+    event.preventDefault();
     var API = `http://localhost:8080/student/download/learningagreement`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     };
 
-    fetch(API, requestOptions).then((res) => {
-      res.json().then((data) => {
-        console.log("aaaaaaaaaaaaaaaa" + data);
+    fetch(API, requestOptions)
+      .then((res) => {
+        res.blob();
+      })
+      .then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `PreApproval.pdf`);
+        link.click();
       });
-    });
   }
 
   return (
@@ -106,6 +115,12 @@ const LearningAgreementForm = ({ status }) => {
 
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Col className="text-center">
+            <Button href={template}
+              variant="primary"
+              className="button-default mx-3"
+            >
+              Download Template
+            </Button>
             <Button variant="primary" className="button-default" type="submit">
               Save Changes
             </Button>

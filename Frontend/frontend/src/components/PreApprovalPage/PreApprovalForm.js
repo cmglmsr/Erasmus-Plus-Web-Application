@@ -86,23 +86,6 @@ const PreApprovalForm = ({ status }) => {
     });
   }
 
-  function downloadTemplate() {
-    var API = `http://localhost:8080/student/download/preapproval`;
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    fetch(API, requestOptions).then((res) => {
-      res.json().then((data) => {
-        console.log("aaaaaaaaaaaaaaaa" + data);
-      });
-    });
-  }
   return (
     <Card>
       <Form className="form">
@@ -135,7 +118,6 @@ const PreApprovalForm = ({ status }) => {
           <Button href={template}
               variant="primary"
               className="button-default mx-3"
-              onClick={downloadTemplate}
             >
               Download Template
             </Button>
