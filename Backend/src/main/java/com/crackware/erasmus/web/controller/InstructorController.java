@@ -26,11 +26,7 @@ public class InstructorController {
 
     private final InstructorService instructorService;
 
-    private final ScheduleService scheduleService;
-
     private final ToDoListItemService toDoListItemService;
-
-    private final TaskService taskService;
 
     private final ToDoListService toDoListService;
 
@@ -43,12 +39,13 @@ public class InstructorController {
     private final CourseService courseService;
 
 
-    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService, ImageService imageService, StudentService studentService, WishlistCourseService wishlistCourseService, CourseService courseService) {
+    public InstructorController(HelperService helperService, InstructorService instructorService,
+                                ToDoListItemService toDoListItemService, ToDoListService toDoListService,
+                                ImageService imageService, StudentService studentService,
+                                WishlistCourseService wishlistCourseService, CourseService courseService) {
         this.helperService = helperService;
         this.instructorService = instructorService;
-        this.scheduleService = scheduleService;
         this.toDoListItemService = toDoListItemService;
-        this.taskService = taskService;
         this.toDoListService = toDoListService;
         this.imageService = imageService;
         this.studentService = studentService;

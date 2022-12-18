@@ -6,7 +6,6 @@ import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -31,23 +30,20 @@ public class StudentController {
 
     private final ToDoListItemService toDoListItemService;
 
-    private final TaskService taskService;
-
-    private final ScheduleService scheduleService;
-
     private final DocumentService documentService;
 
     private final ImageService imageService;
 
     private final CourseService courseService;
 
-    public StudentController(HelperService helperService, StudentService studentService, ToDoListService toDoListService, ToDoListItemService toDoListItemService, TaskService taskService, ScheduleService scheduleService, DocumentService documentService, ImageService imageService, CourseService courseService) {
+    public StudentController(HelperService helperService, StudentService studentService,
+                             ToDoListService toDoListService, ToDoListItemService toDoListItemService,
+                             DocumentService documentService, ImageService imageService,
+                             CourseService courseService) {
         this.helperService = helperService;
         this.studentService = studentService;
         this.toDoListService = toDoListService;
         this.toDoListItemService = toDoListItemService;
-        this.taskService = taskService;
-        this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.imageService = imageService;
         this.courseService = courseService;
@@ -87,28 +83,6 @@ public class StudentController {
             studentService.save((Student) helperService.getUser());
         }
 
-    }
-
-    @PostMapping("/schedule")
-    public void studentSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
-        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
-        if (helperService.getUser().getSchedule() == null){
-            helperService.getUser().setSchedule(new Schedule());
-        }
-        if (task.isDone()){
-            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
-                    scheduleRequest.getDueDate());
-        }else {
-            taskService.save(task);
-            if (helperService.getUser().getSchedule() != null)
-                helperService.getUser().getSchedule().addItem(task);
-            else {
-                helperService.getUser().setSchedule(new Schedule());
-                helperService.getUser().getSchedule().addItem(task);
-            }
-            scheduleService.save(helperService.getUser().getSchedule());
-            studentService.save((Student) helperService.getUser());
-        }
     }
 
     @PostMapping("/upload/learningAgreement")
