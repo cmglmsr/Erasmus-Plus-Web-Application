@@ -41,6 +41,7 @@ import PreApprovalListPage from "./pages/Fbm/PreApprovalListPage";
 import SingleWishlistView from "./pages/Instructor/SingleWishlistView";
 import CourseWishlistContextLayout from "./context/CourseWishlistContext/CourseWishlistContextLayout";
 import CourseWishlistPage from "./pages/Instructor/CourseWishlistPage";
+import WaitingListPage from "./pages/WaitingListPage"
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -141,6 +142,13 @@ function App() {
             exact={true}
             element={<CoordinatorPage />}
           ></Route>
+
+          <Route
+            path="/coordinator/waitingList"
+            exact={true}
+            element={<WaitingListPage />}
+          ></Route>
+
           <Route
             path="/coordinator/profile"
             exact={true}
@@ -188,11 +196,11 @@ function App() {
             element={<InstructorProfile />}
           ></Route>
           <Route element={<CourseWishlistContextLayout />}>
-          <Route
-            path="/instructor/wishlists/"
-            exact={true}
-            element={<CourseWishlistPage />}
-          ></Route>
+            <Route
+              path="/instructor/wishlists/"
+              exact={true}
+              element={<CourseWishlistPage />}
+            ></Route>
           </Route>
           <Route
             path="/instructor/wishlist/:id"
@@ -224,10 +232,7 @@ function App() {
             exact={true}
             element={<IsoProfile />}
           ></Route>
-
         </Route>
-
-
       </Routes>
     </Layout>
   );
