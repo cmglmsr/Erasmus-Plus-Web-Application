@@ -16,6 +16,7 @@ const ActionButtons = ({role}) => {
     }
     else if (role === "ROLE_INSTRUCTOR" || role === "ROLE_COORDINATOR") {
         buttons[3] = <Button className="button-default" key="course-transfer-list" as={Link} to="/course-transfer-list">Course Transfer</Button>;
+        buttons[4] = <Button className="button-default" key="view-wishlists" as={Link} to="/instructor/viewWishlists">View Wishlists</Button>;
     }
     else if (role === "ROLE_FACULTY_BOARD_MEMBER") {
         buttons[0] = <Button className="button-default" key="application" as={Link} to="/fbm/preApprovals">PreApprovals</Button>;
