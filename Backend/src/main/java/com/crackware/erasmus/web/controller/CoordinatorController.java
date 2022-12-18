@@ -146,5 +146,12 @@ public class CoordinatorController {
         }
         return waitlistedApplications;
     }
+
+    @GetMapping("/waitlist/reject/{id}")
+    public void rejectWaitlistApplication(@PathVariable String id) {
+        Application a = applicationService.findById(Long.valueOf(id));
+        a.setStatus(Status.DENIED);
+        applicationService.save(a);
+    }
 }
 
