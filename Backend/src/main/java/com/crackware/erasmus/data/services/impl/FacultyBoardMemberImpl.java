@@ -11,17 +11,18 @@ import java.util.Set;
 
 @Service
 /**
- * Class which contains implementations of AdminService interface
+ * Class which contains implementations of FacultyBoardMemberService interface
  */
 public class FacultyBoardMemberImpl implements FacultyBoardMemberService {
 
     private final FacultyBoardMemberRepository facultyBoardMemberRepository;
-    // Constructor for AdminServiceImpl class
+    // Constructor for FacultyBoardMemberImpl class
     public FacultyBoardMemberImpl(FacultyBoardMemberRepository facultyBoardMemberRepository) {
         this.facultyBoardMemberRepository = facultyBoardMemberRepository;
     }
 
     @Override
+    // Function which finds all CourseList instances by ID
     public Set<FacultyBoardMember> findAll() {
         HashSet<FacultyBoardMember> facultyBoardMembers = new HashSet<>();
         facultyBoardMemberRepository.findAll().forEach(facultyBoardMembers::add);
@@ -29,26 +30,31 @@ public class FacultyBoardMemberImpl implements FacultyBoardMemberService {
     }
 
     @Override
+    // Function which finds a FacultyBoardMember class instance by ID
     public FacultyBoardMember findById(Long aLong) {
         return facultyBoardMemberRepository.findById(aLong).orElse(null);
     }
 
     @Override
+    // Function which saves a FacultyBoardMember class instance to the system
     public FacultyBoardMember save(FacultyBoardMember object) {
         return facultyBoardMemberRepository.save(object);
     }
 
     @Override
+    // Function which deletes a FacultyBoardMember class instance from the system
     public void delete(FacultyBoardMember object) {
         facultyBoardMemberRepository.delete(object);
     }
 
     @Override
+    // Function which deletes a FacultyBoardMember class instance from the system by ID
     public void deleteById(Long aLong) {
         facultyBoardMemberRepository.deleteById(aLong);
     }
 
     @Override
+    // Function which finds a FacultyBoardMember class instance by email
     public BaseEntity findByEmail(String email) {
         return facultyBoardMemberRepository.findByMail(email);
     }
