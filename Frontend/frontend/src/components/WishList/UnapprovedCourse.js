@@ -14,18 +14,18 @@ var university1 = "";
 function UnapprovedCourseList(props) {
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
-  const [university, setUniversity] = useState("");
+  const [hostUniversityName, setUniversity] = useState("");
   const [approvedNotapproved, setApprovedNotapproved] = useState("");
 
   useEffect(() => {
     course = {
       courseName: courseName,
       courseCode: courseCode,
-      university: university,
-      approvedNotapproved: "Approved"
+      hostUniversityName: hostUniversityName,
+      approvedNotapproved: "Unpproved"
     };
     props.getCourse(course);
-  }, [courseName, courseCode, university, "Approved"]);
+  }, [courseName, courseCode, hostUniversityName, "Unpproved"]);
 
 
   return (
@@ -90,7 +90,7 @@ function UnapprovedCourseList(props) {
                 setCourseName(courseName1);
                 setCourseCode(courseCode1);
                 setUniversity(university1);
-                approvedNotapproved = "Not approved"
+                approvedNotapproved = "Unapproved"
               }} 
             >
               Add Course

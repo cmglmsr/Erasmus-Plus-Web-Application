@@ -188,6 +188,11 @@ function App() {
             exact={true}
             element={<InstructorProfile />}
           ></Route>
+          <Route
+            path="/instructor/viewWishlists"
+            exact={true}
+            element={<ViewWishlistsPage />}
+          ></Route>
         </Route>
 
         <Route element={<FbmContextLayout />}>
@@ -222,12 +227,6 @@ function App() {
             ></Route>
           </Route>
         </Route>
-
-        <Route
-          path="/viewWishlists"
-          exact={true}
-          element={<ViewWishlistsPage />}
-        ></Route>
 
         <Route
           path="/studentsWishlist"
