@@ -39,7 +39,7 @@ function LoginPage() {
           else if (parsedJson.role === "ROLE_ISO") {
             window.location.href = "http://localhost:3000/iso/home";
           }
-          else if (parsedJson.role === "ROLE_FBM") {
+          else if (parsedJson.role === "ROLE_FACULTY_BOARD_MEMBER") {
             window.location.href = "http://localhost:3000/fbm/home";
           }
         }

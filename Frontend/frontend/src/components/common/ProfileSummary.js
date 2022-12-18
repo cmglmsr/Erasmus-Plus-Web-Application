@@ -17,7 +17,7 @@ const ProfileSummary = ({
     ROLE_COORDINATOR: "Coordinator",
     ROLE_INSTRUCTOR: "Instructor",
     ROLE_ISO: "International Student Office",
-    ROLE_FBM: "Faculty Board Member",
+    ROLE_FACULTY_BOARD_MEMBER: "Faculty Board Member",
   };
   var semesterComp;
   var table;

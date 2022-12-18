@@ -1,15 +1,13 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
-import classes from "./LearningAgreementList.module.css";
-import { LearningAgreementListContext } from "../../context/LearningAgreementContext/LearningAgreementListContext";
+import classes from "./PreApprovalList.module.css";
+import { PreApprovalListContext } from "../../context/PreApprovalContext/PreApprovalListContext";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function LearningAgreementList() {
-  const learningAgreementList = useContext(LearningAgreementListContext);
-  const navigate = useNavigate();
-  console.log(learningAgreementList);
+function PreApprovalList() {
+  const PreApprovalList = useContext(PreApprovalListContext);
+  console.log(PreApprovalList);
 
   const selectDownloadNumber = (numberSelected) => {
     downloadForm(numberSelected.target.value);
@@ -25,9 +23,9 @@ function LearningAgreementList() {
 
   function downloadForm(number) {
     console.log(number);
-    var API = `http://localhost:8080/coordinator/learningAgreement/download/${number}`;
+    var API = `http://localhost:8080/fbm/download/preapproval/${number}`;
     var requestOptions = {
-      method: "POST",
+      method: "GET",
       redirect: "follow",
       credentials: "include",
     };
@@ -38,7 +36,7 @@ function LearningAgreementList() {
         const url = window.URL.createObjectURL(new Blob([blob]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", `LearningAgreement.pdf`);
+        link.setAttribute("download", `PreApprovalForm.pdf`);
         link.click();
       });
     });
@@ -46,7 +44,7 @@ function LearningAgreementList() {
 
   function approve(number) {
     console.log(number);
-    var API = `http://localhost:8080/coordinator/learningAgreement/approve/${number}`;
+    var API = `http://localhost:8080/fbm/preapproval/approve/${number}`;
     var requestOptions = {
       method: "POST",
       redirect: "follow",
@@ -60,7 +58,7 @@ function LearningAgreementList() {
 
   function reject(number) {
     console.log(number);
-    var API = `http://localhost:8080/coordinator/learningAgreement/reject/${number}`;
+    var API = `http://localhost:8080/fbm/preapproval/reject/${number}`;
     var requestOptions = {
       method: "POST",
       redirect: "follow",
@@ -72,10 +70,10 @@ function LearningAgreementList() {
     });
   }
 
-  console.log(learningAgreementList);
+  console.log(PreApprovalList);
   return (
     <Card>
-      <h3 className="heading my-3">Learning Agreement List</h3>
+      <h3 className="heading my-3">PreApproval List</h3>
       <hr />
       <div className={classes.scrollable}>
         <Table>
@@ -90,7 +88,7 @@ function LearningAgreementList() {
             </tr>
           </thead>
           <tbody>
-            {learningAgreementList.map((learningAgreement) => (
+            {PreApprovalList.map((learningAgreement) => (
               <tr key={learningAgreement.documentId}>
                 <td className={classes.center}>{learningAgreement.fullname}</td>
                 <td className={classes.center}>{learningAgreement.id}</td>
@@ -99,7 +97,7 @@ function LearningAgreementList() {
                 {learningAgreement.status === "WAITING_COORDINATOR" ? (
                   <td className={classes.center}>
                     <Button
-                      key={learningAgreement.documentId}
+                      key={`approve-${learningAgreement.documentId}`}
                       value={learningAgreement.documentId}
                       className="btn-success mx-2"
                       onClick={selectApproveNumber}
@@ -107,7 +105,7 @@ function LearningAgreementList() {
                       Approve
                     </Button>
                     <Button
-                      key={learningAgreement.documentId}
+                      key={`reject-${learningAgreement.documentId}`}
                       value={learningAgreement.documentId}
                       className="btn-danger mx-2"
                       onClick={selectRejectNumber}
@@ -120,7 +118,7 @@ function LearningAgreementList() {
                 )}
                 <td className={classes.center}>
                   <Button
-                    key={learningAgreement.documentId}
+                    key={`download-${learningAgreement.documentId}`}
                     value={learningAgreement.documentId}
                     className="button-default"
                     onClick={selectDownloadNumber}
@@ -137,4 +135,4 @@ function LearningAgreementList() {
   );
 }
 
-export default LearningAgreementList;
+export default PreApprovalList;

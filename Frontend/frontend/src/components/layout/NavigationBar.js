@@ -74,7 +74,7 @@ function NavigationBar() {
                 </Nav.Link>
               </Nav>
             )}
-            {role === "ROLE_FBM" && (
+            {role === "ROLE_FACULTY_BOARD_MEMBER" && (
               <Nav className="ms-auto">
                 <Nav.Link as={Link} to="/fbm/home">
                   Home
