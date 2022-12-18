@@ -7,11 +7,14 @@ import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping({"iso", "/iso"})
@@ -29,11 +32,14 @@ public class InternationalStudentOfficeController {
     private final ToDoListItemService toDoListItemService;
 
     private final InternationalStudentOfficeService isoService;
+
+    private final StudentService studentService;
+
     public InternationalStudentOfficeController(HelperService helperService, StudentService studentService,
                                                 InternationalStudentOfficeService isoService,
                                                 DocumentService documentService,
                                                 ToDoListService toDoListService, ScheduleService scheduleService,
-                                                TaskService taskService, ToDoListItemService toDoListItemService) {
+                                                TaskService taskService, ToDoListItemService toDoListItemService, StudentService studentService1) {
         this.helperService = helperService;
         this.isoService = isoService;
         this.documentService = documentService;
@@ -41,6 +47,7 @@ public class InternationalStudentOfficeController {
         this.scheduleService = scheduleService;
         this.taskService = taskService;
         this.toDoListItemService = toDoListItemService;
+        this.studentService = studentService1;
     }
 
     @GetMapping("/home")
@@ -107,6 +114,11 @@ public class InternationalStudentOfficeController {
             scheduleService.save(helperService.getUser().getSchedule());
             isoService.save((InternationalStudentOffice) helperService.getUser());
         }
+    }
 
+    @GetMapping("/students")
+    public ResponseEntity<ArrayList<Student>> getStudents() {
+        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(students);
     }
 }
