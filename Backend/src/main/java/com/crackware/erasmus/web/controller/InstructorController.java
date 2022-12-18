@@ -141,15 +141,4 @@ public class InstructorController {
         return student.getCourseWishlist();
     }
 
-    @GetMapping("/waitlist")
-    public ArrayList<Application> getWaitlist() {
-        ArrayList<Application> applications = new ArrayList<>(applicationService.findAll());
-        ArrayList<Application> waitlistedApplications = new ArrayList<>();
-        for(Application a : applications) {
-            if(a.getStatus()==Status.WAITLISTED) {
-                waitlistedApplications.add(a);
-            }
-        }
-        return waitlistedApplications;
-    }
 }

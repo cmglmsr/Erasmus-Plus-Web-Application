@@ -152,5 +152,16 @@ public class CoordinatorController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @GetMapping("/waitlist")
+    public ArrayList<Application> getWaitlist() {
+        ArrayList<Application> applications = new ArrayList<>(applicationService.findAll());
+        ArrayList<Application> waitlistedApplications = new ArrayList<>();
+        for(Application a : applications) {
+            if(a.getStatus()==Status.WAITLISTED) {
+                waitlistedApplications.add(a);
+            }
+        }
+        return waitlistedApplications;
+    }
 }
 
