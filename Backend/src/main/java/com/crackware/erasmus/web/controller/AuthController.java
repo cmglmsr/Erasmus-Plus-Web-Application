@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/")
+/**
+ * Controller class for handling authentication
+ */
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -37,6 +40,7 @@ public class AuthController {
 
     private final JwtUtils jwtUtils;
 
+    // Constructor for AuthController class
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;

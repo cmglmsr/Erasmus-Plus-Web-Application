@@ -23,6 +23,9 @@ import java.util.*;
 
 @RestController
 @RequestMapping("student")
+/**
+ * Controller class for Application class
+ */
 public class ApplicationsController {
 
     private final ApplicationService applicationService;
@@ -35,6 +38,7 @@ public class ApplicationsController {
 
     private final ToDoListHelper toDoListHelper;
 
+    // Constructor for ApplicationsController class
     public ApplicationsController(ApplicationListServiceImpl applicationListService,
                                   ApplicationServiceImpl applicationService,
                                   HelperService helperService, SchoolService schoolService,

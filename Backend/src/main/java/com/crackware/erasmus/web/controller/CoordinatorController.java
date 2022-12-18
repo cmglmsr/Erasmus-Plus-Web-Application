@@ -24,6 +24,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/coordinator", "coordinator"})
+/**
+ * Controller class for Coordinator class
+ */
 public class CoordinatorController {
 
     private final CoordinatorService coordinatorService;
@@ -42,6 +45,7 @@ public class CoordinatorController {
 
     private final StudentService studentService;
 
+    // Constructor for CoordinatorController class
     public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService,
                                  ToDoListService toDoListService, ToDoListItemService toDoListItemService,
                                  DocumentService documentService, ApplicationService applicationService,

@@ -15,12 +15,15 @@ import java.io.FileNotFoundException;
 
 @Controller
 @RequestMapping("/student/excel")
+/**
+ * Controller class for handling Excel file and school operations
+ */
 public class TestController {
 
 
     private final ExcelService fileService;
 
-
+    // Constructor for AdminController class
     public TestController(ExcelService fileService, SchoolsHelper sh) {
         this.fileService = fileService;
     }

@@ -14,9 +14,13 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("student/")
+/**
+ * Controller class for School class
+ */
 public class SchoolsController {
     private final SchoolsHelper sh;
 
+    // Constructor for AdminCoSchoolsControllerntroller class
     public SchoolsController(SchoolsHelper sh) {
         this.sh = sh;
     }

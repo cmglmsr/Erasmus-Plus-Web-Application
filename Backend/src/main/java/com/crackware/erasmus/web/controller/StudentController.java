@@ -18,6 +18,9 @@ import java.util.Set;
 
 @RestController
 @RequestMapping( "/student")
+/**
+ * Controller class for Student class
+ */
 public class StudentController {
 
     private final HelperService helperService;
@@ -36,6 +39,7 @@ public class StudentController {
 
     private final CourseService courseService;
 
+    // Constructor for StudentController class
     public StudentController(HelperService helperService, StudentService studentService,
                              ToDoListHelper toDoListHelper, ToDoListService toDoListService, ToDoListItemService toDoListItemService,
                              DocumentService documentService, ImageService imageService,
