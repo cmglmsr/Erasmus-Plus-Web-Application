@@ -7,7 +7,7 @@ export const TranscriptListProvider = ({ children }) => {
   const [transcriptList, setTranscriptList] = useState([]);
 
   useEffect(() => {
-    var API = "http://localhost:8080/coordinator/finalTransferList";
+    var API = "http://localhost:8080/iso/students";
     var requestOptions = {
       method: "GET",
       redirect: "follow",
