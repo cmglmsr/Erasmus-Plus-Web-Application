@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CourseWishlistContext from "../../context/CourseWishlistContext/CourseWishlistContext";
 
 function CourseWishlistList() {
-  const courseWishlist = useContext(CourseWishlistContext);
+  const {courseWishlist, students} = useContext(CourseWishlistContext);
   const navigate = useNavigate();
 
   function view(e) {
@@ -46,7 +46,7 @@ function CourseWishlistList() {
 
   return (
     <Card>
-      <h3 className="heading my-3">Applications List</h3>
+      <h3 className="heading my-3">Course Wishlists</h3>
       <hr />
       <div className={classes.scrollable}>
         <Table>
@@ -60,24 +60,24 @@ function CourseWishlistList() {
             </tr>
           </thead>
           <tbody>
-            {courseWishlist.map((wishlist) => (
-              <tr key={wishlist.id}>
-                <td className={classes.center}>{wishlist.fullname}</td>
-                <td className={classes.center}>{wishlist.id}</td>
-                <td className={classes.center}>{wishlist.status}</td>
-                {wishlist.status === "WAITING_INSTRUCTOR" ? (
+            {courseWishlist.map((wishlist, index) => (
+              <tr key={students[index].id}>
+                <td className={classes.center}>{students[index].fullname}</td>
+                <td className={classes.center}>{students[index].bilkentId}</td>
+                <td className={classes.center}>{wishlist[0].status}</td>
+                {wishlist[0].status === "WAITING_INSTRUCTOR" ? (
                   <td className={classes.center}>
                     <Button
                       key={`approve-${wishlist.id}`}
-                      value={wishlist.id}
+                      value={students[index].id}
                       className="btn-success mx-2"
                       onClick={approve}
                     >
                       Approve
                     </Button>
                     <Button
-                      key={`reject-${wishlist.id}`}
-                      value={wishlist.id}
+                      key={`reject-${students[index].id}`}
+                      value={students[index].id}
                       className="btn-danger mx-2"
                       onClick={reject}
                     >
@@ -89,8 +89,8 @@ function CourseWishlistList() {
                 )}
                 <td className={classes.center}>
                   <Button
-                    key={`download-${wishlist.id}`}
-                    value={wishlist.id}
+                    key={`view-${students[index].id}`}
+                    value={students[index].id}
                     className="button-default"
                     onClick={view}
                   >

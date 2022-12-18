@@ -40,6 +40,8 @@ import LearningAgreementListPage from "./pages/LearningAgreementListPage";
 import LearningAgreementListContextLayout from "./context/LearningAgreementContext/LearningAgreementListContextLayout";
 import PreApprovalListContextLayout from "./context/PreApprovalContext/PreApprovalListContextLayout";
 import PreApprovalListPage from "./pages/Fbm/PreApprovalListPage";
+import CourseWishlistContextLayout from "./context/CourseWishlistContext/CourseWishlistContextLayout";
+import CourseWishlistPage from "./pages/Instructor/CourseWishlistPage";
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -186,6 +188,13 @@ function App() {
             exact={true}
             element={<InstructorProfile />}
           ></Route>
+          <Route element={<CourseWishlistContextLayout />}>
+          <Route
+            path="/instructor/viewWishlists"
+            exact={true}
+            element={<CourseWishlistPage />}
+          ></Route>
+          </Route>
         </Route>
 
         <Route element={<FbmContextLayout />}>
@@ -212,13 +221,6 @@ function App() {
             element={<IsoProfile />}
           ></Route>
 
-          <Route element={<TranscriptListContext />}>
-            <Route
-              path="/iso/transcript"
-              exact={true}
-              element={<TranscriptListPage />}
-            ></Route>
-          </Route>
         </Route>
 
         <Route
