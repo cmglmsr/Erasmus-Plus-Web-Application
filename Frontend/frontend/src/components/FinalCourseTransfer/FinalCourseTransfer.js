@@ -1,12 +1,12 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Card from "../UI/Card";
-import classes from "./FinalCourseTransferList.module.css";
+import classes from "./FinalCourseTransfer.module.css";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import FinalCourseTransferListContext from  "../../context/FinalCourseTransferContext/FinalCourseTransferListContext";
 
-function FinalCourseTransferList(){
+function FinalCourseTransfer(){
   const finalCourseTransferList = useContext(FinalCourseTransferListContext);
   const navigate = useNavigate();
 
@@ -53,4 +53,4 @@ function FinalCourseTransferList(){
 
 }
 
-export default FinalCourseTransferList;
+export default FinalCourseTransfer;

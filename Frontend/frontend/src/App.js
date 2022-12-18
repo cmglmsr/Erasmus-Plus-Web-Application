@@ -48,7 +48,8 @@ import WaitingListPage from "./pages/WaitingListPage";
 import WaitingListContextLayout from "./context/WaitingListContext/WaitingListContextLayout";
 import StudentProfileEdit from "./pages/Student/StudentProfileEdit";
 import FinalCourseTransferListPage from "./pages/FinalCourseTransferListPage";
-import FinalCourseTransferListContextLayout from "./context/FinalCourseTransferContext/FinalCourseTransferListContextLayout"
+import FinalCourseTransferListContextLayout from "./context/FinalCourseTransferContext/FinalCourseTransferListContextLayout";
+
 const DUMMY_PROFILE = {
   role: "Student",
   image: "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",

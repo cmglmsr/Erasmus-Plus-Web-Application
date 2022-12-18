@@ -26,7 +26,7 @@ const ActionButtons = ({role}) => {
         buttons[1] = <Button className="button-default" key="placements" as={Link} to="/coordinator/placements">Placements</Button>;
         buttons[3] = <Button className="button-default" key="course-transfer-list" as={Link} to="/coordinator/learningAgreements">Learning Agreements</Button>;
         buttons[2] = <Button className="button-default" key="wait-list" as={Link} to="/coordinator/waitinglist">Waitlist</Button>;
-        buttons[4] = <Button className="button-default" key="final-course-transfer" as={Link} to="/final-course-transfer">Final Course Transfer</Button>;
+        buttons[4] = <Button className="button-default" key="final-course-transfer" as={Link} to="/coordinator/finalCourseTransferList">Final Course Transfer</Button>;
     }
 
     const results= []

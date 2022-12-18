@@ -4,7 +4,7 @@ import { useContext } from "react";
 import ProfileSummary from "../../src/components/common/ProfileSummary.js";
 import ActionButtons from "../../src/components/common/ActionButtons";
 import CoordinatorContext from "../../src/context/CoordinatorContext/CoordinatorContext";
-import FinalCourseTransferList from "../../src/pages/FinalCourseTransferListPage.js";
+import FinalCourseTransfer from "../components/FinalCourseTransfer/FinalCourseTransfer.js";
 
 function FinalCourseTransferListPage(){
   const [coordinatorData, role] = useContext(CoordinatorContext);
@@ -28,7 +28,7 @@ function FinalCourseTransferListPage(){
           </Row>
         </Col>
         <Col className="mx-3">
-          <FinalCourseTransferList/>
+          <FinalCourseTransfer />
         </Col>
       </Row>
     </section>
