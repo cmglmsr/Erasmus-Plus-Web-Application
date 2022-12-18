@@ -2,16 +2,13 @@ package com.crackware.erasmus.data.bootstrap;
 
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Department;
-import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.model.security.EnumRole;
 import com.crackware.erasmus.data.model.security.Role;
 import com.crackware.erasmus.data.model.security.User;
-import com.crackware.erasmus.data.repositories.CoordinatorRepository;
-import com.crackware.erasmus.data.repositories.FacultyBoardMemberRepository;
-import com.crackware.erasmus.data.repositories.ScheduleRepository;
-import com.crackware.erasmus.data.repositories.TaskRepository;
+import com.crackware.erasmus.data.repositories.*;
 import com.crackware.erasmus.data.repositories.security.RoleRepository;
 import com.crackware.erasmus.data.repositories.security.UserRepository;
+import com.crackware.erasmus.data.services.InternationalStudentOfficeService;
 import com.crackware.erasmus.data.services.StudentService;
 import com.crackware.erasmus.data.services.ToDoListItemService;
 import com.crackware.erasmus.data.services.helper.ExcelService;
@@ -26,8 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Date;
 import java.util.HashSet;
 
 @Component
@@ -43,13 +38,15 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final FacultyBoardMemberRepository facultyBoardMemberRepository;
     private final TestController testController;
     private final ExcelService excelService;
+    private final InstructorRepository instructorRepository;
+    private final InternationalStudentOfficeService internationalStudentOfficeService;
 
     public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository,
                             UserRepository userRepository, CoordinatorRepository coordinatorRepository,
                             ScheduleRepository scheduleRepository, TaskRepository taskRepository,
                             ToDoListItemService toDoListItemService,
                             FacultyBoardMemberRepository facultyBoardMemberRepository,
-                            TestController testController, ExcelService excelService) {
+                            TestController testController, ExcelService excelService, InstructorRepository instructorRepository, InternationalStudentOfficeService internationalStudentOfficeService) {
         this.studentService = studentService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -60,6 +57,8 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         this.facultyBoardMemberRepository = facultyBoardMemberRepository;
         this.testController = testController;
         this.excelService = excelService;
+        this.instructorRepository = instructorRepository;
+        this.internationalStudentOfficeService = internationalStudentOfficeService;
     }
 
     @Override
@@ -82,14 +81,17 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         Role cRole = new Role();
         Role fRole = new Role();
         Role iRole = new Role();
+        Role isoRole = new Role();
         cRole.setName(EnumRole.ROLE_COORDINATOR);
         sRole.setName(EnumRole.ROLE_STUDENT);
         fRole.setName(EnumRole.ROLE_FACULTY_BOARD_MEMBER);
         iRole.setName(EnumRole.ROLE_INSTRUCTOR);
+        isoRole.setName(EnumRole.ROLE_ISO);
         roleRepository.save(sRole);
         roleRepository.save(cRole);
         roleRepository.save(fRole);
         roleRepository.save(iRole);
+        roleRepository.save(isoRole);
 
         // set users
         User uCem = new User();
@@ -101,6 +103,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         User uAysegulDundar = new User();
         User uSaksoy = new User();
         User uEray = new User();
+        User isoUser = new User();
         uCem.setEmail("cemg@hotmail.com");
         uCem.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
         HashSet<Role> cemRoles = new HashSet<>(); cemRoles.add(sRole);
@@ -146,6 +149,11 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         HashSet<Role> erayRoles = new HashSet<>(); erayRoles.add(iRole);
         uEray.setRoles(erayRoles);
         userRepository.save(uEray);
+        isoUser.setEmail("iso@hotmail.com");
+        isoUser.setPassword("$2a$12$YgweTD5c62YwUasYujnRa.Puit4Irrxdq3qXDXCwr5nV1yfXcFxvy");
+        HashSet<Role> isoRoles = new HashSet<>(); isoRoles.add(isoRole);
+        isoUser.setRoles(isoRoles);
+        userRepository.save(isoUser);
 
         // set students
         Student cem = new Student();
@@ -270,6 +278,16 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         instructorEray.setDateOfBirth("09.11.2001");
         instructorEray.setSurname("Tüzün");
         instructorEray.setDepartment(Department.CS);
+        instructorRepository.save(instructorEray);
+
+        // set iso
+        InternationalStudentOffice isoPerson = new InternationalStudentOffice();
+        isoPerson.setName("Name");
+        isoPerson.setSurname("Surname");
+        isoPerson.setDateOfBirth("21.01.1991");
+        isoPerson.setMail("iso@hotmail.com");
+        isoPerson.setRole(isoRole);
+        internationalStudentOfficeService.save(isoPerson);
 
         // set applications
         /*

@@ -137,7 +137,7 @@ public class StudentController {
         preApproval.setType(preApprovalFile.getContentType());
         preApproval.setName(preApprovalFile.getName());
         documentService.save(preApproval);
-        preApproval.setDocumentStatus(Status.WAITING_COORDINATOR);
+        preApproval.setDocumentStatus(Status.WAITING_FBM);
         Student curr = (Student) helperService.getUser();
         curr.setPreApproval(preApproval);
         studentService.save(curr);
