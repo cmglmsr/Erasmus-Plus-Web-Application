@@ -12,7 +12,7 @@ const ActionButtons = ({role}) => {
         buttons[3] = <Button className="button-default" key="uploadLearningAgreement" as={Link} to="/student/learningAgreement">Upload Learning Agreement</Button>;
     }
     else if (role === "ROLE_ISO") {
-        buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/transcripts">Transcripts</Button>;
+        buttons[0] = <Button className="button-default" key="transcripts" as={Link} to="/iso/transcripts">Transcripts</Button>;
     }
     else if (role === "ROLE_INSTRUCTOR") {
         buttons[3] = <Button className="button-default" key="course-transfer-list" as={Link} to="/course-transfer-list">Course Transfer</Button>;
