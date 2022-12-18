@@ -11,9 +11,10 @@ function WaitingList() {
   function handleInput(e) {
     console.log(e.target.value);
     const id = e.target.value;
+    console.log(id);
     var API = `http://localhost:8080/coordinator/waitlist/reject/${id}`;
     var requestOptions = {
-      method: "POST",
+      method: "GET",
       redirect: "follow",
       credentials: "include",
     };
@@ -40,13 +41,13 @@ function WaitingList() {
           </thead>
           <tbody>
             {waitingList.map((application) => (
-              <tr key={application.id}>
+              <tr key={application.uid}>
                 <td>{application.fullname}</td>
                 <td>{application.id}</td>
                 <td>{application.cgpa}</td>
                 <td>{application.status}</td>
                 <td>
-                  <Button key={application.id} value={application.id} className="btn-danger" onClick={e => handleInput(e, "value")}>Reject</Button>
+                  {application.status === "WAITLISTED" ? (<Button key={application.uid} value={application.uid} className="btn-danger" onClick={e => handleInput(e, "value")}>Reject</Button>) : "No actions available."}
                 </td>
               </tr>
             ))}
