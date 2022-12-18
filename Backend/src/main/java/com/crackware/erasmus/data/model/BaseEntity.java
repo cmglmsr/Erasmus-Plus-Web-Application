@@ -34,5 +34,7 @@ public class BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private ToDoList toDoList;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Schedule schedule;
 
 }

@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.message.ResponseApplication;
+import com.crackware.erasmus.data.message.ResponseDocument;
 import com.crackware.erasmus.data.message.ResponseFile;
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Status;
@@ -8,6 +9,7 @@ import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
+import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,7 +34,11 @@ public class CoordinatorController {
 
     private final ToDoListService toDoListService;
 
+    private final TaskService taskService;
+
     private final ToDoListItemService toDoListItemService;
+
+    private final ScheduleService scheduleService;
 
     private final DocumentService documentService;
 
@@ -40,17 +46,19 @@ public class CoordinatorController {
 
     private final ImageService imageService;
 
-    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService,
-                                 ToDoListService toDoListService, ToDoListItemService toDoListItemService,
-                                 DocumentService documentService, ApplicationService applicationService,
-                                 ImageService imageService) {
+    private final StudentService studentService;
+
+    public CoordinatorController(CoordinatorService coordinatorService, HelperService helperService, ToDoListService toDoListService, TaskService taskService, ToDoListItemService toDoListItemService, ScheduleService scheduleService, DocumentService documentService, ApplicationService applicationService, ImageService imageService, StudentService studentService) {
         this.coordinatorService = coordinatorService;
         this.helperService = helperService;
         this.toDoListService = toDoListService;
+        this.taskService = taskService;
         this.toDoListItemService = toDoListItemService;
+        this.scheduleService = scheduleService;
         this.documentService = documentService;
         this.applicationService = applicationService;
         this.imageService = imageService;
+        this.studentService = studentService;
     }
 
     @GetMapping("/home")
@@ -106,6 +114,28 @@ public class CoordinatorController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
     }
 
+    @PostMapping("/schedule")
+    public void coordinatorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
+        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
+        if (helperService.getUser().getSchedule() == null){
+            helperService.getUser().setSchedule(new Schedule());
+        }
+        if (task.isDone()){
+            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
+                    scheduleRequest.getDueDate());
+        }else {
+            taskService.save(task);
+            if (helperService.getUser().getSchedule() != null)
+                helperService.getUser().getSchedule().addItem(task);
+            else {
+                helperService.getUser().setSchedule(new Schedule());
+                helperService.getUser().getSchedule().addItem(task);
+            }
+            scheduleService.save(helperService.getUser().getSchedule());
+            coordinatorService.save((Coordinator) helperService.getUser());
+        }
+    }
+
     @PostMapping("/learningAgreement/approve/{id}")
     public void approveLearningAgreement(@PathVariable String id){
         Document agreement = documentService.findById(Long.valueOf(id));
@@ -114,7 +144,7 @@ public class CoordinatorController {
     }
 
     @PostMapping("/learningAgreement/reject/{id}")
-    public void rejectLearningAgreement(@PathVariable String id){
+    public void rejectLearningAgreement(@PathVariable String id) {
         Document agreement = documentService.findById(Long.valueOf(id));
         agreement.setDocumentStatus(Status.DENIED);
         documentService.save(agreement);
@@ -133,17 +163,21 @@ public class CoordinatorController {
     }
 
     @GetMapping("/learningAgreements")
-    public ResponseEntity<List<ResponseFile>> getAgreements(){
-        ArrayList<Document> al = new ArrayList<>(documentService.findAll());
-        List<ResponseFile> responseFiles = new ArrayList<>();
-        for(Document d : al) {
-            ResponseFile rf;
-            if(d.getName().equals("learningAgreement")) {
-                rf = new ResponseFile(d.getName(), d.getType(),d.getId().toString(), d.getDocumentStatus());
-                responseFiles.add(rf);
+    public ResponseEntity<List<ResponseDocument>> getAgreements() {
+        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+        ArrayList<ResponseDocument> response = new ArrayList<>();
+        for(Student s : students) {
+            if(s.getLearningAgreement()!=null) {
+                ResponseDocument rd = new ResponseDocument(
+                        s.getName() + " " + s.getSurname(),
+                        s.getBilkentId(),
+                        s.getCgpa(),
+                        s.getLearningAgreement().getDocumentStatus().toString(),
+                        s.getLearningAgreement().getId().toString());
+                response.add(rd);
             }
         }
-        return ResponseEntity.status(HttpStatus.OK).body(responseFiles);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
 
