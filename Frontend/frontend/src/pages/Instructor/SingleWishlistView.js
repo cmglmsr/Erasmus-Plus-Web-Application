@@ -1,10 +1,10 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useContext } from "react";
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import InstructorContext from "../context/InstructorContext/InstructorContext";
-import WishlistDetailsInstructor from  "../components/WishList/WishlistDetailsInstructor";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import InstructorContext from "../../context/InstructorContext/InstructorContext";
+import WishlistDetailsInstructor from  "../../components/WishList/WishlistDetailsInstructor";
 const SingleWishlistView = () => {
 const [instructorData, role] = useContext(InstructorContext);
 

@@ -1,10 +1,10 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
-import ProfileSummary from "../components/common/ProfileSummary";
-import ActionButtons from "../components/common/ActionButtons";
-import TranscriptList from "../components/TranscriptListPage/TranscriptList";
-import IsoContext from "../context/IsoContext/IsoContext";
+import ProfileSummary from "../../components/common/ProfileSummary";
+import ActionButtons from "../../components/common/ActionButtons";
+import TranscriptList from "../../components/TranscriptListPage/TranscriptList";
+import IsoContext from "../../context/IsoContext/IsoContext";
 
 function TranscriptListPage() {
   const [isoData, role] = useContext(IsoContext);

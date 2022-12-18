@@ -12,8 +12,8 @@ function CourseWishlistList() {
 
   function view(e) {
     console.log(e.target.value);
-    const uid = e.target.value;
-    navigate(`/insturctor/wishlist/${uid}`) //studentid
+    const id = e.target.value;
+    navigate(`/instructor/wishlist/${id}`) //studentid
   };
 
   function approve(event) {

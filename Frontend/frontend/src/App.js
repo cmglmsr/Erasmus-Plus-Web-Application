@@ -38,7 +38,7 @@ import LearningAgreementListPage from "./pages/LearningAgreementListPage";
 import LearningAgreementListContextLayout from "./context/LearningAgreementContext/LearningAgreementListContextLayout";
 import PreApprovalListContextLayout from "./context/PreApprovalContext/PreApprovalListContextLayout";
 import PreApprovalListPage from "./pages/Fbm/PreApprovalListPage";
-import SingleWishlistView from "./pages/SingleWishlistView";
+import SingleWishlistView from "./pages/Instructor/SingleWishlistView";
 import CourseWishlistContextLayout from "./context/CourseWishlistContext/CourseWishlistContextLayout";
 import CourseWishlistPage from "./pages/Instructor/CourseWishlistPage";
 
@@ -189,11 +189,16 @@ function App() {
           ></Route>
           <Route element={<CourseWishlistContextLayout />}>
           <Route
-            path="/instructor/wishlists/:uid"
+            path="/instructor/wishlists/"
             exact={true}
             element={<CourseWishlistPage />}
           ></Route>
           </Route>
+          <Route
+            path="/instructor/wishlist/:id"
+            exact={true}
+            element={<SingleWishlistView />}
+          ></Route>
         </Route>
 
         <Route element={<FbmContextLayout />}>
@@ -222,17 +227,7 @@ function App() {
 
         </Route>
 
-        <Route
-          path="/viewWishlists"
-          exact={true}
-          element={<ViewWishlistsPage />}
-        ></Route>
 
-        <Route
-          path="/studentsWishlist"
-          exact={true}
-          element={<StudentsWishlistPage />}
-        ></Route>
       </Routes>
     </Layout>
   );
