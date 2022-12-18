@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.*;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
@@ -67,7 +68,7 @@ public class InternationalStudentOfficeController {
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
         ArrayList<Student> response = new ArrayList<>();
         for(Student s : students) {
-            if(s.getApplication()!=null&&s.getApplication().getStatus()==Status.FINALIZED) {
+            if(s.getApplication()!=null&&s.getApplication().getStatus()== Status.FINALIZED) {
                 response.add(s);
             }
         }
