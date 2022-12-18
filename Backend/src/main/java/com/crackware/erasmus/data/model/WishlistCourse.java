@@ -12,6 +12,9 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
+/**
+ * Class which contains properties and functions for WishlistCourse class
+ */
 public class WishlistCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

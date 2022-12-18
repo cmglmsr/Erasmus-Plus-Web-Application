@@ -12,6 +12,9 @@ import javax.persistence.*;
         uniqueConstraints=
         @UniqueConstraint(columnNames={"dueDate", "description"})
 )
+/**
+ * Class which contains properties and functions for ToDoListItem class
+ */
 public class ToDoListItem {
 
     @Id

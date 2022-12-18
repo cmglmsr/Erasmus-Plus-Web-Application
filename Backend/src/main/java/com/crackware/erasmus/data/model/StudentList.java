@@ -10,6 +10,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for StudentList class
+ */
 public class StudentList extends List{
 
     @OneToMany

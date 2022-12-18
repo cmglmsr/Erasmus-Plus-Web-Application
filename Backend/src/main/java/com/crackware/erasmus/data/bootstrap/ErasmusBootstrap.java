@@ -16,7 +16,6 @@ import com.crackware.erasmus.web.controller.TestController;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

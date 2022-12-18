@@ -16,6 +16,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for Application class
+ */
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

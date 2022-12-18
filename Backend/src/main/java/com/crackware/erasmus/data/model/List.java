@@ -11,6 +11,9 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for List class
+ */
 public class List {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
