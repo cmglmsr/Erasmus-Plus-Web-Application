@@ -39,6 +39,7 @@ public class WishlistController {
                     case "courseName":
                         System.out.println(parameter);
                         WishlistCourse wlc = new WishlistCourse();
+                        wlc.setDepartment(s.getDepartment().toString());
                         wlc.setCourseName((String) payload.get(i).get(parameter));
                         wlcs.add(wlc);
                         break;
@@ -46,7 +47,7 @@ public class WishlistController {
                         System.out.println(parameter);
                         wlcs.get(wlcs.size() - 1).setCourseCode((String) payload.get(i).get(parameter));
                         break;
-                    case "university":
+                    case "hostUniversityName":
                         System.out.println(parameter);
                         wlcs.get(wlcs.size() - 1).setHostUniversityName((String) payload.get(i).get(parameter));
                         break;
