@@ -10,6 +10,9 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping({"admin", "admin.html"})
+/**
+ * Controller class for Admin class
+ */
 public class AdminController {
     private final StudentService studentService;
     private final InstructorService instructorService;
@@ -20,6 +23,7 @@ public class AdminController {
     private final ImageService imageService;
     private final HelperService helperService;
 
+    // Constructor for AdminController class
     public AdminController(StudentService studentService, InstructorService instructorService,
                            CoordinatorService coordinatorService,
                            InternationalStudentOfficeService internationalStudentOfficeService,

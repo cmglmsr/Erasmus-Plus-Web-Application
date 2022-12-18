@@ -10,6 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Service
+/**
+ * Class which contains implementations of ImageService interface
+ */
 public class ImageServiceImpl implements ImageService {
 
     private final AdminService adminService;
@@ -25,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
     private final FacultyBoardMemberService facultyBoardMemberService;
 
     private final HelperService helperService;
-
+    // Constructor for ImageServiceImpl class
     public ImageServiceImpl(AdminService adminService, StudentService studentService,
                             CoordinatorService coordinatorService, InstructorService instructorService,
                             InternationalStudentOfficeService isoService,
@@ -40,6 +43,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    // Function which saves an image file class instance to the system
     public void saveImageFile(MultipartFile file) throws IOException {
         BaseEntity user = helperService.getUser();
 

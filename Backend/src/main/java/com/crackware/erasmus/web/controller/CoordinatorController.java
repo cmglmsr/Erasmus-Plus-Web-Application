@@ -24,6 +24,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/coordinator", "coordinator"})
+/**
+ * Controller class for Coordinator class
+ */
 public class CoordinatorController {
 
     private final CoordinatorService coordinatorService;
@@ -145,6 +148,16 @@ public class CoordinatorController {
             }
         }
         return waitlistedApplications;
+    }
+
+    @GetMapping("/todolist")
+    public List<ToDoListItem> getToDoList(){
+        Coordinator coordinator = (Coordinator) helperService.getUser();
+        ArrayList<ToDoListItem> arrayList = new ArrayList<>();
+        for (ToDoListItem item: coordinator.getToDoList().getItemSet()) {
+            arrayList.add(item);
+        }
+        return arrayList;
     }
 
     @GetMapping("/waitlist/reject/{id}")

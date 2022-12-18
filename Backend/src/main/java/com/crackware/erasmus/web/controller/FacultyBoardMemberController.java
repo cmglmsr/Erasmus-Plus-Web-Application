@@ -20,6 +20,9 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping({"fbm", "/fbm"})
+/**
+ * Controller class for FacultyBoardMember class
+ */
 public class FacultyBoardMemberController {
 
     private final HelperService helperService;
@@ -36,6 +39,7 @@ public class FacultyBoardMemberController {
 
     private final StudentService studentService;
 
+    // Constructor for FacultyBoardMemberController class
     public FacultyBoardMemberController(HelperService helperService,
                                         FacultyBoardMemberService facultyBoardMemberService,
                                         ToDoListService toDoListService, ToDoListItemService toDoListItemService,

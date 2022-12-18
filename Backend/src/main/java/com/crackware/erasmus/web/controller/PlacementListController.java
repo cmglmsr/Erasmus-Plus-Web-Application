@@ -22,12 +22,16 @@ import java.util.Set;
 @CrossOrigin(origins = "localhost://", maxAge = 3600)
 @RestController
 @RequestMapping({ "/coordinator/placements"})
+/**
+ * Controller class for PlacementList class
+ */
 public class PlacementListController {
     private final PlacementService placementService;
     private final PlacementListService placementListService;
 
     private final ApplicationService applicationService;
 
+    // Constructor for PlacementListController class
     public PlacementListController(PlacementService placementService, PlacementListService placementListService, ApplicationService applicationService) {
         this.placementService = placementService;
         this.placementListService = placementListService;

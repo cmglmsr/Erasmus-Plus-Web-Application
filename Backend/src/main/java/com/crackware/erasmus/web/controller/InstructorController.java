@@ -20,6 +20,9 @@ import java.util.Set;
 
 @RestController
 @RequestMapping({"instructor", "/instructor"})
+/**
+ * Controller class for Instructor class
+ */
 public class InstructorController {
 
     private final HelperService helperService;
@@ -40,7 +43,7 @@ public class InstructorController {
 
     private final ApplicationService applicationService;
 
-
+    // Constructor for InstructorController class
     public InstructorController(HelperService helperService, InstructorService instructorService,
                                 ToDoListItemService toDoListItemService, ToDoListService toDoListService,
                                 ImageService imageService, StudentService studentService,
