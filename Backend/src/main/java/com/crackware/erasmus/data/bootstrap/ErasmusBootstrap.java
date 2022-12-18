@@ -19,6 +19,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -272,12 +273,12 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         internationalStudentOfficeService.save(isoPerson);
 
         try {
-            File uploadFile = new File("Backend/src/main/resources/Book1.xlsx");
+            File uploadFile = new File("D:\\CrackWare\\Backend\\src\\main\\resources\\Book1.xlsx");
             FileInputStream is =  new FileInputStream(uploadFile);
             MultipartFile file = new MockMultipartFile("file",IOUtils.toByteArray(is));;
             excelService.save(file);
         } catch(Exception e) {
-            System.out.println("[-] Excel file cannot be parsed!");
+            System.out.println(e.getMessage());
         }
     }
 }

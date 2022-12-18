@@ -7,7 +7,9 @@ import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.School;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.services.ApplicationService;
+import com.crackware.erasmus.data.services.PlacementListService;
 import com.crackware.erasmus.data.services.SchoolService;
+import com.crackware.erasmus.data.services.WaitListService;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.impl.ApplicationListServiceImpl;
 import com.crackware.erasmus.data.services.impl.ApplicationServiceImpl;
@@ -26,11 +28,15 @@ public class ApplicationsController {
     private final ApplicationService applicationService;
     private final HelperService helperService;
     private final SchoolService schoolService;
+    private final WaitListService waitListService;
+    private final PlacementListService placementListService;
 
-    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService) {
+    public ApplicationsController(ApplicationService applicationService, HelperService helperService, SchoolService schoolService, WaitListService waitListService, PlacementListService placementListService) {
         this.applicationService = applicationService;
         this.helperService = helperService;
         this.schoolService = schoolService;
+        this.waitListService = waitListService;
+        this.placementListService = placementListService;
     }
 
     @PostMapping("/createApplication")
