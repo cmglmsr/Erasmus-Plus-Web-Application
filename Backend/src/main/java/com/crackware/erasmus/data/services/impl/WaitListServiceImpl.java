@@ -10,10 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class WaitListServiceImpl implements WaitListService {
 
     private final WaitListRepository waitListRepository;
-
+    // Constructor for AdminServiceImpl class
     public WaitListServiceImpl(WaitListRepository waitListRepository) {
         this.waitListRepository = waitListRepository;
     }

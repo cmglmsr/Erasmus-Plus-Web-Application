@@ -10,11 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
-
+    // Constructor for AdminServiceImpl class
     public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }

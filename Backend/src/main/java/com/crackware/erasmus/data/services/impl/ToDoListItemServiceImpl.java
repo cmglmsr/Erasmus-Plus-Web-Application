@@ -9,11 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class ToDoListItemServiceImpl implements ToDoListItemService {
 
     private final ToDoListItemRepository toDoListItemRepository;
 
-
+    // Constructor for AdminServiceImpl class
     public ToDoListItemServiceImpl(ToDoListItemRepository toDoListItemRepository) {
         this.toDoListItemRepository = toDoListItemRepository;
     }

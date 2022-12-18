@@ -9,11 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class ListServiceImpl implements ListService {
 
     private final ListRepository listRepository;
 
-
+    // Constructor for AdminServiceImpl class
     public ListServiceImpl(ListRepository listRepository) {
         this.listRepository = listRepository;
     }

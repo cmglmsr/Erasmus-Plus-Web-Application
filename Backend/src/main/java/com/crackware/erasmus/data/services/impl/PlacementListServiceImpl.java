@@ -9,13 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class PlacementListServiceImpl implements PlacementListService {
 
 
 
     private final PlacementListRepository placementListRepository;
 
-
+    // Constructor for AdminServiceImpl class
     public PlacementListServiceImpl(PlacementListRepository placementListRepository) {
         this.placementListRepository = placementListRepository;
     }

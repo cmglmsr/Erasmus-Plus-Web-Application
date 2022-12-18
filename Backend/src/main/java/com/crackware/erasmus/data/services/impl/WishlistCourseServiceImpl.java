@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class WishlistCourseServiceImpl implements WishlistCourseService {
     @Override
     public Set<WishlistCourse> findAll() {

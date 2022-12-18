@@ -10,6 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class ImageServiceImpl implements ImageService {
 
     private final AdminService adminService;
@@ -25,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
     private final FacultyBoardMemberService facultyBoardMemberService;
 
     private final HelperService helperService;
-
+    // Constructor for AdminServiceImpl class
     public ImageServiceImpl(AdminService adminService, StudentService studentService,
                             CoordinatorService coordinatorService, InstructorService instructorService,
                             InternationalStudentOfficeService isoService,

@@ -10,10 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class FacultyBoardMemberImpl implements FacultyBoardMemberService {
 
     private final FacultyBoardMemberRepository facultyBoardMemberRepository;
-
+    // Constructor for AdminServiceImpl class
     public FacultyBoardMemberImpl(FacultyBoardMemberRepository facultyBoardMemberRepository) {
         this.facultyBoardMemberRepository = facultyBoardMemberRepository;
     }

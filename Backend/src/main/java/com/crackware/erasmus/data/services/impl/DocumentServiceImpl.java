@@ -9,10 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Class which contains implementations of AdminService interface
+ */
 public class DocumentServiceImpl implements DocumentService {
 
     private final DocumentRepository documentRepository;
-
+    // Constructor for AdminServiceImpl class
     public DocumentServiceImpl(DocumentRepository documentRepository) {
         this.documentRepository = documentRepository;
     }
