@@ -31,8 +31,6 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final CoordinatorRepository coordinatorRepository;
-    private final ScheduleRepository scheduleRepository;
-    private final TaskRepository taskRepository;
     private final ToDoListItemService toDoListItemService;
     private final FacultyBoardMemberRepository facultyBoardMemberRepository;
     private final TestController testController;
@@ -42,7 +40,6 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
 
     public ErasmusBootstrap(StudentService studentService, RoleRepository roleRepository,
                             UserRepository userRepository, CoordinatorRepository coordinatorRepository,
-                            ScheduleRepository scheduleRepository, TaskRepository taskRepository,
                             ToDoListItemService toDoListItemService,
                             FacultyBoardMemberRepository facultyBoardMemberRepository,
                             TestController testController, ExcelService excelService, InstructorRepository instructorRepository, InternationalStudentOfficeService internationalStudentOfficeService) {
@@ -50,8 +47,6 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.coordinatorRepository = coordinatorRepository;
-        this.scheduleRepository = scheduleRepository;
-        this.taskRepository = taskRepository;
         this.toDoListItemService = toDoListItemService;
         this.facultyBoardMemberRepository = facultyBoardMemberRepository;
         this.testController = testController;
@@ -63,17 +58,6 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
-        // set schedule
-        Schedule schedule = new Schedule();
-        Task task = new Task();
-        task.setDate("18.12.2022");
-        task.setDone(false);
-        task.setDescription("test desc");
-        task.setDueDate("18.12.2022");
-        schedule.addItem(task);
-        taskRepository.save(task);
-        scheduleRepository.save(schedule);
 
         // set roles
         Role sRole = new Role();
@@ -175,7 +159,6 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         cem.setPhoneNumber("905376314257");
         cem.setTerm(5);
         cem.setRole(sRole);
-        cem.setSchedule(schedule);
         studentService.save(cem);
         eren.setDateOfBirth("21.02.2001");
         eren.setMail("eduran@hotmail.com");
@@ -288,19 +271,13 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         isoPerson.setRole(isoRole);
         internationalStudentOfficeService.save(isoPerson);
 
-        // set applications
-        /*
-        Application a1 = new Application();
-        a1.setStudent(cem);
-        a1.setStatus(Status.PENDING);
-        a1.setDate(new Date());
-        a1.setDepartment(Department.CS);
-        a1.setPoints(cem.calculatePoints());
-        a1.setTerm("0");
-        a1.setSchool1();*/
-
-        // set approved courses
-
-
+        try {
+            File uploadFile = new File("Backend/src/main/resources/Book1.xlsx");
+            FileInputStream is =  new FileInputStream(uploadFile);
+            MultipartFile file = new MockMultipartFile("file",IOUtils.toByteArray(is));;
+            excelService.save(file);
+        } catch(Exception e) {
+            System.out.println("[-] Excel file cannot be parsed!");
+        }
     }
 }
