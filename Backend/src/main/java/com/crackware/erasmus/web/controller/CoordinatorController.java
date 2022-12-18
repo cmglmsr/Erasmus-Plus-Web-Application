@@ -133,12 +133,15 @@ public class CoordinatorController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @GetMapping("/waitlist")
-    public ArrayList<Application> getWaitlist() {
+    public ArrayList<ResponseApplication> getWaitlist() {
         ArrayList<Application> applications = new ArrayList<>(applicationService.findAll());
-        ArrayList<Application> waitlistedApplications = new ArrayList<>();
+        ArrayList<ResponseApplication> waitlistedApplications = new ArrayList<>();
         for(Application a : applications) {
+            ResponseApplication ra;
             if(a.getStatus()==Status.WAITLISTED) {
-                waitlistedApplications.add(a);
+                ra = new ResponseApplication(a);
+                ra.setFullname(a.getStudent().getName() + " " + a.getStudent().getSurname());
+                waitlistedApplications.add(ra);
             }
         }
         return waitlistedApplications;
