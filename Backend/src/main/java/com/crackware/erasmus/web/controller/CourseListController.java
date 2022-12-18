@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin("http://localhost:8080")
+/**
+ * Controller class for CourseList class
+ */
 public class CourseListController {
     private final CourseListServiceImpl courseListService;
 
+    // Constructor for CourseListController class
     public CourseListController(CourseListServiceImpl courseListService) {
         this.courseListService = courseListService;
     }

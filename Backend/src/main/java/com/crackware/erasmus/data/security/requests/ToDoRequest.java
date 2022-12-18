@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for request of ToDoRequest class
+ */
 public class ToDoRequest {
 
     @NotBlank

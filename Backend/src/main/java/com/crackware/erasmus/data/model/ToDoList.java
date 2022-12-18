@@ -24,7 +24,7 @@ public class ToDoList {
 
     // Function which add a ToDoListItem instance to a ToDoList instance
     public void addItem(ToDoListItem toDoListItem){
-        if (itemSet != null && !itemSet.contains(toDoListItem)){
+        if (itemSet != null){
             itemSet.add(toDoListItem);
         }
     }

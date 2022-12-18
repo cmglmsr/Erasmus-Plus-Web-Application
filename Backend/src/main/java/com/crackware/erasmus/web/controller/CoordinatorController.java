@@ -24,6 +24,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/coordinator", "coordinator"})
+/**
+ * Controller class for Coordinator class
+ */
 public class CoordinatorController {
 
     private final CoordinatorService coordinatorService;
@@ -68,27 +71,7 @@ public class CoordinatorController {
     public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
         imageService.saveImageFile(profilePic);
     }
-    @PostMapping("/todolist")
-    public void coordinatorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (helperService.getUser().getToDoList() == null) {
-            helperService.getUser().setToDoList(new ToDoList());
-        }
-        if (toDoListItem.isDone()){
-            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
-                    toDoRequest.getDueDate());
-        }else {
-            toDoListItemService.save(toDoListItem);
-            if (helperService.getUser().getToDoList() != null)
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            else {
-                helperService.getUser().setToDoList(new ToDoList());
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            }
-            toDoListService.save(helperService.getUser().getToDoList());
-            coordinatorService.save((Coordinator) helperService.getUser());
-        }
-    }
+
     @GetMapping("/applications")
     public ResponseEntity<Set<ResponseApplication>> listApplications() {
         Set<Application> applications = applicationService.findAll();
@@ -153,15 +136,35 @@ public class CoordinatorController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @GetMapping("/waitlist")
-    public ArrayList<Application> getWaitlist() {
+    public ArrayList<ResponseApplication> getWaitlist() {
         ArrayList<Application> applications = new ArrayList<>(applicationService.findAll());
-        ArrayList<Application> waitlistedApplications = new ArrayList<>();
+        ArrayList<ResponseApplication> waitlistedApplications = new ArrayList<>();
         for(Application a : applications) {
+            ResponseApplication ra;
             if(a.getStatus()==Status.WAITLISTED) {
-                waitlistedApplications.add(a);
+                ra = new ResponseApplication(a);
+                ra.setFullname(a.getStudent().getName() + " " + a.getStudent().getSurname());
+                waitlistedApplications.add(ra);
             }
         }
         return waitlistedApplications;
+    }
+
+    @GetMapping("/todolist")
+    public List<ToDoListItem> getToDoList(){
+        Coordinator coordinator = (Coordinator) helperService.getUser();
+        ArrayList<ToDoListItem> arrayList = new ArrayList<>();
+        for (ToDoListItem item: coordinator.getToDoList().getItemSet()) {
+            arrayList.add(item);
+        }
+        return arrayList;
+    }
+
+    @GetMapping("/waitlist/reject/{id}")
+    public void rejectWaitlistApplication(@PathVariable String id) {
+        Application a = applicationService.findById(Long.valueOf(id));
+        a.setStatus(Status.DENIED);
+        applicationService.save(a);
     }
 }
 

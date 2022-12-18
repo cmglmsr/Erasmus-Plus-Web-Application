@@ -22,12 +22,16 @@ import java.util.Set;
 @CrossOrigin(origins = "localhost://", maxAge = 3600)
 @RestController
 @RequestMapping({ "/coordinator/placements"})
+/**
+ * Controller class for PlacementList class
+ */
 public class PlacementListController {
     private final PlacementService placementService;
     private final PlacementListService placementListService;
 
     private final ApplicationService applicationService;
 
+    // Constructor for PlacementListController class
     public PlacementListController(PlacementService placementService, PlacementListService placementListService, ApplicationService applicationService) {
         this.placementService = placementService;
         this.placementListService = placementListService;
@@ -51,7 +55,9 @@ public class PlacementListController {
         PlacementList placementList = placementLists.get(0);
         Set<Application> applications = placementList.getApplications();
         for(Application a : applications) {
-            responseApplications.add(new ResponseApplication(a));
+            ResponseApplication ra = new ResponseApplication(a);
+            ra.setFullname(a.getStudent().getName()+" "+a.getStudent().getSurname());
+            responseApplications.add(ra);
         }
         return ResponseEntity.status(HttpStatus.OK).body(responseApplications);
     }
@@ -73,5 +79,4 @@ public class PlacementListController {
         }
         return ResponseEntity.status(HttpStatus.OK).body("Placements have been finalized");
     }
-
 }

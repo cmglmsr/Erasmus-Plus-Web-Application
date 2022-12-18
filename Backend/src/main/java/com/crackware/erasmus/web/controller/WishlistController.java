@@ -14,12 +14,16 @@ import java.util.*;
 
 @RestController
 @RequestMapping("student")
+/**
+ * Controller class for Wishlist class
+ */
 public class WishlistController {
 
     private final WishlistCourseService wishlistCourseService;
     private final StudentService studentService;
     private final HelperService helperService;
 
+    // Constructor for WishlistController class
     public WishlistController(WishlistCourseService wishlistCourseService, StudentService studentService, HelperService helperService) {
         this.wishlistCourseService = wishlistCourseService;
         this.studentService = studentService;

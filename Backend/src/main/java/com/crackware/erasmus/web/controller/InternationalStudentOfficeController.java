@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping({"iso", "/iso"})
+/**
+ * Controller class for InternationalStudentOffice class
+ */
 public class InternationalStudentOfficeController {
 
     private final HelperService helperService;
@@ -31,6 +34,7 @@ public class InternationalStudentOfficeController {
 
     private final StudentService studentService;
 
+    // Constructor for InternationalStudentOfficeController class
     public InternationalStudentOfficeController(HelperService helperService, StudentService studentService,
                                                 InternationalStudentOfficeService isoService,
                                                 DocumentService documentService,
@@ -63,34 +67,12 @@ public class InternationalStudentOfficeController {
         documentService.save(document);
     }
 
-    @PostMapping("/todolist")
-    public void isoToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (helperService.getUser().getToDoList() == null){
-            helperService.getUser().setToDoList(new ToDoList());
-        }
-        if (toDoListItem.isDone()){
-            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
-                    toDoRequest.getDueDate());
-        }else {
-            toDoListItemService.save(toDoListItem);
-            if (helperService.getUser().getToDoList() != null)
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            else {
-                helperService.getUser().setToDoList(new ToDoList());
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            }
-            toDoListService.save(helperService.getUser().getToDoList());
-            isoService.save((InternationalStudentOffice) helperService.getUser());
-        }
-    }
-
     @GetMapping("/students")
     public ResponseEntity<ArrayList<Student>> getStudents() {
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
         ArrayList<Student> response = new ArrayList<>();
         for(Student s : students) {
-            if(s.getApplication()!=null&&s.getApplication().getStatus()==Status.FINALIZED) {
+            if(s.getApplication()!=null&&s.getApplication().getStatus()== Status.FINALIZED) {
                 response.add(s);
             }
         }

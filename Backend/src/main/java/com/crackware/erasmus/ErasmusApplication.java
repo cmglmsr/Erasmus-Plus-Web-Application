@@ -13,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.net.URL;
 
 @SpringBootApplication
+/**
+ * Class which is used to run Spring application
+ */
 public class ErasmusApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ErasmusApplication.class, args);

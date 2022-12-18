@@ -11,6 +11,7 @@ import com.crackware.erasmus.data.repositories.security.UserRepository;
 import com.crackware.erasmus.data.services.InternationalStudentOfficeService;
 import com.crackware.erasmus.data.services.StudentService;
 import com.crackware.erasmus.data.services.ToDoListItemService;
+import com.crackware.erasmus.data.services.ToDoListService;
 import com.crackware.erasmus.data.services.helper.ExcelService;
 import com.crackware.erasmus.web.controller.TestController;
 import org.apache.commons.compress.utils.IOUtils;
@@ -35,6 +36,8 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     private final ToDoListItemService toDoListItemService;
     private final FacultyBoardMemberRepository facultyBoardMemberRepository;
     private final TestController testController;
+
+    private final ToDoListService toDoListService;
     private final ExcelService excelService;
     private final InstructorRepository instructorRepository;
     private final InternationalStudentOfficeService internationalStudentOfficeService;
@@ -43,7 +46,9 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
                             UserRepository userRepository, CoordinatorRepository coordinatorRepository,
                             ToDoListItemService toDoListItemService,
                             FacultyBoardMemberRepository facultyBoardMemberRepository,
-                            TestController testController, ExcelService excelService, InstructorRepository instructorRepository, InternationalStudentOfficeService internationalStudentOfficeService) {
+                            TestController testController, ToDoListService toDoListService, ExcelService excelService,
+                            InstructorRepository instructorRepository,
+                            InternationalStudentOfficeService internationalStudentOfficeService) {
         this.studentService = studentService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -51,6 +56,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         this.toDoListItemService = toDoListItemService;
         this.facultyBoardMemberRepository = facultyBoardMemberRepository;
         this.testController = testController;
+        this.toDoListService = toDoListService;
         this.excelService = excelService;
         this.instructorRepository = instructorRepository;
         this.internationalStudentOfficeService = internationalStudentOfficeService;
@@ -59,6 +65,12 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        // set To Do Lists
+        ToDoList coordinatorToDoList = new ToDoList();
+        toDoListService.save(coordinatorToDoList);
+
+
 
         // set roles
         Role sRole = new Role();
@@ -234,6 +246,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         calkan.setName("Can");
         calkan.setSurname("Alkan");
         calkan.setDateOfBirth("21.04.1980");
+        calkan.setToDoList(coordinatorToDoList);
         coordinatorRepository.save(calkan);
         Coordinator aduran = new Coordinator();
         aduran.setDepartment(Department.CS);
@@ -242,6 +255,7 @@ public class ErasmusBootstrap implements ApplicationListener<ContextRefreshedEve
         aduran.setName("Ayşegül");
         aduran.setSurname("Dündar");
         aduran.setDateOfBirth("21.04.1985");
+        aduran.setToDoList(coordinatorToDoList);
         coordinatorRepository.save(aduran);
 
         // set fba

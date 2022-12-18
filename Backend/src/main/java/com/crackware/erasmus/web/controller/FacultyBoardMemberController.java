@@ -20,6 +20,9 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping({"fbm", "/fbm"})
+/**
+ * Controller class for FacultyBoardMember class
+ */
 public class FacultyBoardMemberController {
 
     private final HelperService helperService;
@@ -36,6 +39,7 @@ public class FacultyBoardMemberController {
 
     private final StudentService studentService;
 
+    // Constructor for FacultyBoardMemberController class
     public FacultyBoardMemberController(HelperService helperService,
                                         FacultyBoardMemberService facultyBoardMemberService,
                                         ToDoListService toDoListService, ToDoListItemService toDoListItemService,
@@ -62,28 +66,6 @@ public class FacultyBoardMemberController {
     @PostMapping("/profile/edit")
     public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
         imageService.saveImageFile(profilePic);
-    }
-
-    @PostMapping("/todolist")
-    public void fbmToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (helperService.getUser().getToDoList() == null){
-            helperService.getUser().setToDoList(new ToDoList());
-        }
-        if (toDoListItem.isDone()){
-            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
-                    toDoRequest.getDueDate());
-        }else {
-            toDoListItemService.save(toDoListItem);
-            if (helperService.getUser().getToDoList() != null)
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            else {
-                helperService.getUser().setToDoList(new ToDoList());
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            }
-            toDoListService.save(helperService.getUser().getToDoList());
-            facultyBoardMemberService.save((FacultyBoardMember) helperService.getUser());
-        }
     }
 
     @PostMapping("/preapproval/approve/{id}")

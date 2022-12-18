@@ -5,6 +5,7 @@ import Schedule from "../../components/HomePage/Schedule";
 import ProfileSummary from "../../components/common/ProfileSummary";
 import ActionButtons from "../../components/common/ActionButtons";
 import CoordinatorContext from "../../context/CoordinatorContext/CoordinatorContext";
+import ToDoList from "../../components/HomePage/ToDoList";
 
 function CoordinatorPage() {
   const [coordinatorData, role] = useContext(CoordinatorContext);
@@ -31,6 +32,9 @@ function CoordinatorPage() {
         </Col>
         <Col className="mx-4">
           <div>
+          <Row className="my-3">
+              <ToDoList />
+            </Row>
             <Row className="my-3">
               <Schedule />
             </Row>

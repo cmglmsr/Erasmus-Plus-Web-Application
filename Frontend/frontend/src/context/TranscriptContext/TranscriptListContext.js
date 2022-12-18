@@ -19,6 +19,7 @@ export const TranscriptListProvider = ({ children }) => {
 
     fetch(API, requestOptions).then((res) => {
         res.json().then((data) => {
+          console.log(data);
           setTranscriptList(data);
         });
     }).catch((e) => {console.log(e)});

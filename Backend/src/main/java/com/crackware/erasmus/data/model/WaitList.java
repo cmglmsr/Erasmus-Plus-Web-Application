@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Class which contains properties and functions for WaitList class
  */
-public class WaitList extends List{
+public class WaitList extends List {
     @OneToMany
     private Set<Application> applications;
 }
