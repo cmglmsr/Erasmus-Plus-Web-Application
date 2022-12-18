@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for request of ScheduleRequest class
+ */
 public class ScheduleRequest {
 
     @NotBlank
