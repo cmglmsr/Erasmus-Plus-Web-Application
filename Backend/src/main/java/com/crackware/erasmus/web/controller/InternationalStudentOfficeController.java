@@ -1,6 +1,7 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.*;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ScheduleRequest;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
@@ -82,12 +83,17 @@ public class InternationalStudentOfficeController {
             toDoListService.save(helperService.getUser().getToDoList());
             isoService.save((InternationalStudentOffice) helperService.getUser());
         }
-
     }
 
     @GetMapping("/students")
     public ResponseEntity<ArrayList<Student>> getStudents() {
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
-        return ResponseEntity.status(HttpStatus.OK).body(students);
+        ArrayList<Student> response = new ArrayList<>();
+        for(Student s : students) {
+            if(s.getApplication()!=null&&s.getApplication().getStatus()==Status.FINALIZED) {
+                response.add(s);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

@@ -44,6 +44,7 @@ import CourseWishlistPage from "./pages/Instructor/CourseWishlistPage";
 import TranscriptsListPage from "./pages/Iso/TranscriptListPage";
 import TranscriptListContextLayout from "./context/TranscriptContext/TranscriptListContextLayout";
 import TranscriptSinglePage from "./pages/Iso/TranscriptSinglePage";
+import WaitingListPage from "./pages/WaitingListPage"
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -144,6 +145,13 @@ function App() {
             exact={true}
             element={<CoordinatorPage />}
           ></Route>
+
+          <Route
+            path="/coordinator/waitingList"
+            exact={true}
+            element={<WaitingListPage />}
+          ></Route>
+
           <Route
             path="/coordinator/profile"
             exact={true}
@@ -191,11 +199,11 @@ function App() {
             element={<InstructorProfile />}
           ></Route>
           <Route element={<CourseWishlistContextLayout />}>
-          <Route
-            path="/instructor/wishlists/"
-            exact={true}
-            element={<CourseWishlistPage />}
-          ></Route>
+            <Route
+              path="/instructor/wishlists/"
+              exact={true}
+              element={<CourseWishlistPage />}
+            ></Route>
           </Route>
           <Route
             path="/instructor/wishlist/:id"
@@ -242,8 +250,6 @@ function App() {
           </Route>
 
         </Route>
-
-
       </Routes>
     </Layout>
   );
