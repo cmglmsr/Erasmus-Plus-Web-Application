@@ -10,6 +10,9 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
+/**
+ * Class which contains properties and functions for ToDoList class
+ */
 public class ToDoList {
 
     @Id
@@ -19,8 +22,7 @@ public class ToDoList {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<ToDoListItem> itemSet;
 
-
-
+    // Function which add a ToDoListItem instance to a ToDoList instance
     public void addItem(ToDoListItem toDoListItem){
         if (itemSet != null){
             itemSet.add(toDoListItem);

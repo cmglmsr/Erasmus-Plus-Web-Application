@@ -38,11 +38,13 @@ public class InstructorController {
 
     private final CourseService courseService;
 
+    private final ApplicationService applicationService;
+
 
     public InstructorController(HelperService helperService, InstructorService instructorService,
                                 ToDoListItemService toDoListItemService, ToDoListService toDoListService,
                                 ImageService imageService, StudentService studentService,
-                                WishlistCourseService wishlistCourseService, CourseService courseService) {
+                                WishlistCourseService wishlistCourseService, CourseService courseService, ApplicationService applicationService) {
         this.helperService = helperService;
         this.instructorService = instructorService;
         this.toDoListItemService = toDoListItemService;
@@ -51,6 +53,7 @@ public class InstructorController {
         this.studentService = studentService;
         this.wishlistCourseService = wishlistCourseService;
         this.courseService = courseService;
+        this.applicationService = applicationService;
     }
 
     @GetMapping("/home")
@@ -73,7 +76,9 @@ public class InstructorController {
         Department department = instructor.getDepartment();
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
         ArrayList<Student> departmentStudents = new ArrayList<>();
+        System.out.println("here");
         for(Student s : students) {
+            System.out.println("for student " + s.getName());
             if(s.getDepartment()==department) {
                 departmentStudents.add(s);
             }
@@ -113,4 +118,5 @@ public class InstructorController {
         Student student = studentService.findById(Long.valueOf(studentID));
         return student.getCourseWishlist();
     }
+
 }

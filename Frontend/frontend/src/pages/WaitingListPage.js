@@ -4,26 +4,24 @@ import { useContext } from "react";
 import ProfileSummary from "../components/common/ProfileSummary";
 import ActionButtons from "../components/common/ActionButtons";
 import CoordinatorContext from "../context/CoordinatorContext/CoordinatorContext";
-import ViewWishlists from "../components/WishList/ViewWishlists";
-import { useEffect, useState } from "react";
+import WaitingList from "../components/WaitingListPage/WaitingList";
 
-function ViewWishlistsPage() {
-  //const [coordinatorData, role] = useContext(CoordinatorContext);
-  const [profile, setProfile] = useState({});
-  const [role, setRole] = useState("");
+function WaitingListPage() {
+  const [coordinatorData, role] = useContext(CoordinatorContext);
+
   return (
     <section>
       <Row>
       <Col xs={3} className="mx-3">
           <Row>
             <ProfileSummary
-              name={profile.name}
-              surname={profile.surname}
+              name={coordinatorData.name}
+              surname={coordinatorData.surname}
               role={role}
-              semester={profile.image}
-              id={profile.id}
-              image={profile.image}
-              department={profile.department}
+              term=""
+              id={coordinatorData.bilkentId}
+              image={coordinatorData.image}
+              department={coordinatorData.department}
             />
           </Row>
           <Row className="my-4">
@@ -31,11 +29,11 @@ function ViewWishlistsPage() {
           </Row>
         </Col>
         <Col className="mx-3">
-          <ViewWishlists/>
+          <WaitingList/>
         </Col>
       </Row>
     </section>
   );
 }
 
-export default ViewWishlistsPage;
+export default WaitingListPage;

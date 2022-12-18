@@ -18,16 +18,6 @@
   border-radius: 100px;
 }
 
-.button {
-  background-color: cadetblue;
-  border: none;
-  color: white;
-  padding: 20px 30px;
+.heading {
   text-align: center;
-  text-decoration: "a";
-  display: inline-block;
-  font-size: 15px;
-  border-radius: 12px;
-  font-weight: bold;
-  
 }

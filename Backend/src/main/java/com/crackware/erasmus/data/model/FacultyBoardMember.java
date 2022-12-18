@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
+/**
+ * Class which contains properties and functions for FacultyBoardMember class
+ */
 public class FacultyBoardMember extends BaseEntity{
     @OneToOne
     private Document signature;

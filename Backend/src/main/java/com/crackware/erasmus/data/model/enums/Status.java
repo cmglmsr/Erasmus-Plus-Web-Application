@@ -7,6 +7,7 @@ public enum Status {
     MANAGED,
     FINALIZED,
     DENIED,
+    WAITLISTED,
     WAITING_COORDINATOR,
     WAITING_INSTRUCTOR,
     WAITING_FBM,

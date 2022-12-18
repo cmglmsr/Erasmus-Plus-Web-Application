@@ -24,8 +24,6 @@ import InstructorProfile from "./pages/Instructor/InstructorProfile";
 import ApplicationListContextLayout from "./context/ApplicationContext/ApplicationListContextLayout";
 import SingleApplicationView from "./pages/SingleApplicationView";
 import WishListPage from "./pages/WishListPage";
-import ViewWishlistsPage from "./pages/ViewWishlistsPage";
-import StudentsWishlistPage from "./pages/StudentsWishlistPage";
 import PlacementListContextLayout from "./context/PlacementListContext/PlacementListContextLayout";
 import PlacementListPage from "./pages/Coordinator/PlacementListPage";
 import PreApprovalUpload from "./pages/Student/PreApprovalUpload";
@@ -40,7 +38,13 @@ import LearningAgreementListPage from "./pages/LearningAgreementListPage";
 import LearningAgreementListContextLayout from "./context/LearningAgreementContext/LearningAgreementListContextLayout";
 import PreApprovalListContextLayout from "./context/PreApprovalContext/PreApprovalListContextLayout";
 import PreApprovalListPage from "./pages/Fbm/PreApprovalListPage";
-
+import SingleWishlistView from "./pages/Instructor/SingleWishlistView";
+import CourseWishlistContextLayout from "./context/CourseWishlistContext/CourseWishlistContextLayout";
+import CourseWishlistPage from "./pages/Instructor/CourseWishlistPage";
+import TranscriptsListPage from "./pages/Iso/TranscriptListPage";
+import TranscriptListContextLayout from "./context/TranscriptContext/TranscriptListContextLayout";
+import TranscriptSinglePage from "./pages/Iso/TranscriptSinglePage";
+import WaitingListPage from "./pages/WaitingListPage"
 
 const DUMMY_PROFILE = {
   role: "Student",
@@ -141,6 +145,13 @@ function App() {
             exact={true}
             element={<CoordinatorPage />}
           ></Route>
+
+          <Route
+            path="/coordinator/waitingList"
+            exact={true}
+            element={<WaitingListPage />}
+          ></Route>
+
           <Route
             path="/coordinator/profile"
             exact={true}
@@ -187,10 +198,17 @@ function App() {
             exact={true}
             element={<InstructorProfile />}
           ></Route>
+          <Route element={<CourseWishlistContextLayout />}>
+            <Route
+              path="/instructor/wishlists/"
+              exact={true}
+              element={<CourseWishlistPage />}
+            ></Route>
+          </Route>
           <Route
-            path="/instructor/viewWishlists"
+            path="/instructor/wishlist/:id"
             exact={true}
-            element={<ViewWishlistsPage />}
+            element={<SingleWishlistView />}
           ></Route>
         </Route>
 
@@ -217,13 +235,21 @@ function App() {
             exact={true}
             element={<IsoProfile />}
           ></Route>
-        </Route>
 
-        <Route
-          path="/studentsWishlist"
-          exact={true}
-          element={<StudentsWishlistPage />}
-        ></Route>
+          <Route element={<TranscriptListContextLayout />}>
+          <Route
+            path="/iso/transcripts"
+            exact={true}
+            element={<TranscriptsListPage />}
+          ></Route>
+          <Route
+            path="/iso/transcript/:id"
+            exact={true}
+            element={<TranscriptSinglePage />}
+          ></Route>
+          </Route>
+
+        </Route>
       </Routes>
     </Layout>
   );

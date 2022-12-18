@@ -96,6 +96,7 @@ public class PlacementService {
             if (application.getFinalSchool() != null) {
                 finalizedOnes.add(application);
             }else {
+                application.setStatus(Status.WAITLISTED);
                 waitingList.add(application);
             }
         }
@@ -162,6 +163,4 @@ public class PlacementService {
            application.setFinalSchool(null);
         }
     }
-
-
 }

@@ -17,3 +17,19 @@
     background-color: cadetblue;
     border-radius: 100px;
   }
+  .heading {
+    text-align: center;
+  }
+  
+  .button1 {
+    background-color: #4caf50;
+  }
+  
+  .button2 {
+    background-color: #f44336;
+  }
+  
+  .center {
+    text-align: center;
+  }
+  

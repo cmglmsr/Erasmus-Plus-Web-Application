@@ -65,6 +65,12 @@ public class InternationalStudentOfficeController {
     @GetMapping("/students")
     public ResponseEntity<ArrayList<Student>> getStudents() {
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
-        return ResponseEntity.status(HttpStatus.OK).body(students);
+        ArrayList<Student> response = new ArrayList<>();
+        for(Student s : students) {
+            if(s.getApplication()!=null&&s.getApplication().getStatus()==Status.FINALIZED) {
+                response.add(s);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

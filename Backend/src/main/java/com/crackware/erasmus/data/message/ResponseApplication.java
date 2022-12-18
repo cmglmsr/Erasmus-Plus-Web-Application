@@ -10,6 +10,9 @@ import java.util.Set;
 
 @Setter
 @Getter
+/**
+ * Class which contains properties and functions for response of Application class
+ */
 public class ResponseApplication {
     private String fullname;
     private String id;
@@ -24,8 +27,10 @@ public class ResponseApplication {
     private String timePeriod;
     private Long uid;
 
+    // Default constructor
     public ResponseApplication() {}
 
+    // Parameter supplied constructor
     public ResponseApplication(String fullname, String id, String cgpa, String school, String status) {
         this.fullname = fullname;
         this.id = id;
@@ -33,6 +38,7 @@ public class ResponseApplication {
         this.school = school;
         this.status = status;
     }
+    // Constructor which takes an Application instance
     public ResponseApplication(Application a) {
         Student s = new Student();
         if(a.getStudent() != null) {

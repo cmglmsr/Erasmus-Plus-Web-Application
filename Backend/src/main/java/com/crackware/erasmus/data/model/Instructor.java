@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for Instructor class
+ */
 public class Instructor extends BaseEntity{
 
     private Department department;

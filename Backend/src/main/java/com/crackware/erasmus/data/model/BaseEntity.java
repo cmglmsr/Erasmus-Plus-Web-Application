@@ -11,6 +11,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
+/**
+ * Class which contains properties and functions for BaseEntity class
+ */
 public class BaseEntity{
 
     @Id

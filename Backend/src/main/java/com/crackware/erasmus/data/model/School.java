@@ -12,6 +12,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+/**
+ * Class which contains properties and functions for School class
+ */
 public class School {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,7 @@ public class School {
 
     private String name;
 
+    // Function which adds a department quota for a School class instance
     public void addDepartmentQuota(DepartmentQuota departmentQuota){
         if (!departmentQuotas.contains(departmentQuota)){
             departmentQuotas.add(departmentQuota);

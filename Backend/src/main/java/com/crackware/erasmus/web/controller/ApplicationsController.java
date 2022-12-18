@@ -6,7 +6,9 @@ import com.crackware.erasmus.data.model.Student;
 import com.crackware.erasmus.data.model.enums.ItemType;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.services.ApplicationService;
+import com.crackware.erasmus.data.services.PlacementListService;
 import com.crackware.erasmus.data.services.SchoolService;
+import com.crackware.erasmus.data.services.WaitListService;
 import com.crackware.erasmus.data.services.StudentService;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
@@ -26,15 +28,20 @@ public class ApplicationsController {
     private final ApplicationService applicationService;
     private final HelperService helperService;
     private final SchoolService schoolService;
+    private final WaitListService waitListService;
+    private final PlacementListService placementListService;
 
     private final StudentService studentService;
 
     private final ToDoListHelper toDoListHelper;
 
     public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService, StudentService studentService, ToDoListHelper toDoListHelper) {
+    public ApplicationsController(ApplicationService applicationService, HelperService helperService, SchoolService schoolService, WaitListService waitListService, PlacementListService placementListService) {
         this.applicationService = applicationService;
         this.helperService = helperService;
         this.schoolService = schoolService;
+        this.waitListService = waitListService;
+        this.placementListService = placementListService;
         this.studentService = studentService;
         this.toDoListHelper = toDoListHelper;
     }

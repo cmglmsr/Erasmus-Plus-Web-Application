@@ -10,6 +10,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+/**
+ * Class which contains properties and functions for PlacementList class
+ */
 public class PlacementList extends List{
 
     @OneToMany
