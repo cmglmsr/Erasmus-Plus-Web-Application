@@ -84,7 +84,7 @@ public class ApplicationsController {
             int count = 0;
             ArrayList<Student> students = new ArrayList<>(studentService.findAll());
             for (Student toCheck : students) {
-                if (toCheck.getLearningAgreement() != null)
+                if (toCheck.getApplication() != null)
                     count++;
             }
             toDoListHelper.addItem(ItemType.APPLICATION, count);
