@@ -143,5 +143,15 @@ public class CoordinatorController {
         }
         return waitlistedApplications;
     }
+
+    @GetMapping("/todolist")
+    public List<ToDoListItem> getToDoList(){
+        Coordinator coordinator = (Coordinator) helperService.getUser();
+        ArrayList<ToDoListItem> arrayList = new ArrayList<>();
+        for (ToDoListItem item: coordinator.getToDoList().getItemSet()) {
+            arrayList.add(item);
+        }
+        return arrayList;
+    }
 }
 
