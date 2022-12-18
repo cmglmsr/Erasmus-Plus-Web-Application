@@ -28,6 +28,7 @@ const wishlist = [
 function StudentsCourseList(props) {
   const [mapItem, setMapItem] = useState([]);
 
+
   function gettingCourse(value) {
     if (value.courseCode != "") {
       console.log(value);
