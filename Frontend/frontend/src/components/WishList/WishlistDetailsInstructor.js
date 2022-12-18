@@ -6,12 +6,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const WishlistDetailsInstructor = () => {
-  const [wishlistData, setWishlistData] = useState({});
+  const [wishlistData, setWishlistData] = useState([]);
   const params = useParams();
 
-
   useEffect(() => {
-    var API = `http://localhost:8080/instructor/wishlists/${params.id}`;
+
+    var API = `http://localhost:8080/instructor/wishlist/${params.id}`;
     var requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -20,11 +20,12 @@ const WishlistDetailsInstructor = () => {
         "Content-Type": "application/json",
       },
     };
+    console.log("bbbbbbbbbbbb")
 
     fetch(API, requestOptions).then((res) => {
         res.json().then((data) => {
           setWishlistData(data);
-          console.log(wishlistData);
+          console.log(data);
         });
       }
     );
@@ -48,7 +49,7 @@ const WishlistDetailsInstructor = () => {
           </thead>
           <tbody>
             {wishlistData.map((course) => (
-              <tr key={course.uid}>
+              <tr key={course.id}>
                 <td>{course.courseName}</td>
                 <td>{course.courseCode}</td>
                 <td>{course.hostUniversityName}</td>
