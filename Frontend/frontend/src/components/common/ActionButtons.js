@@ -24,10 +24,9 @@ const ActionButtons = ({role}) => {
     if (role === "ROLE_COORDINATOR") {
         buttons[0] = <Button className="button-default" key="application-list" as={Link} to="/coordinator/applications">Applications</Button>;
         buttons[1] = <Button className="button-default" key="placements" as={Link} to="/coordinator/placements">Placements</Button>;
-        buttons[3] = <Button className="button-default" key="pre-approvals" as={Link} to="/coordinator/preApprovals">Pre-Approvals</Button>;
-        buttons[4] = <Button className="button-default" key="course-transfer-list" as={Link} to="/coordinator/learningAgreements">Learning Agreements</Button>;
-        buttons[2] = <Button className="button-default" key="final-course-transfer" as={Link} to="/coordinator/waitlists">Waitlist</Button>;
-        buttons[5] = <Button className="button-default" key="final-course-transfer" as={Link} to="/final-course-transfer">Final Course Transfer</Button>;
+        buttons[3] = <Button className="button-default" key="course-transfer-list" as={Link} to="/coordinator/learningAgreements">Learning Agreements</Button>;
+        buttons[2] = <Button className="button-default" key="wait-list" as={Link} to="/coordinator/waitinglist">Waitlist</Button>;
+        buttons[4] = <Button className="button-default" key="final-course-transfer" as={Link} to="/final-course-transfer">Final Course Transfer</Button>;
     }
 
     const results= []
