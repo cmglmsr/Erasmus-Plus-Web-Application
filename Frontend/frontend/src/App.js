@@ -97,12 +97,6 @@ function App() {
           ></Route>
 
           <Route
-            path="/student/manageApplication"
-            exact={true}
-            element={<ManageApplication />}
-          ></Route>
-
-          <Route
             path="/student/preApproval"
             exact={true}
             element={<PreApprovalUpload />}
@@ -128,6 +122,12 @@ function App() {
             ></Route>
 
             <Route
+              path="/student/manageApplication"
+              exact={true}
+              element={<ManageApplication />}
+            ></Route>
+
+            <Route
               path="/student/createCourseWishlist"
               exact={true}
               element={<WishListPage />}
@@ -150,7 +150,7 @@ function App() {
             ></Route>
           </Route>
 
-          <Route element={<FinalCourseTransferListContextLayout/>}>
+          <Route element={<FinalCourseTransferListContextLayout />}>
             <Route
               path="/coordinator/finalCourseTransferList"
               exact={true}

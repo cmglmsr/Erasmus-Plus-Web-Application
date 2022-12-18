@@ -94,7 +94,7 @@ function PreApprovalList() {
                 <td className={classes.center}>{learningAgreement.id}</td>
                 <td className={classes.center}>{learningAgreement.cgpa}</td>
                 <td className={classes.center}>{learningAgreement.status}</td>
-                {learningAgreement.status === "WAITING_COORDINATOR" ? (
+                {learningAgreement.status === "WAITING_FBM" ? (
                   <td className={classes.center}>
                     <Button
                       key={`approve-${learningAgreement.documentId}`}
