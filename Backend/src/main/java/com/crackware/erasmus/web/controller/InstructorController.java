@@ -2,19 +2,20 @@ package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.*;
 import com.crackware.erasmus.data.model.enums.Department;
-import com.crackware.erasmus.data.security.requests.ScheduleRequest;
+import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
-import com.crackware.erasmus.data.services.helper.ScheduleHelper;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -37,7 +38,12 @@ public class InstructorController {
 
     private final StudentService studentService;
 
-    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService, ImageService imageService, StudentService studentService) {
+    private final WishlistCourseService wishlistCourseService;
+
+    private final CourseService courseService;
+
+
+    public InstructorController(HelperService helperService, InstructorService instructorService, ScheduleService scheduleService, ToDoListItemService toDoListItemService, TaskService taskService, ToDoListService toDoListService, ImageService imageService, StudentService studentService, WishlistCourseService wishlistCourseService, CourseService courseService) {
         this.helperService = helperService;
         this.instructorService = instructorService;
         this.scheduleService = scheduleService;
@@ -46,6 +52,8 @@ public class InstructorController {
         this.toDoListService = toDoListService;
         this.imageService = imageService;
         this.studentService = studentService;
+        this.wishlistCourseService = wishlistCourseService;
+        this.courseService = courseService;
     }
 
     @GetMapping("/home")
@@ -84,30 +92,8 @@ public class InstructorController {
         }
     }
 
-    @PostMapping("/schedule")
-    public void instructorSchedule(@Valid @RequestBody ScheduleRequest scheduleRequest){
-        Task task = ScheduleHelper.scheduleHelp(scheduleRequest);
-        if (helperService.getUser().getSchedule() == null){
-            helperService.getUser().setSchedule(new Schedule());
-        }
-        if (task.isDone()){
-            taskService.deleteAllByDescriptionAndDueDate(scheduleRequest.getDescription(),
-                    scheduleRequest.getDueDate());
-        }else {
-            taskService.save(task);
-            if (helperService.getUser().getSchedule() != null)
-                helperService.getUser().getSchedule().addItem(task);
-            else {
-                helperService.getUser().setSchedule(new Schedule());
-                helperService.getUser().getSchedule().addItem(task);
-            }
-            scheduleService.save(helperService.getUser().getSchedule());
-            instructorService.save((Instructor) helperService.getUser());
-        }
-    }
-
     @GetMapping("/wishlists")
-    public void getWishlists() {
+    public List<Student> getWishlists() {
         Instructor instructor = (Instructor) helperService.getUser();
         Department department = instructor.getDepartment();
         ArrayList<Student> students = new ArrayList<>(studentService.findAll());
@@ -117,5 +103,39 @@ public class InstructorController {
                 departmentStudents.add(s);
             }
         }
+        return departmentStudents;
+    }
+
+    @PostMapping("/wishlist/approve/{studentID}")
+    public void approveWishlist(@PathVariable String studentID){
+        Student student = studentService.findById(Long.valueOf(studentID));
+        ArrayList<WishlistCourse> courses = new ArrayList<>(student.getCourseWishlist());
+        for (WishlistCourse course : courses) {
+            course.setStatus(Status.APPROVED);
+            Course newApproved = new Course();
+            newApproved.setCourseName(course.getCourseName());
+            newApproved.setDepartment(course.getDepartment());
+            newApproved.setHostUniversityName(course.getHostUniversityName());
+            newApproved.setCourseCode(course.getCourseCode());
+            courseService.save(newApproved);
+            wishlistCourseService.save(course);
+        }
+    }
+
+    @PostMapping("/wishlist/reject/{studentID}")
+    public void rejectWishlist(@PathVariable String studentID){
+        Student student = studentService.findById(Long.valueOf(studentID));
+        ArrayList<WishlistCourse> courses = new ArrayList<>(student.getCourseWishlist());
+        for (WishlistCourse course : courses) {
+            wishlistCourseService.delete(course);
+        }
+        student.setCourseWishlist(new HashSet<>());
+        studentService.save(student);
+    }
+
+    @GetMapping("/wishlist/{studentID}")
+    public Set<WishlistCourse> getWishlist(@PathVariable String studentID) {
+        Student student = studentService.findById(Long.valueOf(studentID));
+        return student.getCourseWishlist();
     }
 }
