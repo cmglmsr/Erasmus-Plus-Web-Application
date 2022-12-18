@@ -1,9 +1,8 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.model.*;
+import com.crackware.erasmus.data.model.enums.ItemType;
 import com.crackware.erasmus.data.model.enums.Status;
-import com.crackware.erasmus.data.security.requests.ScheduleRequest;
-import com.crackware.erasmus.data.security.requests.ToDoRequest;
 import com.crackware.erasmus.data.services.*;
 import com.crackware.erasmus.data.services.helper.HelperService;
 import com.crackware.erasmus.data.services.helper.ToDoListHelper;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,6 +24,8 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    private final ToDoListHelper toDoListHelper;
+
     private final ToDoListService toDoListService;
 
     private final ToDoListItemService toDoListItemService;
@@ -37,11 +37,12 @@ public class StudentController {
     private final CourseService courseService;
 
     public StudentController(HelperService helperService, StudentService studentService,
-                             ToDoListService toDoListService, ToDoListItemService toDoListItemService,
+                             ToDoListHelper toDoListHelper, ToDoListService toDoListService, ToDoListItemService toDoListItemService,
                              DocumentService documentService, ImageService imageService,
                              CourseService courseService) {
         this.helperService = helperService;
         this.studentService = studentService;
+        this.toDoListHelper = toDoListHelper;
         this.toDoListService = toDoListService;
         this.toDoListItemService = toDoListItemService;
         this.documentService = documentService;
@@ -62,29 +63,6 @@ public class StudentController {
         imageService.saveImageFile(profilePic);
     }
 
-    @PostMapping("/todolist")
-    public void studentToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (helperService.getUser().getToDoList() == null){
-            helperService.getUser().setToDoList(new ToDoList());
-        }
-        if (toDoListItem.isDone()){
-            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
-                    toDoRequest.getDueDate());
-        }else {
-            toDoListItemService.save(toDoListItem);
-            if (helperService.getUser().getToDoList() != null)
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            else {
-                helperService.getUser().setToDoList(new ToDoList());
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            }
-            toDoListService.save(helperService.getUser().getToDoList());
-            studentService.save((Student) helperService.getUser());
-        }
-
-    }
-
     @PostMapping("/upload/learningAgreement")
     public void submitLearningAgreement(@RequestParam("learningAgreement") MultipartFile learningAgreement) throws IOException {
             Document learning = new Document();
@@ -96,6 +74,13 @@ public class StudentController {
             Student curr = (Student) helperService.getUser();
             curr.setLearningAgreement(learning);
             studentService.save(curr);
+            int count = 0;
+            ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+            for (Student student: students){
+                if (student.getLearningAgreement() != null)
+                    count++;
+            }
+            toDoListHelper.addItem(ItemType.LEARNING_AGREEMENT, count);
     }
 
     @GetMapping("learningAgreement")
@@ -115,6 +100,7 @@ public class StudentController {
         Student curr = (Student) helperService.getUser();
         curr.setPreApproval(preApproval);
         studentService.save(curr);
+
     }
 
     @GetMapping("/preapproval")

@@ -67,28 +67,6 @@ public class InstructorController {
         imageService.saveImageFile(profilePic);
     }
 
-    @PostMapping("/todolist")
-    public void instructorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (helperService.getUser().getToDoList() == null){
-            helperService.getUser().setToDoList(new ToDoList());
-        }
-        if (toDoListItem.isDone()){
-            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
-                    toDoRequest.getDueDate());
-        }else {
-            toDoListItemService.save(toDoListItem);
-            if (helperService.getUser().getToDoList() != null)
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            else {
-                helperService.getUser().setToDoList(new ToDoList());
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            }
-            toDoListService.save(helperService.getUser().getToDoList());
-            instructorService.save((Instructor) helperService.getUser());
-        }
-    }
-
     @GetMapping("/wishlists")
     public List<Student> getWishlists() {
         Instructor instructor = (Instructor) helperService.getUser();

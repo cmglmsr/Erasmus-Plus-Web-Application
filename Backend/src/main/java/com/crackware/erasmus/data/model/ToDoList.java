@@ -19,8 +19,10 @@ public class ToDoList {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<ToDoListItem> itemSet;
 
+
+
     public void addItem(ToDoListItem toDoListItem){
-        if (itemSet != null && !itemSet.contains(toDoListItem)){
+        if (itemSet != null){
             itemSet.add(toDoListItem);
         }
     }

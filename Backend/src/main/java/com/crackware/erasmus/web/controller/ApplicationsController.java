@@ -1,17 +1,17 @@
 package com.crackware.erasmus.web.controller;
 
 import com.crackware.erasmus.data.message.ResponseApplication;
-import com.crackware.erasmus.data.message.ResponseSchools;
 import com.crackware.erasmus.data.model.Application;
 import com.crackware.erasmus.data.model.Student;
-import com.crackware.erasmus.data.model.School;
+import com.crackware.erasmus.data.model.enums.ItemType;
 import com.crackware.erasmus.data.model.enums.Status;
 import com.crackware.erasmus.data.services.ApplicationService;
 import com.crackware.erasmus.data.services.SchoolService;
+import com.crackware.erasmus.data.services.StudentService;
 import com.crackware.erasmus.data.services.helper.HelperService;
+import com.crackware.erasmus.data.services.helper.ToDoListHelper;
 import com.crackware.erasmus.data.services.impl.ApplicationListServiceImpl;
 import com.crackware.erasmus.data.services.impl.ApplicationServiceImpl;
-import com.crackware.erasmus.data.services.impl.SchoolServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +27,16 @@ public class ApplicationsController {
     private final HelperService helperService;
     private final SchoolService schoolService;
 
-    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService) {
+    private final StudentService studentService;
+
+    private final ToDoListHelper toDoListHelper;
+
+    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService, StudentService studentService, ToDoListHelper toDoListHelper) {
         this.applicationService = applicationService;
         this.helperService = helperService;
         this.schoolService = schoolService;
+        this.studentService = studentService;
+        this.toDoListHelper = toDoListHelper;
     }
 
     @PostMapping("/createApplication")
@@ -63,6 +69,15 @@ public class ApplicationsController {
         application.setStudent(student);
         student.setApplication(application);
         applicationService.save(application);
+
+        int count = 0;
+        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+        for (Student toCheck: students){
+            if (toCheck.getLearningAgreement() != null)
+                count++;
+        }
+        toDoListHelper.addItem(ItemType.APPLICATION, count);
+
         return ResponseEntity.status(HttpStatus.OK).body("Application has been created.");
     }
 

@@ -13,6 +13,8 @@ public class Coordinator extends BaseEntity {
 
     private Department department;
 
-    private String signature; // String is used instead of string type
+    @ManyToOne(cascade = CascadeType.ALL)
+    private ToDoList toDoList;
+
 
 }

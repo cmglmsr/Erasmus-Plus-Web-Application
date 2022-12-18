@@ -31,8 +31,4 @@ public class BaseEntity{
 
     private String dateOfBirth;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private ToDoList toDoList;
-
-
 }

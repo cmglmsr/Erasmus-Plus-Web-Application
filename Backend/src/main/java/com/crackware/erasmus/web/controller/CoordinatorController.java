@@ -68,27 +68,7 @@ public class CoordinatorController {
     public void editProfile(@RequestParam("profilePic") MultipartFile profilePic) throws IOException {
         imageService.saveImageFile(profilePic);
     }
-    @PostMapping("/todolist")
-    public void coordinatorToDoList(@Valid @RequestBody ToDoRequest toDoRequest){
-        ToDoListItem toDoListItem = ToDoListHelper.toDoListHelp(toDoRequest);
-        if (helperService.getUser().getToDoList() == null) {
-            helperService.getUser().setToDoList(new ToDoList());
-        }
-        if (toDoListItem.isDone()){
-            toDoListItemService.deleteAllByDescriptionAndDueDate(toDoListItem.getDescription(),
-                    toDoRequest.getDueDate());
-        }else {
-            toDoListItemService.save(toDoListItem);
-            if (helperService.getUser().getToDoList() != null)
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            else {
-                helperService.getUser().setToDoList(new ToDoList());
-                helperService.getUser().getToDoList().addItem(toDoListItem);
-            }
-            toDoListService.save(helperService.getUser().getToDoList());
-            coordinatorService.save((Coordinator) helperService.getUser());
-        }
-    }
+
     @GetMapping("/applications")
     public ResponseEntity<Set<ResponseApplication>> listApplications() {
         Set<Application> applications = applicationService.findAll();
