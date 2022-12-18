@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
+/**
+ * Helper class which handles operations for ToDoList class
+ */
 public class ToDoListHelper {
 
 
@@ -21,12 +24,14 @@ public class ToDoListHelper {
 
     private final ToDoListItemService toDoListItemService;
 
+    // Constructor for ToDoList class
     public ToDoListHelper(CoordinatorService coordinatorService, ToDoListService toDoListService, ToDoListItemService toDoListItemService) {
         this.coordinatorService = coordinatorService;
         this.toDoListService = toDoListService;
         this.toDoListItemService = toDoListItemService;
     }
 
+    // Function which adds items to the ToDoList class instance
     public void addItem(ItemType itemType, int count){
         ArrayList<ToDoListItem> toDoListItems = new ArrayList<>(toDoListItemService.findAll());
         ToDoListItem itemToChange = null;

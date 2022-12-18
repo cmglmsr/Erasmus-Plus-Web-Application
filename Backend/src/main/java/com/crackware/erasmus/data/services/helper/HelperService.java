@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
+/**
+ * Helper class which handles different role operations
+ */
 public class HelperService {
 
     private final AdminService adminService;
@@ -28,6 +31,7 @@ public class HelperService {
 
     private final FacultyBoardMemberService facultyBoardMemberService;
 
+    // Constructor which sets roles and corresponding services for HelperService class
     public HelperService(AdminService adminService, StudentService studentService,
                          CoordinatorService coordinatorService, InstructorService instructorService,
                          InternationalStudentOfficeService isoService,
@@ -40,6 +44,7 @@ public class HelperService {
         this.facultyBoardMemberService = facultyBoardMemberService;
     }
 
+    // Function which return a user type in BaseEntity type
     public BaseEntity getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         ArrayList<GrantedAuthority> authorities = new ArrayList<>(authentication.getAuthorities());
