@@ -12,14 +12,19 @@ import java.io.InputStream;
 import java.util.*;
 
 @Service
+/**
+ * Helper class which handles Excel operations
+ */
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String SHEET = "Sheet1";
 
+    // Function which checks whether an input file is in Excel format or not
     public static boolean hasExcelFormat(MultipartFile file) {
         return TYPE.equals(file.getContentType());
     }
 
+    // Function which gets input contents input file
     public static List<Course> excelToCourses(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);

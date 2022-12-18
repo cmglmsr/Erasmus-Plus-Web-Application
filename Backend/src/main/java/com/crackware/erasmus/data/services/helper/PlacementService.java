@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
+/**
+ * Helper class which handles student placement operations
+ */
 public class PlacementService {
 
     private final ApplicationService applicationService;
@@ -21,6 +24,7 @@ public class PlacementService {
 
     private final DepartmentQuotaService departmentQuotaService;
 
+    // Constructor which sets roles and corresponding services for PlacementService class
     public PlacementService(ApplicationService applicationService, PlacementListService placementListService,
                             WaitListService waitListService, SchoolService schoolService, DepartmentQuotaService departmentQuotaService) {
         this.applicationService = applicationService;
@@ -30,6 +34,7 @@ public class PlacementService {
         this.departmentQuotaService = departmentQuotaService;
     }
 
+    // Function which finalizes placements of students
     public void finalizePlacements(){
         ArrayList<Application> applications = new ArrayList<>(applicationService.findAll());
 
@@ -124,6 +129,7 @@ public class PlacementService {
             waitListService.save(waitList);}
     }
 
+    // Function which checks whether there is an availability or not for each department
     private boolean checkAvailabilityByDepartment(Department department, Set<DepartmentQuota> departmentQuota){
         HashSet<DepartmentQuota> departmentQuotas = new HashSet<>(departmentQuota);
         for (DepartmentQuota current : departmentQuotas) {
@@ -136,6 +142,7 @@ public class PlacementService {
         return false;
     }
 
+    // Function which changes the quota for an input Department class parameter
     private void changeQuota(Department department, Set<DepartmentQuota> departmentQuota){
         HashSet<DepartmentQuota> departmentQuotas = new HashSet<>(departmentQuota);
         for (DepartmentQuota current : departmentQuotas) {
@@ -147,6 +154,7 @@ public class PlacementService {
         }
     }
 
+    // Function which resets the quotas for schools
     private void resetQuotas(ArrayList<School> schools) {
         for(School s : schools) {
             Set<DepartmentQuota> departmentQuotas = s.getDepartmentQuotas();
@@ -158,6 +166,7 @@ public class PlacementService {
         }
     }
 
+    // Function which resets applications for schools
     private void resetFinalSchools(ArrayList<Application> applications) {
         for(Application application : applications) {
            application.setFinalSchool(null);

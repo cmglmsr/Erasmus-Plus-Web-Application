@@ -13,14 +13,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+/**
+ * Helper class which handles operations for schools
+ */
 public class SchoolsHelper {
     private final SchoolService schoolService;
 
+    // Constructor for SchoolsHelper class
     public SchoolsHelper(SchoolService schoolService) {
         this.schoolService = schoolService;
         this.setSchoolRepository();
     }
 
+    // Function which sets new departments and schools
     private HashSet<DepartmentQuota> newSet() {
         DepartmentQuota dqcs = new DepartmentQuota();
         DepartmentQuota dqie = new DepartmentQuota();
@@ -39,10 +44,12 @@ public class SchoolsHelper {
         return s;
     }
 
+    // Function which returns all schools in the database
     public Set<School> getSchools() {
         return schoolService.findAll();
     }
 
+    // Function which sets a repository for schools
     public boolean setSchoolRepository() {
         // TODO delete quotas, department quotas, schools
         if(!getSchools().isEmpty()) {
