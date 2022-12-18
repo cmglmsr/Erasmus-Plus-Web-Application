@@ -27,12 +27,12 @@ export const CourseWishlistProvider = ({ children }) => {
             var wishlist = student.courseWishlist;
             if (wishlist.length !== 0) {
               wishlists.push(wishlist);
-              var student = {
+              var info = {
                 fullname: student.name + " " + student.surname,
                 id : student.id,
                 bilkentId: student.bilkentId
               }
-              students.push(student);
+              students.push(info);
             }
           });
           setsetCourseWishlist(wishlists);

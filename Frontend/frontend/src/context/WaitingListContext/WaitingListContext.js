@@ -19,6 +19,7 @@ const [waitingList, setWaitingList] = useState([]);
 
     fetch(API, requestOptions).then((res) => {
         res.json().then((data) => {
+          console.log(data);
           setWaitingList(data);
         });
     }).catch((e) => {console.log(e)});

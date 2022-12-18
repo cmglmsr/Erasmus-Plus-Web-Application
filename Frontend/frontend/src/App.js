@@ -44,8 +44,9 @@ import CourseWishlistPage from "./pages/Instructor/CourseWishlistPage";
 import TranscriptsListPage from "./pages/Iso/TranscriptListPage";
 import TranscriptListContextLayout from "./context/TranscriptContext/TranscriptListContextLayout";
 import TranscriptSinglePage from "./pages/Iso/TranscriptSinglePage";
-import WaitingListPage from "./pages/WaitingListPage"
-
+import WaitingListPage from "./pages/WaitingListPage";
+import WaitingListContextLayout from "./context/WaitingListContext/WaitingListContextLayout";
+import StudentProfileEdit from "./pages/Student/StudentProfileEdit";
 const DUMMY_PROFILE = {
   role: "Student",
   image: "https://cdn-icons-png.flaticon.com/512/3135/3135823.png",
@@ -67,27 +68,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="login" />}></Route>
         <Route path="/login" exact={true} element={<LoginPage />}></Route>
-        <Route
-          path="/profile"
-          exact={true}
-          element={<ProfilePage profile={DUMMY_PROFILE} />}
-        ></Route>
+
         <Route
           path="/informationPage"
           exact={true}
           element={<InformationPage />}
         ></Route>
-        <Route
-          path="/internationalStudentOffice/home"
-          exact={true}
-          element={<InternationalStudentOfficePage />}
-        ></Route>
 
-        <Route
-          path="/viewProfile"
-          exact={true}
-          element={<ViewProfile profile={DUMMY_PROFILE} />}
-        ></Route>
         <Route element={<StudentContextLayout />}>
           <Route
             path="/student/home"
@@ -98,6 +85,12 @@ function App() {
             path="/student/profile"
             exact={true}
             element={<StudentProfile />}
+          ></Route>
+
+          <Route
+            path="/student/profile/edit"
+            exact={true}
+            element={<StudentProfileEdit />}
           ></Route>
 
           <Route
@@ -146,11 +139,13 @@ function App() {
             element={<CoordinatorPage />}
           ></Route>
 
-          <Route
-            path="/coordinator/waitingList"
-            exact={true}
-            element={<WaitingListPage />}
-          ></Route>
+          <Route element={<WaitingListContextLayout />}>
+            <Route
+              path="/coordinator/waitinglist"
+              exact={true}
+              element={<WaitingListPage />}
+            ></Route>
+          </Route>
 
           <Route
             path="/coordinator/profile"
@@ -237,18 +232,17 @@ function App() {
           ></Route>
 
           <Route element={<TranscriptListContextLayout />}>
-          <Route
-            path="/iso/transcripts"
-            exact={true}
-            element={<TranscriptsListPage />}
-          ></Route>
-          <Route
-            path="/iso/transcript/:id"
-            exact={true}
-            element={<TranscriptSinglePage />}
-          ></Route>
+            <Route
+              path="/iso/transcripts"
+              exact={true}
+              element={<TranscriptsListPage />}
+            ></Route>
+            <Route
+              path="/iso/transcript/:id"
+              exact={true}
+              element={<TranscriptSinglePage />}
+            ></Route>
           </Route>
-
         </Route>
       </Routes>
     </Layout>
