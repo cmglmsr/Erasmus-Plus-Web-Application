@@ -35,109 +35,114 @@ public class ApplicationsController {
 
     private final ToDoListHelper toDoListHelper;
 
-    public ApplicationsController(ApplicationListServiceImpl applicationListService, ApplicationServiceImpl applicationService, HelperService helperService, SchoolService schoolService, StudentService studentService, ToDoListHelper toDoListHelper) {
-    public ApplicationsController(ApplicationService applicationService, HelperService helperService, SchoolService schoolService, WaitListService waitListService, PlacementListService placementListService) {
-        this.applicationService = applicationService;
-        this.helperService = helperService;
-        this.schoolService = schoolService;
+    public ApplicationsController(ApplicationListServiceImpl applicationListService,
+                                  ApplicationServiceImpl applicationService,
+                                  HelperService helperService, SchoolService schoolService,
+                                  WaitListService waitListService, PlacementListService placementListService,
+                                  StudentService studentService, ToDoListHelper toDoListHelper
+    ){
+            this.applicationService = applicationService;
+            this.helperService = helperService;
+            this.schoolService = schoolService;
         this.waitListService = waitListService;
         this.placementListService = placementListService;
         this.studentService = studentService;
-        this.toDoListHelper = toDoListHelper;
+            this.toDoListHelper = toDoListHelper;
+        }
+
+        @PostMapping("/createApplication")
+        public ResponseEntity<?> createApplication (@RequestBody HashMap < String, Object > payload){
+            Student student = (Student) helperService.getUser();
+            System.out.println(student.getTerm());
+            if (Double.parseDouble(student.getCgpa()) < 2.5 | student.getTerm() > 5 | student.getTerm() < 3) {
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student ineligible for application!"); // 406
+            }
+            if (student.getApplication() != null) {
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student already has an application!");
+            }
+            Application application = new Application();
+            application.setDate(new Date());
+            application.setDepartment(student.getDepartment());
+            // Can be sent as JSON
+            /*
+             * TODO:
+             * Get CV
+             * Get Semester
+             * */
+            application.setPoints(student.calculatePoints());
+            application.setSchool1(schoolService.findById(Long.valueOf((String) payload.get("pref1"))));
+            application.setSchool2(schoolService.findById(Long.valueOf((String) payload.get("pref2"))));
+            application.setSchool3(schoolService.findById(Long.valueOf((String) payload.get("pref3"))));
+            application.setSchool4(schoolService.findById(Long.valueOf((String) payload.get("pref4"))));
+            application.setSchool5(schoolService.findById(Long.valueOf((String) payload.get("pref5"))));
+            application.setTerm((String) payload.get("term"));
+            application.setStatus(Status.PENDING);
+            application.setStudent(student);
+            student.setApplication(application);
+            applicationService.save(application);
+
+            int count = 0;
+            ArrayList<Student> students = new ArrayList<>(studentService.findAll());
+            for (Student toCheck : students) {
+                if (toCheck.getLearningAgreement() != null)
+                    count++;
+            }
+            toDoListHelper.addItem(ItemType.APPLICATION, count);
+
+            return ResponseEntity.status(HttpStatus.OK).body("Application has been created.");
+        }
+
+        @GetMapping("/getApplication")
+        public ResponseEntity<ResponseApplication> getApplicationPage () {
+            Student s = (Student) helperService.getUser();
+            if (s.getApplication() == null) {
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseApplication(null, null, null, null, null));
+            }
+            Application a = s.getApplication();
+            ResponseApplication r = new ResponseApplication(a);
+            return ResponseEntity.status(HttpStatus.OK).body(r);
+        }
+
+        @PostMapping("/manageApplication")
+        public ResponseEntity<ResponseApplication> manageApplication (@RequestBody HashMap < String, Object > payload){
+            Student s = (Student) helperService.getUser();
+            if (s.getApplication() == null) {
+                return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(new ResponseApplication(null, null, null, null, null));
+            }
+            Application a = s.getApplication();
+            for (String parameter : payload.keySet()) {
+                if (parameter == "pref1") {
+                    a.setSchool1(schoolService.findById(Long.valueOf((String) payload.get("pref1"))));
+                }
+                if (parameter == "pref2") {
+                    a.setSchool2(schoolService.findById(Long.valueOf((String) payload.get("pref2"))));
+                }
+                if (parameter == "pref3") {
+                    a.setSchool3(schoolService.findById(Long.valueOf((String) payload.get("pref3"))));
+                }
+                if (parameter == "pref4") {
+                    a.setSchool4(schoolService.findById(Long.valueOf((String) payload.get("pref4"))));
+                }
+                if (parameter == "pref5") {
+                    a.setSchool5(schoolService.findById(Long.valueOf((String) payload.get("pref5"))));
+                }
+            }
+            a.setStatus(Status.MANAGED);
+            applicationService.save(a);
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
+        }
+
+        @GetMapping("/deleteApplication")
+        public ResponseEntity<?> deleteApplication () {
+            Student s = (Student) helperService.getUser();
+            if (s.getApplication() == null) {
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student does not have an application!");
+            }
+            Application a = s.getApplication();
+            s.setApplication(null);
+            a.setStudent(null);
+            applicationService.delete(a);
+            return ResponseEntity.status(HttpStatus.OK).body("Application has been deleted.");
+        }
     }
 
-    @PostMapping("/createApplication")
-    public ResponseEntity<?> createApplication(@RequestBody HashMap<String, Object> payload) {
-        Student student = (Student) helperService.getUser();
-        System.out.println(student.getTerm());
-        if(Double.parseDouble(student.getCgpa()) < 2.5 | student.getTerm() > 5 | student.getTerm() < 3) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student ineligible for application!"); // 406
-        }
-        if(student.getApplication() != null) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student already has an application!");
-        }
-        Application application = new Application();
-        application.setDate(new Date());
-        application.setDepartment(student.getDepartment());
-        // Can be sent as JSON
-        /*
-        * TODO:
-        * Get CV
-        * Get Semester
-        * */
-        application.setPoints(student.calculatePoints());
-        application.setSchool1(schoolService.findById(Long.valueOf((String)payload.get("pref1"))));
-        application.setSchool2(schoolService.findById(Long.valueOf((String)payload.get("pref2"))));
-        application.setSchool3(schoolService.findById(Long.valueOf((String)payload.get("pref3"))));
-        application.setSchool4(schoolService.findById(Long.valueOf((String)payload.get("pref4"))));
-        application.setSchool5(schoolService.findById(Long.valueOf((String)payload.get("pref5"))));
-        application.setTerm((String)payload.get("term"));
-        application.setStatus(Status.PENDING);
-        application.setStudent(student);
-        student.setApplication(application);
-        applicationService.save(application);
-
-        int count = 0;
-        ArrayList<Student> students = new ArrayList<>(studentService.findAll());
-        for (Student toCheck: students){
-            if (toCheck.getLearningAgreement() != null)
-                count++;
-        }
-        toDoListHelper.addItem(ItemType.APPLICATION, count);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Application has been created.");
-    }
-
-    @GetMapping("/getApplication")
-    public ResponseEntity<ResponseApplication> getApplicationPage(){
-        Student s = (Student) helperService.getUser();
-        if(s.getApplication() == null) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(new ResponseApplication(null, null, null, null, null));
-        }
-        Application a = s.getApplication();
-        ResponseApplication r = new ResponseApplication(a);
-       return ResponseEntity.status(HttpStatus.OK).body(r);
-    }
-
-    @PostMapping("/manageApplication")
-    public ResponseEntity<ResponseApplication> manageApplication(@RequestBody HashMap<String, Object> payload) {
-        Student s = (Student) helperService.getUser();
-        if(s.getApplication() == null) {
-            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(new ResponseApplication(null, null, null, null, null));
-        }
-        Application a = s.getApplication();
-        for(String parameter : payload.keySet()) {
-            if(parameter=="pref1") {
-                a.setSchool1(schoolService.findById(Long.valueOf((String)payload.get("pref1"))));
-            }
-            if(parameter=="pref2") {
-                a.setSchool2(schoolService.findById(Long.valueOf((String)payload.get("pref2"))));
-            }
-            if(parameter=="pref3") {
-                a.setSchool3(schoolService.findById(Long.valueOf((String)payload.get("pref3"))));
-            }
-            if(parameter=="pref4") {
-                a.setSchool4(schoolService.findById(Long.valueOf((String)payload.get("pref4"))));
-            }
-            if(parameter=="pref5") {
-                a.setSchool5(schoolService.findById(Long.valueOf((String)payload.get("pref5"))));
-            }
-        }
-        a.setStatus(Status.MANAGED);
-        applicationService.save(a);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseApplication(a));
-    }
-
-    @GetMapping("/deleteApplication")
-    public ResponseEntity<?> deleteApplication() {
-        Student s = (Student) helperService.getUser();
-        if(s.getApplication()==null) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Student does not have an application!");
-        }
-        Application a = s.getApplication();
-        s.setApplication(null);
-        a.setStudent(null);
-        applicationService.delete(a);
-        return ResponseEntity.status(HttpStatus.OK).body("Application has been deleted.");
-    }
-}
