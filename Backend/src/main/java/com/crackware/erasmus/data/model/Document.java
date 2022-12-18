@@ -12,6 +12,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+/**
+ * Class which contains properties and functions for Document class
+ */
 public class Document {
     private String name;
     private String type;
@@ -24,8 +27,10 @@ public class Document {
     @Lob
     private byte[] data;
 
+    // Default constructor
     public Document(){}
 
+    // Parameter supplied constructor
     public Document(String name, String type, byte[] data, Status documentStatus) {
         this.name = name;
         this.type = type;

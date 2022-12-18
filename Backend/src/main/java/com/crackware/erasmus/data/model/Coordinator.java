@@ -9,6 +9,9 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+/**
+ * Class which contains properties and functions for Coordinator class
+ */
 public class Coordinator extends BaseEntity {
 
     private Department department;

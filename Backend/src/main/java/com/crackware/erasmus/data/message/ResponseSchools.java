@@ -13,6 +13,9 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * Class which contains properties and functions for response of School class
+ */
 public class ResponseSchools {
     private Set<School> schools;
 }

@@ -15,6 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+/**
+ * Class which contains properties and functions for Student class
+ */
 public class Student extends BaseEntity{
 
     @Enumerated
@@ -56,6 +59,7 @@ public class Student extends BaseEntity{
     @Nullable
     private Document learningAgreement;
 
+    // Function which calculates the Erasmus points of a Student class instance
     public double calculatePoints() {
         double total = 0; double eng101 = 0; double eng102 = 0;
         switch(eng101grade) {

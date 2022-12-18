@@ -11,6 +11,10 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
+
+/**
+ * Class which contains properties and functions for Course class
+ */
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

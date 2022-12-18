@@ -9,6 +9,9 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
+/**
+ * Class which contains properties and functions for DepartmentQuota class
+ */
 public class DepartmentQuota {
 
     @Id
