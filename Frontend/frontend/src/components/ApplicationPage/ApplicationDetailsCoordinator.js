@@ -28,7 +28,6 @@ const ApplicationDetailsCoordinator = () => {
 
     fetch(API, requestOptions).then((res) => {
         res.json().then((data) => {
-          console.log("aaaaaaaaaaaaaaaa" + data);
           setApplicationData(data);
         });
       }
