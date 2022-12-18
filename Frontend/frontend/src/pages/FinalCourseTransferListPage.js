@@ -1,10 +1,10 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useContext } from "react";
-import ProfileSummary from "../../components/common/ProfileSummary";
-import ActionButtons from "../../components/common/ActionButtons";
-import CoordinatorContext from "../../components/CoordinatorContext/CoordinatorContext";
-import FinalCourseTransferList from "../../components/FinalCourseTransferListPage/FinalCourseTransferListPage";
+import ProfileSummary from "../../src/components/common/ProfileSummary.js";
+import ActionButtons from "../../src/components/common/ActionButtons";
+import CoordinatorContext from "../../src/context/CoordinatorContext/CoordinatorContext";
+import FinalCourseTransferList from "../../src/pages/FinalCourseTransferListPage.js";
 
 function FinalCourseTransferListPage(){
   const [coordinatorData, role] = useContext(CoordinatorContext);
