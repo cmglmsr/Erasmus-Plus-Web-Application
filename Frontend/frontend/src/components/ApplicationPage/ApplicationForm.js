@@ -29,11 +29,11 @@ const ApplicationForm = ({
   var check2 = document.getElementById("check2");
   var check3 = document.getElementById("check3");
 
-  const [pref1, setPref1] = useState();
-  const [pref2, setPref2] = useState();
-  const [pref3, setPref3] = useState();
-  const [pref4, setPref4] = useState();
-  const [pref5, setPref5] = useState();
+  const [pref1, setPref1] = useState(first);
+  const [pref2, setPref2] = useState(second);
+  const [pref3, setPref3] = useState(third);
+  const [pref4, setPref4] = useState(fourth);
+  const [pref5, setPref5] = useState(fifth);
   const [file, setFile] = useState();
   const [isSubscribed, setIsSubscribed] = useState();
   

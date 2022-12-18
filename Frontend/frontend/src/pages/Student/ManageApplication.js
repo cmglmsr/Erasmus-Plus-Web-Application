@@ -54,7 +54,6 @@ function ManageApplication() {
             phoneNumber={studentData.phoneNumber}
             mail={studentData.mail}
             address={studentData.address}
-            manage={true}
             first={application.pref1id}
             second={application.pref2id}
             third={application.pref3id}
