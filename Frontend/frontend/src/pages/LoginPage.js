@@ -24,7 +24,7 @@ function LoginPage() {
           localStorage.setItem("role", parsedJson.role);
 
           /// DONT EVER TOUCH THIS LINE
-          document.cookie = parsedJson.cookie+ ";SameSite=None;";
+          //document.cookie = parsedJson.cookie+ ";SameSite=None;";
           // DANGER DANGER DANGER
 
           if (parsedJson.role === "ROLE_STUDENT") {
